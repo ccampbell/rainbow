@@ -7,15 +7,17 @@ window.Rainbow = (function() {
 
     /**
      * array of replacements and positions
-     *
-     * @var {Object}
      */
     var replacements = {},
         replacement_positions = {},
+
+        /**
+         * an array of the language patterns specified for each language
+         */
         language_patterns = {},
 
         /**
-         * an array of languages that should not inherit the defaults
+         * an array of languages and whether they should bypass the default patterns
          */
         bypass_defaults = {},
 
@@ -56,7 +58,7 @@ window.Rainbow = (function() {
                 length = attrs.length,
                 i;
 
-            for(i = 0; i < length; ++i) {
+            for (i = 0; i < length; ++i) {
                 if (attr[i].nodeName === attr) {
                     result = attr[i].nodeValue;
                 }
@@ -140,17 +142,22 @@ window.Rainbow = (function() {
     /**
      * finds out the position of group match for a regular expression
      *
+     * @see http://stackoverflow.com/questions/1985594/how-to-find-index-of-groups-in-match
+     *
      * @param {RegExp} match
      * @param {number} group_number
      * @returns {number}
      */
     function _indexOfGroup(match, group_number) {
-        var index = match.index;
-        for (var i = 1; i < group_number; ++i) {
+        var index = match.index,
+            i;
+
+        for (i = 1; i < group_number; ++i) {
             if (match[i]) {
                 index += match[i].length;
             }
         }
+
         return index;
     }
 
@@ -340,7 +347,7 @@ window.Rainbow = (function() {
         }
 
         // numeric descending
-        return locations.sort(function(a,b) {
+        return locations.sort(function(a, b) {
             return b - a;
         });
     }
@@ -392,7 +399,7 @@ window.Rainbow = (function() {
      * @param {function} callback   what to do when we are done processing
      * @returns void
      */
-    function _processReplacements(code, callback) {
+    function _processReplacements(code, onComplete) {
 
         /**
          * processes a single replacement
@@ -400,10 +407,10 @@ window.Rainbow = (function() {
          * @param {string} code
          * @param {Array} positions
          * @param {number} i
-         * @param {function} callback
+         * @param {function} onComplete
          * @returns void
          */
-        function _processReplacement(code, positions, i, callback) {
+        function _processReplacement(code, positions, i, onComplete) {
             if (i < positions.length) {
                 ++replacement_counter;
                 pos = positions[i];
@@ -412,18 +419,18 @@ window.Rainbow = (function() {
 
                 // process next function
                 var next = function() {
-                    _processReplacement(code, positions, ++i, callback);
+                    _processReplacement(code, positions, ++i, onComplete);
                 };
 
                 // use a timeout every 250 to not freeze up the UI
                 return replacement_counter % 250 > 0 ? next() : setTimeout(next, 0);
             }
 
-            callback(code);
+            onComplete(code);
         }
 
         var string_positions = keys(replacements[CURRENT_LEVEL]);
-        _processReplacement(code, string_positions, 0, callback);
+        _processReplacement(code, string_positions, 0, onComplete);
     }
 
     /**
@@ -431,13 +438,13 @@ window.Rainbow = (function() {
      *
      * @param {string} code
      * @param {string} language
-     * @param {function} callback
+     * @param {function} onComplete
      * @returns void
      */
-    function _highlightBlockForLanguage(code, language, callback) {
+    function _highlightBlockForLanguage(code, language, onComplete) {
         var patterns = _getPatternsForLanguage(language);
         _processCodeWithPatterns(code, patterns, function (code) {
-            callback(code);
+            onComplete(code);
         });
     }
 
@@ -448,26 +455,25 @@ window.Rainbow = (function() {
      * @returns void
      */
     function _highlightCodeBlock(code_blocks, i) {
-        if (i >= code_blocks.length) {
-            return;
-        }
+        if (i < code_blocks.length) {
+            var language = _attr(code_blocks[i], 'data-language').toLowerCase();
 
-        var language = _attr(code_blocks[i], 'data-language').toLowerCase();
+            if (language) {
+                code_blocks[i].className = language;
 
-        if (language) {
-            code_blocks[i].className = language;
+                _highlightBlockForLanguage(code_blocks[i].innerHTML, language, function (code) {
+                    code_blocks[i].innerHTML = code;
 
-            _highlightBlockForLanguage(code_blocks[i].innerHTML, language, function (code) {
-                code_blocks[i].innerHTML = code;
+                    // reset the replacement arrays
+                    replacements = {};
+                    replacement_positions = {};
 
-                // reset the replacement arrays
-                replacements = {};
-                replacement_positions = {};
-
-                setTimeout(function() {
-                    _highlightCodeBlock(code_blocks, ++i);
-                }, 0);
-            });
+                    // process the next block
+                    setTimeout(function() {
+                        _highlightCodeBlock(code_blocks, ++i);
+                    }, 0);
+                });
+            }
         }
     }
 
@@ -481,6 +487,9 @@ window.Rainbow = (function() {
         _highlightCodeBlock(code_blocks, 0);
     }
 
+    /**
+     * public methods
+     */
     return {
 
         /**
@@ -500,7 +509,6 @@ window.Rainbow = (function() {
             }
 
             bypass_defaults[language] = bypass;
-
             language_patterns[language] = patterns.concat(language_patterns[language] || []);
         },
 
