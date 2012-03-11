@@ -42,6 +42,15 @@ Rainbow.extend('css', [
             3: 'support.value'
         },
         'pattern': /(:|,)\s?(-o-|-moz-|-webkit-|-ms-)?([a-zA-Z-]*)(?=\b)(?!.*\{)/g
+    },
+    {
+        'matches': {
+            1: {
+                'name': 'meta.style-tag',
+                'pattern': /\w+/g
+            }
+        },
+        'pattern': /&lt;\/?(.*?)(?=\=|&gt;)/g
     }
 ], true);
 

@@ -11,6 +11,15 @@ Rainbow.extend('html', [
         'pattern': /&lt;\?(php)?([\s\S]*?)(\?&gt;)/gm
     },
     {
+        'name': 'css',
+        'matches': {
+            0: {
+                'language': 'css'
+            }
+        },
+        'pattern': /&lt;style(.*?)&gt;([\s\S]*?)&lt;\/style&gt;/gm
+    },
+    {
         'name': 'support.tag',
         'pattern': /&lt;|&gt;/g
     },
