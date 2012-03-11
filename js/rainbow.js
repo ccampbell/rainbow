@@ -13,9 +13,31 @@ window.Rainbow = (function() {
     var replacements = {},
         replacement_positions = {},
         language_patterns = {},
+
+        /**
+         * an array of languages that should not inherit the defaults
+         */
         bypass_defaults = {},
+
+        /**
+         * processing level
+         *
+         * replacements are stored at this level so if there is a sub block of code
+         * (for example php inside of html) it runs at a different level
+         */
         CURRENT_LEVEL = 0,
-        DEFAULT_LANGUAGE = 0;
+
+        /**
+         * constant used to refer to the default language
+         */
+        DEFAULT_LANGUAGE = 0,
+
+        /**
+         * used as counters so we can selectively call setTimeout
+         * after processing a certain number of matches/replacements
+         */
+        match_counter = 0,
+        replacement_counter = 0;
 
     /**
      * cross browser get attribute for an element
@@ -125,7 +147,9 @@ window.Rainbow = (function() {
     function _indexOfGroup(match, group_number) {
         var index = match.index;
         for (var i = 1; i < group_number; ++i) {
-            index += match[i].length;
+            if (match[i]) {
+                index += match[i].length;
+            }
         }
         return index;
     }
@@ -150,6 +174,8 @@ window.Rainbow = (function() {
             return callback();
         }
 
+        ++match_counter;
+
         var replacement = match[0],
             start_pos = match.index,
             end_pos = match[0].length + start_pos;
@@ -158,9 +184,13 @@ window.Rainbow = (function() {
          * callback to process the next match of this pattern
          */
         var processNext = function() {
-            setTimeout(function() {
+            var nextCall = function() {
                 _processPattern(regex, pattern, code, callback);
-            }, 0);
+            };
+
+            // every 100 items we process let's call set timeout
+            // to let the ui breathe a little
+            return match_counter % 100 > 0 ? nextCall() : setTimeout(nextCall, 0);
         };
 
         // if this is not a child match and it falls inside of another
@@ -249,7 +279,7 @@ window.Rainbow = (function() {
 
             var group_match_position = _indexOfGroup(match, group_keys[i]) - match.index;
             replacement = _replaceAtPosition(group_match_position, match[group_keys[i]], _wrapCodeInSpan(group, match[group_keys[i]]), replacement);
-            return processNextGroup();
+            processNextGroup();
         };
 
         processGroup(0, group_keys, onMatchSuccess);
@@ -335,35 +365,71 @@ window.Rainbow = (function() {
         // processing sub blocks of code
         ++CURRENT_LEVEL;
 
-        function _workOnPatterns(patterns, i, onComplete)
+        // patterns are processed one at a time through this function
+        function _workOnPatterns(patterns, i)
         {
+            // still have patterns to process, keep going
             if (i < patterns.length) {
                 return _processPattern(patterns[i]['pattern'], patterns[i], code, function() {
-                    setTimeout(function () {
-                        _workOnPatterns(patterns, ++i, onComplete);
-                    }, 0);
+                    _workOnPatterns(patterns, ++i);
                 });
             }
-            onComplete();
+
+            // we are done processing the patterns
+            // process the replacements and update the DOM
+            _processReplacements(code, function(code) {
+
+                // when we are done processing replacements
+                // we are done at this level so we can go back down
+                delete replacements[CURRENT_LEVEL];
+                delete replacement_positions[CURRENT_LEVEL];
+                --CURRENT_LEVEL;
+                callback(code);
+            });
         }
 
-        var onComplete = function() {
-            // actually do the replacing
-            var string_positions = keys(replacements[CURRENT_LEVEL]);
-            for (i = 0; i < string_positions.length; ++i) {
-                pos = string_positions[i];
+        _workOnPatterns(patterns, 0);
+    }
+
+    /**
+     * process replacements in the string of code to actually update the markup
+     *
+     * @param {string} code         the code to process replacements in
+     * @param {function} callback   what to do when we are done processing
+     * @returns void
+     */
+    function _processReplacements(code, callback) {
+
+        /**
+         * processes a single replacement
+         *
+         * @param {string} code
+         * @param {Array} positions
+         * @param {number} i
+         * @param {function} callback
+         * @returns void
+         */
+        function _processReplacement(code, positions, i, callback) {
+            if (i < positions.length) {
+                ++replacement_counter;
+                pos = positions[i];
                 replacement = replacements[CURRENT_LEVEL][pos];
                 code = _replaceAtPosition(pos, replacement['replace'], replacement['with'], code);
+
+                // process next function
+                var next = function() {
+                    _processReplacement(code, positions, ++i, callback);
+                };
+
+                // use a timeout every 250 to not freeze up the UI
+                return replacement_counter % 250 > 0 ? next() : setTimeout(next, 0);
             }
 
-            // we are done at this level so we can go back down
-            delete replacements[CURRENT_LEVEL];
-            delete replacement_positions[CURRENT_LEVEL];
-            --CURRENT_LEVEL;
             callback(code);
-        };
+        }
 
-        _workOnPatterns(patterns, 0, onComplete);
+        var string_positions = keys(replacements[CURRENT_LEVEL]);
+        _processReplacement(code, string_positions, 0, callback);
     }
 
     /**
@@ -371,7 +437,8 @@ window.Rainbow = (function() {
      *
      * @param {string} code
      * @param {string} language
-     * @returns {string}
+     * @param {function} callback
+     * @returns void
      */
     function _highlightBlockForLanguage(code, language, callback) {
         var patterns = _getPatternsForLanguage(language);
@@ -403,7 +470,9 @@ window.Rainbow = (function() {
                 replacements = {};
                 replacement_positions = {};
 
-                _highlightCodeBlock(code_blocks, ++i);
+                setTimeout(function() {
+                    _highlightCodeBlock(code_blocks, ++i);
+                }, 0);
             });
         }
     }
@@ -467,7 +536,7 @@ window.Rainbow = (function() {
 
 
 /**
- * add the default language patterns
+ * adds the default language patterns
  */
 Rainbow.extend([
     {
