@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<meta name="author" content="Craig Campbell">
+<title>Syntax Highlighting</title>
+<link href="../themes/blackboard.css" rel="stylesheet" type="text/css" media="screen">
+<body>
+
+<pre>
+<code data-language="html">&lt;body&gt;
+    &lt;span class="blah" width="200" height="200"&gt;test code goes here&lt;/span&gt;
+&lt;/body&gt;
+
+&lt;?
+    $test = true;
+
+    /**
+     * test
+     */
+    function what($test) {
+        return $test;
+    }
+?&gt;
+
+&lt;!-- this is an html comment --&gt;
+&lt;article title="&lt;?= $user->name ?&gt;"&gt;test&lt;/article&gt;
+</code>
+</pre>
+
+    <script src="../js/rainbow.js"></script>
+    <script src="../js/language/php.js"></script>
+    <script src="../js/language/html.js"></script>
+</body>
