@@ -45,6 +45,20 @@ Rainbow.extend('javascript', [
     {
         'name': 'meta.function-call',
         'pattern': /(\w+)(?=:\s{0,}function)/g
+    },
+    {
+        'matches': {
+            2: 'meta.script-tag'
+        },
+        'pattern': /(&lt;\/?)(script( type)?)(&gt;)?/g
+    },
+    {
+        'matches': {
+            1: 'string.quote',
+            2: 'string',
+            3: 'string.quote'
+        },
+        'pattern': /\=('|")(.*?)(\1)&gt;/g
     }/*,
     {
         'name': 'comment',

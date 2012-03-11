@@ -20,6 +20,15 @@ Rainbow.extend('html', [
         'pattern': /&lt;style(.*?)&gt;([\s\S]*?)&lt;\/style&gt;/gm
     },
     {
+        'name': 'js',
+        'matches': {
+            0: {
+                'language': 'javascript'
+            }
+        },
+        'pattern': /&lt;script(.*?)&gt;([\s\S]*?)&lt;\/script&gt;/gm
+    },
+    {
         'name': 'support.tag',
         'pattern': /&lt;|&gt;/g
     },
