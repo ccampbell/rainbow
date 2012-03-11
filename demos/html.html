@@ -19,7 +19,7 @@
     &lt;span class="blah" width="200" height="200"&gt;test code goes here&lt;/span&gt;
 &lt;/body&gt;
 
-&lt;!-- php code in html! --&gt;
+&lt;!-- inline php! --&gt;
 &lt;?php
     $test = true;
 
@@ -31,11 +31,20 @@
     }
 ?&gt;
 
+&lt;!-- inline javascript! --&gt;
+&lt;script type="text/javascript"&gt;
+    function prettyCool() {
+        doSomeJQueryOrWhatever();
+    }
+&lt;/script&gt;
+
 &lt;article title="&lt;?= $user->name ?&gt;"&gt;test&lt;/article&gt;</code>
 </pre>
 
     <script src="../js/rainbow.js"></script>
     <script src="../js/language/html.js"></script>
-    <script src="../js/language/php.js"></script>
     <script src="../js/language/css.js"></script>
+    <script src="../js/language/php.js"></script>
+    <script src="../js/language/javascript.js"></script>
+
 </body>
