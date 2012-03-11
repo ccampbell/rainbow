@@ -41,6 +41,10 @@ code .keyword.regexp.php {
     color: #fff;
 }
 
+code .parent {
+    font-style: italic;
+}
+
 code .entity {
     color: #FF6400;
 }
