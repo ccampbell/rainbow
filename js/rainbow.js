@@ -265,12 +265,8 @@ window.Rainbow = (function() {
             }
 
             // if this is a submatch go and process the block using the specified pattern
-            var name = group['name'];
-            if (name) {
-                _processCodeWithPatterns(block, [{
-                    'name': group['name'],
-                    'pattern': group['pattern']
-                }], function(code) {
+            if (group['name']) {
+                _processCodeWithPatterns(block, [group], function(code) {
                     replacement = replacement.replace(block, code);
                     processNextGroup();
                 });
