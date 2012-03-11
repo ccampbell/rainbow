@@ -1,0 +1,54 @@
+pre {
+    background: #0B1022;
+    font-family: 'Monaco', courier, monospace;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+    margin: 0px;
+    padding: 0px;
+    padding: 10px;
+    color: #fff;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+code {
+    font-family: 'Monaco', courier, monospace;
+}
+
+code .comment {
+    color: #727272;
+}
+
+code .constant, code .integer {
+    color: #D8FA3C;
+}
+
+code .storage {
+    color: #FBDE2D;
+}
+
+code .string {
+    color: #61CE3C;
+}
+
+code .keyword, code .selector, code.sql .constant {
+    color: #FBDE2D;
+}
+
+code .keyword.regexp.php {
+    color: #fff;
+}
+
+code .entity {
+    color: #FF6400;
+}
+
+code .support {
+    color: #8DA6CE;
+}
+
+code .meta {
+    color: #FF6400;
+}
