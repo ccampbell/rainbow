@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<meta name="author" content="Craig Campbell">
+<title>Syntax Highlighting</title>
+<link href="../themes/blackboard.css" rel="stylesheet" type="text/css" media="screen">
+<body>
+
+<pre>
+<code data-language="css">pre {
+    background: #0B1022;
+    font-family: 'Monaco', courier, monospace;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+    margin: 0px;
+    padding: 10px;
+    color: #fff;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+code {
+    font-family: 'Monaco', courier, monospace;
+}
+
+code .comment {
+    color: #727272;
+}
+
+code .constant, code .integer {
+    color: #D8FA3C;
+}
+
+code .storage {
+    color: #FBDE2D;
+}
+
+code .string {
+    color: #61CE3C;
+}
+
+code .keyword, code .selector, code.sql .constant {
+    color: #FBDE2D;
+}
+
+code .keyword.regexp.php {
+    color: #fff;
+}
+
+code .parent {
+    font-style: italic;
+}
+
+#test code .entity {
+    color: #FF6400;
+}
+
+code .support {
+    color: #8DA6CE;
+}
+
+code .meta {
+    color: #FF6400;
+}</code>
+</pre>
+
+    <script src="../js/rainbow.js"></script>
+    <script src="../js/language/css.js"></script>
+</body>
