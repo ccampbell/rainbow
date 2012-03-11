@@ -123,7 +123,7 @@ window.Rainbow = (function() {
      * @returns {number}
      */
     function _indexOfGroup(match, group_number) {
-        var index= match.index;
+        var index = match.index;
         for (var i = 1; i < group_number; ++i) {
             index += match[i].length;
         }
@@ -160,7 +160,7 @@ window.Rainbow = (function() {
         var processNext = function() {
             setTimeout(function() {
                 _processPattern(regex, pattern, code, callback);
-            }, 1);
+            }, 0);
         };
 
         // if this is not a child match and it falls inside of another
@@ -178,7 +178,7 @@ window.Rainbow = (function() {
                 replacement = _wrapCodeInSpan(pattern['name'], replacement);
             }
 
-            console.log('LEVEL', CURRENT_LEVEL, 'replace', match[0], 'with', replacement, 'at position', start_pos, 'to', end_pos);
+            // console.log('LEVEL', CURRENT_LEVEL, 'replace', match[0], 'with', replacement, 'at position', start_pos, 'to', end_pos);
 
             // store what needs to be replaced with what at this position
             if (!replacements[CURRENT_LEVEL]) {
@@ -212,9 +212,13 @@ window.Rainbow = (function() {
                 return callback(replacement);
             }
 
+            var processNextGroup = function() {
+                processGroup(++i, group_keys, callback);
+            };
+
             // if there is no match here then move on
             if (!match[group_keys[i]]) {
-                return processGroup(++i, group_keys, callback);
+                return processNextGroup();
             }
 
             var group = pattern['matches'][group_keys[i]],
@@ -225,7 +229,7 @@ window.Rainbow = (function() {
             if (language) {
                 _highlightBlockForLanguage(block, language, function(code) {
                     replacement = replacement.replace(block, code);
-                    return processGroup(++i, group_keys, callback);
+                    processNextGroup();
                 });
                 return;
             }
@@ -238,19 +242,17 @@ window.Rainbow = (function() {
                     'pattern': group['pattern']
                 }], function(code) {
                     replacement = replacement.replace(block, code);
-                    return processGroup(++i, group_keys, callback);
+                    processNextGroup();
                 });
                 return;
             }
 
             var group_match_position = _indexOfGroup(match, group_keys[i]) - match.index;
             replacement = _replaceAtPosition(group_match_position, match[group_keys[i]], _wrapCodeInSpan(group, match[group_keys[i]]), replacement);
-            return processGroup(++i, group_keys, callback);
+            return processNextGroup();
         };
 
         processGroup(0, group_keys, onMatchSuccess);
-        // onMatchSuccess(replacement);
-
     }
 
     /**
@@ -339,14 +341,13 @@ window.Rainbow = (function() {
                 return _processPattern(patterns[i]['pattern'], patterns[i], code, function() {
                     setTimeout(function () {
                         _workOnPatterns(patterns, ++i, onComplete);
-                    }, 1);
+                    }, 0);
                 });
             }
             onComplete();
         }
 
         var onComplete = function() {
-
             // actually do the replacing
             var string_positions = keys(replacements[CURRENT_LEVEL]);
             for (i = 0; i < string_positions.length; ++i) {
