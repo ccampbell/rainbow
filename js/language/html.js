@@ -12,23 +12,23 @@ Rainbow.extend('html', [
     },
     {
         'name': 'support.tag',
-        'pattern': /&lt;([^\s]*?)&gt;/g
+        'pattern': /&lt;|&gt;/g
     },
     {
-        'name': 'support.tag',
         'matches': {
-            1: 'support.tag-name'
+            1: 'support.tag',
+            2: 'support.tag.end',
+            3: 'support.tag-name'
         },
-        'pattern': /&lt;\/?(\w+)(?=\s|\&)/g
+        'pattern': /(&lt;)(\/?)(\w+)(?=\s|\&)/g
     },
     {
-        'name': 'support.tag',
         'matches': {
             1: 'support.attribute',
             2: 'support.operator',
             3: 'string'
         },
-        'pattern': /([a-z-]+)(=)(('|")(.*?)(\4))(&gt;)?/g
+        'pattern': /([a-z-]+)(=)(('|")(.*?)(\4))/g
     },
     {
         'name': 'comment.html',
