@@ -257,20 +257,18 @@ window.Rainbow = (function() {
             // if this is a sublanguage go and process the block using that language
             var language = group['language'];
             if (language) {
-                _highlightBlockForLanguage(block, language, function(code) {
+                return _highlightBlockForLanguage(block, language, function(code) {
                     replacement = replacement.replace(block, code);
                     processNextGroup();
                 });
-                return;
             }
 
             // if this is a submatch go and process the block using the specified pattern
             if (group['name']) {
-                _processCodeWithPatterns(block, [group], function(code) {
+                return _processCodeWithPatterns(block, [group], function(code) {
                     replacement = replacement.replace(block, code);
                     processNextGroup();
                 });
-                return;
             }
 
             var group_match_position = _indexOfGroup(match, group_keys[i]) - match.index;
@@ -500,9 +498,7 @@ window.Rainbow = (function() {
                 language = DEFAULT_LANGUAGE;
             }
 
-            if (bypass) {
-                bypass_defaults[language] = 1;
-            }
+            bypass_defaults[language] = bypass;
 
             language_patterns[language] = patterns.concat(language_patterns[language] || []);
         },
