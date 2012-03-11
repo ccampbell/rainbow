@@ -115,6 +115,13 @@ window.Rainbow = (function() {
         return '<span class="' + name.replace(/\./g, ' ') + '">' + code + '</span>';
     }
 
+    /**
+     * finds out the position of group match for a regular expression
+     *
+     * @param {RegExp} match
+     * @param {number} group_number
+     * @returns {number}
+     */
     function _indexOfGroup(match, group_number) {
         var index= match.index;
         for (var i = 1; i < group_number; ++i) {
@@ -135,89 +142,43 @@ window.Rainbow = (function() {
      * @param {string} code
      * @returns void
      */
-    function _processPattern(pattern, code) {
-        var regex = pattern['pattern'],
-            match = regex.exec(code),
-            replacement,
-            group,
-            start_pos,
-            end_pos;
+    function _processPattern(regex, pattern, code, callback)
+    {
+        var match = regex.exec(code);
 
-        // continue looping through until all matches are found in the string
-        while (match !== null) {
+        if (!match) {
+            return callback();
+        }
 
-            // this is the entire match
-            replacement = match[0];
-            start_pos = match.index;
+        var replacement = match[0],
+            start_pos = match.index,
             end_pos = match[0].length + start_pos;
 
-            // if this is not a child match and it falls inside of another
-            // match that already happened we should skip it and continue processing
-            if (_matchIsInsideOtherMatch(start_pos, end_pos)) {
-                // console.warn(match);
-                match = regex.exec(code);
-                continue;
-            }
+        /**
+         * callback to process the next match of this pattern
+         */
+        var processNext = function() {
+            setTimeout(function() {
+                _processPattern(regex, pattern, code, callback);
+            }, 1);
+        };
 
-            // if this pattern has sub matches for different groups in the regex
-            // then we should process them one at a time by rerunning them through
-            // this function to generate the new replacement
-            var group_keys = keys(pattern['matches']);
-            for (var i = 0; i < group_keys.length; ++i) {
+        // if this is not a child match and it falls inside of another
+        // match that already happened we should skip it and continue processing
+        if (_matchIsInsideOtherMatch(start_pos, end_pos)) {
+            return processNext();
+        }
 
-                if (!match[group_keys[i]]) {
-                    continue;
-                }
-
-                group = pattern['matches'][group_keys[i]];
-
-                /*
-                if this is a sublanguage go and process the block using that language
-                this is specified by using:
-
-                'matches': {
-                    1: {
-                        'language': 'language_name'
-                    }
-                }
-                */
-                var language = group['language'];
-                if (language) {
-                    replacement = replacement.replace(match[group_keys[i]], _highlightBlockForLanguage(match[group_keys[i]], language));
-                    continue;
-                }
-
-                /*
-                if this is a submatch go and process the block using the specified pattern
-                this is specified by using:
-
-                'matches': {
-                     1: {
-                         'name': 'match.name',
-                         'pattern': /regex/g
-                     }
-                }
-                */
-                var name = group['name'];
-                if (name) {
-                    replacement = replacement.replace(match[group_keys[i]], _processCodeWithPatterns(match[group_keys[i]],[{
-                        'name': group['name'],
-                        'pattern': group['pattern']
-                    }]));
-                    continue;
-                }
-
-                var group_match_position = _indexOfGroup(match, group_keys[i]) - match.index;
-                replacement = _replaceAtPosition(group_match_position, match[group_keys[i]], _wrapCodeInSpan(group, match[group_keys[i]]), replacement);
-
-            }
-
+        /**
+         * callback for when a match was successfully processed
+         */
+        var onMatchSuccess = function(replacement) {
             // if this match has a name then wrap it in a span tag
             if (pattern['name']) {
                 replacement = _wrapCodeInSpan(pattern['name'], replacement);
             }
 
-            // console.log('LEVEL', CURRENT_LEVEL, 'replace', match[0], 'with', replacement, 'at position', start_pos, 'to', end_pos);
+            console.log('LEVEL', CURRENT_LEVEL, 'replace', match[0], 'with', replacement, 'at position', start_pos, 'to', end_pos);
 
             // store what needs to be replaced with what at this position
             if (!replacements[CURRENT_LEVEL]) {
@@ -234,9 +195,62 @@ window.Rainbow = (function() {
             // with other matches later
             replacement_positions[CURRENT_LEVEL][start_pos] = end_pos;
 
-            // find the next match and continue on in this loop
-            match = regex.exec(code);
-        }
+            // process the next match
+            processNext();
+        };
+
+        // if this pattern has sub matches for different groups in the regex
+        // then we should process them one at a time by rerunning them through
+        // this function to generate the new replacement
+        var group_keys = keys(pattern['matches']);
+
+        /**
+         * callback for processing a sub group
+         */
+        var processGroup = function(i, group_keys, callback) {
+            if (i >= group_keys.length) {
+                return callback(replacement);
+            }
+
+            // if there is no match here then move on
+            if (!match[group_keys[i]]) {
+                return processGroup(++i, group_keys, callback);
+            }
+
+            var group = pattern['matches'][group_keys[i]],
+                block = match[group_keys[i]];
+
+            // if this is a sublanguage go and process the block using that language
+            var language = group['language'];
+            if (language) {
+                _highlightBlockForLanguage(block, language, function(code) {
+                    replacement = replacement.replace(block, code);
+                    return processGroup(++i, group_keys, callback);
+                });
+                return;
+            }
+
+            // if this is a submatch go and process the block using the specified pattern
+            var name = group['name'];
+            if (name) {
+                _processCodeWithPatterns(block, [{
+                    'name': group['name'],
+                    'pattern': group['pattern']
+                }], function(code) {
+                    replacement = replacement.replace(block, code);
+                    return processGroup(++i, group_keys, callback);
+                });
+                return;
+            }
+
+            var group_match_position = _indexOfGroup(match, group_keys[i]) - match.index;
+            replacement = _replaceAtPosition(group_match_position, match[group_keys[i]], _wrapCodeInSpan(group, match[group_keys[i]]), replacement);
+            return processGroup(++i, group_keys, callback);
+        };
+
+        processGroup(0, group_keys, onMatchSuccess);
+        // onMatchSuccess(replacement);
+
     }
 
     /**
@@ -312,32 +326,43 @@ window.Rainbow = (function() {
      * @param {array} patterns
      * @returns {string}
      */
-    function _processCodeWithPatterns(code, patterns)
+    function _processCodeWithPatterns(code, patterns, callback)
     {
         // we have to increase the level here so that the
         // replacements will not conflict with each other when
         // processing sub blocks of code
         ++CURRENT_LEVEL;
 
-        // process all the regex patterns
-        for (var i = 0; i < patterns.length; ++i) {
-            _processPattern(patterns[i], code);
+        function _workOnPatterns(patterns, i, onComplete)
+        {
+            if (i < patterns.length) {
+                return _processPattern(patterns[i]['pattern'], patterns[i], code, function() {
+                    setTimeout(function () {
+                        _workOnPatterns(patterns, ++i, onComplete);
+                    }, 1);
+                });
+            }
+            onComplete();
         }
 
-        // actually do the replacing
-        var string_positions = keys(replacements[CURRENT_LEVEL]);
-        for (i = 0; i < string_positions.length; ++i) {
-            pos = string_positions[i];
-            replacement = replacements[CURRENT_LEVEL][pos];
-            code = _replaceAtPosition(pos, replacement['replace'], replacement['with'], code);
-        }
+        var onComplete = function() {
 
-        // we are done at this level so we can go back down
-        delete replacements[CURRENT_LEVEL];
-        delete replacement_positions[CURRENT_LEVEL];
-        --CURRENT_LEVEL;
+            // actually do the replacing
+            var string_positions = keys(replacements[CURRENT_LEVEL]);
+            for (i = 0; i < string_positions.length; ++i) {
+                pos = string_positions[i];
+                replacement = replacements[CURRENT_LEVEL][pos];
+                code = _replaceAtPosition(pos, replacement['replace'], replacement['with'], code);
+            }
 
-        return code;
+            // we are done at this level so we can go back down
+            delete replacements[CURRENT_LEVEL];
+            delete replacement_positions[CURRENT_LEVEL];
+            --CURRENT_LEVEL;
+            callback(code);
+        };
+
+        _workOnPatterns(patterns, 0, onComplete);
     }
 
     /**
@@ -347,10 +372,11 @@ window.Rainbow = (function() {
      * @param {string} language
      * @returns {string}
      */
-    function _highlightBlockForLanguage(code, language) {
+    function _highlightBlockForLanguage(code, language, callback) {
         var patterns = _getPatternsForLanguage(language);
-        code = _processCodeWithPatterns(code, patterns);
-        return code;
+        _processCodeWithPatterns(code, patterns, function (code) {
+            callback(code);
+        });
     }
 
     /**
@@ -359,19 +385,25 @@ window.Rainbow = (function() {
      * @param {Element} code_block
      * @returns void
      */
-    function _highlightCodeBlock(code_block) {
-        var language = _attr(code_block, 'data-language').toLowerCase();
+    function _highlightCodeBlock(code_blocks, i) {
+        if (i >= code_blocks.length) {
+            return;
+        }
+
+        var language = _attr(code_blocks[i], 'data-language').toLowerCase();
 
         if (language) {
-            code_block.className = language;
+            code_blocks[i].className = language;
 
-            var code = _highlightBlockForLanguage(code_block.innerHTML, language);
+            _highlightBlockForLanguage(code_blocks[i].innerHTML, language, function (code) {
+                code_blocks[i].innerHTML = code;
 
-            code_block.innerHTML = code;
+                // reset the replacement arrays
+                replacements = {};
+                replacement_positions = {};
 
-            // reset the replacement arrays
-            replacements = {};
-            replacement_positions = {};
+                _highlightCodeBlock(code_blocks, ++i);
+            });
         }
     }
 
@@ -381,12 +413,8 @@ window.Rainbow = (function() {
      * @returns void
      */
     function _highlight() {
-        var code_blocks = document.getElementsByTagName('code'),
-            i;
-
-        for (i = 0; i < code_blocks.length; ++i) {
-            _highlightCodeBlock(code_blocks[i]);
-        }
+        var code_blocks = document.getElementsByTagName('code');
+        _highlightCodeBlock(code_blocks, 0);
     }
 
     return {
@@ -463,7 +491,7 @@ Rainbow.extend([
         'matches': {
             1: 'keyword'
         },
-        'pattern': /\b(and|or|xor|import|print|echo|def|for|do|while|foreach|as|return|die|exit|if|then|else|elseif|new|delete|try|throw|catch|finally|class|function|string|array|object|resource|var|bool|boolean|int|integer|float|double|real|string|array|global|const|static|public|private|protected|published|extends|switch|void|this|self|struct|char|signed|unsigned|short|long)(\(|\b)/g
+        'pattern': /\b(and|or|xor|import|print|echo|def|for|do|while|foreach|as|return|die|exit|if|then|else|elseif|new|delete|try|throw|catch|finally|class|function|string|array|object|resource|var|bool|boolean|int|integer|float|double|real|string|array|global|const|static|public|private|protected|published|extends|switch|void|this|self|struct|char|signed|unsigned|short|long)(?=\(|\b)/g
     },
     {
         'name': 'constant.language',
