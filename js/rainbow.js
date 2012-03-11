@@ -244,18 +244,18 @@ window.Rainbow = (function() {
 
             var processNextGroup = function() {
                 processGroup(++i, group_keys, callback);
-            };
+            },
+                block = match[group_keys[i]];
 
             // if there is no match here then move on
-            if (!match[group_keys[i]]) {
+            if (!block) {
                 return processNextGroup();
             }
 
             var group = pattern['matches'][group_keys[i]],
-                block = match[group_keys[i]];
+                language = group['language'];
 
             // if this is a sublanguage go and process the block using that language
-            var language = group['language'];
             if (language) {
                 return _highlightBlockForLanguage(block, language, function(code) {
                     replacement = replacement.replace(block, code);
@@ -263,6 +263,7 @@ window.Rainbow = (function() {
                 });
             }
 
+            // @todo add support for passing an array of patterns to match a subgroup against
             // if this is a submatch go and process the block using the specified pattern
             if (group['name']) {
                 return _processCodeWithPatterns(block, [group], function(code) {
@@ -272,7 +273,7 @@ window.Rainbow = (function() {
             }
 
             var group_match_position = _indexOfGroup(match, group_keys[i]) - match.index;
-            replacement = _replaceAtPosition(group_match_position, match[group_keys[i]], _wrapCodeInSpan(group, match[group_keys[i]]), replacement);
+            replacement = _replaceAtPosition(group_match_position, block, _wrapCodeInSpan(group, block), replacement);
             processNextGroup();
         };
 
