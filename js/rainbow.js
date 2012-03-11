@@ -324,8 +324,7 @@ window.Rainbow = (function() {
      */
     function _replaceAtPosition(position, replace, replace_with, code) {
         var sub_string = code.substr(position);
-        code = code.replace(sub_string, sub_string.replace(replace, replace_with));
-        return code;
+        return code.substr(0, position) + sub_string.replace(replace, replace_with);
     }
 
    /**
