@@ -2,6 +2,10 @@ window.Rainbow = window.Rainbow || {};
 
 Rainbow.extend('css', [
     {
+        'name': 'comment',
+        'pattern': /\/\*[\s\S]*?\*\//gm
+    },
+    {
         'name': 'constant.hex-color',
         'pattern': /#([a-fA-F0-9]{3}|[a-fA-F0-9]{6})(?=;|\s)/g
     },
