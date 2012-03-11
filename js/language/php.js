@@ -15,7 +15,7 @@ Rainbow.extend('php', [
     },
     {
         'name': 'keyword',
-        'pattern': /\b(continue|break|require(_once)?|include(_once)?)\b/g
+        'pattern': /\b(continue|break|case|require(_once)?|include(_once)?)\b/g
     },
     {
         'matches': {
@@ -31,7 +31,7 @@ Rainbow.extend('php', [
         'matches': {
             1: 'support.function'
         },
-        'pattern': /\b(apc_(fetch|store)|array|asort|file_get_contents|get_(called_)?class|getenv|in_array|json_(encode|decode)|mt_rand|rand|spl_autoload_register|str(tolower|str|pos|_replace)|trigger_error)(?=\()/g
+        'pattern': /\b(apc_(fetch|store)|array(_sum|_rand)?|asort|count|empty|explode|file_(get_contents|exists)|get_(called_)?class|getenv|in_array|is_(numeric|array|link)|isset|json_(encode|decode)|mt_rand|rand|rmdir|round|spl_autoload_register|str(tolower|str|pos|_replace)|trigger_error|un(link|set))(?=\()/g
     },
     {
         'name': 'phptag',
@@ -52,10 +52,10 @@ Rainbow.extend('php', [
             1: 'keyword.class.description',
             2: 'keyword.class',
             3: 'meta.class-name',
-            5: 'keyword.extends',
-            6: 'meta.parent.class-name'
+            4: 'keyword.extends',
+            5: 'meta.parent.class-name'
         },
-        'pattern': /\b(abstract|final)\s(class)\s(\w+)(\s(extends)\s([^\\]*))?\n/g
+        'pattern': /\b(abstract|final)?\s?(class)\s(\w+)(\sextends\s)?([\w\\]*)?\s?\{?\n/g
     },
     {
         'name': 'keyword.static',
