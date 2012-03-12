@@ -6,18 +6,30 @@
 window.Rainbow = (function() {
 
     /**
-     * array of replacements and positions
+     * array of replacements to process at the end
+     *
+     * @type {Object}
      */
     var replacements = {},
+
+        /**
+         * an array of start and end positions of blocks to be replaced
+         *
+         * @type {Object}
+         */
         replacement_positions = {},
 
         /**
          * an array of the language patterns specified for each language
+         *
+         * @type {Object}
          */
         language_patterns = {},
 
         /**
          * an array of languages and whether they should bypass the default patterns
+         *
+         * @type {Object}
          */
         bypass_defaults = {},
 
@@ -26,19 +38,29 @@ window.Rainbow = (function() {
          *
          * replacements are stored at this level so if there is a sub block of code
          * (for example php inside of html) it runs at a different level
+         *
+         * @type {number}
          */
         CURRENT_LEVEL = 0,
 
         /**
          * constant used to refer to the default language
+         *
+         * @type {number}
          */
         DEFAULT_LANGUAGE = 0,
 
         /**
          * used as counters so we can selectively call setTimeout
          * after processing a certain number of matches/replacements
+         *
+         * @type {number}
          */
         match_counter = 0,
+
+        /**
+         * @type {number}
+         */
         replacement_counter = 0;
 
     /**
@@ -46,9 +68,9 @@ window.Rainbow = (function() {
      *
      * @see http://stackoverflow.com/questions/3755227/cross-browser-javascript-getattribute-method
      *
-     * @param {Object} element
-     * @param {String} attribute you are trying to get
-     * @returns {String}
+     * @param {Element} el
+     * @param {string} attr     attribute you are trying to get
+     * @returns {string}
      */
     function _attr(el, attr) {
         var result = (el.getAttribute && el.getAttribute(attr)) || null;
@@ -112,6 +134,7 @@ window.Rainbow = (function() {
      */
     function _matchIsInsideOtherMatch(start, end) {
         for (var key in replacement_positions[CURRENT_LEVEL]) {
+            key = parseInt(key, 10);
 
             // if this block completely overlaps with another block
             // then we should remove the other block and return false
@@ -144,7 +167,7 @@ window.Rainbow = (function() {
      *
      * @see http://stackoverflow.com/questions/1985594/how-to-find-index-of-groups-in-match
      *
-     * @param {RegExp} match
+     * @param {Object} match
      * @param {number} group_number
      * @returns {number}
      */
@@ -333,7 +356,7 @@ window.Rainbow = (function() {
      * sorts an object by index descending
      *
      * @param {Object} object
-     * @return {array}
+     * @return {Array}
      */
     function keys(object) {
         var locations = [],
@@ -356,8 +379,8 @@ window.Rainbow = (function() {
      * processes a block of code using specified patterns
      *
      * @param {string} code
-     * @param {array} patterns
-     * @returns {string}
+     * @param {Array} patterns
+     * @returns void
      */
     function _processCodeWithPatterns(code, patterns, callback)
     {
@@ -396,7 +419,7 @@ window.Rainbow = (function() {
      * process replacements in the string of code to actually update the markup
      *
      * @param {string} code         the code to process replacements in
-     * @param {function} callback   what to do when we are done processing
+     * @param {Function} onComplete   what to do when we are done processing
      * @returns void
      */
     function _processReplacements(code, onComplete) {
@@ -407,7 +430,7 @@ window.Rainbow = (function() {
          * @param {string} code
          * @param {Array} positions
          * @param {number} i
-         * @param {function} onComplete
+         * @param {Function} onComplete
          * @returns void
          */
         function _processReplacement(code, positions, i, onComplete) {
@@ -438,7 +461,7 @@ window.Rainbow = (function() {
      *
      * @param {string} code
      * @param {string} language
-     * @param {function} onComplete
+     * @param {Function} onComplete
      * @returns void
      */
     function _highlightBlockForLanguage(code, language, onComplete) {
@@ -451,7 +474,8 @@ window.Rainbow = (function() {
     /**
      * highlight an individual code block
      *
-     * @param {Element} code_block
+     * @param {NodeList} code_blocks
+     * @param {number} i
      * @returns void
      */
     function _highlightCodeBlock(code_blocks, i) {
@@ -495,9 +519,9 @@ window.Rainbow = (function() {
         /**
          * extends the language pattern matches
          *
-         * @param {string} language     name of language
-         * @param {Array} patterns      array of patterns to add on
-         * @param {boolean} bypass      if true this will bypass the default language patterns
+         * @param {*} language     name of language
+         * @param {*} patterns      array of patterns to add on
+         * @param {boolean|null} bypass      if true this will bypass the default language patterns
          */
         extend: function(language, patterns, bypass) {
 
