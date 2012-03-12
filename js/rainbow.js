@@ -3,7 +3,7 @@
  *
  * @author Craig Campbell <iamcraigcampbell@gmail.com>
  */
-window.Rainbow = (function() {
+window['Rainbow'] = (function() {
 
     /**
      * array of replacements to process at the end
