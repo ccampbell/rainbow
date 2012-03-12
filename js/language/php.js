@@ -6,8 +6,11 @@ Rainbow.extend('php', [
         'pattern': /\becho\b/g
     },
     {
-        'name': 'variable',
-        'pattern': /\$\w+\b/g
+        'matches': {
+            1: 'variable.dollar-sign',
+            2: 'variable'
+        },
+        'pattern': /(\$)(\w+)\b/g
     },
     {
         'name': 'keyword.dot',
