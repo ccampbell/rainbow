@@ -15,15 +15,15 @@ Rainbow.extend('javascript', [
     },
     {
         'matches': {
-            1: 'support.function property'
+            1: 'support.property'
         },
-        'pattern': /\.(length|push|node(Name|Value))\b/g
+        'pattern': /\.(length|node(Name|Value))\b/g
     },
     {
         'matches': {
             1: 'support.function'
         },
-        'pattern': /\.(getAttribute|getElementById|getElementsByClassName|log)\(/g
+        'pattern': /\.(getAttribute|push|getElementById|getElementsByClassName|log)\(/g
     },
 
     /**
@@ -48,18 +48,20 @@ Rainbow.extend('javascript', [
     },
     {
         'matches': {
-            2: 'meta.script-tag'
+            2: [
+                {
+                    'name': 'string',
+                    'pattern': /('|")(.*?)(\1)/g
+                },
+                {
+                    'name': 'meta.script-tag',
+                    'pattern': /(\w+)/g
+                }
+            ]
         },
-        'pattern': /(&lt;\/?)(script( type)?)(&gt;)?/g
-    },
-    {
-        'matches': {
-            1: 'string.quote',
-            2: 'string',
-            3: 'string.quote'
-        },
-        'pattern': /\=('|")(.*?)(\1)&gt;/g
-    }/*,
+        'pattern': /(&lt;\/?)(script(.*?))(&gt;)/g
+    }
+    /*,
     {
         'name': 'comment',
         'matches': {
@@ -71,4 +73,3 @@ Rainbow.extend('javascript', [
         'pattern': /\/\*([\s\S]*?)\*\//gm
     } */
 ]);
-
