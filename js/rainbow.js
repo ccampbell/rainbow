@@ -308,10 +308,9 @@ window['Rainbow'] = (function() {
                 });
             }
 
-            // @todo add support for passing an array of patterns to match a subgroup against
             // if this is a submatch go and process the block using the specified pattern
-            if (group['name']) {
-                return _processCodeWithPatterns(block, [group], function(code) {
+            if (typeof group === 'object') {
+                return _processCodeWithPatterns(block, group.length ? group : [group], function(code) {
                     replacement = replacement.replace(block, code);
                     processNextGroup();
                 });
@@ -529,19 +528,23 @@ window['Rainbow'] = (function() {
             j,
             final_blocks = [];
 
+        // loop through the pre blocks to see if they have any
+        // code blocks inside
         for (i = 0; i < pre_blocks.length; ++i) {
+
             code_blocks = pre_blocks[i].getElementsByTagName('code');
+
+            // if there are no code blocks then use the pre blocks directly
             if (!code_blocks.length) {
                 final_blocks.push(pre_blocks[i]);
                 continue;
             }
 
+            // otherwise add the code blocks to the list
             for (j = 0; j < code_blocks.length; ++j) {
                 final_blocks.push(code_blocks[j]);
             }
         }
-
-        // console.log(final_blocks);
 
         _highlightCodeBlock(final_blocks, 0);
     }
