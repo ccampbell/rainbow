@@ -524,8 +524,26 @@ window['Rainbow'] = (function() {
      * @returns void
      */
     function _highlight() {
-        var code_blocks = document.getElementsByTagName('code');
-        _highlightCodeBlock(code_blocks, 0);
+        var pre_blocks = document.getElementsByTagName('pre'),
+            i,
+            j,
+            final_blocks = [];
+
+        for (i = 0; i < pre_blocks.length; ++i) {
+            code_blocks = pre_blocks[i].getElementsByTagName('code');
+            if (!code_blocks.length) {
+                final_blocks.push(pre_blocks[i]);
+                continue;
+            }
+
+            for (j = 0; j < code_blocks.length; ++j) {
+                final_blocks.push(code_blocks[j]);
+            }
+        }
+
+        // console.log(final_blocks);
+
+        _highlightCodeBlock(final_blocks, 0);
     }
 
     /**
