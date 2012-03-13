@@ -495,9 +495,11 @@ window['Rainbow'] = (function() {
      */
     function _highlightCodeBlock(code_blocks, i) {
         if (i < code_blocks.length) {
-            var language = _attr(code_blocks[i], 'data-language').toLowerCase();
+            var language = _attr(code_blocks[i], 'data-language');
 
             if (language) {
+                language = language.toLowerCase();
+
                 code_blocks[i].className = language;
 
                 _highlightBlockForLanguage(code_blocks[i].innerHTML, language, function (code) {
