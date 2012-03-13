@@ -60,9 +60,9 @@ Rainbow.extend('javascript', [
  *
  * @see http://stackoverflow.com/questions/3755227/cross-browser-javascript-getattribute-method
  *
- * @param {Object} element
- * @param {String} attribute you are trying to get
- * @returns {String}
+ * @param {Element} el
+ * @param {string} attr     attribute you are trying to get
+ * @returns {string}
  */
 function _attr(el, attr) {
     var result = (el.getAttribute &amp;&amp; el.getAttribute(attr)) || null;
@@ -72,7 +72,7 @@ function _attr(el, attr) {
             length = attrs.length,
             i;
 
-        for(i = 0; i &lt; length; ++i) {
+        for (i = 0; i &lt; length; ++i) {
             if (attr[i].nodeName === attr) {
                 result = attr[i].nodeValue;
             }
