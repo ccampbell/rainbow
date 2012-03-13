@@ -17,7 +17,7 @@ Rainbow.extend('javascript', [
         'matches': {
             1: 'support.function property'
         },
-        'pattern': /\.(length|node(Name|Value))\b/g
+        'pattern': /\.(length|push|node(Name|Value))\b/g
     },
     {
         'matches': {
