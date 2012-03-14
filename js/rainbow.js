@@ -501,7 +501,7 @@ window['Rainbow'] = (function() {
 
                 code_blocks[i].className = language;
 
-                _highlightBlockForLanguage(code_blocks[i].innerHTML, language, function (code) {
+                return _highlightBlockForLanguage(code_blocks[i].innerHTML, language, function (code) {
                     code_blocks[i].innerHTML = code;
 
                     // reset the replacement arrays
@@ -514,6 +514,7 @@ window['Rainbow'] = (function() {
                     }, 0);
                 });
             }
+            _highlightCodeBlock(code_blocks, ++i);
         }
     }
 
@@ -524,25 +525,22 @@ window['Rainbow'] = (function() {
      */
     function _highlight() {
         var pre_blocks = document.getElementsByTagName('pre'),
+            code_blocks = document.getElementsByTagName('code'),
             i,
-            j,
             final_blocks = [];
 
-        // loop through the pre blocks to see if they have any
-        // code blocks inside
+        // @see http://stackoverflow.com/questions/2735067/how-to-convert-a-dom-node-list-to-an-array-in-javascript
+        // we are going to process all <code> blocks
+        for (i = code_blocks.length >>> 0; i--;) {
+            final_blocks[i] = code_blocks[i];
+        }
+
+        // loop through the pre blocks to see which ones we should add
         for (i = 0; i < pre_blocks.length; ++i) {
 
-            code_blocks = pre_blocks[i].getElementsByTagName('code');
-
-            // if there are no code blocks then use the pre blocks directly
-            if (!code_blocks.length) {
+            // if the pre block has no code blocks then process it directly
+            if (!pre_blocks[i].getElementsByTagName('code').length) {
                 final_blocks.push(pre_blocks[i]);
-                continue;
-            }
-
-            // otherwise add the code blocks to the list
-            for (j = 0; j < code_blocks.length; ++j) {
-                final_blocks.push(code_blocks[j]);
             }
         }
 
