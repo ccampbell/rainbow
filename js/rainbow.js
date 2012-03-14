@@ -625,7 +625,7 @@ Rainbow.extend([
         'matches': {
             1: 'keyword'
         },
-        'pattern': /\b(and|array|as|bool(ean)?|catch|char|class|const|def|delete|die|do(uble)?|echo|else(if)?|exit|extends|finally|float|for(each)?|function|global|if|import|int(eger)?|long|new|object|or|pr(int|ivate|otected)|pub(lic|lished)|re(al|source|turn)|self|short|st(ring|ruct|atic)|switch|th(en|is|row)|try|(un)?signed|var|void|while|xor)(?=\(|\b)/g
+        'pattern': /\b(and|array|as|bool(ean)?|catch|char|class|const|def|delete|die|do(uble)?|echo|else(if)?|exit|extends|finally|float|for(each)?|function|global|if|import|int(eger)?|long|new|object|or|pr(int|ivate|otected)|public|return|self|st(ring|ruct|atic)|switch|th(en|is|row)|try|(un)?signed|var|void|while)(?=\(|\b)/g
     },
     {
         'name': 'constant.language',
