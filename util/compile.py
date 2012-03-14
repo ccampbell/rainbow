@@ -27,6 +27,10 @@ for language in languages:
     included_languages.append(language)
     js_files_to_include.append(path)
 
+closure_path = '/usr/local/compiler-latest/compiler.jar'
+if not os.path.isfile(closure_path):
+    sys.exit('could not find closure compiler at ' + closure_path)
+
 print 'waiting for closure compiler...'
 proc = subprocess.Popen(['java', '-jar', '/usr/local/compiler-latest/compiler.jar', '--compilation_level', 'ADVANCED_OPTIMIZATIONS'] + js_files_to_include, stdout = subprocess.PIPE, stderr = subprocess.PIPE)
 output, err = proc.communicate()
