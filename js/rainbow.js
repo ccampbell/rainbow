@@ -488,7 +488,7 @@ window['Rainbow'] = (function() {
     /**
      * highlight an individual code block
      *
-     * @param {NodeList} code_blocks
+     * @param {Array} code_blocks
      * @param {number} i
      * @returns void
      */
@@ -603,13 +603,17 @@ window['Rainbow'] = (function() {
 Rainbow.extend([
     {
         'name': 'comment',
-        'pattern': /\/\*[\s\S]*?\*\/|\/\/[\s\S]*?$|\#[\s\S]*?$/gm
+        'pattern': /\/\*[\s\S]*?\*\/|(\/\/|\#)[\s\S]*?$/gm
     },
     {
         'matches': {
+            1: {
+                'name': 'keyword.operator',
+                'pattern': /\=/g
+            },
             2: 'string'
         },
-        'pattern': /(\(|\s|\[)(('|")[\s\S]*?(\3))/gm
+        'pattern': /(\(|\s|\[|\=)(('|")[\s\S]*?(\3))/gm
     },
     {
         'name': 'integer',
