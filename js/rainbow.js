@@ -76,7 +76,12 @@ window['Rainbow'] = (function() {
         /**
          * @type {number}
          */
-        replacement_counter = 0;
+        replacement_counter = 0,
+
+        /**
+         * @type {null|Function}
+         */
+        onHighlight;
 
     /**
      * cross browser get attribute for an element
@@ -504,6 +509,11 @@ window['Rainbow'] = (function() {
                     replacements = {};
                     replacement_positions = {};
 
+                    // if you have a listener attached tell it that this block is now highlighted
+                    if (onHighlight) {
+                        onHighlight(code_blocks[i]);
+                    }
+
                     // process the next block
                     setTimeout(function() {
                         _highlightCodeBlock(code_blocks, ++i);
@@ -569,6 +579,15 @@ window['Rainbow'] = (function() {
         },
 
         /**
+         * call back to let you do stuff in your app after a piece of code has been highlighted
+         *
+         * @param {Function} callback
+         */
+        onHighlight: function(callback) {
+            onHighlight = callback;
+        },
+
+        /**
          * starts the magic rainbow
          *
          * @returns void
@@ -588,3 +607,5 @@ window['Rainbow'] = (function() {
     }
     w.attachEvent('onload', Rainbow.init);
 }) (window);
+
+Rainbow["onHighlight"] = Rainbow.onHighlight;
