@@ -5,6 +5,12 @@ sys.argv.pop(0)
 languages = sys.argv
 languages.sort()
 
+no_language_args = ['--alone', '--forever-alone', '--core', '--no-languages', '--without-languages', '--none']
+rainbow_only = len(set(no_language_args) - set(sys.argv)) < len(no_language_args)
+
+if not rainbow_only:
+    languages.insert(0, 'generic')
+
 js_path = os.path.dirname(__file__) + '/../js/'
 
 js_files_to_include = [js_path + 'rainbow.js']
@@ -13,12 +19,17 @@ included_languages = []
 all_files = '--all' in sys.argv
 
 if all_files:
-    languages = []
+    languages = ['generic']
     files = glob.glob(js_path + 'language/*.js')
     for file in files:
-        languages.append(os.path.basename(file).replace('.js', ''))
+        name = os.path.basename(file).replace('.js', '')
+        if name != 'generic':
+            languages.append(name)
 
 for language in languages:
+    if language.startswith('--'):
+        continue
+
     path = js_path + 'language/' + language + '.js'
     if not os.path.isfile(path):
         print "no file for language: ",language
