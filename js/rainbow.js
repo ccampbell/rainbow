@@ -451,8 +451,8 @@ window['Rainbow'] = (function() {
         function _processReplacement(code, positions, i, onComplete) {
             if (i < positions.length) {
                 ++replacement_counter;
-                pos = positions[i];
-                replacement = replacements[CURRENT_LEVEL][pos];
+                var pos = positions[i],
+                    replacement = replacements[CURRENT_LEVEL][pos];
                 code = _replaceAtPosition(pos, replacement['replace'], replacement['with'], code);
 
                 // process next function
