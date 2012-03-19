@@ -79,6 +79,11 @@ window['Rainbow'] = (function() {
         replacement_counter = 0,
 
         /**
+         * @type {null|string}
+         */
+        global_class,
+
+        /**
          * @type {null|Function}
          */
         onHighlight;
@@ -179,7 +184,7 @@ window['Rainbow'] = (function() {
      * @returns {string}
      */
     function _wrapCodeInSpan(name, code) {
-        return '<span class="' + name.replace(/\./g, ' ') + '">' + code + '</span>';
+        return '<span class="' + name.replace(/\./g, ' ') + (global_class ? ' ' + global_class : '') + '">' + code + '</span>';
     }
 
     /**
@@ -593,6 +598,15 @@ window['Rainbow'] = (function() {
         },
 
         /**
+         * method to set a global class that will be applied to all spans
+         *
+         * @param {string} class_name
+         */
+        addClass: function(class_name) {
+            global_class = class_name;
+        },
+
+        /**
          * starts the magic rainbow
          *
          * @returns void
@@ -614,3 +628,4 @@ window['Rainbow'] = (function() {
 }) ();
 
 Rainbow["onHighlight"] = Rainbow.onHighlight;
+Rainbow["addClass"] = Rainbow.addClass;
