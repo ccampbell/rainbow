@@ -495,7 +495,12 @@ window['Rainbow'] = (function() {
      */
     function _highlightCodeBlock(code_blocks, i) {
         if (i < code_blocks.length) {
-            var language = _attr(code_blocks[i], 'data-language');
+
+            // if this doesn't have a language but the parent does then use that
+            // this means if for example you have: <pre data-language="php">
+            // with a bunch of <code> blocks inside then you do not have
+            // to specify the language for each block
+            var language = _attr(code_blocks[i], 'data-language') || _attr(code_blocks[i].parentNode, 'data-language');
 
             if (language) {
                 language = language.toLowerCase();
