@@ -606,11 +606,11 @@ window['Rainbow'] = (function() {
 /**
  * adds event listener to start highlighting
  */
-(function (w) {
-    if (w.addEventListener) {
-        return w.addEventListener('load', Rainbow.init, false);
+(function () {
+    if (window.addEventListener) {
+        return window.addEventListener('load', Rainbow.init, false);
     }
-    w.attachEvent('onload', Rainbow.init);
-}) (window);
+    window.attachEvent('onload', Rainbow.init);
+}) ();
 
 Rainbow["onHighlight"] = Rainbow.onHighlight;
