@@ -23,7 +23,14 @@ Rainbow.extend('javascript', [
         'matches': {
             1: 'support.function'
         },
-        'pattern': /\.(getAttribute|push|getElementById|getElementsByClassName|log)(?=\()/g
+        'pattern': /(setTimeout|setInterval)(?=\()/g
+
+    },
+    {
+        'matches': {
+            1: 'support.method'
+        },
+        'pattern': /\.(getAttribute|push|getElementById|getElementsByClassName|log|setTimeout|setInterval)(?=\()/g
     },
 
     /**
