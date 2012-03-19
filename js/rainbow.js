@@ -511,7 +511,7 @@ window['Rainbow'] = (function() {
 
                     // if you have a listener attached tell it that this block is now highlighted
                     if (onHighlight) {
-                        onHighlight(code_blocks[i]);
+                        onHighlight(code_blocks[i], language);
                     }
 
                     // process the next block
