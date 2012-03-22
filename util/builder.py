@@ -60,7 +60,7 @@ class RainbowBuilder(object):
         match = re.search(r'@version\s(.*)\s+?', contents)
         return match.group(1)
 
-    def getFileForLanguages(self, languages, cache_dir=None):
+    def getFileForLanguages(self, languages, cache=None):
         self.verifyPaths()
 
         # strip out any duplicates
@@ -76,16 +76,12 @@ class RainbowBuilder(object):
 
         self.file_name = 'rainbow' + ('-custom' if len(languages) else '') + '.min.js'
 
-        if not os.path.isdir(cache_dir):
-            cache_dir = None
-
-        if cache_dir is not None:
+        if cache is not None:
             version = self.getVersion()
-            cache_key = hashlib.md5(''.join(self.js_files_to_include)).hexdigest()
-            cache_path = os.path.join(cache_dir, version, cache_key)
-
-            if os.path.isfile(cache_path):
-                return self.openFile(cache_path)
+            cache_key = 'rainbow_' + hashlib.md5(''.join(self.js_files_to_include)).hexdigest() + '_' + version
+            cached_version = cache.get(cache_key)
+            if cached_version:
+                return cached_version
 
         command = ['java', '-jar', self.closure_path, '--compilation_level', 'ADVANCED_OPTIMIZATIONS'] + self.js_files_to_include
         proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -104,10 +100,7 @@ class RainbowBuilder(object):
 
         output = new_comment + '\n' + '\n'.join(lines[4:])
 
-        if cache_dir is not None:
-            save_to = os.path.join(cache_dir, version)
-            if not os.path.isdir(save_to):
-                os.mkdir(save_to)
-            self.writeFile(cache_path, output)
+        if cache is not None:
+            cache.set(cache_key, output)
 
         return output
