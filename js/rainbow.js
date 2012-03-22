@@ -197,7 +197,7 @@ window['Rainbow'] = (function() {
      * @returns {number}
      */
     function _indexOfGroup(match, group_number) {
-        var index = match.index,
+        var index = 0,
             i;
 
         for (i = 1; i < group_number; ++i) {
@@ -326,7 +326,7 @@ window['Rainbow'] = (function() {
                     });
                 }
 
-                var group_match_position = _indexOfGroup(match, group_keys[i]) - match.index;
+                var group_match_position = _indexOfGroup(match, group_keys[i]);
                 replacement = _replaceAtPosition(group_match_position, block, _wrapCodeInSpan(group, block), replacement);
                 processNextGroup();
             };
