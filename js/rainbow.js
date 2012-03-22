@@ -231,6 +231,12 @@ window['Rainbow'] = (function() {
 
         ++match_counter;
 
+        // treat match 0 the same way as name
+        if (!pattern['name'] && pattern['matches'][0]) {
+            pattern['name'] = pattern['matches'][0];
+            delete pattern['matches'][0];
+        }
+
         var replacement = match[0],
             start_pos = match.index,
             end_pos = match[0].length + start_pos,
