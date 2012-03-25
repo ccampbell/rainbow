@@ -37,13 +37,17 @@ Rainbow.extend('javascript', [
      * matches any escaped characters inside of a js regex pattern
      */
     {
+        'name': 'constant.regex',
         'matches': {
-            1: {
-                'name': 'constant.regex',
+            1: 'support.regex.open',
+            2: {
+                'name': 'constant.regex.escape',
                 'pattern': /\\(.){1}/g
-            }
+            },
+            3: 'support.regex.close',
+            4: 'support.regex.modifier'
         },
-        'pattern': /\/(.*?)\//g
+        'pattern': /(\/)(.*)(\/)([igm]{0,3})/g
     },
 
     /**
