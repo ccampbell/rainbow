@@ -101,6 +101,6 @@ class RainbowBuilder(object):
         output = new_comment + '\n' + '\n'.join(lines[4:])
 
         if cache is not None:
-            cache.set(cache_key, output)
+            cache.set(cache_key, output, 14400)  # 4 hours
 
         return output

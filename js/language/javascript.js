@@ -1,7 +1,6 @@
 /**
  * Javascript patterns
  *
- * @license http://www.apache.org/licenses/LICENSE-2.0
  * @author Craig Campbell
  * @version 1.0.1
  */
