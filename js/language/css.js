@@ -1,3 +1,10 @@
+/**
+ * CSS patterns
+ *
+ * @license http://www.apache.org/licenses/LICENSE-2.0
+ * @author Craig Campbell
+ * @version 1.0
+ */
 window.Rainbow = window.Rainbow || {};
 
 Rainbow.extend('css', [
@@ -53,4 +60,3 @@ Rainbow.extend('css', [
         'pattern': /&lt;\/?(.*?)(?=\=|&gt;)/g
     }
 ], true);
-

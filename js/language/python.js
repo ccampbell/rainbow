@@ -1,3 +1,10 @@
+/**
+ * Python patterns
+ *
+ * @license http://www.apache.org/licenses/LICENSE-2.0
+ * @author Craig Campbell
+ * @version 1.0
+ */
 window.Rainbow = window.Rainbow || {};
 
 Rainbow.extend('python', [
