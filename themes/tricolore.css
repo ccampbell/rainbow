@@ -26,10 +26,12 @@ pre, code {
 
 pre .comment {
     color: #7E7E7E;
+	font-style: italic;
 }
 
 pre .constant, pre .integer {
     color: #18838A;
+	font-weight: bold;
 }
 
 pre .storage {
@@ -42,6 +44,7 @@ pre .string {
 
 pre .keyword, pre .selector {
     color: #0000A1;
+	font-weight: bold;
 }
 
 pre .parent {
