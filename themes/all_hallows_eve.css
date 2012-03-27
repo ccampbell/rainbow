@@ -19,11 +19,9 @@ pre {
   font-size: 14px;
   margin-bottom: 20px;
 }
-
 pre, code {
   font-family: 'Monaco', courier, monospace;
 }
-
 pre .comment {
   color: #9933CC;
 }
