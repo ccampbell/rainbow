@@ -2,7 +2,7 @@
  * CSS patterns
  *
  * @author Craig Campbell
- * @version 1.0
+ * @version 1.0.1
  */
 window.Rainbow = window.Rainbow || {};
 
@@ -31,16 +31,31 @@ Rainbow.extend('css', [
         'pattern': /[\w-]+(?=\s|:)(?!.*\{)/g
     },
     {
-        'name': 'meta.tag',
-        'pattern': /[\w]+(?=.*\{)/g
-    },
-    {
-        'name': 'meta.class',
-        'pattern': /\.[\w]+(?=.*\{)/g
-    },
-    {
-        'name': 'meta.id',
-        'pattern': /\#[\w]+(?=.*\{)/g
+        'matches': {
+            1: [
+                {
+                    'name': 'meta.sass',
+                    'pattern': /&amp;/g
+                },
+                {
+                    'name': 'meta.class',
+                    'pattern': /\.[\w\-_]+/g
+                },
+                {
+                    'name': 'meta.id',
+                    'pattern': /\#[\w\-_]+/g
+                },
+                {
+                    'name': 'meta.pseudo',
+                    'pattern': /:[\w\-_]+/g
+                },
+                {
+                    'name': 'meta.tag',
+                    'pattern': /\w+/g
+                }
+            ]
+        },
+        'pattern': /([a-zA-Z0-9\ ,:\.\#\&\;\-_]+)(?=.*\{)/g
     },
     {
         'matches': {
