@@ -58,3 +58,7 @@ pre .entity, pre .meta {
 pre .support {
     color: #192140;
 }
+
+pre .variable.global, pre .variable.class, pre .variable.instance {
+    color: #3E853F;
+}
