@@ -2,15 +2,11 @@
  * Generic language patterns
  *
  * @author Craig Campbell
- * @version 1.0
+ * @version 1.0.1
  */
 window.Rainbow = window.Rainbow || {};
 
 Rainbow.extend([
-    {
-        'name': 'comment',
-        'pattern': /\/\*[\s\S]*?\*\/|(\/\/|\#)[\s\S]*?$/gm
-    },
     {
         'matches': {
             1: {
@@ -20,6 +16,10 @@ Rainbow.extend([
             2: 'string'
         },
         'pattern': /(\(|\s|\[|\=)(('|")[\s\S]*?(\3))/gm
+    },
+    {
+        'name': 'comment',
+        'pattern': /\/\*[\s\S]*?\*\/|(\/\/|\#)[\s\S]*?$/gm
     },
     {
         'name': 'integer',
