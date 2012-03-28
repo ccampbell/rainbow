@@ -3,16 +3,18 @@ import subprocess
 import zipfile
 import hashlib
 import re
+import glob
 from zipfile import ZipFile
 from StringIO import StringIO
 
 
 class RainbowBuilder(object):
-    def __init__(self, js_path, closure_path):
+    def __init__(self, js_path, closure_path, theme_path=None):
         self.js_path = js_path
         self.closure_path = closure_path
         self.js_files_to_include = []
         self.file_name = ""
+        self.theme_path = theme_path
 
     def getPathForLanguage(self, language):
         return os.path.join(self.js_path, 'language/' + language + '.js')
@@ -36,6 +38,15 @@ class RainbowBuilder(object):
         write_to = StringIO() if path is None else path
         zip_file = ZipFile(write_to, 'w')
         zip_file.write(self.getRainbowPath(), 'rainbow.js', zipfile.ZIP_DEFLATED)
+
+        # include minimized version even when downloading the dev version
+        zip_file.write(self.getRainbowPath().replace('.js', '.min.js'), 'rainbow.min.js', zipfile.ZIP_DEFLATED)
+
+        # include themes as well
+        if self.theme_path:
+            files = glob.glob(self.theme_path + '/*.css')
+            for file_name in files:
+                zip_file.write(file_name, os.path.join('themes', os.path.basename(file_name)), zipfile.ZIP_DEFLATED)
 
         for language in languages:
             zip_file.write(self.getPathForLanguage(language), os.path.join('language', language + '.js'), zipfile.ZIP_DEFLATED)
