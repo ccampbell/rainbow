@@ -4,8 +4,6 @@
  * @author Craig Campbell
  * @version 1.0
  */
-window.Rainbow = window.Rainbow || {};
-
 Rainbow.extend('html', [
     {
         'name': 'php',

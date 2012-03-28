@@ -5,8 +5,6 @@
  * @author Craig Campbell
  * @version 1.0.2
  */
-window.Rainbow = window.Rainbow || {};
-
 Rainbow.extend('shell', [
     /**
      * This handles the case where subshells contain quotes.

@@ -4,8 +4,6 @@
  * @author Craig Campbell
  * @version 1.0.1
  */
-window.Rainbow = window.Rainbow || {};
-
 Rainbow.extend([
     {
         'matches': {

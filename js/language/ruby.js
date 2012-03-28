@@ -4,8 +4,6 @@
  * @author Matthew King
  * @version 1.0
  */
-window.Rainbow = window.Rainbow || {};
-
 Rainbow.extend('ruby', [
     /**
      * Strings include heredocs
