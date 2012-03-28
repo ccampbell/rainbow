@@ -15,7 +15,7 @@
  *
  * Rainbow is a simple code syntax highlighter
  *
- * @preserve @version 1.0
+ * @preserve @version 1.1
  * @url rainbowco.de
  */
 window['Rainbow'] = (function() {
@@ -113,6 +113,28 @@ window['Rainbow'] = (function() {
         }
 
         return result;
+    }
+
+    /**
+     * adds a class to a given code block
+     *
+     * @param {Element} el
+     * @param {string} class_name   class name to add
+     * @returns void
+     */
+    function _addClass(el, class_name) {
+        el.className += el.className ? ' ' + class_name : class_name;
+    }
+
+    /**
+     * checks if a block has a given class
+     *
+     * @param {Element} el
+     * @param {string} class_name   class name to check for
+     * @returns {boolean}
+     */
+    function _hasClass(el, class_name) {
+        return (' ' + el.className + ' ').indexOf(' ' + class_name + ' ') > -1;
     }
 
     /**
@@ -492,7 +514,7 @@ window['Rainbow'] = (function() {
      */
     function _highlightBlockForLanguage(code, language, onComplete) {
         var patterns = _getPatternsForLanguage(language);
-        _processCodeWithPatterns(code, patterns, function (code) {
+        _processCodeWithPatterns(code, patterns, function(code) {
             onComplete(code);
         });
     }
@@ -504,7 +526,7 @@ window['Rainbow'] = (function() {
      * @param {number} i
      * @returns void
      */
-    function _highlightCodeBlock(code_blocks, i) {
+    function _highlightCodeBlock(code_blocks, i, onComplete) {
         if (i < code_blocks.length) {
 
             // if this doesn't have a language but the parent does then use that
@@ -512,13 +534,12 @@ window['Rainbow'] = (function() {
             // with a bunch of <code> blocks inside then you do not have
             // to specify the language for each block
             var language = _attr(code_blocks[i], 'data-language') || _attr(code_blocks[i].parentNode, 'data-language');
-
-            if (language) {
+            if (!_hasClass(code_blocks[i], 'rainbow') && language) {
                 language = language.toLowerCase();
 
-                code_blocks[i].className = language;
+                _addClass(code_blocks[i], 'rainbow');
 
-                return _highlightBlockForLanguage(code_blocks[i].innerHTML, language, function (code) {
+                return _highlightBlockForLanguage(code_blocks[i].innerHTML, language, function(code) {
                     code_blocks[i].innerHTML = code;
 
                     // reset the replacement arrays
@@ -532,11 +553,15 @@ window['Rainbow'] = (function() {
 
                     // process the next block
                     setTimeout(function() {
-                        _highlightCodeBlock(code_blocks, ++i);
+                        _highlightCodeBlock(code_blocks, ++i, onComplete);
                     }, 0);
                 });
             }
-            _highlightCodeBlock(code_blocks, ++i);
+            return _highlightCodeBlock(code_blocks, ++i, onComplete);
+        }
+
+        if (onComplete) {
+            onComplete();
         }
     }
 
@@ -545,16 +570,16 @@ window['Rainbow'] = (function() {
      *
      * @returns void
      */
-    function _highlight() {
-        var pre_blocks = document.getElementsByTagName('pre'),
-            code_blocks = document.getElementsByTagName('code'),
+    function _highlight(node, onComplete) {
+        var pre_blocks = (node || document).getElementsByTagName('pre'),
+            code_blocks = (node || document).getElementsByTagName('code'),
             i,
             final_blocks = [];
 
         // @see http://stackoverflow.com/questions/2735067/how-to-convert-a-dom-node-list-to-an-array-in-javascript
         // we are going to process all <code> blocks
-        for (i = code_blocks.length >>> 0; i--;) {
-            final_blocks[i] = code_blocks[i];
+        for (i = 0; i < code_blocks.length; ++i) {
+            final_blocks.push(code_blocks[i]);
         }
 
         // loop through the pre blocks to see which ones we should add
@@ -566,7 +591,7 @@ window['Rainbow'] = (function() {
             }
         }
 
-        _highlightCodeBlock(final_blocks, 0);
+        _highlightCodeBlock(final_blocks, 0, onComplete);
     }
 
     /**
@@ -617,8 +642,23 @@ window['Rainbow'] = (function() {
          *
          * @returns void
          */
-        init: function() {
-            _highlight();
+        color: function() {
+
+            // if you want to straight up highlight a string you can pass the string of code,
+            // the language, and a callback function
+            if (typeof arguments[0] == 'string') {
+                return _highlightBlockForLanguage(arguments[0], arguments[1], arguments[2]);
+            }
+
+            // if you pass a callback function then we rerun the color function
+            // on all the code and call the callback function on complete
+            if (typeof arguments[0] == 'function') {
+                return _highlight(null, arguments[0]);
+            }
+
+            // otherwise we use whatever node you passed in with an optional
+            // callback function as the second parameter
+            _highlight(arguments[0] instanceof Event ? null : arguments[0], arguments[1]);
         }
     };
 }) ();
@@ -626,12 +666,13 @@ window['Rainbow'] = (function() {
 /**
  * adds event listener to start highlighting
  */
-(function () {
+(function() {
     if (window.addEventListener) {
-        return window.addEventListener('load', Rainbow.init, false);
+        return window.addEventListener('load', Rainbow.color, false);
     }
-    window.attachEvent('onload', Rainbow.init);
+    window.attachEvent('onload', Rainbow.color);
 }) ();
 
 Rainbow["onHighlight"] = Rainbow.onHighlight;
 Rainbow["addClass"] = Rainbow.addClass;
+Rainbow["color"] = Rainbow.color;
