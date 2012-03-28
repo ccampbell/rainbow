@@ -36,6 +36,9 @@ Rainbow.extend('php', [
         },
         'pattern': /(instanceof)\s([^\$].*?)(\)|;)/g
     },
+    /**
+     * @todo limit this to the most commonly used PHP functions since this could grow really big
+     */
     {
         'matches': {
             1: 'support.function'
