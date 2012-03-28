@@ -2,6 +2,7 @@
  * Shell patterns
  *
  * @author Matthew King
+ * @author Craig Campbell
  * @version 1.0.2
  */
 window.Rainbow = window.Rainbow || {};
@@ -25,24 +26,28 @@ Rainbow.extend('shell', [
     },
     {
         'matches': {
-            1: {
-                'name': 'keyword.operator',
-                'pattern': /\=/g
-            },
             2: 'string'
         },
         'pattern': /(\(|\s|\[|\=)(('|")[\s\S]*?(\3))/gm
     },
     {
+        'name': 'keyword.operator',
+        'pattern': /&lt;|&gt;|&amp;/g
+    },
+    {
         'name': 'comment',
         'pattern': /\#[\s\S]*?$/gm
+    },
+    {
+        'name': 'meta.function',
+        'pattern': /(.+?)(?=\(\)\s{0,}\{)/g
     },
     /**
      * Environment variables
      */
     {
-        'name': 'constant',
-        'pattern': /\b[A-Z0-9_]{2,}\b/g
+        'name': 'support.command',
+        'pattern': /\b(echo|rm|ls|(mk|rm)dir|cd|find|cp|exit|pwd|exec|trap|source|shift|unset)/g
     },
     {
         'matches': {
