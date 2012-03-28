@@ -53,7 +53,7 @@ Rainbow.extend('javascript', [
             3: 'support.regex.close',
             4: 'support.regex.modifier'
         },
-        'pattern': /(\/)(.*)(\/)([igm]{0,3})/g
+        'pattern': /(\/)(.+)(\/)([igm]{0,3})/g
     },
 
     /**
