@@ -1,6 +1,6 @@
 /**
  * Ruby patterns
- * 
+ *
  * @author Matthew King
  * @version 0.1.0
  */
@@ -48,7 +48,7 @@ Rainbow.extend('ruby', [
         'pattern': /\b[A-Z0-9_]{2,}\b/g
     },
     /**
-     * Symbols 
+     * Symbols
      */
     {
         'matches': {
