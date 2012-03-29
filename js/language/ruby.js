@@ -53,7 +53,7 @@ Rainbow.extend('ruby', [
             3: 'support.regex.close',
             4: 'support.regex.modifier'
         },
-        'pattern': /(\/)(.*?)(\/)([a-z]*)/g,
+        'pattern': /(\/)(.*?)(\/)([a-z]*)/g
     },
     {
         'name': 'constant.regex',
