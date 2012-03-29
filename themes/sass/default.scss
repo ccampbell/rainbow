@@ -1,0 +1,71 @@
+/**
+ * Default theme - backboard example base
+ *
+ * @author Domenico Carbotta
+ * @version 1.0
+ */
+/* updated: SASS Color Syntax - @brunomarks */
+
+$pre : #fff;
+ $pre_background : #0B1022;
+ $string : #61CE3C;
+ $tag : #8DA6CE;
+ $selector_storage : #FBDE2D; 
+ $globalvar : #FF6400;
+ $constant : #D8FA3C;
+ $comment : #727272;
+ $support : #8DA6CE;
+
+pre {
+    background: $pre_background;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+    margin: 0px;
+    padding: 0px;
+    padding: 10px;
+    color: $pre;
+    font-size: 14px;
+    margin-bottom: 20px;
+    code {
+        font-family: 'Monaco', courier, monospace;
+    }
+    .comment {
+        color: $comment;
+    }
+    .constant {
+        color: $constant;
+    }
+    .integer{
+        @extend .constant;
+    }
+    .storage {
+        color: $selector_storage;
+    }
+    .string {
+        color: $string;
+    }
+    .keyword, .selector {
+        color: $selector_storage;
+    }
+    .parent {
+        font-style: italic;
+    }
+    .entity {
+        color: $globalvar;
+    }
+    .meta {
+        @extend .entity;
+    }
+    .support {
+        color: $support;
+    }
+    .variable.global {
+        color: $globalvar;
+    }
+    .variable.class, .variable.instance{
+        @extend .variable.global;
+        }
+}
