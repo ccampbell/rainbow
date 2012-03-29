@@ -2,7 +2,7 @@
  * Javascript patterns
  *
  * @author Craig Campbell
- * @version 1.0.2
+ * @version 1.0.3
  */
 Rainbow.extend('javascript', [
 
@@ -36,9 +36,25 @@ Rainbow.extend('javascript', [
         },
         'pattern': /\.(getAttribute|push|getElementById|getElementsByClassName|log|setTimeout|setInterval)(?=\()/g
     },
+    {
+        'matches': {
+            2: [
+                {
+                    'name': 'string',
+                    'pattern': /('|")(.*?)(\1)/g
+                },
+                {
+                    'name': 'meta.script-tag',
+                    'pattern': /(\w+)/g
+                }
+            ]
+        },
+        'pattern': /(&lt;\/?)(script(.*?))(&gt;)/g
+    },
 
     /**
      * matches any escaped characters inside of a js regex pattern
+     * @todo check that there is valid regex in match group 1
      */
     {
         'name': 'regex',
@@ -60,21 +76,6 @@ Rainbow.extend('javascript', [
     {
         'name': 'meta.function-call',
         'pattern': /(\w+)(?=:\s{0,}function)/g
-    },
-    {
-        'matches': {
-            2: [
-                {
-                    'name': 'string',
-                    'pattern': /('|")(.*?)(\1)/g
-                },
-                {
-                    'name': 'meta.script-tag',
-                    'pattern': /(\w+)/g
-                }
-            ]
-        },
-        'pattern': /(&lt;\/?)(script(.*?))(&gt;)/g
     }
     /*,
     {
