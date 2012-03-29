@@ -9,6 +9,17 @@ from StringIO import StringIO
 
 
 class RainbowBuilder(object):
+    VERSIONS = {
+        'css': '1.0.1',
+        'generic': '1.0.1',
+        'html': '1.0',
+        'javascript': '1.0.1',
+        'php': '1.0',
+        'python': '1.0',
+        'ruby': '1.0.1',
+        'shell': '1.0.2'
+    }
+
     def __init__(self, js_path, closure_path, theme_path=None):
         self.js_path = js_path
         self.closure_path = closure_path
@@ -71,6 +82,14 @@ class RainbowBuilder(object):
         match = re.search(r'@version\s(.*)\s+?', contents)
         return match.group(1)
 
+    def getLanguageVersions(self, languages):
+        groups = []
+        for language in languages:
+            if language in RainbowBuilder.VERSIONS:
+                groups.append(language + ':' + RainbowBuilder.VERSIONS[language])
+
+        return ','.join(groups)
+
     def getFileForLanguages(self, languages, cache=None):
         self.verifyPaths()
 
@@ -89,7 +108,7 @@ class RainbowBuilder(object):
 
         if cache is not None:
             version = self.getVersion()
-            cache_key = 'rainbow_' + hashlib.md5(''.join(self.js_files_to_include)).hexdigest() + '_' + version
+            cache_key = 'rainbow_' + hashlib.md5(self.getLanguageVersions(languages)).hexdigest() + '_' + version
             cached_version = cache.get(cache_key)
             if cached_version:
                 return cached_version
