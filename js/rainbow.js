@@ -139,6 +139,7 @@ window['Rainbow'] = (function() {
 
     /**
      * makes sure html entities are always used for tags
+     *
      * @param {string} code
      * @returns {string}
      */
