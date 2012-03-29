@@ -138,6 +138,15 @@ window['Rainbow'] = (function() {
     }
 
     /**
+     * makes sure html entities are always used for tags
+     * @param {string} code
+     * @returns {string}
+     */
+    function _htmlEntities(code) {
+        return code.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    /**
      * determines if a new match intersects with an existing one
      *
      * @param {number} start1    start position of existing match
@@ -514,9 +523,7 @@ window['Rainbow'] = (function() {
      */
     function _highlightBlockForLanguage(code, language, onComplete) {
         var patterns = _getPatternsForLanguage(language);
-        _processCodeWithPatterns(code, patterns, function(code) {
-            onComplete(code);
-        });
+        _processCodeWithPatterns(_htmlEntities(code), patterns, onComplete);
     }
 
     /**
