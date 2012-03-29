@@ -6,7 +6,7 @@
     <form method="get">
         <fieldset>
             <legend>Select Languages</legend>
-            <select multiple>
+            <select multiple name="languages">
                 <option value="css">css</option>
                 <option value="generic">generic</option>
                 <option value="html">html</option>
@@ -16,9 +16,15 @@
                 <option value="ruby">ruby</option>
                 <option value="shell">shell</option>
             </select>
-            <label><input type="checkbox" name="min" value="use minimized"> Use minimized</label>
+            <label><input type="checkbox" name="min"> Use minimized</label>
             <input type="button" id="run_tests" value="Run Tests">
         </fieldset>
     </form>
-    <script src=""
+    <div id="results">
+    </div>
+    <script src="jquery-1.7.2.min.js"></script>
+    <script>
+        var RAINBOW_PATH = '../js';
+    </script>
+    <script src="tests.js"></script>
 </body>
