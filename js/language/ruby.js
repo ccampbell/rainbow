@@ -2,7 +2,7 @@
  * Ruby patterns
  *
  * @author Matthew King
- * @version 1.0.1
+ * @version 1.0.2
  */
 Rainbow.extend('ruby', [
     /**
@@ -43,15 +43,15 @@ Rainbow.extend('ruby', [
      * Escaped delimiter (`/\//`) is unsupported.
      */
     {
-        'name': 'constant.regex',
+        'name': 'regex',
         'matches': {
-            1: 'support.regex.open',
+            1: 'regex.open',
             2: {
                 'name': 'constant.regex.escape',
                 'pattern': /\\(.){1}/g
             },
-            3: 'support.regex.close',
-            4: 'support.regex.modifier'
+            3: 'regex.close',
+            4: 'regex.modifier'
         },
         'pattern': /(\/)(.*?)(\/)([a-z]*)/g
     },

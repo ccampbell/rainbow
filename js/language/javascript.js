@@ -2,7 +2,7 @@
  * Javascript patterns
  *
  * @author Craig Campbell
- * @version 1.0.1
+ * @version 1.0.2
  */
 Rainbow.extend('javascript', [
 
@@ -41,15 +41,15 @@ Rainbow.extend('javascript', [
      * matches any escaped characters inside of a js regex pattern
      */
     {
-        'name': 'constant.regex',
+        'name': 'regex',
         'matches': {
-            1: 'support.regex.open',
+            1: 'regex.open',
             2: {
                 'name': 'constant.regex.escape',
                 'pattern': /\\(.){1}/g
             },
-            3: 'support.regex.close',
-            4: 'support.regex.modifier'
+            3: 'regex.close',
+            4: 'regex.modifier'
         },
         'pattern': /(\/)(.+)(\/)([igm]{0,3})/g
     },
