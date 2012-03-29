@@ -6,63 +6,94 @@
  */
 Rainbow.extend('ruby', [
     /**
-     * Strings include heredocs
-     * Heredocs of the form `<<'HTML' ... HTML` are not supported.
-     * Strings of the form `%Q{...}` are not supported.
-     * String interpolation is not supported.
+     * Strings
+     * Escaped quote (`"\""`) is unsupported.
+     * String interpolation is unsupported.
+     */
+    {
+        'name': 'string',
+        'pattern': /(?=['"](.*?)['"])(?:"\1"|'\1')/g
+    },
+    {
+        'name': 'string',
+        'pattern': /%[qQ](?=(\(|\[|\{|&lt;|.)(.*?)(?:'|\)|\]|\}|&gt;|\1))(?:\(\2\)|\[\2\]|\{\2\}|\&lt;\2&gt;|\1\2\1)/g
+    },
+    /**
+     * Heredocs
+     * Heredocs of the form `<<'HTML' ... HTML` are unsupported.
      */
     {
         'matches': {
-            1: {
-                'name': 'keyword.operator',
-                'pattern': /\=/g
-            },
-            2: 'string'
+            1: 'string',
+            2: 'string',
+            3: 'string'
         },
-        'pattern': /(\(|\s|\[|\=|\=&gt;)(&lt;&lt;\-(\S+)[\s\S]*?(\3)|&lt;&lt;(\S+)[\s\S]*?(\5)|('|")[\s\S]*?(\7))/gm
+        'pattern': /(&lt;&lt;)(\w+).*?$([\s\S]*?^\2)/gm
+    },
+    {
+        'matches': {
+            1: 'string',
+            2: 'string',
+            3: 'string'
+        },
+        'pattern': /(&lt;&lt;\-)(\w+).*?$([\s\S]*?\2)/gm
+    },
+    /**
+     * Regular expressions
+     * Escaped delimiter (`/\//`) is unsupported.
+     */
+    {
+        'name': 'constant.regex',
+        'matches': {
+            1: 'support.regex.open',
+            2: {
+                'name': 'constant.regex.escape',
+                'pattern': /\\(.){1}/g
+            },
+            3: 'support.regex.close',
+            4: 'support.regex.modifier'
+        },
+        'pattern': /(\/)(.*?)(\/)([a-z]*)/g,
+    },
+    {
+        'name': 'constant.regex',
+        'matches': {
+            1: 'support.regex.open',
+            2: {
+                'name': 'constant.regex.escape',
+                'pattern': /\\(.){1}/g
+            },
+            3: 'support.regex.close',
+            4: 'support.regex.modifier'
+        },
+        'pattern': /%r(?=(\(|\[|\{|&lt;|.)(.*?)('|\)|\]|\}|&gt;|\1))(?:\(\2\)|\[\2\]|\{\2\}|\&lt;\2&gt;|\1\2\1)([a-z]*)/g
     },
     {
         'name': 'comment',
-        'pattern': /^=begin[\s\S]*?^=end|\#[\s\S]*?$/gm
-    },
-    {
-        'name': 'integer',
-        'pattern': /\b(0x[\da-f]+|\d+)\b/g
-    },
-    {
-        'name': 'variable.global',
-        'pattern': /\$(\w+)\b/g
-    },
-    {
-        'name': 'variable.class',
-        'pattern': /@@(\w+)\b/g
-    },
-    {
-        'name': 'variable.instance',
-        'pattern': /@(\w+)\b/g
-    },
-    {
-        'name': 'constant',
-        'pattern': /\b[A-Z0-9_]{2,}\b/g
+        'pattern': /^=begin[\s\S]*?^=end|\#.*?$/gm
     },
     /**
      * Symbols
      */
     {
         'matches': {
-            1: {
-                'name': 'keyword.operator',
-                'pattern': /\=/g
-            },
-            2: 'constant'
+            1: 'constant'
         },
-        'pattern': /(\(|\s|\[|\=)(:('|")[\s\S]*?(\3)|:\w+)/gm
+        'pattern': /(\w+:)[^:]/g
     },
     {
         'matches': {
-            1: 'keyword'
+            1: 'constant'
         },
-        'pattern': /\b(alias|and|begin|break|case|class|continue|def|defined|do|else|elsif|end|ensure|extend|false|for|if|in|include|module|next|nil|not|or|redo|require|rescue|retry|return|self|super|then|true|undef|unless|until|when|while|yield)(?=\(|\b)/g
+        'pattern': /[^:](:(?:\w+|(?=['"](.*?)['"])(?:"\2"|'\2')))/g
+    },
+    {
+        'name': 'integer',
+        'pattern': /\b(0x[\da-f]+|\d+)\b/g
+    },
+    {
+        'name': 'constant',
+        'pattern': /\b[A-Z0-9_]{2,}\b/g
     },
     {
         'matches': {
@@ -80,10 +111,21 @@ Rainbow.extend('ruby', [
         'pattern': /\b[A-Z]\w*[a-z]\w*\b/g
     },
     {
+        'name': 'variable.global',
+        'pattern': /\$(\w+)\b/g
+    },
+    {
+        'name': 'variable.class',
+        'pattern': /@@(\w+)\b/g
+    },
+    {
+        'name': 'variable.instance',
+        'pattern': /@(\w+)\b/g
+    },
+    {
         'matches': {
-            1: 'keyword',
-            2: 'meta.function'
+            1: 'keyword'
         },
-        'pattern': /(def)\s(.*?)(?=\()/g
+        'pattern': /\b(alias|and|begin|break|case|class|continue|def|defined|do|else|elsif|end|ensure|extend|false|for|if|in|include|module|next|nil|not|private|or|raise|redo|require|rescue|retry|return|self|super|then|true|undef|unless|until|when|while|yield)(?=\(|\b)/g
     }
 ], true);
