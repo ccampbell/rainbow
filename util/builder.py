@@ -86,9 +86,9 @@ class RainbowBuilder(object):
         groups = []
         for language in languages:
             if language in RainbowBuilder.VERSIONS:
-                groups.append(language + ':' + RainbowBuilder.VERSIONS[language])
+                groups.append(language + ' v' + RainbowBuilder.VERSIONS[language])
 
-        return ','.join(groups)
+        return ', '.join(groups)
 
     def getFileForLanguages(self, languages, cache=None):
         self.verifyPaths()
