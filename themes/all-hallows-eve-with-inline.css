@@ -20,12 +20,10 @@ pre {
     margin-bottom: 20px;
 }
 
-code {
-    background: #000;
-    color: #fff;
-}
 pre, code {
     font-family: 'Monaco', courier, monospace;
+    background: #000;
+    color: #fff;
 }
 
 pre .comment, code .comment {
