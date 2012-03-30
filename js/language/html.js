@@ -76,6 +76,6 @@ Rainbow.extend('html', [
     },
     {
         'name': 'support.attribute',
-        'pattern': /(\w+)(?=&gt;)/g
+        'pattern': /(\w+)(?=\s?\/?&gt;)/g
     }
 ], true);
