@@ -57,7 +57,7 @@ Rainbow.extend('python', [
         'pattern': /(def)\s+(\w+)(?=\()/g
     },
     {
-        'name': 'support.decorator',
+        'name': 'meta.decorator',
         'pattern': /@(\w+)/g
 
     },
