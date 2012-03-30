@@ -141,7 +141,7 @@ Rainbow.extend('ruby', [
     */
     {
         'matches': {
-            1: 'keyword',
+            1: 'keyword.def',
             2: 'meta.function'
         },
         'pattern': /(def)\s(.*?)(?=(\s|\())/g
