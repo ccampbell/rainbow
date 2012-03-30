@@ -91,24 +91,28 @@ Rainbow.extend('ruby', [
         'name': 'integer',
         'pattern': /\b(0x[\da-f]+|\d+)\b/g
     },
-    {
-        'name': 'constant',
-        'pattern': /\b[A-Z0-9_]{2,}\b/g
-    },
-    {
-        'matches': {
-            1: 'keyword.class',
-            2: 'meta.class-name',
-            4: 'meta.parent.class-name'
-        },
-        'pattern': /(class|module)\s+(\w+)(<\s+(\w+))?/g
-    },
     /**
      * Class names begin with an upper-case letter
      */
     {
-        'name': 'meta.class-name',
-        'pattern': /\b[A-Z]\w*[a-z]\w*\b/g
+        'matches': {
+            1: 'keyword.class',
+            2: 'meta.class-name',
+            3: 'meta.parent.class-name'
+        },
+        'pattern': /\s*(class)\s+((?:(?:::)?[A-Z]\w*)+)(?:\s+&lt;\s+((?:(?:::)?[A-Z]\w*)+))?/g
+    },
+    {
+        'matches': {
+            1: 'keyword.module',
+            2: 'meta.class-name',
+        },
+        'pattern': /\s*(module)\s+((?:(?:::)?[A-Z]\w*)+)/g
+    },
+
+    {
+        'name': 'support.class-name',
+        'pattern': /\b[A-Z]\w*(?=((\.|::)[A-Za-z]|\[))/g
     },
     {
         'name': 'variable.global',
@@ -127,5 +131,15 @@ Rainbow.extend('ruby', [
             1: 'keyword'
         },
         'pattern': /\b(alias|and|begin|break|case|class|continue|def|defined|do|else|elsif|end|ensure|extend|false|for|if|in|include|module|next|nil|not|private|or|raise|redo|require|rescue|retry|return|self|super|then|true|undef|unless|until|when|while|yield)(?=\(|\b)/g
+    },
+    /**
+    * Functions
+    */
+    {
+        'matches': {
+            1: 'keyword',
+            2: 'meta.function'
+        },
+        'pattern': /(def)\s(.*?)(?=(\s|\())/g
     }
 ], true);
