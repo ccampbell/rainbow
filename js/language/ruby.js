@@ -119,15 +119,15 @@ Rainbow.extend('ruby', [
     },
     {
         'name': 'variable.global',
-        'pattern': /\$(\w+)\b/g
+        'pattern': /\$([a-zA-Z_]\w*)\b/g
     },
     {
         'name': 'variable.class',
-        'pattern': /@@(\w+)\b/g
+        'pattern': /@@([a-zA-Z_]\w*)\b/g
     },
     {
         'name': 'variable.instance',
-        'pattern': /@(\w+)\b/g
+        'pattern': /@([a-zA-Z_]\w*)\b/g
     },
     {
         'matches': {
