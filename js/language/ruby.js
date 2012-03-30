@@ -3,17 +3,20 @@
  *
  * @author Matthew King
  * @author Jesse Farmer <jesse@20bits.com>
- * @version 1.0.3
+ * @version 1.0.4
  */
 Rainbow.extend('ruby', [
     /**
      * Strings
-     * Escaped quote (`"\""`) is unsupported.
      * String interpolation is unsupported.
      */
     {
         'name': 'string',
-        'pattern': /(?=['"](.*?)['"])(?:"\1"|'\1')/g
+        'pattern': /(\'(([^'\\]|\\).*)\')/g
+    },
+    {
+        'name': 'string',
+        'pattern': /("(([^"\\]|\\).*)")/g
     },
     {
         'name': 'string',
