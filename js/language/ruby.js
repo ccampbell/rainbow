@@ -11,11 +11,11 @@ Rainbow.extend('ruby', [
      * String interpolation is unsupported.
      */
     {
-        'name': 'string',
+        'name': 'string.single-quoted',
         'pattern': /(\'(([^'\\]|\\).*)\')/g
     },
     {
-        'name': 'string',
+        'name': 'string.double-quoted',
         'pattern': /("(([^"\\]|\\).*)")/g
     },
     {
