@@ -41,7 +41,7 @@ Rainbow.extend('html', [
             1: 'support.tag.open',
             2: 'support.tag.close'
         },
-        'pattern': /(&lt;)|(&gt;)/g
+        'pattern': /(&lt;)|(\/?&gt;)/g
     },
     {
         'name': 'support.tag',
@@ -76,6 +76,6 @@ Rainbow.extend('html', [
     },
     {
         'name': 'support.attribute',
-        'pattern': /(\w+)(?=&gt;)/g
+        'pattern': /(\w+)(?=\s?\/?&gt;)/g
     }
 ], true);
