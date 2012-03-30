@@ -91,6 +91,14 @@ Rainbow.extend('ruby', [
         'name': 'integer',
         'pattern': /\b(0x[\da-f]+|\d+)\b/g
     },
+    {
+        'name': 'support.class-name',
+        'pattern': /\b[A-Z]\w*(?=((\.|::)[A-Za-z]|\[))/g
+    },
+    {
+        'name': 'constant',
+        'pattern': /\b[A-Z]\w*\b/g
+    },
     /**
      * Class names begin with an upper-case letter
      */
@@ -108,11 +116,6 @@ Rainbow.extend('ruby', [
             2: 'meta.class-name',
         },
         'pattern': /\s*(module)\s+((?:(?:::)?[A-Z]\w*)+)/g
-    },
-
-    {
-        'name': 'support.class-name',
-        'pattern': /\b[A-Z]\w*(?=((\.|::)[A-Za-z]|\[))/g
     },
     {
         'name': 'variable.global',
