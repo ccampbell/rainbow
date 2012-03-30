@@ -2,7 +2,7 @@
  * CSS patterns
  *
  * @author Craig Campbell
- * @version 1.0.1
+ * @version 1.0.2
  */
 Rainbow.extend('css', [
     {
@@ -34,6 +34,10 @@ Rainbow.extend('css', [
                 {
                     'name': 'meta.sass',
                     'pattern': /&amp;/g
+                },
+                {
+                    'name': 'direct-descendent',
+                    'pattern': /&gt;/g
                 },
                 {
                     'name': 'meta.class',
