@@ -2,7 +2,8 @@
  * Ruby patterns
  *
  * @author Matthew King
- * @version 1.0.2
+ * @author Jesse Farmer <jesse@20bits.com>
+ * @version 1.0.3
  */
 Rainbow.extend('ruby', [
     /**
