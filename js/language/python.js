@@ -56,13 +56,13 @@ Rainbow.extend('python', [
         },
         'pattern': /(def)\s+(\w+)(?=\()/g
     },
-	{
-		'name': 'support.decorator',
-		'pattern': /@(\w+)/g
-	
-	},
-	{
-		'name': 'comment.docstring',
-		'pattern': /""".*"""/g
-	}
+    {
+        'name': 'support.decorator',
+        'pattern': /@(\w+)/g
+
+    },
+    {
+        'name': 'comment.docstring',
+        'pattern': /""".*"""/g
+    }
 ]);
