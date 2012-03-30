@@ -12,11 +12,11 @@ Rainbow.extend('ruby', [
      */
     {
         'name': 'string.single-quoted',
-        'pattern': /(\'(([^'\\]|\\).*)\')/g
+        'pattern': /(\'(([^'\\]|\\)[\s\S]*)\')/g
     },
     {
         'name': 'string.double-quoted',
-        'pattern': /("(([^"\\]|\\).*)")/g
+        'pattern': /("(([^"\\]|\\)[\s\S]*)")/g
     },
     {
         'name': 'string',
