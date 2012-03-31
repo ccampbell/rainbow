@@ -2,7 +2,7 @@
  * Generic language patterns
  *
  * @author Craig Campbell
- * @version 1.0.1
+ * @version 1.0.2
  */
 Rainbow.extend([
     {

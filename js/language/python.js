@@ -2,7 +2,7 @@
  * Python patterns
  *
  * @author Craig Campbell
- * @version 1.0
+ * @version 1.0.1
  */
 Rainbow.extend('python', [
     /**
