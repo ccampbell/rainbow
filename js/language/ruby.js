@@ -6,17 +6,29 @@
  * @version 1.0.3
  */
 Rainbow.extend('ruby', [
-    /**
-     * Strings
-     * String interpolation is unsupported.
-     */
+    {
+        'name': 'comment',
+        'pattern': /#.*$/gm
+    },
+    {
+        'name': 'comment',
+        'pattern': /^\=begin[\s\S]*?\=end$/gm
+    },
     {
         'name': 'string.single-quoted',
-        'pattern': /(\'(([^'\\]|\\)[\s\S]*)\')/g
+        'pattern': /'([^\\'\n]|\\.)*'/g
+    },
+    {
+        'name': 'string.single-quoted',
+        'pattern': /'([^\\']|\\[\S\s])*'/g
     },
     {
         'name': 'string.double-quoted',
-        'pattern': /("(([^"\\]|\\)[\s\S]*)")/g
+        'pattern': /"([^\\"\n]|\\.)*"/g
+    },
+    {
+        'name': 'string.double-quoted',
+        'pattern': /"([^\\"]|\\[\S\s])*"/g
     },
     {
         'name': 'string',
@@ -72,10 +84,6 @@ Rainbow.extend('ruby', [
         },
         'pattern': /%r(?=(\(|\[|\{|&lt;|.)(.*?)('|\)|\]|\}|&gt;|\1))(?:\(\2\)|\[\2\]|\{\2\}|\&lt;\2&gt;|\1\2\1)([a-z]*)/g
     },
-    {
-        'name': 'comment',
-        'pattern': /^=begin[\s\S]*?^=end|\#.*?$/gm
-    },
     /**
      * Symbols
      */
@@ -87,7 +95,7 @@ Rainbow.extend('ruby', [
     },
     {
         'matches': {
-            1: 'constant'
+            1: 'constant.symbol'
         },
         'pattern': /[^:](:(?:\w+|(?=['"](.*?)['"])(?:"\2"|'\2')))/g
     },
@@ -149,4 +157,6 @@ Rainbow.extend('ruby', [
         },
         'pattern': /(def)\s(.*?)(?=(\s|\())/g
     }
+
+
 ], true);
