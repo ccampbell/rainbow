@@ -11,7 +11,7 @@ from StringIO import StringIO
 class RainbowBuilder(object):
     VERSIONS = {
         'css': '1.0.4',
-        'generic': '1.0.2',
+        'generic': '1.0.3',
         'html': '1.0.2',
         'javascript': '1.0.3',
         'php': '1.0.1',

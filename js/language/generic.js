@@ -2,7 +2,7 @@
  * Generic language patterns
  *
  * @author Craig Campbell
- * @version 1.0.2
+ * @version 1.0.3
  */
 Rainbow.extend([
     {
@@ -31,7 +31,7 @@ Rainbow.extend([
         'matches': {
             1: 'keyword'
         },
-        'pattern': /\b(and|array|as|bool(ean)?|c(atch|har|lass|onst)|d(ef|elete|ie|o(uble)?)|e(cho|lse(if)?|xit|xtends)|f(inally|loat|or(each)?|unction)|global|if|import|int(eger)?|long|new|object|or|pr(int|ivate|otected)|public|return|self|st(ring|ruct|atic)|switch|th(en|is|row)|try|except|(un)?signed|var|void|while)(?=\(|\b)/g
+        'pattern': /\b(and|array|as|bool(ean)?|c(atch|har|lass|onst)|d(ef|elete|ie|o(uble)?)|e(cho|lse(if)?|xit|xtends)|f(inally|loat|or(each)?|unction)|global|if|import|int(eger)?|long|new|object|or|pr(int|ivate|otected)|public|return|self|st(ring|ruct|atic)|switch|th(en|is|row)|try|except|(un)?signed|var|void|while)(?=\(|\b)/gi
     },
     {
         'name': 'constant.language',
