@@ -46,6 +46,14 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'regex 2',
+
+    'var pattern = /true/',
+
+    '<span class="keyword">var</span> pattern <span class="keyword operator">=</span> <span class="regex"><span class="regex open">/</span>true<span class="regex close">/</span></span>'
+);
+
+RainbowTester.run(
     'string no regex',
 
     'var test = "http://website.com/could/match/regex/i";',
