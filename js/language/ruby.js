@@ -3,7 +3,7 @@
  *
  * @author Matthew King
  * @author Jesse Farmer <jesse@20bits.com>
- * @version 1.0.4
+ * @version 1.0.3
  */
 Rainbow.extend('ruby', [
     /**
