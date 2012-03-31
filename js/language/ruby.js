@@ -127,5 +127,9 @@ Rainbow.extend('ruby', [
             1: 'keyword'
         },
         'pattern': /\b(alias|and|begin|break|case|class|continue|def|defined|do|else|elsif|end|ensure|extend|false|for|if|in|include|module|next|nil|not|private|or|raise|redo|require|rescue|retry|return|self|super|then|true|undef|unless|until|when|while|yield)(?=\(|\b)/g
-    }
+    },
+    {
+        'name': 'keyword.operator',
+        'pattern': /\+|\!|\-|&(gt|lt|amp);|\|\||\*|\=|\%/g
+    },
 ], true);
