@@ -54,6 +54,14 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'single line comment vs. regex',
+
+    'var Animal = function() { /* some comment */ };',
+
+    '<span class="keyword">var</span> Animal <span class="keyword operator">=</span> <span class="keyword">function</span>() { <span class="comment">/* some comment */</span> };'
+);
+
+RainbowTester.run(
     'functions in object',
 
     'window.Rainbow = {\n' +

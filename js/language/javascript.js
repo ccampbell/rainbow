@@ -2,7 +2,7 @@
  * Javascript patterns
  *
  * @author Craig Campbell
- * @version 1.0.3
+ * @version 1.0.4
  */
 Rainbow.extend('javascript', [
 
@@ -54,6 +54,13 @@ Rainbow.extend('javascript', [
 
     /**
      * matches any escaped characters inside of a js regex pattern
+     *
+     * @see https://github.com/ccampbell/rainbow/issues/22
+     *
+     * this was causing single line comments to fail so it now checks
+     * for a regex modifier directly after the / this is not a perfect
+     * solution, but it works for now
+     *
      * @todo check that there is valid regex in match group 1
      */
     {
@@ -67,7 +74,7 @@ Rainbow.extend('javascript', [
             3: 'regex.close',
             4: 'regex.modifier'
         },
-        'pattern': /(\/)(.+)(\/)([igm]{0,3})/g
+        'pattern': /(\/)(.+)(\/)([igm]{1,3})/g
     },
 
     /**
