@@ -59,10 +59,9 @@ Rainbow.extend('python', [
     {
         'name': 'meta.decorator',
         'pattern': /@(\w+)/g
-
     },
     {
         'name': 'comment.docstring',
-        'pattern': /""".*"""/g
+        'pattern': /"""[\s\S]*"""/gm
     }
 ]);
