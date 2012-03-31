@@ -169,7 +169,6 @@ window.RainbowTester = (function() {
         var languages = window.localStorage.getItem('languages').split(',');
         $("select[name=languages] option").each(function() {
             if ($.inArray(this.value, $(languages)) === -1) {
-                console.log(this.value, 'uncheck');
                 $(this).attr("selected", false);
             }
         });
