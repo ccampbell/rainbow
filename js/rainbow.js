@@ -15,7 +15,7 @@
  *
  * Rainbow is a simple code syntax highlighter
  *
- * @preserve @version 1.1.2
+ * @preserve @version 1.1.3
  * @url rainbowco.de
  */
 window['Rainbow'] = (function() {
@@ -144,7 +144,7 @@ window['Rainbow'] = (function() {
      * @returns {string}
      */
     function _htmlEntities(code) {
-        return code.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/&(?!.*;)/g, '&amp;');
+        return code.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/&(?![\w\#]+;)/g, '&amp;');
     }
 
     /**
