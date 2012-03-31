@@ -68,10 +68,10 @@ RainbowTester.run(
     '}',
 
     '<span class="meta tag">code</span> <span class="meta tag">span</span> {\n' +
-    '   <span class="support css-property"><span class="support vendor-prefix">-moz-</span>transition</span>: <span class="support value">color</span> .<span class="integer">8</span><span class="keyword unit">s</span> ease-in;\n' +
-    '   <span class="support css-property"><span class="support vendor-prefix">-o-</span>transition</span>: <span class="support value">color</span> .<span class="integer">8</span><span class="keyword unit">s</span> ease-in;\n' +
-    '   <span class="support css-property"><span class="support vendor-prefix">-webkit-</span>transition</span>: <span class="support value">color</span> .<span class="integer">8</span><span class="keyword unit">s</span> ease-in;\n' +
-    '   <span class="support css-property">transition</span>: <span class="support value">color</span> .<span class="integer">8</span><span class="keyword unit">s</span> ease-in;\n' +
+    '   <span class="support css-property"><span class="support vendor-prefix">-moz-</span>transition</span>: <span class="support css-value">color</span> .<span class="integer">8</span><span class="keyword unit">s</span> ease-in;\n' +
+    '   <span class="support css-property"><span class="support vendor-prefix">-o-</span>transition</span>: <span class="support css-value">color</span> .<span class="integer">8</span><span class="keyword unit">s</span> ease-in;\n' +
+    '   <span class="support css-property"><span class="support vendor-prefix">-webkit-</span>transition</span>: <span class="support css-value">color</span> .<span class="integer">8</span><span class="keyword unit">s</span> ease-in;\n' +
+    '   <span class="support css-property">transition</span>: <span class="support css-value">color</span> .<span class="integer">8</span><span class="keyword unit">s</span> ease-in;\n' +
     '}'
 );
 
