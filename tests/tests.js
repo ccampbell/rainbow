@@ -14,6 +14,10 @@ window.RainbowTester = (function() {
             min = $("input[name=min]").attr("checked"),
             i;
 
+        if (window.localStorage) {
+            window.localStorage.setItem('languages', languages);
+        }
+
         results = {};
         $('.global_toggle').show();
         $('#results').html('');
@@ -155,7 +159,20 @@ window.RainbowTester = (function() {
         );
         actual = actual.replace(/\n/g, '\\n\' + \n' + '\'');
         console.log('\'' + actual + '\'');
+    }
 
+    function _restoreLanguagesFromLastRun() {
+        if (!window.localStorage) {
+            return;
+        }
+
+        var languages = window.localStorage.getItem('languages').split(',');
+        $("select[name=languages] option").each(function() {
+            if ($.inArray(this.value, $(languages)) === -1) {
+                console.log(this.value, 'uncheck');
+                $(this).attr("selected", false);
+            }
+        });
     }
 
     return {
@@ -163,6 +180,7 @@ window.RainbowTester = (function() {
             $("#run_tests").click(_runTests);
             $("#results").on('click', '.toggle', _toggleCode);
             $("body").on('click', '.global_toggle', _globalToggleCode);
+            _restoreLanguagesFromLastRun();
         },
 
         startTest: function(name) {
