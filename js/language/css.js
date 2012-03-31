@@ -61,7 +61,7 @@ Rainbow.extend('css', [
     },
     {
         'matches': {
-            2: 'support.vender-prefix',
+            2: 'support.vendor-prefix',
             3: 'support.value'
         },
         'pattern': /(:|,)\s?(-o-|-moz-|-webkit-|-ms-)?([a-zA-Z-]*)(?=\b)(?!.*\{)/g
