@@ -264,7 +264,7 @@ window['Rainbow'] = (function() {
         ++match_counter;
 
         // treat match 0 the same way as name
-        if (!pattern['name'] && pattern['matches'][0]) {
+        if (!pattern['name'] && typeof pattern['matches'][0] == 'string') {
             pattern['name'] = pattern['matches'][0];
             delete pattern['matches'][0];
         }
