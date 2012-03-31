@@ -91,12 +91,19 @@ window.RainbowTester = (function() {
         table += '</table>';
 
         $("#results").append(table);
+        _scroll();
+    }
+
+    function _scroll() {
+        $(window).scrollTop($(document).height());
     }
 
     function _processQueue() {
         if (queue.length === 0) {
             return _showResults();
         }
+
+        _scroll();
 
         var test = queue.shift();
         Rainbow.color(test['code'], test['language'], function(actual) {
