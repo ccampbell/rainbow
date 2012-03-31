@@ -34,7 +34,7 @@ pre .storage {
     color: #0000A1;
 }
 
-pre .string {
+pre .string, pre .regex, pre .string .keyword {
     color: #8E0022;
 }
 

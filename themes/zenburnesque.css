@@ -33,7 +33,7 @@ pre .storage {
     color: #6080FF;
 }
 
-pre .string, pre .regex {
+pre .string, pre .regex, pre .string .keyword {
     color: #FF2020;
 }
 
