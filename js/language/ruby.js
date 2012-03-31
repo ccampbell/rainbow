@@ -6,19 +6,6 @@
  */
 Rainbow.extend('ruby', [
     /**
-     * Strings
-     * Escaped quote (`"\""`) is unsupported.
-     * String interpolation is unsupported.
-     */
-    {
-        'name': 'string',
-        'pattern': /(?=['"](.*?)['"])(?:"\1"|'\1')/g
-    },
-    {
-        'name': 'string',
-        'pattern': /%[qQ](?=(\(|\[|\{|&lt;|.)(.*?)(?:'|\)|\]|\}|&gt;|\1))(?:\(\2\)|\[\2\]|\{\2\}|\&lt;\2&gt;|\1\2\1)/g
-    },
-    /**
      * Heredocs
      * Heredocs of the form `<<'HTML' ... HTML` are unsupported.
      */
@@ -144,5 +131,40 @@ Rainbow.extend('ruby', [
             2: 'meta.function-call'
         },
         'pattern': /(def)(\s\w+)/g
+    },
+    /**
+     * Strings
+     */
+    {
+        'name': 'string',
+        'pattern': /('|"|`)(\1)/g
+    },
+    {
+        'name': 'string',
+        'matches': {
+            1: 'string.open',
+            2: {
+                'name': 'string.keyword',
+                'pattern': /(#{.*?})/g
+            },
+            3: 'string.close',
+        },
+        'pattern': /('|"|`)(.*?[^\\])?(\1)/g
+    },
+    {
+        'name': 'string',
+        'pattern': /('|"|`)(.*?)[^\\](\1)/g
+    },
+    {
+        'name': 'string',
+        'pattern': /('|"|`)(.*?)[^\\](\1)/g
+    },
+    {
+        'name': 'string',
+        'pattern': /(?=['"](.*?)['"])(?:"\1"|'\1')/g
+    },
+    {
+        'name': 'string',
+        'pattern': /%[qQ](?=(\(|\[|\{|&lt;|.)(.*?)(?:'|\)|\]|\}|&gt;|\1))(?:\(\2\)|\[\2\]|\{\2\}|\&lt;\2&gt;|\1\2\1)/g
     },
 ], true);
