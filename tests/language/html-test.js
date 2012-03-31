@@ -149,6 +149,14 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'attribute middle',
+
+    '<input checked type="checkbox">',
+
+    '<span class="support tag"><span class="support tag">&lt;</span><span class="support tag-name">input</span></span> <span class="support attribute">checked</span> <span class="support attribute">type</span><span class="support operator">=</span><span class="string quote">"</span><span class="string value">checkbox</span><span class="string quote">"</span><span class="support tag close">&gt;</span>'
+);
+
+RainbowTester.run(
     'attribute alone self close',
 
     '<input type="checkbox" name="whatever" checked />',
