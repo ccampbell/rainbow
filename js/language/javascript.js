@@ -84,15 +84,4 @@ Rainbow.extend('javascript', [
         'name': 'meta.function-call',
         'pattern': /(\w+)(?=:\s{0,}function)/g
     }
-    /*,
-    {
-        'name': 'comment',
-        'matches': {
-            1: {
-                'name': 'keyword.jsdoc',
-                'pattern': /\s+@\w+/g
-            }
-        },
-        'pattern': /\/\*([\s\S]*?)\*\//gm
-    } */
 ]);
