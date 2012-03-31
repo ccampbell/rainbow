@@ -1,7 +1,6 @@
 window.RainbowTester = (function() {
     var _language,
-        _done = false,
-        tests = [],
+        queue = [],
         results = {};
 
     function _addScript(url, language) {
@@ -16,7 +15,6 @@ window.RainbowTester = (function() {
             i;
 
         results = {};
-        _done = false;
         $('.global_toggle').show();
         $('#results').html('');
 
@@ -32,6 +30,8 @@ window.RainbowTester = (function() {
         for (i = 0; i < languages.length; ++i) {
             _addScript('language/' + languages[i] + '-test.js', languages[i]);
         }
+
+        setTimeout(_processQueue, 50);
     }
 
     function _toggleCode(e) {
@@ -61,6 +61,10 @@ window.RainbowTester = (function() {
     }
 
     function _showResults() {
+        if (queue.length) {
+            return _processQueue();
+        }
+
         var table = '<table><tr><th>Language</th><th class="failure">Failed</th><th class="success">Passed</th></tr>',
             total_pass = 0,
             total_fail = 0;
@@ -89,19 +93,20 @@ window.RainbowTester = (function() {
         $("#results").append(table);
     }
 
-    function _removeTest(name) {
-        for (var i = 0; i < tests.length; ++i) {
-            if (tests[i] == name) {
-                tests.splice(i, 1);
-            }
+    function _processQueue() {
+        if (queue.length === 0) {
+            return _showResults();
         }
 
-        setTimeout(function() {
-            if (!_done && tests.length === 0) {
-                _done = true;
-                _showResults();
+        var test = queue.shift();
+        Rainbow.color(test['code'], test['language'], function(actual) {
+            if (test['expected'] == actual) {
+                _pass(test['language'], test['name'], actual);
+                return _processQueue();
             }
-        }, 1000);
+            _fail(test['language'], test['name'], test['expected'], actual);
+            _processQueue();
+        });
     }
 
     function _pass(language, test_name, actual) {
@@ -119,12 +124,10 @@ window.RainbowTester = (function() {
                 '</div>' +
             '</li>'
         );
-
-        _removeTest(language + ':' + test_name);
     }
 
     function _fail(language, test_name, expected, actual) {
-        _initResults();
+        _initResults(language);
         results[language][test_name] = {
             success: false,
             expected: expected,
@@ -146,7 +149,6 @@ window.RainbowTester = (function() {
         actual = actual.replace(/\n/g, '\\n\' + \n' + '\'');
         console.log('\'' + actual + '\'');
 
-        _removeTest(language + ':' + test_name);
     }
 
     return {
@@ -167,12 +169,12 @@ window.RainbowTester = (function() {
 
         run: function(test_name, code, expected) {
             var language = _language;
-            tests.push(language + ':' + test_name);
-            Rainbow.color(code, _language, function(actual) {
-                if (expected == actual) {
-                    return _pass(language, test_name, actual);
-                }
-                return _fail(language, test_name, expected, actual);
+
+            queue.push({
+                'language': _language,
+                'name': test_name,
+                'code': code,
+                'expected': expected
             });
         }
     };
