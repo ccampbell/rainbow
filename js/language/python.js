@@ -32,7 +32,7 @@ Rainbow.extend('python', [
         'matches': {
             1: 'keyword'
         },
-        'pattern': /\b(not|self|in|from)(?=\(|\b)/g
+        'pattern': /\b(pass|lambda|with|is|not|in|from|elif)(?=\(|\b)/g
     },
     {
         'matches': {
@@ -40,20 +40,29 @@ Rainbow.extend('python', [
             2: 'meta.class-name',
             3: 'meta.parent.class-name'
         },
-        'pattern': /(class)\s+(\w+?)\((\w+?)\)/g
+        'pattern': /(class)\s+(\w+)\((\w+?)\)/g
     },
     {
         'matches': {
             1: 'keyword',
             2: 'support.magic'
         },
-        'pattern': /(def)\s(__.*?)(?=\()/g
+        'pattern': /(def)\s+(__\w+)(?=\()/g
     },
     {
         'matches': {
             1: 'keyword',
             2: 'meta.function'
         },
-        'pattern': /(def)\s(.*?)(?=\()/g
+        'pattern': /(def)\s+(\w+)(?=\()/g
+    },
+    {
+        'name': 'meta.decorator',
+        'pattern': /@(\w+)/g
+
+    },
+    {
+        'name': 'comment.docstring',
+        'pattern': /""".*"""/g
     }
 ]);
