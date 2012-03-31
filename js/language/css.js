@@ -36,7 +36,7 @@ Rainbow.extend('css', [
                     'pattern': /&amp;/g
                 },
                 {
-                    'name': 'direct-descendent',
+                    'name': 'direct-descendant',
                     'pattern': /&gt;/g
                 },
                 {
