@@ -31,7 +31,7 @@ pre .storage {
     color: #FBDE2D;
 }
 
-pre .string {
+pre .string, pre .comment.docstring {
     color: #61CE3C;
 }
 
