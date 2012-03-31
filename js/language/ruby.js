@@ -5,15 +5,13 @@
  * @author Jesse Farmer <jesse@20bits.com>
  * @version 1.0.3
  */
+
 Rainbow.extend('ruby', [
-    {
-        'name': 'comment',
-        'pattern': /#.*$/gm
-    },
-    {
-        'name': 'comment',
-        'pattern': /^\=begin[\s\S]*?\=end$/gm
-    },
+    /**
+     * Strings
+     *   1. No support for multi-line strings
+     *   2. No support for string interpolation
+     */
     {
         'name': 'string.single-quoted',
         'pattern': /'([^\\'\n]|\\.)*'/g
@@ -77,6 +75,17 @@ Rainbow.extend('ruby', [
         'pattern': /%r(?=(\(|\[|\{|&lt;|.)(.*?)('|\)|\]|\}|&gt;|\1))(?:\(\2\)|\[\2\]|\{\2\}|\&lt;\2&gt;|\1\2\1)([a-z]*)/g
     },
     /**
+     * Comments
+     */
+    {
+        'name': 'comment',
+        'pattern': /#.*$/gm
+    },
+    {
+        'name': 'comment',
+        'pattern': /^\=begin[\s\S]*?\=end$/gm
+    },
+    /**
      * Symbols
      */
     {
@@ -104,7 +113,9 @@ Rainbow.extend('ruby', [
         'pattern': /\b[A-Z]\w*\b/g
     },
     /**
-     * Class names begin with an upper-case letter
+     * Keywords, variables, constants, and operators
+     *   In Ruby some keywords are valid method names, e.g., MyClass#yield
+     *   Don't mark those instances as "keywords"
      */
     {
         'matches': {
@@ -164,7 +175,7 @@ Rainbow.extend('ruby', [
         'pattern': /\b(require|gem|initialize|new|loop|include|extend|raise|attr_reader|attr_writer|attr_accessor|attr|catch|throw|private|module_function|public|protected)\b(?![?!])/g
     },
     {
-        'name': 'keyword.operator.poo',
+        'name': 'keyword.operator',
         'pattern': /\s\?\s|=|&lt;&lt;|&lt;&lt;=|%=|&=|\*=|\*\*=|\+=|\-=|\^=|\|{1,2}=|&lt;&lt;|&lt;=&gt;|&lt;(?!&lt;|=)|&gt;(?!&lt;|=|&gt;)|&lt;=|&gt;=|===|==|=~|!=|!~|%|&amp;|\*\*|\*|\+|\-|\/|\||~|&gt;&gt;/g
     },
     {
@@ -176,6 +187,7 @@ Rainbow.extend('ruby', [
 
     /**
     * Functions
+    *   1. No support for marking function parameters
     */
     {
         'matches': {
