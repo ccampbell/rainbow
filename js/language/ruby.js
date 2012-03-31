@@ -145,21 +145,4 @@ Rainbow.extend('ruby', [
         },
         'pattern': /(def)(\s\w+)/g
     },
-    /**
-     * matches any escaped characters inside of a regex pattern
-     * @todo check that there is valid regex in match group 1
-     */
-    {
-        'name': 'regex',
-        'matches': {
-            1: 'regex.open',
-            2: {
-                'name': 'constant.regex.escape',
-                'pattern': /\\(.){1}/g
-            },
-            3: 'regex.close',
-            4: 'regex.modifier'
-        },
-        'pattern': /(\/)(.+)(\/)([igm]{0,3})/g
-    },
 ], true);
