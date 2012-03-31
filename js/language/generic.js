@@ -21,7 +21,7 @@ Rainbow.extend([
     },
     {
         'name': 'integer',
-        'pattern': /\b(0x[\da-f]+|\d+)\b/g
+        'pattern': /\b(0x[\da-f]+|\d+)\b/gi
     },
     {
         'name': 'constant',
