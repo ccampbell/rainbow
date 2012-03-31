@@ -211,7 +211,7 @@ RainbowTester.run(
     '    return strtolower(arg);\n' +
     '}',
 
-    '<span class="keyword">function</span> <span class="meta function-call">someFunction</span>(arg) {\n' +
+    '<span class="keyword">function</span> <span class="meta function">someFunction</span>(arg) {\n' +
     '    <span class="keyword">return</span> <span class="function call">strtolower</span>(arg);\n' +
     '}'
 );

@@ -50,7 +50,7 @@ Rainbow.extend([
     {
         'matches': {
             1: 'keyword',
-            2: 'meta.function-call'
+            2: 'meta.function'
         },
         'pattern': /(function)\s(.*?)(?=\()/g
     }

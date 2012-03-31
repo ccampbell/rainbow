@@ -100,7 +100,7 @@ RainbowTester.run(
     '</script>',
 
     '<span class="js">&lt;<span class="meta script-tag">script</span> <span class="meta script-tag">type</span>=<span class="string">"text/javascript"</span>&gt;\n' +
-    '    <span class="keyword">function</span> <span class="meta function-call">prettyCool</span>() {\n' +
+    '    <span class="keyword">function</span> <span class="meta function">prettyCool</span>() {\n' +
     '        <span class="function call">doSomeJQueryOrWhatever</span>();\n' +
     '    }\n' +
     '&lt;/<span class="meta script-tag">script</span>&gt;</span>'
@@ -117,7 +117,7 @@ RainbowTester.run(
     '</script>',
 
     '<span class="js">&lt;<span class="meta script-tag">script</span>&gt;\n' +
-    '    <span class="keyword">function</span> <span class="meta function-call">prettyCool</span>() {\n' +
+    '    <span class="keyword">function</span> <span class="meta function">prettyCool</span>() {\n' +
     '        <span class="function call">doSomeJQueryOrWhatever</span>();\n' +
     '    }\n' +
     '&lt;/<span class="meta script-tag">script</span>&gt;</span>'
