@@ -26,7 +26,10 @@ Rainbow.extend('css', [
     },
     {
         'name': 'support.css-property',
-        'pattern': /[\w-]+(?=\s|:)(?!.*\{)/g
+        'matches': {
+            1: 'support.vendor-prefix'
+        },
+        'pattern': /(-o-|-moz-|-webkit-|-ms-)?[\w-]+(?=\s?:)(?!.*\{)/g
     },
     {
         'matches': {
