@@ -78,6 +78,17 @@ Rainbow.extend('javascript', [
     },
 
     /**
+     * matches runtime function declarations
+     */
+    {
+        'matches': {
+            1: 'keyword',
+            2: 'meta.function-var'
+        },
+        'pattern': /(var)\s(.*)(?=\s?=\s?function\()/g
+    },
+
+    /**
      * matches any function call in the style functionName: function()
      */
     {

@@ -58,7 +58,7 @@ RainbowTester.run(
 
     'var Animal = function() { /* some comment */ };',
 
-    '<span class="keyword">var</span> Animal <span class="keyword operator">=</span> <span class="keyword">function</span>() { <span class="comment">/* some comment */</span> };'
+    '<span class="keyword">var</span> <span class="meta function-var">Animal </span><span class="keyword operator">=</span> <span class="keyword">function</span>() { <span class="comment">/* some comment */</span> };'
 );
 
 RainbowTester.run(
