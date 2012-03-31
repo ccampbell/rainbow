@@ -91,7 +91,7 @@ window.RainbowTester = (function() {
             table += _getTableRow(lang, fail, pass);
         }
 
-        table += _getTableRow('total', total_fail, total_pass);
+        table += _getTableRow('<strong>total</strong>', total_fail, total_pass);
         table += '</table>';
 
         $("#results").append(table);
