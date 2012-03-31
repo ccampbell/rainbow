@@ -7,11 +7,11 @@
 Rainbow.extend('javascript', [
 
     /**
-     * matches $.  or $(
+     * matches $. or $(
      */
     {
         'name': 'selector',
-        'pattern': /\s\$(?=\.|\()/g
+        'pattern': /(\s|^)\$(?=\.|\()/g
     },
     {
         'name': 'support',
