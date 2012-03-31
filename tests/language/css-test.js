@@ -42,6 +42,16 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'percentage',
+
+    'width: 100%\n' +
+    'height: 100%',
+
+    '<span class="support css-property">width</span>: <span class="integer">100</span><span class="keyword unit">%</span>\n' +
+    '<span class="support css-property">height</span>: <span class="integer">100</span><span class="keyword unit">%</span>'
+);
+
+RainbowTester.run(
     'string single quote',
 
     '\'test string\'',
