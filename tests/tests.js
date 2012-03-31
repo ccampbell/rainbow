@@ -179,6 +179,15 @@ window.RainbowTester = (function() {
             $("#run_tests").click(_runTests);
             $("#results").on('click', '.toggle', _toggleCode);
             $("body").on('click', '.global_toggle', _globalToggleCode);
+            $(document).keyup(function(e) {
+                if (e.keyCode == 79) {
+                    $(".global_toggle").click();
+                }
+
+                if (e.keyCode == 82) {
+                    $("#run_tests").click();
+                }
+            });
             _restoreLanguagesFromLastRun();
         },
 
