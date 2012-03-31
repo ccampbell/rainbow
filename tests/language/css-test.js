@@ -153,4 +153,12 @@ RainbowTester.run(
     '&lt;<span class="meta style-tag">style</span> <span class="meta style-tag">type</span>=<span class="string">"text/css"</span>&gt;&lt;/<span class="meta style-tag">style</span>&gt;'
 );
 
+RainbowTester.run(
+    'one line',
+
+    'p { color: #fff; margin-top: 10px; }',
+
+    '<span class="meta tag">p</span> { <span class="support css-property">color</span>: <span class="constant hex-color">#fff</span>; <span class="support css-property">margin-top</span>: <span class="integer">10</span><span class="keyword unit">px</span>; }'
+);
+
 RainbowTester.endTest('css');
