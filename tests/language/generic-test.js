@@ -222,7 +222,7 @@ RainbowTester.run(
 RainbowTester.run(
     'comment after website string',
 
-    'var test = "http://website.com/index.html" // sweet website',
+    'var test = "http://website.com/index.html"; // sweet website',
 
     '<span class="keyword">var</span> test <span class="keyword operator">=</span> <span class="string">"http://website.com/index.html"</span>; <span class="comment">// sweet website</span>'
 );
