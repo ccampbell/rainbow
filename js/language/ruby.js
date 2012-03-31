@@ -132,4 +132,17 @@ Rainbow.extend('ruby', [
         'name': 'keyword.operator',
         'pattern': /\+|\!|\-|&(gt|lt|amp);|\|\||\*|\=|\%/g
     },
+    {
+        'matches': {
+            1: 'function.call'
+        },
+        'pattern': /(\w+?)(?=\()/g
+    },
+    {
+        'matches': {
+            1: 'keyword',
+            2: 'meta.function-call'
+        },
+        'pattern': /(def)(\s\w+)/g
+    },
 ], true);
