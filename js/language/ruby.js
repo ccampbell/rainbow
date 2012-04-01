@@ -57,28 +57,28 @@ Rainbow.extend('ruby', [
      * Escaped delimiter (`/\//`) is unsupported.
      */
     {
-        'name': 'regex',
+        'name': 'string.regexp',
         'matches': {
-            1: 'regex.open',
+            1: 'string.regexp',
             2: {
-                'name': 'constant.regex.escape',
+                'name': 'string.regexp',
                 'pattern': /\\(.){1}/g
             },
-            3: 'regex.close',
-            4: 'regex.modifier'
+            3: 'string.regexp',
+            4: 'string.regexp'
         },
         'pattern': /(\/)(.*?)(\/)([a-z]*)/g
     },
     {
-        'name': 'constant.regex',
+        'name': 'string.regexp',
         'matches': {
-            1: 'support.regex.open',
+            1: 'string.regexp',
             2: {
-                'name': 'constant.regex.escape',
+                'name': 'string.regexp',
                 'pattern': /\\(.){1}/g
             },
-            3: 'support.regex.close',
-            4: 'support.regex.modifier'
+            3: 'string.regexp',
+            4: 'string.regexp'
         },
         'pattern': /%r(?=(\(|\[|\{|&lt;|.)(.*?)('|\)|\]|\}|&gt;|\1))(?:\(\2\)|\[\2\]|\{\2\}|\&lt;\2&gt;|\1\2\1)([a-z]*)/g
     },

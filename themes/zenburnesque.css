@@ -33,7 +33,8 @@ pre .storage {
     color: #6080FF;
 }
 
-pre .string, pre .regex {
+/* This includes regexes */
+pre .string {
     color: #FF2020;
 }
 
