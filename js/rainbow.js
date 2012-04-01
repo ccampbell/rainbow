@@ -347,38 +347,31 @@ window['Rainbow'] = (function() {
                 }
 
                 var group = pattern['matches'][group_keys[i]],
-                    language = group['language'];
+                    language = group['language'],
+                    process_group = group['matches'] || group,
+                    _replaceAndContinue = function(block, replace_block, match_name) {
+                        replacement = _replaceAtPosition(_indexOfGroup(match, group_keys[i]), block, match_name ? _wrapCodeInSpan(match_name, replace_block) : replace_block, replacement);
+                        processNextGroup();
+                    };
 
                 // if this is a sublanguage go and process the block using that language
                 if (language) {
                     return _highlightBlockForLanguage(block, language, function(code) {
-                        replacement = replacement.replace(block, code);
-                        processNextGroup();
+                        _replaceAndContinue(block, code);
                     });
                 }
 
-                // if this is a submatch go and process the block using the specified pattern
-                if (typeof group === 'object') {
-
-                    // this is a special case where you want a name to match to a group
-                    // but also want to apply submatches to it
-                    var group_name = group['matches'] && group['name'] ? group['name'] : '';
-
-                    // use matches if it is specified otherwise use object on its own
-                    group = group['matches'] || group;
-
-                    return _processCodeWithPatterns(block, group.length ? group : [group], function(code) {
-
-                        // wrap the group name around the span if we want it
-                        code = group_name ? _wrapCodeInSpan(group_name, code) : code;
-                        replacement = replacement.replace(block, code);
-                        processNextGroup();
-                    });
+                // if this is a string then this match is directly mapped to selector
+                // so all we have to do is wrap it in a span and continue
+                if (typeof group === 'string') {
+                    return _replaceAndContinue(block, block, group);
                 }
 
-                var group_match_position = _indexOfGroup(match, group_keys[i]);
-                replacement = _replaceAtPosition(group_match_position, block, _wrapCodeInSpan(group, block), replacement);
-                processNextGroup();
+                // the process group can be a single pattern or an array of patterns
+                // _processCodeWithPatterns always expects an array so we convert it here
+                _processCodeWithPatterns(block, process_group.length ? process_group : [process_group], function(code) {
+                    _replaceAndContinue(block, code, group['matches'] ? group['name'] : 0);
+                });
             };
 
         processGroup(0, group_keys, onMatchSuccess);
