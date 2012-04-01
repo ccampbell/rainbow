@@ -3,6 +3,7 @@
  *
  * @author Matthew King
  * @author Jesse Farmer <jesse@20bits.com>
+ * @author actsasflinn
  * @version 1.0.3
  */
 
@@ -10,15 +11,22 @@ Rainbow.extend('ruby', [
     /**
      * Strings
      *   1. No support for multi-line strings
-     *   2. No support for string interpolation
      */
     {
-        'name': 'string.single-quoted',
-        'pattern': /'([^\\'\n]|\\.)*'/g
+        'name': 'string',
+        'matches': {
+            1: 'string.open',
+            2: {
+                'name': 'string.keyword',
+                'pattern': /(#{.*?})/g
+               },
+            3: 'string.close'
+        },
+        'pattern': /("|`)(.*?[^\\\1])?(\1)/g
     },
     {
-        'name': 'string.double-quoted',
-        'pattern': /"([^\\"\n]|\\.)*"/g
+        'name': 'string',
+        'pattern': /('|"|`)([^\\\1\n]|\\.)*\1/g
     },
     {
         'name': 'string',
@@ -196,6 +204,4 @@ Rainbow.extend('ruby', [
         },
         'pattern': /(def)\s(.*?)(?=(\s|\())/g
     }
-
-
 ], true);
