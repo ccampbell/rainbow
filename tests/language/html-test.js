@@ -45,9 +45,9 @@ RainbowTester.run(
     '</ul>',
 
     '<span class="support tag"><span class="support tag">&lt;</span><span class="support tag-name">ul</span></span> <span class="support attribute">class</span><span class="support operator">=</span><span class="string quote">"</span><span class="string value">articles</span><span class="string quote">"</span><span class="support tag close">&gt;</span>\n' +
-    '    <span class="php">&lt;?php <span class="keyword">foreach</span> (<span class="variable dollar-sign">$</span><span class="variable">articles</span> <span class="keyword">as</span> <span class="variable dollar-sign">$</span><span class="variable">article</span>): ?&gt;</span>\n' +
-    '        <span class="support tag"><span class="support tag">&lt;</span><span class="support tag-name">li</span></span><span class="support tag close">&gt;</span><span class="php">&lt;?php <span class="support">echo</span> <span class="variable dollar-sign">$</span><span class="variable">article</span><span class="keyword operator">-</span><span class="keyword operator">&gt;</span>title; ?&gt;</span><span class="support tag"><span class="support tag">&lt;</span><span class="support tag special">/</span><span class="support tag-name">li</span></span><span class="support tag close">&gt;</span>\n' +
-    '    <span class="php">&lt;?php <span class="keyword">endforeach</span>; ?&gt;</span>\n' +
+    '    <span class="source php embedded">&lt;?php <span class="keyword">foreach</span> (<span class="variable dollar-sign">$</span><span class="variable">articles</span> <span class="keyword">as</span> <span class="variable dollar-sign">$</span><span class="variable">article</span>): ?&gt;</span>\n' +
+    '        <span class="support tag"><span class="support tag">&lt;</span><span class="support tag-name">li</span></span><span class="support tag close">&gt;</span><span class="source php embedded">&lt;?php <span class="support">echo</span> <span class="variable dollar-sign">$</span><span class="variable">article</span><span class="keyword operator">-</span><span class="keyword operator">&gt;</span>title; ?&gt;</span><span class="support tag"><span class="support tag">&lt;</span><span class="support tag special">/</span><span class="support tag-name">li</span></span><span class="support tag close">&gt;</span>\n' +
+    '    <span class="source php embedded">&lt;?php <span class="keyword">endforeach</span>; ?&gt;</span>\n' +
     '<span class="support tag"><span class="support tag">&lt;</span><span class="support tag special">/</span><span class="support tag-name">ul</span></span><span class="support tag close">&gt;</span>'
 );
 
@@ -62,12 +62,12 @@ RainbowTester.run(
     '    }\n' +
     '</style>',
 
-    '<span class="css">&lt;<span class="meta style-tag">style</span> <span class="meta style-tag">type</span>=<span class="string">"text/css"</span>&gt;\n' +
+    '<span class="source css embedded"><span class="support tag style">&lt;</span><span class="entity tag style">style</span> <span class="entity tag style">type</span>=<span class="string">"text/css"</span><span class="support tag style">&gt;</span>\n' +
     '    <span class="meta tag">body</span> <span class="meta tag">span</span><span class="meta class">.blah</span> {\n' +
     '        <span class="support css-property">background</span>: <span class="constant hex-color">#000</span>;\n' +
     '        <span class="support css-property">color</span>: <span class="constant hex-color">#fff</span>;\n' +
     '    }\n' +
-    '&lt;/<span class="meta style-tag">style</span>&gt;</span>'
+    '<span class="support tag style">&lt;/</span><span class="entity tag style">style</span><span class="support tag style">&gt;</span></span>'
 );
 
 
@@ -81,12 +81,12 @@ RainbowTester.run(
     '    }\n' +
     '</style>',
 
-    '<span class="css">&lt;<span class="meta style-tag">style</span>&gt;\n' +
+    '<span class="source css embedded"><span class="support tag style">&lt;</span><span class="entity tag style">style</span><span class="support tag style">&gt;</span>\n' +
     '    <span class="meta tag">body</span> <span class="meta tag">span</span><span class="meta class">.blah</span> {\n' +
     '        <span class="support css-property">background</span>: <span class="constant hex-color">#000</span>;\n' +
     '        <span class="support css-property">color</span>: <span class="constant hex-color">#fff</span>;\n' +
     '    }\n' +
-    '&lt;/<span class="meta style-tag">style</span>&gt;</span>'
+    '<span class="support tag style">&lt;/</span><span class="entity tag style">style</span><span class="support tag style">&gt;</span></span>'
 );
 
 
@@ -99,11 +99,11 @@ RainbowTester.run(
     '    }\n' +
     '</script>',
 
-    '<span class="js">&lt;<span class="meta script-tag">script</span> <span class="meta script-tag">type</span>=<span class="string">"text/javascript"</span>&gt;\n' +
+    '<span class="source js embedded"><span class="support tag script">&lt;</span><span class="entity tag script">script</span> <span class="entity tag script">type</span>=<span class="string">"text/javascript"</span><span class="support tag script">&gt;</span>\n' +
     '    <span class="keyword">function</span> <span class="meta function">prettyCool</span>() {\n' +
     '        <span class="function call">doSomeJQueryOrWhatever</span>();\n' +
     '    }\n' +
-    '&lt;/<span class="meta script-tag">script</span>&gt;</span>'
+    '<span class="support tag script">&lt;/</span><span class="entity tag script">script</span><span class="support tag script">&gt;</span></span>'
 );
 
 
@@ -116,11 +116,11 @@ RainbowTester.run(
     '    }\n' +
     '</script>',
 
-    '<span class="js">&lt;<span class="meta script-tag">script</span>&gt;\n' +
+    '<span class="source js embedded"><span class="support tag script">&lt;</span><span class="entity tag script">script</span><span class="support tag script">&gt;</span>\n' +
     '    <span class="keyword">function</span> <span class="meta function">prettyCool</span>() {\n' +
     '        <span class="function call">doSomeJQueryOrWhatever</span>();\n' +
     '    }\n' +
-    '&lt;/<span class="meta script-tag">script</span>&gt;</span>'
+    '<span class="support tag script">&lt;/</span><span class="entity tag script">script</span><span class="support tag script">&gt;</span></span>'
 );
 
 

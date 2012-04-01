@@ -142,7 +142,7 @@ RainbowTester.run(
 
     '<style></style>',
 
-    '&lt;<span class="meta style-tag">style</span>&gt;&lt;/<span class="meta style-tag">style</span>&gt;'
+    '<span class="support tag style">&lt;</span><span class="entity tag style">style</span><span class="support tag style">&gt;</span><span class="support tag style">&lt;/</span><span class="entity tag style">style</span><span class="support tag style">&gt;</span>'
 );
 
 RainbowTester.run(
@@ -150,7 +150,7 @@ RainbowTester.run(
 
     '<style type="text/css"></style>',
 
-    '&lt;<span class="meta style-tag">style</span> <span class="meta style-tag">type</span>=<span class="string">"text/css"</span>&gt;&lt;/<span class="meta style-tag">style</span>&gt;'
+    '<span class="support tag style">&lt;</span><span class="entity tag style">style</span> <span class="entity tag style">type</span>=<span class="string">"text/css"</span><span class="support tag style">&gt;</span><span class="support tag style">&lt;/</span><span class="entity tag style">style</span><span class="support tag style">&gt;</span>'
 );
 
 RainbowTester.run(
