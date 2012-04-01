@@ -106,8 +106,8 @@ window['Rainbow'] = (function() {
                 i;
 
             for (i = 0; i < length; ++i) {
-                if (attr[i].nodeName === attr) {
-                    result = attr[i].nodeValue;
+                if (attrs[i].nodeName === attr) {
+                    return attrs[i].nodeValue;
                 }
             }
         }
