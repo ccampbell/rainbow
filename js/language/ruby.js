@@ -136,7 +136,7 @@ Rainbow.extend('ruby', [
     {
         'matches': {
             1: 'keyword.module',
-            2: 'meta.class-name',
+            2: 'meta.class-name'
         },
         'pattern': /\s*(module)\s+((?:(?:::)?[A-Z]\w*)+)/g
     },
