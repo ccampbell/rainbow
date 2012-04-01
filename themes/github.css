@@ -82,3 +82,7 @@ pre .string, pre .support.value  {
     font-weight: normal;
     color: #d14;
 }
+
+pre .regexp {
+    color: #009926;
+}
