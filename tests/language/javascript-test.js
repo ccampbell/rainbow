@@ -70,6 +70,32 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'inline function',
+
+    'var foo = true,\n' +
+    '    something = function() {\n' +
+    '       // do something\n' +
+    '    };',
+
+    '<span class="keyword">var</span> foo <span class="keyword operator">=</span> <span class="constant language">true</span>,\n' +
+    '<span class="entity function">    something </span><span class="keyword operator">=</span> <span class="keyword">function</span>() {\n' +
+    '       <span class="comment">// do something</span>\n' +
+    '    };'
+);
+
+RainbowTester.run(
+    'inline function beginning of line',
+
+    'something = function() {\n' +
+    '   // do something\n' +
+    '};',
+
+    '<span class="entity function">something </span><span class="keyword operator">=</span> <span class="keyword">function</span>() {\n' +
+    '   <span class="comment">// do something</span>\n' +
+    '};'
+);
+
+RainbowTester.run(
     'functions in object',
 
     'window.Rainbow = {\n' +
