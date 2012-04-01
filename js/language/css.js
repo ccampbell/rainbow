@@ -35,7 +35,7 @@ Rainbow.extend('css', [
         'matches': {
             1: [
                 {
-                    'name': 'meta.sass',
+                    'name': 'entity.name.sass',
                     'pattern': /&amp;/g
                 },
                 {
@@ -43,19 +43,19 @@ Rainbow.extend('css', [
                     'pattern': /&gt;/g
                 },
                 {
-                    'name': 'meta.class',
+                    'name': 'entity.name.class',
                     'pattern': /\.[\w\-_]+/g
                 },
                 {
-                    'name': 'meta.id',
+                    'name': 'entity.name.id',
                     'pattern': /\#[\w\-_]+/g
                 },
                 {
-                    'name': 'meta.pseudo',
+                    'name': 'entity.name.pseudo',
                     'pattern': /:[\w\-_]+/g
                 },
                 {
-                    'name': 'meta.tag',
+                    'name': 'entity.name.tag',
                     'pattern': /\w+/g
                 }
             ]
