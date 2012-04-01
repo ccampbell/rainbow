@@ -97,15 +97,13 @@ window['Rainbow'] = (function() {
      * @param {string} attr     attribute you are trying to get
      * @returns {string}
      */
-    function _attr(el, attr) {
-        var result = (el.getAttribute && el.getAttribute(attr)) || null;
+    function _attr(el, attr, attrs, i) {
+        var result = (el.getAttribute && el.getAttribute(attr)) || 0;
 
         if (!result) {
-            var attrs = el.attributes,
-                length = attrs.length,
-                i;
+            attrs = el.attributes;
 
-            for (i = 0; i < length; ++i) {
+            for (i = 0; i < attrs.length; ++i) {
                 if (attrs[i].nodeName === attr) {
                     return attrs[i].nodeValue;
                 }
@@ -684,7 +682,7 @@ window['Rainbow'] = (function() {
             // if you pass a callback function then we rerun the color function
             // on all the code and call the callback function on complete
             if (typeof arguments[0] == 'function') {
-                return _highlight(null, arguments[0]);
+                return _highlight(0, arguments[0]);
             }
 
             // otherwise we use whatever node you passed in with an optional
