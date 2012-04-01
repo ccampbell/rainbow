@@ -2,7 +2,7 @@
  * Generic language patterns
  *
  * @author Craig Campbell
- * @version 1.0.4
+ * @version 1.0.5
  */
 Rainbow.extend([
     {
@@ -11,9 +11,15 @@ Rainbow.extend([
                 'name': 'keyword.operator',
                 'pattern': /\=/g
             },
-            2: 'string'
+            2: {
+                'name': 'string',
+                'matches': {
+                    'name': 'constant.character.escape',
+                    'pattern': /\\('|"){1}/g
+                }
+            }
         },
-        'pattern': /(\(|\s|\[|\=)(('|")[\s\S]*?(\3))/gm
+        'pattern': /(\(|\s|\[|\=)(('|")([^\\\1]|\\.)*?(\3))/gm
     },
     {
         'name': 'comment',

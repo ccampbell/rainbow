@@ -276,7 +276,7 @@ RainbowTester.run(
 
     'var test = \'someone\\\'s string\'',
 
-    '<span class="keyword">var</span> test <span class="keyword operator">=</span> <span class="string">\'someone<span class="constant escaped">\\\'</span>s string\'</span>'
+    '<span class="keyword">var</span> test <span class="keyword operator">=</span> <span class="string">\'someone<span class="constant character escape">\\\'</span>s string\'</span>'
 );
 
 RainbowTester.run(
@@ -284,7 +284,7 @@ RainbowTester.run(
 
     'var test = \"someone\\\"s string\"',
 
-    '<span class="keyword">var</span> test <span class="keyword operator">=</span> <span class="string">"someone<span class="constant escaped">\\\"</span>s string"</span>'
+    '<span class="keyword">var</span> test <span class="keyword operator">=</span> <span class="string">"someone<span class="constant character escape">\\\"</span>s string"</span>'
 );
 
 RainbowTester.endTest('generic');
