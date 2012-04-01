@@ -26,7 +26,7 @@ pre .comment {
     color: #727272;
 }
 
-pre .integer {
+pre .constant.numeric {
     color: #D87D50;
 }
 

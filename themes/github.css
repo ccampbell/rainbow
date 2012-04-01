@@ -61,7 +61,7 @@ pre, pre code {
     color: #333;
 }
 
-.integer, .keyword.unit, .hex-color {
+.constant.numeric, .keyword.unit, .hex-color {
     font-weight: normal;
     color: #099;
 }

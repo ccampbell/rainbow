@@ -20,7 +20,7 @@ Rainbow.extend([
         'pattern': /\/\*[\s\S]*?\*\/|(\/\/|\#)[\s\S]*?$/gm
     },
     {
-        'name': 'integer',
+        'name': 'constant.numeric',
         'pattern': /\b(0x[\da-f]+|\d+)\b/gi
     },
     {

@@ -135,7 +135,7 @@ RainbowTester.run(
 
     '23',
 
-    '<span class="integer">23</span>'
+    '<span class="constant numeric">23</span>'
 );
 
 RainbowTester.run(
@@ -143,7 +143,7 @@ RainbowTester.run(
 
     '23.5',
 
-    '<span class="integer">23</span>.<span class="integer">5</span>'
+    '<span class="constant numeric">23</span>.<span class="constant numeric">5</span>'
 );
 
 RainbowTester.run(
@@ -151,7 +151,7 @@ RainbowTester.run(
 
     '0x0A',
 
-    '<span class="integer">0x0A</span>'
+    '<span class="constant numeric">0x0A</span>'
 );
 
 RainbowTester.run(
@@ -197,7 +197,7 @@ RainbowTester.run(
 
     'value = (25 * 2) + (14 / 2) - 10',
 
-    'value <span class="keyword operator">=</span> (<span class="integer">25</span> <span class="keyword operator">*</span> <span class="integer">2</span>) <span class="keyword operator">+</span> (<span class="integer">14</span> / <span class="integer">2</span>) <span class="keyword operator">-</span> <span class="integer">10</span>'
+    'value <span class="keyword operator">=</span> (<span class="constant numeric">25</span> <span class="keyword operator">*</span> <span class="constant numeric">2</span>) <span class="keyword operator">+</span> (<span class="constant numeric">14</span> / <span class="constant numeric">2</span>) <span class="keyword operator">-</span> <span class="constant numeric">10</span>'
 );
 
 RainbowTester.run(
@@ -207,7 +207,7 @@ RainbowTester.run(
     '    print "nice";\n' +
     '}',
 
-    '<span class="keyword">if</span> ((test <span class="keyword operator">&gt;</span> <span class="integer">0</span> <span class="keyword operator">&amp;</span><span class="keyword operator">&amp;</span> test <span class="keyword operator">&lt;</span> <span class="integer">25</span>) <span class="keyword operator">|</span><span class="keyword operator">|</span> test <span class="keyword operator">=</span><span class="keyword operator">=</span> <span class="integer">50</span>) {\n' +
+    '<span class="keyword">if</span> ((test <span class="keyword operator">&gt;</span> <span class="constant numeric">0</span> <span class="keyword operator">&amp;</span><span class="keyword operator">&amp;</span> test <span class="keyword operator">&lt;</span> <span class="constant numeric">25</span>) <span class="keyword operator">|</span><span class="keyword operator">|</span> test <span class="keyword operator">=</span><span class="keyword operator">=</span> <span class="constant numeric">50</span>) {\n' +
     '    <span class="keyword">print</span> <span class="string">"nice"</span>;\n' +
     '}'
 );
@@ -219,7 +219,7 @@ RainbowTester.run(
     '    print "nice";\n' +
     '}',
 
-    '<span class="keyword">if</span> ((test <span class="keyword operator">&gt;</span> <span class="integer">0</span> <span class="keyword operator">&amp;</span><span class="keyword operator">&amp;</span> test <span class="keyword operator">&lt;</span> <span class="integer">25</span>) <span class="keyword operator">|</span><span class="keyword operator">|</span> test <span class="keyword operator">=</span><span class="keyword operator">=</span> <span class="integer">50</span>) {\n' +
+    '<span class="keyword">if</span> ((test <span class="keyword operator">&gt;</span> <span class="constant numeric">0</span> <span class="keyword operator">&amp;</span><span class="keyword operator">&amp;</span> test <span class="keyword operator">&lt;</span> <span class="constant numeric">25</span>) <span class="keyword operator">|</span><span class="keyword operator">|</span> test <span class="keyword operator">=</span><span class="keyword operator">=</span> <span class="constant numeric">50</span>) {\n' +
     '    <span class="keyword">print</span> <span class="string">"nice"</span>;\n' +
     '}'
 );

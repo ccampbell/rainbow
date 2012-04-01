@@ -30,7 +30,7 @@ RainbowTester.run(
 
     'margin:10px 20px 5px 30px;',
 
-    '<span class="support css-property">margin</span>:<span class="integer">10</span><span class="keyword unit">px</span> <span class="integer">20</span><span class="keyword unit">px</span> <span class="integer">5</span><span class="keyword unit">px</span> <span class="integer">30</span><span class="keyword unit">px</span>;'
+    '<span class="support css-property">margin</span>:<span class="constant numeric">10</span><span class="keyword unit">px</span> <span class="constant numeric">20</span><span class="keyword unit">px</span> <span class="constant numeric">5</span><span class="keyword unit">px</span> <span class="constant numeric">30</span><span class="keyword unit">px</span>;'
 );
 
 RainbowTester.run(
@@ -38,7 +38,7 @@ RainbowTester.run(
 
     'margin: 1cm 2cm 1.3cm 4cm;',
 
-    '<span class="support css-property">margin</span>: <span class="integer">1</span><span class="keyword unit">cm</span> <span class="integer">2</span><span class="keyword unit">cm</span> <span class="integer">1</span>.<span class="integer">3</span><span class="keyword unit">cm</span> <span class="integer">4</span><span class="keyword unit">cm</span>;'
+    '<span class="support css-property">margin</span>: <span class="constant numeric">1</span><span class="keyword unit">cm</span> <span class="constant numeric">2</span><span class="keyword unit">cm</span> <span class="constant numeric">1</span>.<span class="constant numeric">3</span><span class="keyword unit">cm</span> <span class="constant numeric">4</span><span class="keyword unit">cm</span>;'
 );
 
 RainbowTester.run(
@@ -47,8 +47,8 @@ RainbowTester.run(
     'width: 100%\n' +
     'height: 100%',
 
-    '<span class="support css-property">width</span>: <span class="integer">100</span><span class="keyword unit">%</span>\n' +
-    '<span class="support css-property">height</span>: <span class="integer">100</span><span class="keyword unit">%</span>'
+    '<span class="support css-property">width</span>: <span class="constant numeric">100</span><span class="keyword unit">%</span>\n' +
+    '<span class="support css-property">height</span>: <span class="constant numeric">100</span><span class="keyword unit">%</span>'
 );
 
 RainbowTester.run(
@@ -78,10 +78,10 @@ RainbowTester.run(
     '}',
 
     '<span class="meta tag">code</span> <span class="meta tag">span</span> {\n' +
-    '   <span class="support css-property"><span class="support vendor-prefix">-moz-</span>transition</span>: <span class="support css-value">color</span> .<span class="integer">8</span><span class="keyword unit">s</span> ease-in;\n' +
-    '   <span class="support css-property"><span class="support vendor-prefix">-o-</span>transition</span>: <span class="support css-value">color</span> .<span class="integer">8</span><span class="keyword unit">s</span> ease-in;\n' +
-    '   <span class="support css-property"><span class="support vendor-prefix">-webkit-</span>transition</span>: <span class="support css-value">color</span> .<span class="integer">8</span><span class="keyword unit">s</span> ease-in;\n' +
-    '   <span class="support css-property">transition</span>: <span class="support css-value">color</span> .<span class="integer">8</span><span class="keyword unit">s</span> ease-in;\n' +
+    '   <span class="support css-property"><span class="support vendor-prefix">-moz-</span>transition</span>: <span class="support css-value">color</span> .<span class="constant numeric">8</span><span class="keyword unit">s</span> ease-in;\n' +
+    '   <span class="support css-property"><span class="support vendor-prefix">-o-</span>transition</span>: <span class="support css-value">color</span> .<span class="constant numeric">8</span><span class="keyword unit">s</span> ease-in;\n' +
+    '   <span class="support css-property"><span class="support vendor-prefix">-webkit-</span>transition</span>: <span class="support css-value">color</span> .<span class="constant numeric">8</span><span class="keyword unit">s</span> ease-in;\n' +
+    '   <span class="support css-property">transition</span>: <span class="support css-value">color</span> .<span class="constant numeric">8</span><span class="keyword unit">s</span> ease-in;\n' +
     '}'
 );
 
@@ -131,7 +131,7 @@ RainbowTester.run(
     '<span class="meta tag">article</span> {\n' +
     '   <span class="meta sass">&amp;</span><span class="meta class">.cool</span> {\n' +
     '       <span class="meta tag">p</span> {\n' +
-    '           <span class="support css-property">margin-top</span>: <span class="integer">20</span><span class="keyword unit">px</span>;\n' +
+    '           <span class="support css-property">margin-top</span>: <span class="constant numeric">20</span><span class="keyword unit">px</span>;\n' +
     '       }\n' +
     '   }\n' +
     '}'
@@ -158,7 +158,7 @@ RainbowTester.run(
 
     'p { color: #fff; margin-top: 10px; }',
 
-    '<span class="meta tag">p</span> { <span class="support css-property">color</span>: <span class="constant hex-color">#fff</span>; <span class="support css-property">margin-top</span>: <span class="integer">10</span><span class="keyword unit">px</span>; }'
+    '<span class="meta tag">p</span> { <span class="support css-property">color</span>: <span class="constant hex-color">#fff</span>; <span class="support css-property">margin-top</span>: <span class="constant numeric">10</span><span class="keyword unit">px</span>; }'
 );
 
 RainbowTester.endTest('css');

@@ -15,7 +15,7 @@ Rainbow.extend('css', [
     },
     {
         'matches': {
-            1: 'integer',
+            1: 'constant.numeric',
             2: 'keyword.unit'
         },
         'pattern': /(\d+)(px|cm|s|%)?/g
