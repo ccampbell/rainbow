@@ -43,7 +43,7 @@ pre .keyword, pre .selector {
 	font-weight: bold;
 }
 
-pre .parent {
+pre .inherited-class {
     font-style: italic;
 }
 

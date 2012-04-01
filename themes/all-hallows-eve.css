@@ -40,7 +40,7 @@ pre .keyword, pre .selector {
     color: #CC7833;
 }
 
-pre .parent {
+pre .inherited-class {
     font-style: italic;
 }
 
