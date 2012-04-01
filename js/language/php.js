@@ -34,14 +34,17 @@ Rainbow.extend('php', [
         },
         'pattern': /(instanceof)\s([^\$].*?)(\)|;)/g
     },
+
     /**
-     * @todo limit this to the most commonly used PHP functions since this could grow really big
+     * these are the top 50 most used PHP functions
+     * found from running a script and checking the frequency of each function
+     * over a bunch of popular PHP frameworks then combining the results
      */
     {
         'matches': {
             1: 'support.function'
         },
-        'pattern': /\b(apc_(fetch|store)|array(_sum|_rand)?|asort|count|empty|explode|file_(get_contents|exists)|get_(called_)?class|getenv|in_array|is_(numeric|array|link)|isset|json_(encode|decode)|mt_rand|rand|rmdir|round|spl_autoload_register|str(tolower|str|pos|_replace)|trigger_error|un(link|set))(?=\()/g
+        'pattern': /\b(array(_key_exists|_merge|_keys|_shift)?|isset|count|empty|unset|printf|is_(array|string|numeric|object)|sprintf|each|date|time|substr|pos|str(len|pos|tolower|_replace|totime)?|ord|trim|in_array|implode|end|preg_match|explode|fmod|define|link|list|get_class|serialize|file|sort|mail|dir|idate|log|intval|header|chr|function_exists|dirname|preg_replace|file_exists)(?=\()/g
     },
     {
         'name': 'phptag',
