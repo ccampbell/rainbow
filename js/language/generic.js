@@ -2,7 +2,7 @@
  * Generic language patterns
  *
  * @author Craig Campbell
- * @version 1.0.5
+ * @version 1.0.6
  */
 Rainbow.extend([
     {
@@ -27,11 +27,7 @@ Rainbow.extend([
     },
     {
         'name': 'constant.numeric',
-        'pattern': /\b(0x[\da-f]+|\d+)\b/gi
-    },
-    {
-        'name': 'constant.numeric',
-        'pattern': /\b((\d+\.\d*)|(\d*\.\d+))((e|E)(\+|\-)?\d+)?(f|F|d|D)?\b/g
+        'pattern': /\b(\d+(\.\d+)?(e(\+|\-)?\d+)?(f|d)?|0x[\da-f]+)\b/gi
     },
     {
         'name': 'constant',

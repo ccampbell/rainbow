@@ -12,7 +12,7 @@ class RainbowBuilder(object):
     VERSIONS = {
         'c': '1.0.1',
         'css': '1.0.6',
-        'generic': '1.0.5',
+        'generic': '1.0.6',
         'html': '1.0.4',
         'javascript': '1.0.5',
         'php': '1.0.3',
