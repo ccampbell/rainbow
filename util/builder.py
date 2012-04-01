@@ -10,13 +10,13 @@ from StringIO import StringIO
 
 class RainbowBuilder(object):
     VERSIONS = {
-        'css': '1.0.3',
-        'generic': '1.0.2',
-        'html': '1.0.2',
-        'javascript': '1.0.3',
+        'css': '1.0.5',
+        'generic': '1.0.3',
+        'html': '1.0.3',
+        'javascript': '1.0.4',
         'php': '1.0.1',
-        'python': '1.0.1',
-        'ruby': '1.0.2',
+        'python': '1.0.3',
+        'ruby': '1.0.3',
         'shell': '1.0.2'
     }
 

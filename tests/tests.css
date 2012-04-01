@@ -73,7 +73,7 @@ li h5 {
     color: green;
 }
 
-.success .code {
+.success .code, .failure .code {
     display: none;
 }
 

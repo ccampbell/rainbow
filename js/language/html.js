@@ -2,7 +2,7 @@
  * HTML patterns
  *
  * @author Craig Campbell
- * @version 1.0.2
+ * @version 1.0.3
  */
 Rainbow.extend('html', [
     {
@@ -78,6 +78,6 @@ Rainbow.extend('html', [
         'matches': {
             1: 'support.attribute'
         },
-        'pattern': /\s(\w+)(?=\s|&gt;)(?!.*&lt;)/g
+        'pattern': /\s(\w+)(?=\s|&gt;)(?![\s\S]*&lt;)/g
     }
 ], true);

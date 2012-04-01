@@ -14,6 +14,10 @@ window.RainbowTester = (function() {
             min = $("input[name=min]").attr("checked"),
             i;
 
+        if (window.localStorage) {
+            window.localStorage.setItem('languages', languages);
+        }
+
         results = {};
         $('.global_toggle').show();
         $('#results').html('');
@@ -87,16 +91,23 @@ window.RainbowTester = (function() {
             table += _getTableRow(lang, fail, pass);
         }
 
-        table += _getTableRow('total', total_fail, total_pass);
+        table += _getTableRow('<strong>total</strong>', total_fail, total_pass);
         table += '</table>';
 
         $("#results").append(table);
+        _scroll();
+    }
+
+    function _scroll() {
+        $(window).scrollTop($(document).height());
     }
 
     function _processQueue() {
         if (queue.length === 0) {
             return _showResults();
         }
+
+        _scroll();
 
         var test = queue.shift();
         Rainbow.color(test['code'], test['language'], function(actual) {
@@ -148,7 +159,19 @@ window.RainbowTester = (function() {
         );
         actual = actual.replace(/\n/g, '\\n\' + \n' + '\'');
         console.log('\'' + actual + '\'');
+    }
 
+    function _restoreLanguagesFromLastRun() {
+        if (!window.localStorage) {
+            return;
+        }
+
+        var languages = window.localStorage.getItem('languages').split(',');
+        $("select[name=languages] option").each(function() {
+            if ($.inArray(this.value, $(languages)) === -1) {
+                $(this).attr("selected", false);
+            }
+        });
     }
 
     return {
@@ -156,6 +179,16 @@ window.RainbowTester = (function() {
             $("#run_tests").click(_runTests);
             $("#results").on('click', '.toggle', _toggleCode);
             $("body").on('click', '.global_toggle', _globalToggleCode);
+            $(document).keyup(function(e) {
+                if (e.keyCode == 79) {
+                    $(".global_toggle").click();
+                }
+
+                if (e.keyCode == 82) {
+                    $("#run_tests").click();
+                }
+            });
+            _restoreLanguagesFromLastRun();
         },
 
         startTest: function(name) {

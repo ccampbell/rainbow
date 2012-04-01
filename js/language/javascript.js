@@ -2,16 +2,16 @@
  * Javascript patterns
  *
  * @author Craig Campbell
- * @version 1.0.3
+ * @version 1.0.4
  */
 Rainbow.extend('javascript', [
 
     /**
-     * matches $.  or $(
+     * matches $. or $(
      */
     {
         'name': 'selector',
-        'pattern': /\s\$(?=\.|\()/g
+        'pattern': /(\s|^)\$(?=\.|\()/g
     },
     {
         'name': 'support',
@@ -54,6 +54,12 @@ Rainbow.extend('javascript', [
 
     /**
      * matches any escaped characters inside of a js regex pattern
+     *
+     * @see https://github.com/ccampbell/rainbow/issues/22
+     *
+     * this was causing single line comments to fail so it now makes sure
+     * the opening / is not directly followed by a *
+     *
      * @todo check that there is valid regex in match group 1
      */
     {
@@ -67,25 +73,25 @@ Rainbow.extend('javascript', [
             3: 'regex.close',
             4: 'regex.modifier'
         },
-        'pattern': /(\/)(.+)(\/)([igm]{0,3})/g
+        'pattern': /(\/)(?!\*)(.+)(\/)([igm]{0,3})/g
+    },
+
+    /**
+     * matches runtime function declarations
+     */
+    {
+        'matches': {
+            1: 'keyword',
+            2: 'meta.function.var'
+        },
+        'pattern': /(var)\s(.*)(?=\s?=\s?function\()/g
     },
 
     /**
      * matches any function call in the style functionName: function()
      */
     {
-        'name': 'meta.function-call',
+        'name': 'meta.function',
         'pattern': /(\w+)(?=:\s{0,}function)/g
     }
-    /*,
-    {
-        'name': 'comment',
-        'matches': {
-            1: {
-                'name': 'keyword.jsdoc',
-                'pattern': /\s+@\w+/g
-            }
-        },
-        'pattern': /\/\*([\s\S]*?)\*\//gm
-    } */
 ]);

@@ -42,6 +42,16 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'percentage',
+
+    'width: 100%\n' +
+    'height: 100%',
+
+    '<span class="support css-property">width</span>: <span class="integer">100</span><span class="keyword unit">%</span>\n' +
+    '<span class="support css-property">height</span>: <span class="integer">100</span><span class="keyword unit">%</span>'
+);
+
+RainbowTester.run(
     'string single quote',
 
     '\'test string\'',
@@ -68,10 +78,10 @@ RainbowTester.run(
     '}',
 
     '<span class="meta tag">code</span> <span class="meta tag">span</span> {\n' +
-    '   <span class="support css-property"><span class="support vendor-prefix">-moz-</span>transition</span>: <span class="support value">color</span> .<span class="integer">8</span><span class="keyword unit">s</span> ease-in;\n' +
-    '   <span class="support css-property"><span class="support vendor-prefix">-o-</span>transition</span>: <span class="support value">color</span> .<span class="integer">8</span><span class="keyword unit">s</span> ease-in;\n' +
-    '   <span class="support css-property"><span class="support vendor-prefix">-webkit-</span>transition</span>: <span class="support value">color</span> .<span class="integer">8</span><span class="keyword unit">s</span> ease-in;\n' +
-    '   <span class="support css-property">transition</span>: <span class="support value">color</span> .<span class="integer">8</span><span class="keyword unit">s</span> ease-in;\n' +
+    '   <span class="support css-property"><span class="support vendor-prefix">-moz-</span>transition</span>: <span class="support css-value">color</span> .<span class="integer">8</span><span class="keyword unit">s</span> ease-in;\n' +
+    '   <span class="support css-property"><span class="support vendor-prefix">-o-</span>transition</span>: <span class="support css-value">color</span> .<span class="integer">8</span><span class="keyword unit">s</span> ease-in;\n' +
+    '   <span class="support css-property"><span class="support vendor-prefix">-webkit-</span>transition</span>: <span class="support css-value">color</span> .<span class="integer">8</span><span class="keyword unit">s</span> ease-in;\n' +
+    '   <span class="support css-property">transition</span>: <span class="support css-value">color</span> .<span class="integer">8</span><span class="keyword unit">s</span> ease-in;\n' +
     '}'
 );
 
@@ -141,6 +151,14 @@ RainbowTester.run(
     '<style type="text/css"></style>',
 
     '&lt;<span class="meta style-tag">style</span> <span class="meta style-tag">type</span>=<span class="string">"text/css"</span>&gt;&lt;/<span class="meta style-tag">style</span>&gt;'
+);
+
+RainbowTester.run(
+    'one line',
+
+    'p { color: #fff; margin-top: 10px; }',
+
+    '<span class="meta tag">p</span> { <span class="support css-property">color</span>: <span class="constant hex-color">#fff</span>; <span class="support css-property">margin-top</span>: <span class="integer">10</span><span class="keyword unit">px</span>; }'
 );
 
 RainbowTester.endTest('css');

@@ -2,7 +2,7 @@
  * Python patterns
  *
  * @author Craig Campbell
- * @version 1.0.1
+ * @version 1.0.3
  */
 Rainbow.extend('python', [
     /**
@@ -59,10 +59,9 @@ Rainbow.extend('python', [
     {
         'name': 'meta.decorator',
         'pattern': /@(\w+)/g
-
     },
     {
         'name': 'comment.docstring',
-        'pattern': /""".*"""/g
+        'pattern': /('{3}|"{3})[\s\S]*\1/gm
     }
 ]);
