@@ -62,7 +62,7 @@ Rainbow.extend('php', [
     },
     {
         'matches': {
-            1: 'keyword.class.description',
+            1: 'storage.modifier',
             2: 'keyword.class',
             3: 'meta.class-name',
             4: 'keyword.extends',
