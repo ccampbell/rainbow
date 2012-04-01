@@ -337,8 +337,8 @@ window['Rainbow'] = (function() {
                 }
 
                 var processNextGroup = function() {
-                    processGroup(++i, group_keys, callback);
-                },
+                        processGroup(++i, group_keys, callback);
+                    },
                     block = match[group_keys[i]];
 
                 // if there is no match here then move on
