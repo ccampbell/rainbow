@@ -58,7 +58,7 @@ Rainbow.extend('php', [
                 'pattern': /\w+/g
             }
         },
-        'pattern': /\b(namespace\s)(.*?);/g
+        'pattern': /\b(namespace)\s(.*?);/g
     },
     {
         'matches': {
