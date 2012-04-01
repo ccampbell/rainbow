@@ -25,7 +25,7 @@ Rainbow.extend([
     },
     {
         'name': 'constant.numeric',
-        'pattern': /\b\d*\.\d*((e|E)(\+|\-)?\d+)?(f|F|d|D)?\b/g
+        'pattern': /\b((\d+\.\d*)|(\d*\.\d+))((e|E)(\+|\-)?\d+)?(f|F|d|D)?\b/g
     },
     {
         'name': 'constant',
