@@ -63,10 +63,10 @@ Rainbow.extend('php', [
     {
         'matches': {
             1: 'storage.modifier',
-            2: 'keyword.class',
-            3: 'meta.class-name',
-            4: 'keyword.extends',
-            5: 'meta.parent.class-name'
+            2: 'storage.class',
+            3: 'entity.name.class',
+            4: 'storage.modifier.extends',
+            5: 'entity.other.inherited-class'
         },
         'pattern': /\b(abstract|final)?\s?(class)\s(\w+)(\sextends\s)?([\w\\]*)?\s?\{?(\n|\})/g
     },
@@ -76,7 +76,7 @@ Rainbow.extend('php', [
     },
     {
         'matches': {
-            1: 'keyword',
+            1: 'storage.function',
             2: 'support.magic'
         },
         'pattern': /(function)\s(__.*?)(?=\()/g

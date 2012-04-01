@@ -37,7 +37,7 @@ Rainbow.extend('shell', [
         'pattern': /\#[\s\S]*?$/gm
     },
     {
-        'name': 'meta.function',
+        'name': 'storage.function',
         'pattern': /(.+?)(?=\(\)\s{0,}\{)/g
     },
     /**

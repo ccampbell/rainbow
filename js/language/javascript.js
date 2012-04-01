@@ -83,8 +83,8 @@ Rainbow.extend('javascript', [
      */
     {
         'matches': {
-            1: 'keyword',
-            2: 'meta.function.var'
+            1: 'storage',
+            2: 'entity.function'
         },
         'pattern': /(var)\s(.*)(?=\s?=\s?function\()/g
     },
@@ -93,7 +93,7 @@ Rainbow.extend('javascript', [
      * matches any function call in the style functionName: function()
      */
     {
-        'name': 'meta.function',
+        'name': 'entity.function',
         'pattern': /(\w+)(?=:\s{0,}function)/g
     }
 ]);
