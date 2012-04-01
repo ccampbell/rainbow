@@ -9,19 +9,21 @@ from StringIO import StringIO
 
 
 class RainbowBuilder(object):
-    VERSIONS = {
-        'c': '1.0.1',
-        'css': '1.0.6',
-        'generic': '1.0.6',
-        'html': '1.0.4',
-        'javascript': '1.0.5',
-        'php': '1.0.3',
-        'python': '1.0.4',
-        'ruby': '1.0.5',
-        'shell': '1.0.3'
-    }
 
     def __init__(self, js_path, closure_path, theme_path=None):
+
+        self.versions = {
+            'c': '1.0.1',
+            'css': '1.0.6',
+            'generic': '1.0.6',
+            'html': '1.0.4',
+            'javascript': '1.0.5',
+            'php': '1.0.3',
+            'python': '1.0.4',
+            'ruby': '1.0.5',
+            'shell': '1.0.3'
+        }
+
         self.js_path = js_path
         self.closure_path = closure_path
         self.js_files_to_include = []
@@ -86,8 +88,8 @@ class RainbowBuilder(object):
     def getLanguageVersions(self, languages):
         groups = []
         for language in languages:
-            if language in RainbowBuilder.VERSIONS:
-                groups.append(language + ' v' + RainbowBuilder.VERSIONS[language])
+            if language in self.versions:
+                groups.append(language + ' v' + self.versions[language])
 
         return ', '.join(groups)
 
