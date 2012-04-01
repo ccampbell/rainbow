@@ -53,7 +53,7 @@ Rainbow.extend('php', [
     {
         'matches': {
             1: 'keyword.namespace',
-           2: {
+            2: {
                 'name': 'support.namespace',
                 'pattern': /\w+/g
             }
