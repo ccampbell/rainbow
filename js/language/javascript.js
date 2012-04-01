@@ -38,18 +38,20 @@ Rainbow.extend('javascript', [
     },
     {
         'matches': {
+            1: 'support.tag.script',
             2: [
                 {
                     'name': 'string',
                     'pattern': /('|")(.*?)(\1)/g
                 },
                 {
-                    'name': 'meta.script-tag',
+                    'name': 'entity.tag.script',
                     'pattern': /(\w+)/g
                 }
-            ]
+            ],
+            3: 'support.tag.script'
         },
-        'pattern': /(&lt;\/?)(script(.*?))(&gt;)/g
+        'pattern': /(&lt;\/?)(script.*?)(&gt;)/g
     },
 
     /**

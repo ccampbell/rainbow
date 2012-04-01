@@ -6,7 +6,7 @@
  */
 Rainbow.extend('html', [
     {
-        'name': 'php',
+        'name': 'source.php.embedded',
         'matches': {
             2: {
                 'language': 'php'
@@ -15,7 +15,7 @@ Rainbow.extend('html', [
         'pattern': /&lt;\?(php)?([\s\S]*?)(\?&gt;)/gm
     },
     {
-        'name': 'css',
+        'name': 'source.css.embedded',
         'matches': {
             0: {
                 'language': 'css'
@@ -24,7 +24,7 @@ Rainbow.extend('html', [
         'pattern': /&lt;style(.*?)&gt;([\s\S]*?)&lt;\/style&gt;/gm
     },
     {
-        'name': 'js',
+        'name': 'source.js.embedded',
         'matches': {
             0: {
                 'language': 'javascript'

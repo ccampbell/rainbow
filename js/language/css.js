@@ -71,11 +71,19 @@ Rainbow.extend('css', [
     },
     {
         'matches': {
-            1: {
-                'name': 'meta.style-tag',
-                'pattern': /\w+/g
-            }
+            1: 'support.tag.style',
+            2: [
+                {
+                    'name': 'string',
+                    'pattern': /('|")(.*?)(\1)/g
+                },
+                {
+                    'name': 'entity.tag.style',
+                    'pattern': /(\w+)/g
+                }
+            ],
+            3: 'support.tag.style'
         },
-        'pattern': /&lt;\/?(.*?)(?=\=|&gt;)/g
+        'pattern': /(&lt;\/?)(style.*?)(&gt;)/g
     }
 ], true);
