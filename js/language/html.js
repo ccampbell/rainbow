@@ -2,7 +2,7 @@
  * HTML patterns
  *
  * @author Craig Campbell
- * @version 1.0.3
+ * @version 1.0.4
  */
 Rainbow.extend('html', [
     {

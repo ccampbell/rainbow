@@ -4,7 +4,7 @@
  * @author Matthew King
  * @author Jesse Farmer <jesse@20bits.com>
  * @author actsasflinn
- * @version 1.0.4
+ * @version 1.0.5
  */
 
 Rainbow.extend('ruby', [

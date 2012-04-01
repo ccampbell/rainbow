@@ -2,7 +2,7 @@
  * Javascript patterns
  *
  * @author Craig Campbell
- * @version 1.0.4
+ * @version 1.0.5
  */
 Rainbow.extend('javascript', [
 
