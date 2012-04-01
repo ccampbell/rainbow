@@ -113,7 +113,7 @@ Rainbow.extend('ruby', [
         'pattern': /\b(0x[\da-f]+|\d+)\b/g
     },
     {
-        'name': 'support.class-name',
+        'name': 'support.class',
         'pattern': /\b[A-Z]\w*(?=((\.|::)[A-Za-z]|\[))/g
     },
     {
@@ -127,16 +127,16 @@ Rainbow.extend('ruby', [
      */
     {
         'matches': {
-            1: 'keyword.class',
-            2: 'meta.class-name',
-            3: 'meta.parent.class-name'
+            1: 'storage.class',
+            2: 'entity.name.class',
+            3: 'entity.other.inherited-class'
         },
         'pattern': /\s*(class)\s+((?:(?:::)?[A-Z]\w*)+)(?:\s+&lt;\s+((?:(?:::)?[A-Z]\w*)+))?/g
     },
     {
         'matches': {
-            1: 'keyword.module',
-            2: 'meta.class-name'
+            1: 'storage.module',
+            2: 'entity.name.class'
         },
         'pattern': /\s*(module)\s+((?:(?:::)?[A-Z]\w*)+)/g
     },
@@ -199,8 +199,8 @@ Rainbow.extend('ruby', [
     */
     {
         'matches': {
-            1: 'keyword.def',
-            2: 'meta.function'
+            1: 'storage.function',
+            2: 'entity.name.function'
         },
         'pattern': /(def)\s(.*?)(?=(\s|\())/g
     }
