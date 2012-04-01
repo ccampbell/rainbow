@@ -174,6 +174,9 @@ window['Rainbow'] = (function() {
      * @returns {boolean}
      */
     function _hasCompleteOverlap(start1, end1, start2, end2) {
+
+        // if the starting and end positions are exactly the same
+        // then the first one should stay and this one should be ignored
         if (start2 == start1 && end2 == end1) {
             return false;
         }
