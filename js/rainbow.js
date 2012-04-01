@@ -295,6 +295,9 @@ window['Rainbow'] = (function() {
 
         /**
          * callback for when a match was successfully processed
+         *
+         * @param {string} replacement
+         * @returns void
          */
         var onMatchSuccess = function(replacement) {
                 // if this match has a name then wrap it in a span tag
@@ -326,10 +329,18 @@ window['Rainbow'] = (function() {
             // if this pattern has sub matches for different groups in the regex
             // then we should process them one at a time by rerunning them through
             // this function to generate the new replacement
+            //
+            // we run through them backwards because the match position of earlier
+            // matches will not change depending on what gets replaced in later
+            // matches
             group_keys = keys(pattern['matches']),
 
             /**
              * callback for processing a sub group
+             *
+             * @param {number} i
+             * @param {Array} group_keys
+             * @param {Function} callback
              */
             processGroup = function(i, group_keys, callback) {
                 if (i >= group_keys.length) {
@@ -348,7 +359,41 @@ window['Rainbow'] = (function() {
 
                 var group = pattern['matches'][group_keys[i]],
                     language = group['language'],
+
+                    /**
+                     * process group is what group we should use to actually process
+                     * this match group
+                     *
+                     * for example if the subgroup pattern looks like this
+                     * 2: {
+                     *     'name': 'keyword',
+                     *     'pattern': /true/g
+                     * }
+                     *
+                     * then we use that as is, but if it looks like this
+                     *
+                     * 2: {
+                     *     'name': 'keyword',
+                     *     'matches': {
+                     *          'name': 'special',
+                     *          'pattern': /whatever/g
+                     *      }
+                     * }
+                     *
+                     * we treat the 'matches' part as the pattern and keep
+                     * the name around to wrap it with later
+                     */
                     process_group = group['matches'] || group,
+
+                    /**
+                     * takes the code block matched at this group, replaces it
+                     * with the highlighted block, and optionally wraps it with
+                     * a span with a name
+                     *
+                     * @param {string} block
+                     * @param {string} replace_block
+                     * @param {string|null} match_name
+                     */
                     _replaceAndContinue = function(block, replace_block, match_name) {
                         replacement = _replaceAtPosition(_indexOfGroup(match, group_keys[i]), block, match_name ? _wrapCodeInSpan(match_name, replace_block) : replace_block, replacement);
                         processNextGroup();
