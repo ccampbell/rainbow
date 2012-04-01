@@ -37,8 +37,8 @@ Rainbow.extend('python', [
     {
         'matches': {
             1: 'keyword.class',
-            2: 'meta.class-name',
-            3: 'meta.parent.class-name'
+            2: 'entity.name.class',
+            3: 'entity.other.inherited-class'
         },
         'pattern': /(class)\s+(\w+)\((\w+?)\)/g
     },
@@ -52,12 +52,12 @@ Rainbow.extend('python', [
     {
         'matches': {
             1: 'keyword',
-            2: 'meta.function'
+            2: 'entity.name.function'
         },
         'pattern': /(def)\s+(\w+)(?=\()/g
     },
     {
-        'name': 'meta.decorator',
+        'name': 'entity.name.function.decorator',
         'pattern': /@(\w+)/g
     },
     {
