@@ -141,9 +141,9 @@ RainbowTester.run(
 RainbowTester.run(
     'float',
 
-    '23.5',
+    '23.5f',
 
-    '<span class="constant numeric">23</span>.<span class="constant numeric">5</span>'
+    '<span class="constant numeric">23.5f</span>'
 );
 
 RainbowTester.run(
