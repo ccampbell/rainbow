@@ -2,7 +2,7 @@
 
 Rainbow is a code syntax highlighting library written in Javascript.
 
-It was designed to be lightweight (1.2kb), easy to use, and extendable.
+It was designed to be lightweight (1.4kb), easy to use, and extendable.
 
 It is completely themable via CSS.
 
@@ -32,6 +32,25 @@ It is completely themable via CSS.
     <script src="/assets/js/language/python.js"></script>
     ```
 
+## Extending Rainbow
+If you have a language specific pattern that you want highlighted, but it does not exist in the language syntax rules you can add a rule on your page.
+
+Let's say for example you want to reference PHP's apc functions.
+You can include the php language then in the markup on your page add:
+
+```html
+<script>
+    Rainbow.extend('php', [
+        {
+            'matches': {
+                1: 'support.function'
+            },
+            'pattern': /\b(apc_(store|fetch|add|inc))(?=\()/g
+        }  
+    ]);
+</script>
+```
+
 ## More Info
 
-You can check out the documentation and build custom packages at [rainbowco.de](http://rainbowco.de).
+You can check out additional documentation and build custom packages at [rainbowco.de](http://rainbowco.de).

@@ -100,7 +100,7 @@ RainbowTester.run(
     '</script>',
 
     '<span class="js">&lt;<span class="meta script-tag">script</span> <span class="meta script-tag">type</span>=<span class="string">"text/javascript"</span>&gt;\n' +
-    '    <span class="keyword">function</span> <span class="meta function-call">prettyCool</span>() {\n' +
+    '    <span class="keyword">function</span> <span class="meta function">prettyCool</span>() {\n' +
     '        <span class="function call">doSomeJQueryOrWhatever</span>();\n' +
     '    }\n' +
     '&lt;/<span class="meta script-tag">script</span>&gt;</span>'
@@ -117,7 +117,7 @@ RainbowTester.run(
     '</script>',
 
     '<span class="js">&lt;<span class="meta script-tag">script</span>&gt;\n' +
-    '    <span class="keyword">function</span> <span class="meta function-call">prettyCool</span>() {\n' +
+    '    <span class="keyword">function</span> <span class="meta function">prettyCool</span>() {\n' +
     '        <span class="function call">doSomeJQueryOrWhatever</span>();\n' +
     '    }\n' +
     '&lt;/<span class="meta script-tag">script</span>&gt;</span>'
@@ -149,11 +149,35 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'attribute middle',
+
+    '<input checked type="checkbox">',
+
+    '<span class="support tag"><span class="support tag">&lt;</span><span class="support tag-name">input</span></span> <span class="support attribute">checked</span> <span class="support attribute">type</span><span class="support operator">=</span><span class="string quote">"</span><span class="string value">checkbox</span><span class="string quote">"</span><span class="support tag close">&gt;</span>'
+);
+
+RainbowTester.run(
     'attribute alone self close',
 
     '<input type="checkbox" name="whatever" checked />',
 
     '<span class="support tag"><span class="support tag">&lt;</span><span class="support tag-name">input</span></span> <span class="support attribute">type</span><span class="support operator">=</span><span class="string quote">"</span><span class="string value">checkbox</span><span class="string quote">"</span> <span class="support attribute">name</span><span class="support operator">=</span><span class="string quote">"</span><span class="string value">whatever</span><span class="string quote">"</span> <span class="support attribute">checked</span> <span class="support tag close">/&gt;</span>'
+);
+
+RainbowTester.run(
+    'string inside tags',
+
+    '<pre><code data-language="python">def openFile(path):\n' +
+    'file = open(path, "r")\n' +
+    'content = file.read()\n' +
+    'file.close()\n' +
+    'return content</code></pre>',
+
+    '<span class="support tag"><span class="support tag">&lt;</span><span class="support tag-name">pre</span></span><span class="support tag close">&gt;</span><span class="support tag"><span class="support tag">&lt;</span><span class="support tag-name">code</span></span> <span class="support attribute">data-language</span><span class="support operator">=</span><span class="string quote">"</span><span class="string value">python</span><span class="string quote">"</span><span class="support tag close">&gt;</span>def openFile(path):\n' +
+    'file = open(path, "r")\n' +
+    'content = file.read()\n' +
+    'file.close()\n' +
+    'return content<span class="support tag"><span class="support tag">&lt;</span><span class="support tag special">/</span><span class="support tag-name">code</span></span><span class="support tag close">&gt;</span><span class="support tag"><span class="support tag">&lt;</span><span class="support tag special">/</span><span class="support tag-name">pre</span></span><span class="support tag close">&gt;</span>'
 );
 
 

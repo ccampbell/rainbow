@@ -1,17 +1,17 @@
 /**
- * All Hallows Eve theme
+ * Zenburnesque theme
  *
  * @author Flinn Mueller
- * @version 1.0.1
+ * @version 1.0
  * @attribution Adapted from Ultraviolet RubyGem
  */
 pre {
-    background: #000;
+    background: #404040;
     word-wrap: break-word;
     margin: 0px;
     padding: 0px;
     padding: 10px;
-    color: #fff;
+    color: #dedede;
     font-size: 14px;
     margin-bottom: 20px;
 }
@@ -21,23 +21,25 @@ pre, code {
 }
 
 pre .comment {
-    color: #9933CC;
+    color: #709070;
+    font-style: italic;
 }
 
-pre .constant {
-    color: #3387CC;
+pre .integer {
+    color: #22C0FF;
 }
 
 pre .storage {
-    color: #CC7833;
+    color: #6080FF;
 }
 
+/* This includes regexes */
 pre .string {
-    color: #66CC33;
+    color: #FF2020;
 }
 
 pre .keyword, pre .selector {
-    color: #CC7833;
+    color: #ffffa0;
 }
 
 pre .parent {
@@ -45,8 +47,13 @@ pre .parent {
 }
 
 pre .entity, pre .meta {
+  color: #F09040;
 }
 
 pre .support {
     color: #C83730;
+}
+
+pre .variable.class {
+  color: #FF8000;
 }
