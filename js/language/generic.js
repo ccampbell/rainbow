@@ -49,8 +49,8 @@ Rainbow.extend([
     },
     {
         'matches': {
-            1: 'keyword',
-            2: 'meta.function'
+            1: 'storage.function',
+            2: 'entity.name.function'
         },
         'pattern': /(function)\s(.*?)(?=\()/g
     }

@@ -36,7 +36,7 @@ Rainbow.extend('python', [
     },
     {
         'matches': {
-            1: 'keyword.class',
+            1: 'storage.class',
             2: 'entity.name.class',
             3: 'entity.other.inherited-class'
         },
@@ -44,14 +44,14 @@ Rainbow.extend('python', [
     },
     {
         'matches': {
-            1: 'keyword',
+            1: 'storage.function',
             2: 'support.magic'
         },
         'pattern': /(def)\s+(__\w+)(?=\()/g
     },
     {
         'matches': {
-            1: 'keyword',
+            1: 'storage.function',
             2: 'entity.name.function'
         },
         'pattern': /(def)\s+(\w+)(?=\()/g
