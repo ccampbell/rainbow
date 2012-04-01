@@ -47,7 +47,7 @@ Rainbow.extend('php', [
         'pattern': /\b(array(_key_exists|_merge|_keys|_shift)?|isset|count|empty|unset|printf|is_(array|string|numeric|object)|sprintf|each|date|time|substr|pos|str(len|pos|tolower|_replace|totime)?|ord|trim|in_array|implode|end|preg_match|explode|fmod|define|link|list|get_class|serialize|file|sort|mail|dir|idate|log|intval|header|chr|function_exists|dirname|preg_replace|file_exists)(?=\()/g
     },
     {
-        'name': 'phptag',
+        'name': 'variable.language.php-tag',
         'pattern': /(&lt;\?(php)?|\?&gt;)/g
     },
     {
