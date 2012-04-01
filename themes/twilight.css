@@ -50,11 +50,11 @@ pre .string.regexp {
     color: #E9C062;
 }
 
-pre .keyword, pre .selector {
+pre .keyword, pre .selector, pre .storage {
     color: #CDA869;
 }
 
-pre .parent.class-name {
+pre .inherited-class {
     color: #9B5C2E;
 }
 
@@ -74,7 +74,7 @@ pre .variable {
     color: #7587A6;
 }
 
-pre .function, pre .class-name {
+pre .function, pre .entity.class {
     color: #9B703F;
 }
 
