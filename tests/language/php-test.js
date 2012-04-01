@@ -112,7 +112,7 @@ RainbowTester.run(
 
     'class MyClass {}',
 
-    '<span class="keyword class">class</span> <span class="meta class-name">MyClass</span> {}'
+    '<span class="storage class">class</span> <span class="entity name class">MyClass</span> {}'
 );
 
 RainbowTester.run(
@@ -120,7 +120,7 @@ RainbowTester.run(
 
     'abstract class MyClass {}',
 
-    '<span class="storage modifier">abstract</span> <span class="keyword class">class</span> <span class="meta class-name">MyClass</span> {}'
+    '<span class="storage modifier">abstract</span> <span class="storage class">class</span> <span class="entity name class">MyClass</span> {}'
 );
 
 RainbowTester.run(
@@ -130,7 +130,7 @@ RainbowTester.run(
     '{\n' +
     '}',
 
-    '<span class="storage modifier">final</span> <span class="keyword class">class</span> <span class="meta class-name">TestClass</span>\n' +
+    '<span class="storage modifier">final</span> <span class="storage class">class</span> <span class="entity name class">TestClass</span>\n' +
     '{\n' +
     '}'
 );
@@ -140,7 +140,7 @@ RainbowTester.run(
 
     'class Collection extends ArrayObject {}',
 
-    '<span class="keyword class">class</span> <span class="meta class-name">Collection</span><span class="keyword extends"> extends </span><span class="meta parent class-name">ArrayObject</span> {}'
+    '<span class="storage class">class</span> <span class="entity name class">Collection</span><span class="storage modifier extends"> extends </span><span class="entity other inherited-class">ArrayObject</span> {}'
 );
 
 
@@ -149,7 +149,7 @@ RainbowTester.run(
 
     'final class TestClass extends \\Some\\Other\\Class {}',
 
-    '<span class="storage modifier">final</span> <span class="keyword class">class</span> <span class="meta class-name">TestClass</span><span class="keyword extends"> extends </span><span class="meta parent class-name">\\Some\\Other\\Class</span> {}'
+    '<span class="storage modifier">final</span> <span class="storage class">class</span> <span class="entity name class">TestClass</span><span class="storage modifier extends"> extends </span><span class="entity other inherited-class">\\Some\\Other\\Class</span> {}'
 );
 
 RainbowTester.run(
@@ -170,7 +170,7 @@ RainbowTester.run(
     '   // do whatever\n' +
     '}',
 
-    '<span class="keyword">function</span> <span class="support magic">__autoload</span>(<span class="variable dollar-sign">$</span><span class="variable">class</span>)\n' +
+    '<span class="storage function">function</span> <span class="support magic">__autoload</span>(<span class="variable dollar-sign">$</span><span class="variable">class</span>)\n' +
     '{\n' +
     '   <span class="comment">// do whatever</span>\n' +
     '}'
@@ -189,11 +189,11 @@ RainbowTester.run(
     '   }\n' +
     '}',
 
-    '<span class="keyword class">class</span> <span class="meta class-name">SomeThing</span>\n' +
+    '<span class="storage class">class</span> <span class="entity name class">SomeThing</span>\n' +
     '{\n' +
     '   <span class="keyword">protected</span> <span class="variable dollar-sign">$</span><span class="variable">_foo</span>;\n' +
     '\n' +
-    '   <span class="keyword">public</span> <span class="keyword">function</span> <span class="support magic">__construct</span>(<span class="variable dollar-sign">$</span><span class="variable">foo</span>)\n' +
+    '   <span class="keyword">public</span> <span class="storage function">function</span> <span class="support magic">__construct</span>(<span class="variable dollar-sign">$</span><span class="variable">foo</span>)\n' +
     '   {\n' +
     '       <span class="variable dollar-sign">$</span><span class="variable">this</span><span class="keyword operator">-</span><span class="keyword operator">&gt;</span>_foo <span class="keyword operator">=</span> <span class="variable dollar-sign">$</span><span class="variable">foo</span>;\n' +
     '   }\n' +
@@ -253,7 +253,7 @@ RainbowTester.run(
 
     'public static function getForUser(User $user, Sort $sort) {}',
 
-    '<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">function</span> <span class="meta function">getForUser</span>(<span class="support class">User</span> <span class="variable dollar-sign">$</span><span class="variable">user</span>, <span class="support class">Sort</span> <span class="variable dollar-sign">$</span><span class="variable">sort</span>) {}'
+    '<span class="keyword">public</span> <span class="keyword">static</span> <span class="storage function">function</span> <span class="entity name function">getForUser</span>(<span class="support class">User</span> <span class="variable dollar-sign">$</span><span class="variable">user</span>, <span class="support class">Sort</span> <span class="variable dollar-sign">$</span><span class="variable">sort</span>) {}'
 );
 
 
@@ -262,6 +262,6 @@ RainbowTester.run(
 
     'public static function getForUser(\\SomeApp\\User $user) {}',
 
-    '<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">function</span> <span class="meta function">getForUser</span>(\\<span class="support class">SomeApp</span>\\<span class="support class">User</span> <span class="variable dollar-sign">$</span><span class="variable">user</span>) {}'
+    '<span class="keyword">public</span> <span class="keyword">static</span> <span class="storage function">function</span> <span class="entity name function">getForUser</span>(\\<span class="support class">SomeApp</span>\\<span class="support class">User</span> <span class="variable dollar-sign">$</span><span class="variable">user</span>) {}'
 );
 RainbowTester.endTest('php');

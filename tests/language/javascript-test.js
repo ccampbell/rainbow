@@ -66,7 +66,7 @@ RainbowTester.run(
 
     'var Animal = function() { /* some comment */ };',
 
-    '<span class="keyword">var</span> <span class="meta function var">Animal </span><span class="keyword operator">=</span> <span class="keyword">function</span>() { <span class="comment">/* some comment */</span> };'
+    '<span class="storage">var</span> <span class="entity function">Animal </span><span class="keyword operator">=</span> <span class="keyword">function</span>() { <span class="comment">/* some comment */</span> };'
 );
 
 RainbowTester.run(
@@ -81,11 +81,11 @@ RainbowTester.run(
     '};',
 
     '<span class="support">window</span>.Rainbow <span class="keyword operator">=</span> {\n' +
-    '    <span class="meta function">color</span>: <span class="keyword">function</span>() {\n' +
+    '    <span class="entity function">color</span>: <span class="keyword">function</span>() {\n' +
     '        <span class="comment">// do something</span>\n' +
     '    },\n' +
     '\n' +
-    '    <span class="meta function">other</span>: <span class="keyword">function</span>() {}\n' +
+    '    <span class="entity function">other</span>: <span class="keyword">function</span>() {}\n' +
     '};'
 );
 

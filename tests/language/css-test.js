@@ -77,7 +77,7 @@ RainbowTester.run(
         '   transition: color .8s ease-in;\n' +
     '}',
 
-    '<span class="meta tag">code</span> <span class="meta tag">span</span> {\n' +
+    '<span class="entity name tag">code</span> <span class="entity name tag">span</span> {\n' +
     '   <span class="support css-property"><span class="support vendor-prefix">-moz-</span>transition</span>: <span class="support css-value">color</span> .<span class="constant numeric">8</span><span class="keyword unit">s</span> ease-in;\n' +
     '   <span class="support css-property"><span class="support vendor-prefix">-o-</span>transition</span>: <span class="support css-value">color</span> .<span class="constant numeric">8</span><span class="keyword unit">s</span> ease-in;\n' +
     '   <span class="support css-property"><span class="support vendor-prefix">-webkit-</span>transition</span>: <span class="support css-value">color</span> .<span class="constant numeric">8</span><span class="keyword unit">s</span> ease-in;\n' +
@@ -90,7 +90,7 @@ RainbowTester.run(
 
     'p {',
 
-    '<span class="meta tag">p</span> {'
+    '<span class="entity name tag">p</span> {'
 );
 
 RainbowTester.run(
@@ -98,7 +98,7 @@ RainbowTester.run(
 
     'p.intro {',
 
-    '<span class="meta tag">p</span><span class="meta class">.intro</span> {'
+    '<span class="entity name tag">p</span><span class="entity name class">.intro</span> {'
 );
 
 RainbowTester.run(
@@ -106,7 +106,7 @@ RainbowTester.run(
 
     'p#intro {',
 
-    '<span class="meta tag">p</span><span class="meta id">#intro</span> {'
+    '<span class="entity name tag">p</span><span class="entity name id">#intro</span> {'
 );
 
 RainbowTester.run(
@@ -114,7 +114,7 @@ RainbowTester.run(
 
     'p > span {',
 
-    '<span class="meta tag">p</span> <span class="direct-descendant">&gt;</span> <span class="meta tag">span</span> {'
+    '<span class="entity name tag">p</span> <span class="direct-descendant">&gt;</span> <span class="entity name tag">span</span> {'
 );
 
 RainbowTester.run(
@@ -128,9 +128,9 @@ RainbowTester.run(
     '   }\n' +
     '}',
 
-    '<span class="meta tag">article</span> {\n' +
-    '   <span class="meta sass">&amp;</span><span class="meta class">.cool</span> {\n' +
-    '       <span class="meta tag">p</span> {\n' +
+    '<span class="entity name tag">article</span> {\n' +
+    '   <span class="entity name sass">&amp;</span><span class="entity name class">.cool</span> {\n' +
+    '       <span class="entity name tag">p</span> {\n' +
     '           <span class="support css-property">margin-top</span>: <span class="constant numeric">20</span><span class="keyword unit">px</span>;\n' +
     '       }\n' +
     '   }\n' +
@@ -158,7 +158,7 @@ RainbowTester.run(
 
     'p { color: #fff; margin-top: 10px; }',
 
-    '<span class="meta tag">p</span> { <span class="support css-property">color</span>: <span class="constant hex-color">#fff</span>; <span class="support css-property">margin-top</span>: <span class="constant numeric">10</span><span class="keyword unit">px</span>; }'
+    '<span class="entity name tag">p</span> { <span class="support css-property">color</span>: <span class="constant hex-color">#fff</span>; <span class="support css-property">margin-top</span>: <span class="constant numeric">10</span><span class="keyword unit">px</span>; }'
 );
 
 RainbowTester.endTest('css');

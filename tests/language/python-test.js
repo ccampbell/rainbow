@@ -63,7 +63,7 @@ RainbowTester.run(
     'class Something(object):\n' +
     '    pass',
 
-    '<span class="keyword class">class</span> <span class="meta class-name">Something</span>(<span class="meta parent class-name">object</span>):\n' +
+    '<span class="storage class">class</span> <span class="entity name class">Something</span>(<span class="entity other inherited-class">object</span>):\n' +
     '    <span class="keyword">pass</span>'
 );
 
@@ -73,7 +73,7 @@ RainbowTester.run(
     'def __init__(self, some_var):\n' +
     '    pass',
 
-    '<span class="keyword">def</span> <span class="support magic">__init__</span>(<span class="variable self">self</span>, some_var):\n' +
+    '<span class="storage function">def</span> <span class="support magic">__init__</span>(<span class="variable self">self</span>, some_var):\n' +
     '    <span class="keyword">pass</span>'
 );
 
@@ -86,7 +86,7 @@ RainbowTester.run(
     '   file.close()\n' +
     '   return content',
 
-    '<span class="keyword">def</span> <span class="meta function">openFile</span>(path):\n' +
+    '<span class="storage function">def</span> <span class="entity name function">openFile</span>(path):\n' +
     '   file <span class="keyword operator">=</span> <span class="function call">open</span>(path, <span class="string">"r"</span>)\n' +
     '   content <span class="keyword operator">=</span> file.<span class="function call">read</span>()\n' +
     '   file.<span class="function call">close</span>()\n' +
@@ -101,9 +101,9 @@ RainbowTester.run(
     'def hello():\n' +
     '    return "hello world"',
 
-    '<span class="meta decorator">@makebold</span>\n' +
-    '<span class="meta decorator">@makeitalic</span>\n' +
-    '<span class="keyword">def</span> <span class="meta function">hello</span>():\n' +
+    '<span class="entity name function decorator">@makebold</span>\n' +
+    '<span class="entity name function decorator">@makeitalic</span>\n' +
+    '<span class="storage function">def</span> <span class="entity name function">hello</span>():\n' +
     '    <span class="keyword">return</span> <span class="string">"hello world"</span>'
 );
 
