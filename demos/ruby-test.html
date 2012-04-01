@@ -106,6 +106,35 @@ $stderr.puts 3
 {key: &#39;value&#39;}
 foo(:key =&gt; &#39;value&#39;)
 foo(key: &#39;value&#39;)
+
+# Classes, modules, etc.
+module Foo
+  CONSTANT = 'An \'escaped\' string'
+  class Bar
+    def self.something
+    begin
+      1 + 1
+    rescue StandardError => e
+      puts "Whoa buddy!"
+    end
+
+    class &lt;&lt; self
+      def something
+        1 + 1
+      end
+    end
+
+    def something
+    end
+  end
+end
+
+class MyClass &lt; ::Foo::Bar
+end
+
+foo(::Foo::Bar.something)
+
+
 </code></pre>
     <script src="../js/rainbow.js"></script>
     <script src="../js/language/generic.js"></script>
