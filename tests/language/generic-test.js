@@ -139,11 +139,27 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'decimal',
+
+    '3.21',
+
+    '<span class="constant numeric">3.21</span>'
+);
+
+RainbowTester.run(
     'float',
 
-    '23.5',
+    '23.5f',
 
-    '<span class="constant numeric">23</span>.<span class="constant numeric">5</span>'
+    '<span class="constant numeric">23.5f</span>'
+);
+
+RainbowTester.run(
+    'exponential',
+
+    '121.22e-10',
+
+    '<span class="constant numeric">121.22e-10</span>'
 );
 
 RainbowTester.run(

@@ -42,7 +42,7 @@ RainbowTester.run(
 
     'var pattern = /\\((.*?)\\)/g',
 
-    '<span class="keyword">var</span> pattern <span class="keyword operator">=</span> <span class="string regexp"><span class="string regexp open">/</span><span class="constant regex escape">\\(</span>(.*?)<span class="constant regex escape">\\)</span><span class="string regexp close">/</span><span class="string regexp modifier">g</span></span>'
+    '<span class="keyword">var</span> pattern <span class="keyword operator">=</span> <span class="string regexp"><span class="string regexp open">/</span><span class="constant regexp escape">\\(</span>(.*?)<span class="constant regexp escape">\\)</span><span class="string regexp close">/</span><span class="string regexp modifier">g</span></span>'
 );
 
 RainbowTester.run(
