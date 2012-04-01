@@ -55,6 +55,22 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'test quoted comment with multi-line string',
+
+    '# someone\'s comment\n' +
+    'doSomething(\'js\')\n' +
+    'doSomethingElse()\n' +
+    'test = \'other string\n' +
+    'string is still going\'',
+
+    '<span class="comment"># someone\'s comment</span>\n' +
+    '<span class="function call">doSomething</span>(<span class="string">\'js\'</span>)\n' +
+    '<span class="function call">doSomethingElse</span>()\n' +
+    'test <span class="keyword operator">=</span> <span class="string">\'other string\n' +
+    'string is still going\'</span>'
+);
+
+RainbowTester.run(
     'comment inline 1',
 
     '// this is a comment',
