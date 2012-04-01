@@ -1,15 +1,14 @@
 /**
  * Twilight theme
  *
+ * @author Michael Sheets
  * @author Jesse Farmer <jesse@20bits.com>
  * @version 1.0
+ *
+ * Adapted from Michael Sheets' TextMate theme of the same name
  */
 pre {
     background: #0B1022;
-    white-space: pre-wrap;
-    white-space: -moz-pre-wrap;
-    white-space: -pre-wrap;
-    white-space: -o-pre-wrap;
     word-wrap: break-word;
     margin: 0px;
     padding: 0px;
