@@ -4,7 +4,7 @@
  * @author Matthew King
  * @author Jesse Farmer <jesse@20bits.com>
  * @author actsasflinn
- * @version 1.0.3
+ * @version 1.0.4
  */
 
 Rainbow.extend('ruby', [
@@ -18,8 +18,8 @@ Rainbow.extend('ruby', [
             1: 'string.open',
             2: {
                 'name': 'string.keyword',
-                'pattern': /(#{.*?})/g
-               },
+                'pattern': /(\#\{.*?\})/g
+            },
             3: 'string.close'
         },
         'pattern': /("|`)(.*?[^\\\1])?(\1)/g
