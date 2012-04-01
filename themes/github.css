@@ -2,7 +2,7 @@
  * GitHub theme
  *
  * @author Craig Campbell
- * @version 1.0
+ * @version 1.0.1
  */
 pre {
     border: 1px solid #ccc;
@@ -41,44 +41,44 @@ pre, pre code {
     font-size: 13px;
 }
 
-.comment {
+pre .comment {
     color: #998;
 }
 
-.support {
+pre .support {
     color: #0086B3;
 }
 
-.tag, .tag-name {
+pre .tag, pre .tag-name {
     color: navy;
 }
 
-.keyword, .css-property, .vendor-prefix, .sass, .class, .id, .css-value {
+pre .keyword, pre .css-property, pre .vendor-prefix, pre .sass, pre .class, pre .id, pre .css-value {
     font-weight: bold;
 }
 
-.css-property, .css-value, .vendor-prefix {
+pre .css-property, pre .css-value, pre .vendor-prefix {
     color: #333;
 }
 
-.constant.numeric, .keyword.unit, .hex-color {
+pre .constant.numeric, pre .keyword.unit, pre .hex-color {
     font-weight: normal;
     color: #099;
 }
 
-.meta.class {
+pre .meta.class {
     color: #458;
 }
 
-.meta.id {
+pre .meta.id {
     color: #900;
 }
 
-.attribute, .variable {
+pre .attribute, pre .variable {
     color: teal;
 }
 
-.string, .support.value  {
+pre .string, pre .support.value  {
     font-weight: normal;
     color: #d14;
 }
