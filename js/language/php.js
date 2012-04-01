@@ -72,7 +72,7 @@ Rainbow.extend('php', [
     },
     {
         'name': 'keyword.static',
-        'pattern': /self::/g
+        'pattern': /self::|static::/g
     },
     {
         'matches': {
