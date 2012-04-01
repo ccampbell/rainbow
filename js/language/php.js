@@ -96,9 +96,10 @@ Rainbow.extend('php', [
             1: {
                 'name': 'support.class',
                 'pattern': /\w+/g
-            }
+            },
+            2: 'keyword.static'
         },
-        'pattern': /([\w\\]*?)::\b/g
+        'pattern': /([\w\\]*?)(::)(?=\b|\$)/g
     },
     {
         'matches': {
