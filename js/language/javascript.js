@@ -63,15 +63,15 @@ Rainbow.extend('javascript', [
      * @todo check that there is valid regex in match group 1
      */
     {
-        'name': 'regex',
+        'name': 'string.regexp',
         'matches': {
-            1: 'regex.open',
+            1: 'string.regexp.open',
             2: {
                 'name': 'constant.regex.escape',
                 'pattern': /\\(.){1}/g
             },
-            3: 'regex.close',
-            4: 'regex.modifier'
+            3: 'string.regexp.close',
+            4: 'string.regexp.modifier'
         },
         'pattern': /(\/)(?!\*)(.+)(\/)([igm]{0,3})/g
     },
