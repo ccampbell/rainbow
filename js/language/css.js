@@ -2,7 +2,7 @@
  * CSS patterns
  *
  * @author Craig Campbell
- * @version 1.0.2
+ * @version 1.0.5
  */
 Rainbow.extend('css', [
     {
@@ -15,10 +15,10 @@ Rainbow.extend('css', [
     },
     {
         'matches': {
-            1: 'integer',
-            2: 'keyword.px'
+            1: 'constant.numeric',
+            2: 'keyword.unit'
         },
-        'pattern': /(\d+)(px)/g
+        'pattern': /(\d+)(px|cm|s|%)?/g
     },
     {
         'name': 'string',
@@ -26,7 +26,10 @@ Rainbow.extend('css', [
     },
     {
         'name': 'support.css-property',
-        'pattern': /[\w-]+(?=\s|:)(?!.*\{)/g
+        'matches': {
+            1: 'support.vendor-prefix'
+        },
+        'pattern': /(-o-|-moz-|-webkit-|-ms-)?[\w-]+(?=\s?:)(?!.*\{)/g
     },
     {
         'matches': {
@@ -36,7 +39,7 @@ Rainbow.extend('css', [
                     'pattern': /&amp;/g
                 },
                 {
-                    'name': 'direct-descendent',
+                    'name': 'direct-descendant',
                     'pattern': /&gt;/g
                 },
                 {
@@ -61,8 +64,8 @@ Rainbow.extend('css', [
     },
     {
         'matches': {
-            2: 'support.vender-prefix',
-            3: 'support.value'
+            2: 'support.vendor-prefix',
+            3: 'support.css-value'
         },
         'pattern': /(:|,)\s?(-o-|-moz-|-webkit-|-ms-)?([a-zA-Z-]*)(?=\b)(?!.*\{)/g
     },

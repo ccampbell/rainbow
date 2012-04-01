@@ -2,14 +2,10 @@
  * Tricolore theme
  *
  * @author Jean Nicolas
- * @version 1.0
+ * @version 1.0.1
  */
 pre {
     background: #FFF;
-    white-space: pre-wrap;
-    white-space: -moz-pre-wrap;
-    white-space: -pre-wrap;
-    white-space: -o-pre-wrap;
     word-wrap: break-word;
     margin: 0px;
     padding: 0px;
@@ -29,7 +25,7 @@ pre .comment {
 	font-style: italic;
 }
 
-pre .constant, pre .integer {
+pre .constant {
     color: #18838A;
 	font-weight: bold;
 }

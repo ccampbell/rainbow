@@ -2,7 +2,7 @@
  * PHP patterns
  *
  * @author Craig Campbell
- * @version 1.0.1
+ * @version 1.0.2
  */
 Rainbow.extend('php', [
     {
@@ -22,7 +22,7 @@ Rainbow.extend('php', [
     },
     {
         'name': 'keyword',
-        'pattern': /\b(continue|break|end(for(each)?|switch|if)|case|require(_once)?|include(_once)?)\b/g
+        'pattern': /\b(continue|break|end(for(each)?|switch|if)|case|require(_once)?|include(_once)?)(?=\(|\b)/g
     },
     {
         'matches': {
@@ -34,42 +34,45 @@ Rainbow.extend('php', [
         },
         'pattern': /(instanceof)\s([^\$].*?)(\)|;)/g
     },
+
     /**
-     * @todo limit this to the most commonly used PHP functions since this could grow really big
+     * these are the top 50 most used PHP functions
+     * found from running a script and checking the frequency of each function
+     * over a bunch of popular PHP frameworks then combining the results
      */
     {
         'matches': {
             1: 'support.function'
         },
-        'pattern': /\b(apc_(fetch|store)|array(_sum|_rand)?|asort|count|empty|explode|file_(get_contents|exists)|get_(called_)?class|getenv|in_array|is_(numeric|array|link)|isset|json_(encode|decode)|mt_rand|rand|rmdir|round|spl_autoload_register|str(tolower|str|pos|_replace)|trigger_error|un(link|set))(?=\()/g
+        'pattern': /\b(array(_key_exists|_merge|_keys|_shift)?|isset|count|empty|unset|printf|is_(array|string|numeric|object)|sprintf|each|date|time|substr|pos|str(len|pos|tolower|_replace|totime)?|ord|trim|in_array|implode|end|preg_match|explode|fmod|define|link|list|get_class|serialize|file|sort|mail|dir|idate|log|intval|header|chr|function_exists|dirname|preg_replace|file_exists)(?=\()/g
     },
     {
-        'name': 'phptag',
+        'name': 'variable.language.php-tag',
         'pattern': /(&lt;\?(php)?|\?&gt;)/g
     },
     {
         'matches': {
             1: 'keyword.namespace',
-           2: {
+            2: {
                 'name': 'support.namespace',
                 'pattern': /\w+/g
             }
         },
-        'pattern': /\b(namespace\s)(.*?);/g
+        'pattern': /\b(namespace)\s(.*?);/g
     },
     {
         'matches': {
-            1: 'keyword.class.description',
+            1: 'storage.modifier',
             2: 'keyword.class',
             3: 'meta.class-name',
             4: 'keyword.extends',
             5: 'meta.parent.class-name'
         },
-        'pattern': /\b(abstract|final)?\s?(class)\s(\w+)(\sextends\s)?([\w\\]*)?\s?\{?\n/g
+        'pattern': /\b(abstract|final)?\s?(class)\s(\w+)(\sextends\s)?([\w\\]*)?\s?\{?(\n|\})/g
     },
     {
         'name': 'keyword.static',
-        'pattern': /self::/g
+        'pattern': /self::|static::/g
     },
     {
         'matches': {
@@ -93,9 +96,10 @@ Rainbow.extend('php', [
             1: {
                 'name': 'support.class',
                 'pattern': /\w+/g
-            }
+            },
+            2: 'keyword.static'
         },
-        'pattern': /([\w\\]*?)::\b/g
+        'pattern': /([\w\\]*?)(::)(?=\b|\$)/g
     },
     {
         'matches': {
