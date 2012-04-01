@@ -69,7 +69,7 @@ Rainbow.extend('javascript', [
         'matches': {
             1: 'string.regexp.open',
             2: {
-                'name': 'constant.regex.escape',
+                'name': 'constant.regexp.escape',
                 'pattern': /\\(.){1}/g
             },
             3: 'string.regexp.close',
