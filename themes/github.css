@@ -49,7 +49,7 @@ pre .support {
     color: #0086B3;
 }
 
-pre .tag, pre .tag-name {
+pre .tag, pre .tag-name, pre .script-tag {
     color: navy;
 }
 
