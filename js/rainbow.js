@@ -15,7 +15,7 @@
  *
  * Rainbow is a simple code syntax highlighter
  *
- * @preserve @version 1.1.3
+ * @preserve @version 1.1.4
  * @url rainbowco.de
  */
 window['Rainbow'] = (function() {
@@ -579,8 +579,17 @@ window['Rainbow'] = (function() {
      * @returns void
      */
     function _highlight(node, onComplete) {
-        var pre_blocks = (node || document).getElementsByTagName('pre'),
-            code_blocks = (node || document).getElementsByTagName('code'),
+
+        // the first argument can be an Event or a DOM Element
+        // I was originally checking instanceof Event but that makes it break
+        // when using mootools
+        //
+        // @see https://github.com/ccampbell/rainbow/issues/32
+        //
+        node = node && typeof node.getElementsByTagName == 'function' ? node : document;
+
+        var pre_blocks = node.getElementsByTagName('pre'),
+            code_blocks = node.getElementsByTagName('code'),
             i,
             final_blocks = [];
 
@@ -666,7 +675,7 @@ window['Rainbow'] = (function() {
 
             // otherwise we use whatever node you passed in with an optional
             // callback function as the second parameter
-            _highlight(arguments[0] instanceof Event ? null : arguments[0], arguments[1]);
+            _highlight(arguments[0], arguments[1]);
         }
     };
 }) ();
