@@ -87,7 +87,7 @@ RainbowTester.run(
     '   return content',
 
     '<span class="storage function">def</span> <span class="entity name function">openFile</span>(path):\n' +
-    '   file <span class="keyword operator">=</span> <span class="function call">open</span>(path, <span class="string">"r"</span>)\n' +
+    '   file <span class="keyword operator">=</span> <span class="support function python">open</span>(path, <span class="string">"r"</span>)\n' +
     '   content <span class="keyword operator">=</span> file.<span class="function call">read</span>()\n' +
     '   file.<span class="function call">close</span>()\n' +
     '   <span class="keyword">return</span> content'
@@ -105,6 +105,30 @@ RainbowTester.run(
     '<span class="entity name function decorator">@makeitalic</span>\n' +
     '<span class="storage function">def</span> <span class="entity name function">hello</span>():\n' +
     '    <span class="keyword">return</span> <span class="string">"hello world"</span>'
+);
+
+RainbowTester.run(
+    '__main__',
+
+    'if __name__ == \'__main__\':\n' +
+    '   pass',
+
+    '<span class="keyword">if</span> <span class="support magic">__name__</span> <span class="keyword operator">=</span><span class="keyword operator">=</span> <span class="string">\'__main__\'</span>:\n' +
+    '   <span class="keyword">pass</span>'
+);
+
+RainbowTester.run(
+    'try catch',
+
+    'try:\n' +
+    '   import cPickle as pickle\n' +
+    'except ImportError:\n' +
+    '   import pickle',
+
+    '<span class="keyword">try</span>:\n' +
+    '   <span class="keyword">import</span> cPickle <span class="keyword">as</span> pickle\n' +
+    '<span class="keyword control">except</span> <span class="support exception type">ImportError</span>:\n' +
+    '   <span class="keyword">import</span> pickle'
 );
 
 RainbowTester.run(

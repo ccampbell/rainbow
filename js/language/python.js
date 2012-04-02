@@ -2,7 +2,7 @@
  * Python patterns
  *
  * @author Craig Campbell
- * @version 1.0.4
+ * @version 1.0.5
  */
 Rainbow.extend('python', [
     /**
@@ -28,6 +28,20 @@ Rainbow.extend('python', [
         'name': 'support.object',
         'pattern': /object/g
     },
+
+    /**
+     * built in python functions
+     *
+     * this entire list is 580 bytes minified / 379 bytes gzipped
+     *
+     * @see http://docs.python.org/library/functions.html
+     *
+     * @todo strip some out or consolidate the regexes with matching patterns?
+     */
+    {
+        'name': 'support.function.python',
+        'pattern': /\b(bs|divmod|input|open|staticmethod|all|enumerate|int|ord|str|any|eval|isinstance|pow|sum|basestring|execfile|issubclass|print|super|bin|file|iter|property|tuple|bool|filter|len|range|type|bytearray|float|list|raw_input|unichr|callable|format|locals|reduce|unicode|chr|frozenset|long|reload|vars|classmethod|getattr|map|repr|xrange|cmp|globals|max|reversed|zip|compile|hasattr|memoryview|round|__import__|complex|hash|min|set|apply|delattr|help|next|setattr|buffer|dict|hex|object|slice|coerce|dir|id|oct|sorted|intern)(?=\()/g
+    },
     {
         'matches': {
             1: 'keyword'
@@ -48,6 +62,17 @@ Rainbow.extend('python', [
             2: 'support.magic'
         },
         'pattern': /(def)\s+(__\w+)(?=\()/g
+    },
+    {
+        'name': 'support.magic',
+        'pattern': /__(name)__/g
+    },
+    {
+        'matches': {
+            1: 'keyword.control',
+            2: 'support.exception.type'
+        },
+        'pattern': /(except) (\w+):/g
     },
     {
         'matches': {
