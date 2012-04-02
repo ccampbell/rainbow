@@ -15,7 +15,7 @@
  *
  * Rainbow is a simple code syntax highlighter
  *
- * @preserve @version 1.1.6
+ * @preserve @version 1.1.7
  * @url rainbowco.de
  */
 window['Rainbow'] = (function() {
@@ -383,7 +383,7 @@ window['Rainbow'] = (function() {
                      * we treat the 'matches' part as the pattern and keep
                      * the name around to wrap it with later
                      */
-                    process_group = group['matches'] || group,
+                    process_group = group['name'] && group['matches'] ? group['matches'] : group,
 
                     /**
                      * takes the code block matched at this group, replaces it
