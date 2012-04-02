@@ -592,6 +592,23 @@ window['Rainbow'] = (function() {
             // with a bunch of <code> blocks inside then you do not have
             // to specify the language for each block
             var language = _attr(code_blocks[i], 'data-language') || _attr(code_blocks[i].parentNode, 'data-language');
+
+            // Support an alternative way to specify language.
+            // Google Code Prettify style language specification: <pre class="lang-php">
+            // HTML5 style languge specification: <pre><code class="language-php">
+            if (!language) {
+              var reLang = /\blang(?:uage)?-(\w+)/,
+                  langSpec = code_blocks[i].className.match(reLang);
+
+              if (!langSpec) {
+                langSpec = code_blocks[i].parentNode.className.match(reLang);
+              }
+
+              if (langSpec) {
+                language = langSpec[1];
+              }
+            }
+
             if (!_hasClass(code_blocks[i], 'rainbow') && language) {
                 language = language.toLowerCase();
 
