@@ -11,7 +11,7 @@ Rainbow.extend('css', [
     },
     {
         'name': 'constant.hex-color',
-        'pattern': /#([a-fA-F0-9]{3}|[a-fA-F0-9]{6})(?=;|\s)/g
+        'pattern': /#([a-f0-9]{3}|[a-f0-9]{6})(?=;|\s)/gi
     },
     {
         'matches': {
