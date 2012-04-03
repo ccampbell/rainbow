@@ -591,31 +591,28 @@ window['Rainbow'] = (function() {
             // this means if for example you have: <pre data-language="php">
             // with a bunch of <code> blocks inside then you do not have
             // to specify the language for each block
-            var language = _attr(code_blocks[i], 'data-language') || _attr(code_blocks[i].parentNode, 'data-language');
+            var block = code_blocks[i],
+                language = _attr(block, 'data-language') || _attr(block.parentNode, 'data-language');
 
-            // Support an alternative way to specify language.
-            // Google Code Prettify style language specification: <pre class="lang-php">
-            // HTML5 style languge specification: <pre><code class="language-php">
+            // this adds support for specifying language via a css class
+            // you can use the Google Code Prettify style: <pre class="lang-php">
+            // or the HTML5 style: <pre><code class="language-php">
             if (!language) {
-                var reLang = /\blang(?:uage)?-(\w+)/,
-                    langSpec = code_blocks[i].className.match(reLang);
+                var pattern = /\blang(?:uage)?-(\w+)/,
+                    match = block.className.match(pattern) || block.parentNode.className.match(pattern);
 
-                if (!langSpec) {
-                    langSpec = code_blocks[i].parentNode.className.match(reLang);
-                }
-
-                if (langSpec) {
-                    language = langSpec[1];
+                if (match) {
+                    language = match[1];
                 }
             }
 
-            if (!_hasClass(code_blocks[i], 'rainbow') && language) {
+            if (!_hasClass(block, 'rainbow') && language) {
                 language = language.toLowerCase();
 
-                _addClass(code_blocks[i], 'rainbow');
+                _addClass(block, 'rainbow');
 
-                return _highlightBlockForLanguage(code_blocks[i].innerHTML, language, function(code) {
-                    code_blocks[i].innerHTML = code;
+                return _highlightBlockForLanguage(block.innerHTML, language, function(code) {
+                    block.innerHTML = code;
 
                     // reset the replacement arrays
                     replacements = {};
@@ -623,7 +620,7 @@ window['Rainbow'] = (function() {
 
                     // if you have a listener attached tell it that this block is now highlighted
                     if (onHighlight) {
-                        onHighlight(code_blocks[i], language);
+                        onHighlight(block, language);
                     }
 
                     // process the next block
