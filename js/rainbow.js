@@ -15,7 +15,7 @@
  *
  * Rainbow is a simple code syntax highlighter
  *
- * @preserve @version 1.1.7
+ * @preserve @version 1.1.8
  * @url rainbowco.de
  */
 window['Rainbow'] = (function() {
