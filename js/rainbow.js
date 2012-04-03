@@ -597,16 +597,16 @@ window['Rainbow'] = (function() {
             // Google Code Prettify style language specification: <pre class="lang-php">
             // HTML5 style languge specification: <pre><code class="language-php">
             if (!language) {
-              var reLang = /\blang(?:uage)?-(\w+)/,
-                  langSpec = code_blocks[i].className.match(reLang);
+                var reLang = /\blang(?:uage)?-(\w+)/,
+                    langSpec = code_blocks[i].className.match(reLang);
 
-              if (!langSpec) {
-                langSpec = code_blocks[i].parentNode.className.match(reLang);
-              }
+                if (!langSpec) {
+                    langSpec = code_blocks[i].parentNode.className.match(reLang);
+                }
 
-              if (langSpec) {
-                language = langSpec[1];
-              }
+                if (langSpec) {
+                    language = langSpec[1];
+                }
             }
 
             if (!_hasClass(code_blocks[i], 'rainbow') && language) {
