@@ -768,4 +768,3 @@ window['Rainbow'] = (function() {
 
 Rainbow["onHighlight"] = Rainbow.onHighlight;
 Rainbow["addClass"] = Rainbow.addClass;
-Rainbow["color"] = Rainbow.color;
