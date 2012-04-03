@@ -93,7 +93,7 @@ window['Rainbow'] = (function() {
      *
      * @see http://stackoverflow.com/questions/3755227/cross-browser-javascript-getattribute-method
      *
-     * @param {Element} el
+     * @param {Node} el
      * @param {string} attr     attribute you are trying to get
      * @returns {string|number}
      */
