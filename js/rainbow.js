@@ -136,6 +136,35 @@ window['Rainbow'] = (function() {
     }
 
     /**
+     * gets the language for this block of code
+     *
+     * @param {Element} block
+     * @returns {string|null}
+     */
+    function _getLanguageForBlock(block) {
+
+        // if this doesn't have a language but the parent does then use that
+        // this means if for example you have: <pre data-language="php">
+        // with a bunch of <code> blocks inside then you do not have
+        // to specify the language for each block
+        var language = _attr(block, 'data-language') || _attr(block.parentNode, 'data-language');
+
+        // this adds support for specifying language via a css class
+        // you can use the Google Code Prettify style: <pre class="lang-php">
+        // or the HTML5 style: <pre><code class="language-php">
+        if (!language) {
+            var pattern = /\blang(?:uage)?-(\w+)/,
+                match = block.className.match(pattern) || block.parentNode.className.match(pattern);
+
+            if (match) {
+                language = match[1];
+            }
+        }
+
+        return language;
+    }
+
+    /**
      * makes sure html entities are always used for tags
      *
      * @param {string} code
@@ -586,25 +615,8 @@ window['Rainbow'] = (function() {
      */
     function _highlightCodeBlock(code_blocks, i, onComplete) {
         if (i < code_blocks.length) {
-
-            // if this doesn't have a language but the parent does then use that
-            // this means if for example you have: <pre data-language="php">
-            // with a bunch of <code> blocks inside then you do not have
-            // to specify the language for each block
             var block = code_blocks[i],
-                language = _attr(block, 'data-language') || _attr(block.parentNode, 'data-language');
-
-            // this adds support for specifying language via a css class
-            // you can use the Google Code Prettify style: <pre class="lang-php">
-            // or the HTML5 style: <pre><code class="language-php">
-            if (!language) {
-                var pattern = /\blang(?:uage)?-(\w+)/,
-                    match = block.className.match(pattern) || block.parentNode.className.match(pattern);
-
-                if (match) {
-                    language = match[1];
-                }
-            }
+                language = _getLanguageForBlock(block);
 
             if (!_hasClass(block, 'rainbow') && language) {
                 language = language.toLowerCase();
