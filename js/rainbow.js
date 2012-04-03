@@ -95,7 +95,7 @@ window['Rainbow'] = (function() {
      *
      * @param {Element} el
      * @param {string} attr     attribute you are trying to get
-     * @returns {string}
+     * @returns {string|number}
      */
     function _attr(el, attr, attrs, i) {
         var result = (el.getAttribute && el.getAttribute(attr)) || 0;
