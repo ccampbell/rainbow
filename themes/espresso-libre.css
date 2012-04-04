@@ -20,48 +20,48 @@ pre, code {
     font-family: 'Monaco', courier, monospace;
 }
 
-.support.class, .support.type {
+pre .support.class, pre .support.type {
     color: #6d79de;
 }
 
-.support .constant {
+pre .support.constant {
     color: #00af0e;
 }
 
-.constant.language {
+pre .constant.language {
     color: #585cf6;
 }
 
-.support .function {
+pre .support.function {
     font-weight: bold;
     color: #7290d9;
 }
 
-.string {
+pre .string {
     color: #049b0a;
 }
 
-.constant.numeric {
+pre .constant.numeric {
     color: #44aa43;
 }
 
-.keyword, .storage {
+pre .keyword, pre .storage {
     color: #43a8ed;
 }
 
-.entity.function {
+pre .entity.function {
     color: #ff9358;
 }
 
-.comment {
+pre .comment {
     color: #0066ff;
     font-style: italic;
 }
 
-.constant.symbol {
+pre .constant.symbol {
     color:#c5656b;
 }
 
-.variable.instance, .variable.language, .constant {
+pre .variable.instance, pre .variable.language, pre .constant {
     color: #318495;
 }
