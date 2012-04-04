@@ -61,6 +61,13 @@ Rainbow.extend('c', [
         'name': 'support.type',
         'pattern': /\b(struct|union|enum)\b/g
     },
+    /* 'die' is not a keyword in c or c++, overrode the generic rule */
+    {
+	'matches': {
+	    1: '',
+	},
+	'pattern': /\b(die)\b/gi
+    },
 
     /**
      * reset constants
