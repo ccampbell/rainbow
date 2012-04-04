@@ -77,17 +77,4 @@ Rainbow.extend('c', [
         'pattern': /\b[A-Z0-9_]{2,}\b/g
     },
 
-    /**
-     * this rule is very iffy, but it seems like textmate
-     * highlights anything like this
-     *
-     * using 4 or more characters to avoid keywords intersecting
-     * such as if(  and for(
-     */
-    {
-        'matches': {
-            1: 'support.function.call'
-        },
-        'pattern': /(\w{4,})(?=\()/g
-    }
 ]);
