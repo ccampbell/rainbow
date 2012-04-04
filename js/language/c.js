@@ -8,28 +8,28 @@
 Rainbow.extend('c', [
     {
         'matches': {
-            2: [
+            1: [
                 {
                     'matches': {
                         1: 'keyword.define',
                         2: 'entity.name'
                     },
-                    'pattern': /(\w+)\s(\w+)\b/g
+                    'pattern': /(\#\w+)\s(\w+)\b/g
                 },
                 {
                     'name': 'keyword.define',
-                    'pattern': /endif/g
+                    'pattern': /\#endif/g
                 },
                 {
                     'matches': {
                         1: 'keyword.include',
                         2: 'string'
                     },
-                    'pattern': /(include)\s(.*?)$/g
+                    'pattern': /(\#include)\s(.*?)$/g
                 }
             ]
         },
-        'pattern': /(\#)([\S\s]*?)$/gm
+        'pattern': /(\#[\S\s]*?)$/gm
     },
     {
         'name': 'keyword',
@@ -45,7 +45,7 @@ Rainbow.extend('c', [
             3: 'storage.type',
             4: 'entity.name.function'
         },
-        'pattern': /\b((un)?signed|const)?\s?(void|char|short|int|long|float|double)\*?\s+(\s(\w+)(?=\())?/g
+        'pattern': /\b((un)?signed|const)?\s?(void|char|short|int|long|float|double)\*?\s+((\w+)(?=\())?/g
     },
     {
         'matches': {
@@ -70,4 +70,17 @@ Rainbow.extend('c', [
         'pattern': /\b[A-Z0-9_]{2,}\b/g
     },
 
+    /**
+     * this rule is very iffy, but it seems like textmate
+     * highlights anything like this
+     *
+     * using 4 or more characters to avoid keywords intersecting
+     * such as if(  and for(
+     */
+    {
+        'matches': {
+            1: 'support.function.call'
+        },
+        'pattern': /(\w{4,})(?=\()/g
+    }
 ]);
