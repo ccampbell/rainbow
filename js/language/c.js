@@ -3,7 +3,7 @@
  *
  * @author Daniel Holden
  * @author Craig Campbell
- * @version 1.0.4
+ * @version 1.0.5
  */
 Rainbow.extend('c', [
     {
@@ -50,14 +50,14 @@ Rainbow.extend('c', [
             3: 'storage.type',
             4: 'entity.name.function'
         },
-        'pattern': /\b((un)?signed|const)?\s?(void|char|short|int|long|float|double)\*?\s+((\w+)(?=\s?\())?/g
+        'pattern': /\b((un)?signed|const)? ?(void|char|short|int|long|float|double)\*? +((\w+)(?= ?\())?/g
     },
-    // {
-    //     'matches': {
-    //         2: 'entity.name.function'
-    //     },
-    //     'pattern': /(\w|\*)\s+((\w+)(?=\s?\())?/g
-    // },
+    {
+        'matches': {
+            2: 'entity.name.function'
+        },
+        'pattern': /(\w|\*) +((\w+)(?= ?\())/g
+    },
     {
         'name': 'storage.modifier',
         'pattern': /\b(static|extern|auto|register|volatile|inline)\b/g

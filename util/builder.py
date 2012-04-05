@@ -13,7 +13,7 @@ class RainbowBuilder(object):
     def __init__(self, js_path, closure_path, theme_path=None):
 
         self.versions = {
-            'c': '1.0.4',
+            'c': '1.0.5',
             'css': '1.0.6',
             'generic': '1.0.7',
             'html': '1.0.4',
