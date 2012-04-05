@@ -2,7 +2,7 @@
  * PHP patterns
  *
  * @author Craig Campbell
- * @version 1.0.3
+ * @version 1.0.4
  */
 Rainbow.extend('php', [
     {
@@ -22,7 +22,7 @@ Rainbow.extend('php', [
     },
     {
         'name': 'keyword',
-        'pattern': /\b(continue|break|end(for(each)?|switch|if)|case|require(_once)?|include(_once)?)(?=\(|\b)/g
+        'pattern': /\b(continue|break|die|end(for(each)?|switch|if)|case|require(_once)?|include(_once)?)(?=\(|\b)/g
     },
     {
         'matches': {

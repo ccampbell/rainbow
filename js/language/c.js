@@ -3,7 +3,7 @@
  *
  * @author Daniel Holden
  * @author Craig Campbell
- * @version 1.0.2
+ * @version 1.0.3
  */
 Rainbow.extend('c', [
     {
@@ -60,13 +60,6 @@ Rainbow.extend('c', [
     {
         'name': 'support.type',
         'pattern': /\b(struct|union|enum)\b/g
-    },
-    /* 'die' is not a keyword in c or c++, overrode the generic rule */
-    {
-	'matches': {
-	    1: '',
-	},
-	'pattern': /\b(die)\b/gi
     },
 
     /**
