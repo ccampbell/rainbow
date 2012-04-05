@@ -52,12 +52,12 @@ Rainbow.extend('c', [
         },
         'pattern': /\b((un)?signed|const)?\s?(void|char|short|int|long|float|double)\*?\s+((\w+)(?=\s?\())?/g
     },
-    {
-        'matches': {
-            2: 'entity.name.function'
-        },
-        'pattern': /(\w|\*)\s+((\w+)(?=\s?\())?/g
-    },
+    // {
+    //     'matches': {
+    //         2: 'entity.name.function'
+    //     },
+    //     'pattern': /(\w|\*)\s+((\w+)(?=\s?\())?/g
+    // },
     {
         'name': 'storage.modifier',
         'pattern': /\b(static|extern|auto|register|volatile|inline)\b/g
