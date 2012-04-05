@@ -6,6 +6,79 @@
 
 <pre>
 <code data-language="c">
+/* variable names that match a keyword or type at the beginning */
+char charcoal;
+float interval;
+char *floating;
+double short_stuff, voider;
+
+void floater(int x, int y)
+{
+    return;
+}
+</code>
+</pre>
+
+<pre>
+<code data-language="c">
+#include &lt;stdio.h&gt;
+#include &lt;stdarg.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;unistd.h&gt;
+
+#ifndef BUF_SIZE
+#define BUF_SIZE 1024
+#endif
+
+static void die (const char * format, ...)
+{
+    va_list vargs;
+    va_start(vargs, format);
+    vfprintf(stderr, format, vargs);
+    fprintf(stderr, ".\n");
+    va_end(vargs);
+    _exit(1);
+}
+
+int main (int argc, char *argv[])
+{
+    static int x;
+    const float y;
+    unsigned int n;
+    unsigned short int g;
+    char* test;
+
+    int outFD, opt, openFlags = O_WRONLY;
+    char buf[BUF_SIZE];
+    ssize_t charCount;
+
+    while ((opt = getopt(argc, argv, ":a")) != -1) {
+	switch (opt) {
+	case 'a': 
+	    openFlags |= O_APPEND;
+	default:
+	    die("Unrecognized option");
+	}
+    }
+
+    outFD = open(argv[1], O_WRONLY);
+    while ((charCount = read(STDIN_FILENO, buf, BUF_SIZE) > 0)) {
+	if (charCount != write(STDOUT_FILENO, buf, BUF_SIZE))
+	    die("Couldn't write same number of bytes to stdout");
+	if (charCount != write(outFD, buf, BUF_SIZE))
+	    die("Couldn't write same number of bytes to output file");
+    }
+    close(outFD);
+
+    return 0;
+}
+</code>
+</pre>
+
+<pre>
+<code data-language="c">
 #ifndef type_h
 #define type_h
 
