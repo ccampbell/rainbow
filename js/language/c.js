@@ -3,7 +3,7 @@
  *
  * @author Daniel Holden
  * @author Craig Campbell
- * @version 1.0.3
+ * @version 1.0.4
  */
 Rainbow.extend('c', [
     {
@@ -56,7 +56,7 @@ Rainbow.extend('c', [
         'matches': {
             2: 'entity.name.function'
         },
-        'pattern': /(\w|\*)(\s(\w+)(?=\s?\())?/g
+        'pattern': /(\w|\*)\s+((\w+)(?=\s?\())?/g
     },
     {
         'name': 'storage.modifier',
