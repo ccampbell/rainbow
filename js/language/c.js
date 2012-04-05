@@ -50,13 +50,13 @@ Rainbow.extend('c', [
             3: 'storage.type',
             4: 'entity.name.function'
         },
-        'pattern': /\b((un)?signed|const)?\s?(void|char|short|int|long|float|double)\*?\s+((\w+)(?=\())?/g
+        'pattern': /\b((un)?signed|const)?\s?(void|char|short|int|long|float|double)\*?\s+((\w+)(?=\s?\())?/g
     },
     {
         'matches': {
             2: 'entity.name.function'
         },
-        'pattern': /(\w|\*)(\s(\w+)(?=\())?/g
+        'pattern': /(\w|\*)(\s(\w+)(?=\s?\())?/g
     },
     {
         'name': 'storage.modifier',
