@@ -46,7 +46,7 @@ pre .inherited-class {
     font-style: italic;
 }
 
-pre .entity, pre .meta {
+pre .entity {
   color: #F09040;
 }
 
