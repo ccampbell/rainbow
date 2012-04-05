@@ -7,6 +7,7 @@
  */
 Rainbow.extend('c', [
     {
+        'name': 'meta.preprocessor',
         'matches': {
             1: [
                 {
@@ -14,11 +15,11 @@ Rainbow.extend('c', [
                         1: 'keyword.define',
                         2: 'entity.name'
                     },
-                    'pattern': /(\#\w+)\s(\w+)\b/g
+                    'pattern': /(\w+)\s(\w+)\b/g
                 },
                 {
                     'name': 'keyword.define',
-                    'pattern': /\#endif/g
+                    'pattern': /endif/g
                 },
                 {
                     'name': 'constant.numeric',
@@ -29,11 +30,11 @@ Rainbow.extend('c', [
                         1: 'keyword.include',
                         2: 'string'
                     },
-                    'pattern': /(\#include)\s(.*?)$/g
+                    'pattern': /(include)\s(.*?)$/g
                 }
             ]
         },
-        'pattern': /(\#[\S\s]*?)$/gm
+        'pattern': /\#([\S\s]*?)$/gm
     },
     {
         'name': 'keyword',
