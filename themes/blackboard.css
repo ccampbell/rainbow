@@ -54,7 +54,7 @@ pre .entity {
     color: #FF6400;
 }
 
-pre .support {
+pre .support, *[data-language="c"] .function.call {
     color: #8DA6CE;
 }
 
