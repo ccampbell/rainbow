@@ -68,6 +68,5 @@ Rainbow.extend('c', [
     {
         'name': 'variable',
         'pattern': /\b[A-Z0-9_]{2,}\b/g
-    },
-
+    }
 ]);
