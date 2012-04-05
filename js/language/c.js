@@ -21,6 +21,10 @@ Rainbow.extend('c', [
                     'pattern': /\#endif/g
                 },
                 {
+                    'name': 'constant.numeric',
+                    'pattern': /\d+/g
+                },
+                {
                     'matches': {
                         1: 'keyword.include',
                         2: 'string'
