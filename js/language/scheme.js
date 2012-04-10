@@ -62,6 +62,14 @@
               'pattern': /#t|#f|'\(\)/g
           },
           {
+              'name': 'constant.symbol',
+              'pattern': /'[^()\s#]+/g
+          },
+          {
+              'name': 'constant.number',
+              'pattern': /\b\d+(?:\.\d*)?\b/g
+          },
+          {
               'name': 'string',
               'pattern': /".+?"/g
           },
@@ -83,12 +91,6 @@
                   1: 'entity.function'
               },
               'pattern': getKeywords(functions)
-          },
-          {
-              'matches': {
-                  1: 'constant.symbol'
-              },
-              'pattern': /('[^(\s]+?)(?=[()\s#])/g
           }
       ], true);
   })();
