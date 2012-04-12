@@ -233,6 +233,22 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'constant',
+
+    'TEST_CONSTANT',
+
+    '<span class="constant">TEST_CONSTANT</span>'
+);
+
+RainbowTester.run(
+    'constant 2',
+
+    '(TEST_CONSTANT_2)',
+
+    '(<span class="constant">TEST_CONSTANT_2</span>)'
+);
+
+RainbowTester.run(
     'class constant',
 
     '$version = Sonic\\App::VERSION',

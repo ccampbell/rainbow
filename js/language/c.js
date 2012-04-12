@@ -3,7 +3,7 @@
  *
  * @author Daniel Holden
  * @author Craig Campbell
- * @version 1.0.5
+ * @version 1.0.6
  */
 Rainbow.extend('c', [
     {
@@ -65,13 +65,5 @@ Rainbow.extend('c', [
     {
         'name': 'support.type',
         'pattern': /\b(struct|union|enum)\b/g
-    },
-
-    /**
-     * reset constants
-     */
-    {
-        'name': 'variable',
-        'pattern': /\b[A-Z0-9_]{2,}\b/g
     }
 ]);
