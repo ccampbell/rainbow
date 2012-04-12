@@ -6,14 +6,6 @@
 RainbowTester.startTest('python');
 
 RainbowTester.run(
-    'no constant',
-
-    'TEST_CONSTANT',
-
-    '<span class="variable">TEST_CONSTANT</span>'
-);
-
-RainbowTester.run(
     'no self',
 
     'print self.something',
