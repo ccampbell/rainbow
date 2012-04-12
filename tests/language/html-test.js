@@ -52,6 +52,18 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'php short tag',
+
+    '&lt;? foreach ($users as $key => $user): ?&gt;\n' +
+    '   <p>&lt;?= $user->getBio() ?&gt;</p>\n' +
+    '&lt;? endforeach ?&gt;',
+
+    '<span class="source php embedded">&lt;? <span class="keyword">foreach</span> (<span class="variable dollar-sign">$</span><span class="variable">users</span> <span class="keyword">as</span> <span class="variable dollar-sign">$</span><span class="variable">key</span> <span class="keyword operator">=</span><span class="keyword operator">&gt;</span> <span class="variable dollar-sign">$</span><span class="variable">user</span>): ?&gt;</span>\n' +
+    '   <span class="support tag"><span class="support tag">&lt;</span><span class="support tag-name">p</span></span><span class="support tag close">&gt;</span><span class="source php embedded">&lt;?= <span class="variable dollar-sign">$</span><span class="variable">user</span><span class="keyword operator">-</span><span class="keyword operator">&gt;</span><span class="function call">getBio</span>() ?&gt;</span><span class="support tag"><span class="support tag">&lt;</span><span class="support tag special">/</span><span class="support tag-name">p</span></span><span class="support tag close">&gt;</span>\n' +
+    '<span class="source php embedded">&lt;? <span class="keyword">endforeach</span> ?&gt;</span>'
+);
+
+RainbowTester.run(
     'xml declaration',
 
     '<?xml version="1.0" encoding="UTF-8" standalone="no" ?>',

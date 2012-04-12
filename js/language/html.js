@@ -12,7 +12,7 @@ Rainbow.extend('html', [
                 'language': 'php'
             }
         },
-        'pattern': /&lt;\?(?!xml)(php)?([\s\S]*?)(\?&gt;)/gm
+        'pattern': /&lt;\?=?(?!xml)(php)?([\s\S]*?)(\?&gt;)/gm
     },
     {
         'name': 'source.css.embedded',

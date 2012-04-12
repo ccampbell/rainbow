@@ -92,14 +92,6 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
-    'php short tag',
-
-    '&lt;?= $foo; ?&gt;',
-
-    '<span class="variable language php-tag">&lt;?</span><span class="keyword operator">=</span> <span class="variable dollar-sign">$</span><span class="variable">foo</span>; <span class="variable language php-tag">?&gt;</span>'
-);
-
-RainbowTester.run(
     'namespace declaration',
 
     'namespace Sonic\\Database;',
