@@ -51,6 +51,14 @@ RainbowTester.run(
     '<span class="support tag"><span class="support tag">&lt;</span><span class="support tag special">/</span><span class="support tag-name">ul</span></span><span class="support tag close">&gt;</span>'
 );
 
+RainbowTester.run(
+    'xml declaration',
+
+    '<?xml version="1.0" encoding="UTF-8" standalone="no" ?>',
+
+    '<span class="support tag"><span class="support tag">&lt;?</span><span class="support tag-name">xml</span></span> <span class="support attribute">version</span><span class="support operator">=</span><span class="string quote">"</span><span class="string value">1.0</span><span class="string quote">"</span> <span class="support attribute">encoding</span><span class="support operator">=</span><span class="string quote">"</span><span class="string value">UTF-8</span><span class="string quote">"</span> <span class="support attribute">standalone</span><span class="support operator">=</span><span class="string quote">"</span><span class="string value">no</span><span class="string quote">"</span> <span class="support tag close">?&gt;</span>'
+);
+
 
 RainbowTester.run(
     'inline css 1',

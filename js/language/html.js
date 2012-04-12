@@ -2,7 +2,7 @@
  * HTML patterns
  *
  * @author Craig Campbell
- * @version 1.0.4
+ * @version 1.0.5
  */
 Rainbow.extend('html', [
     {
@@ -12,7 +12,7 @@ Rainbow.extend('html', [
                 'language': 'php'
             }
         },
-        'pattern': /&lt;\?(php)?([\s\S]*?)(\?&gt;)/gm
+        'pattern': /&lt;\?(?!xml)(php)?([\s\S]*?)(\?&gt;)/gm
     },
     {
         'name': 'source.css.embedded',
@@ -41,7 +41,7 @@ Rainbow.extend('html', [
             1: 'support.tag.open',
             2: 'support.tag.close'
         },
-        'pattern': /(&lt;)|(\/?&gt;)/g
+        'pattern': /(&lt;)|(\/?\??&gt;)/g
     },
     {
         'name': 'support.tag',
@@ -50,7 +50,7 @@ Rainbow.extend('html', [
             2: 'support.tag.special',
             3: 'support.tag-name'
         },
-        'pattern': /(&lt;)(\/|\!?)(\w+)/g
+        'pattern': /(&lt;\??)(\/|\!?)(\w+)/g
     },
     {
         'matches': {
