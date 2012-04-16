@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Syntax Highlighting</title>
+<link href="../themes/twilight.css" rel="stylesheet" type="text/css" media="screen">
+</head>
+
+<body>
+<h1></h1>
+
+<pre data-language="scheme">
+
+;; Produces the union of two sets
+(define (set-union set1 set2)
+  (let loop ((set1 set1)
+	     (set2 set2))
+    (if (null? set2)
+	set1
+	(let ((item (car set2)))
+	  (if (member item set1)
+	      (loop set1 (cdr set2))
+	      (loop (cons item set1) (cdr set2)))))))
+
+(define (all? pred coll)
+  (if (null? coll)
+      #t
+      (and (pred (car coll))
+           (all? pred (cdr coll)))))
+
+(define (filter pred coll)
+  (let loop ((ret '())
+             (coll coll))
+    (if (null? coll)
+        (reverse ret)
+        (let ((a (car coll)))
+          (if (pred a)
+              (loop (cons a ret) (cdr coll))
+              (loop ret (cdr coll)))))))
+
+</pre>
+
+
+<hr>
+<address></address>
+<!-- hhmts start -->Last modified: Wed Jan 25 22:04:37 CET 2012 <!-- hhmts end -->
+
+<script src="../js/rainbow.js"></script>
+<script src="../js/language/scheme.js"></script>
+</body> </html>
