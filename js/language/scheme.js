@@ -1,8 +1,9 @@
-/*
+/**
  * Scheme patterns
- * Alex Queiroz (alex@artisancoder.com)
+ *
+ * @author Alex Queiroz <alex@artisancoder.com>
+ * @version 1.0
  */
-
 Rainbow.extend('scheme', [
     {
         /* making peace with HTML */
