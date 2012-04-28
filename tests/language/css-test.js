@@ -42,6 +42,14 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'em',
+
+    'font-size: 1.2em;',
+
+    '<span class="support css-property">font-size</span>: <span class="constant numeric">1</span>.<span class="constant numeric">2</span><span class="keyword unit">em</span>;'
+);
+
+RainbowTester.run(
     'percentage',
 
     'width: 100%\n' +
