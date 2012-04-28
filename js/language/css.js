@@ -2,7 +2,7 @@
  * CSS patterns
  *
  * @author Craig Campbell
- * @version 1.0.6
+ * @version 1.0.7
  */
 Rainbow.extend('css', [
     {
@@ -18,7 +18,7 @@ Rainbow.extend('css', [
             1: 'constant.numeric',
             2: 'keyword.unit'
         },
-        'pattern': /(\d+)(px|cm|s|%)?/g
+        'pattern': /(\d+)(px|em|cm|s|%)?/g
     },
     {
         'name': 'string',
