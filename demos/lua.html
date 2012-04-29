@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<!-- Code example from The Crash Course to Lua  http://luatut.com/crash_course.html -->
+<!-- Code example from The Crash Course to Lua  http://luatut.com/crash_course.html
+     And GameMinion https://github.com/GameMinion/GM-Corona-SDK/blob/master/gameminion.lua
+-->
 <meta charset=utf-8>
 <title>Syntax Highlighting</title>
 <link href="../themes/blackboard.css" rel="stylesheet" type="text/css" media="screen">
@@ -46,6 +48,66 @@ factors_of_the_universe = get_all_factors(the_universe)
 
 print("Count",  "The Factors of Life, the Universe, and Everything")
 table.foreach(factors_of_the_universe, print)
+
+
+-- Other example
+-------------------------------------------------
+-- PUBLIC FUNCTIONS
+-------------------------------------------------
+
+function gameminion.init(accessKey, secretKey)  -- constructor
+    -- initialize GM connection
+
+    GM_ACCESS_KEY = accessKey
+    GM_SECRET_KEY = secretKey
+
+    local newGameminion = {
+        authToken = authToken,
+        accessKey = GM_ACCESS_KEY,
+        secretKey = GM_SECRET_KEY,
+        gameID = "4f6f1e456b789d0001000002",
+        cloudStorageBox = cloudStorageBox,
+        gameminion = gameminion
+    }
+
+    return setmetatable( newGameminion, gameminion_mt )
+end
+
+-------------------------------------------------
+-- User
+-------------------------------------------------
+
+function gameminion:loginWeb()
+    local authToken
+
+    return authToken
+end
+
+-------------------------------------------------
+
+function gameminion:loginAPI(username, password)
+    local params = "login="..username.."&password="..password"
+
+    local path = "user_sessions/user_login.json"
+
+    -- set AuthToken when it gets it
+    local function networkListener(event)
+        if (event.isError) then
+            print("Network Error")
+            print("Error: "..event.response)
+            return false
+        else
+            self.authToken = json.decode(event.response).auth_token
+            print("User Logged In!")
+            print("Auth Token: "..self.authToken)
+            return true
+        end
+    end
+
+    postGM(path, params, networkListener)
+
+    return true
+end
 </code>
 </pre>
     <script src="../js/rainbow.js"></script>

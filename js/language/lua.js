@@ -21,13 +21,9 @@ Rainbow.extend('lua', [
         },
         'pattern': /(\(|\s|\[|\=)(('|")([^\\\1]|\\.)*?(\3))/gm
     },
-   /* {
-        'name': 'comment',
-        'pattern': /\/\*[\s\S]*?\*\/|(\/\/|\#)[\s\S]*?$/gm
-    },*/
     {
         'name': 'comment',
-        'pattern': /\-\-\[\[\-\-[\s\S]*?\-\-\]\]\-\-|(\-\-)[\s\S]*?$/gm
+        'pattern': /\-{2}\[{2}\-{2}[\s\S]*?\-{2}\]{2}\-{2}|(\-{2})[\s\S]*?$/gm
     },
     {
         'name': 'constant.numeric',
@@ -45,19 +41,19 @@ Rainbow.extend('lua', [
     },
     {
         'name': 'keyword.operator',
-        'pattern': /\+|\!|\-|&(gt|lt|amp);|\||\*|\=|#/g
-    },
-    {
-        'matches': {
-            1: 'function.call'
-        },
-        'pattern': /(\w+?)(?=\()/g
+        'pattern': /\+|\!|\-|&(gt|lt|amp);|\||\*|\=|#|\.{2}/g
     },
     {
         'matches': {
             1: 'storage.function',
             2: 'entity.name.function'
         },
-        'pattern': /(function)\s(.*?)(?=\()/g
-    }
+        'pattern': /(function)\s+(\w+[\:|\.]?\w+?)(?=\()/g
+    },
+    {
+        'matches': {
+            1: 'support.function'
+        },
+        'pattern': /\b(print|require|module|\w+\.\w+)(?=\()/g
+    },
 ]);
