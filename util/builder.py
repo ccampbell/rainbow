@@ -14,7 +14,7 @@ class RainbowBuilder(object):
 
         self.versions = {
             'c': '1.0.6',
-            'css': '1.0.6',
+            'css': '1.0.7',
             'generic': '1.0.8',
             'html': '1.0.6',
             'javascript': '1.0.6',
