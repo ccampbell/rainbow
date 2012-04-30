@@ -766,5 +766,8 @@ window['Rainbow'] = (function() {
     window.attachEvent('onload', Rainbow.color);
 }) ();
 
+// When using Google closure compiler in advanced mode some methods
+// get renamed.  This keeps a public reference to these methods so they can
+// still be referenced from outside this library.
 Rainbow["onHighlight"] = Rainbow.onHighlight;
 Rainbow["addClass"] = Rainbow.addClass;
