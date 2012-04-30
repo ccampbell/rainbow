@@ -25,7 +25,7 @@ It is completely themable via CSS.
     ```
 
 3. Include rainbow.js and whatever languages you want before the closing ``</body>``:
-    
+
     ```html
     <script src="/assets/js/rainbow.min.js"></script>
     <script src="/assets/js/language/generic.js"></script>
@@ -46,10 +46,23 @@ You can include the php language then in the markup on your page add:
                 1: 'support.function'
             },
             'pattern': /\b(apc_(store|fetch|add|inc))(?=\()/g
-        }  
+        }
     ]);
 </script>
 ```
+
+## Supported Languages
+
+Currently supported languages are:
+- Javascript
+- HTML
+- CSS
+- PHP
+- Python
+- Ruby
+- C
+- Shell
+- Scheme
 
 ## More Info
 
