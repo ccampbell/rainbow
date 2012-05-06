@@ -92,6 +92,14 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'php tag 2',
+
+    '&lt;?php echo \'?&gt;\'; ?&gt;',
+
+    '<span class="variable language php-tag">&lt;?php</span> <span class="support">echo</span> <span class="string">\'?&gt;\'</span>; <span class="variable language php-tag">?&gt;</span>'
+);
+
+RainbowTester.run(
     'namespace declaration',
 
     'namespace Sonic\\Database;',
