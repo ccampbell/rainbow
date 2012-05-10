@@ -1,15 +1,15 @@
 /**
- * C# patterns
- *
- * @author Dan Stewart
- * @version 1.0
- * Do not use generic.js with this.
- */
+* C# patterns
+*
+* @author Dan Stewart
+* @version 1.1
+* Do not use generic.js with this.
+*/
 Rainbow.extend('csharp', [
 	{
         // @see http://msdn.microsoft.com/en-us/library/23954zh5.aspx
-        'name': 'constant',
-        'pattern': /\b(false|null|true)\b/g
+		'name': 'constant',
+		'pattern': /\b(false|null|true)\b/g           
 	},
 	{
 		// @see http://msdn.microsoft.com/en-us/library/x53a06bb%28v=vs.100%29.aspx
@@ -58,7 +58,7 @@ Rainbow.extend('csharp', [
                 'name': 'support.class',
                 'pattern': /\w+/g
             }
-
+            
         },
         'pattern': /\b(new)\s([^\$].*?)(?=\)|\(|;|&)/g
     },
@@ -76,13 +76,13 @@ Rainbow.extend('csharp', [
     },
 	{
 		'name': 'operator',
-		// http://msdn.microsoft.com/en-us/library/6a71f45d%28v=vs.100%29.aspx
+		// @see http://msdn.microsoft.com/en-us/library/6a71f45d%28v=vs.100%29.aspx
 		// ++ += + -- -= - <<= << <= => >>= >> >= != ! ~ ^ || && &= & ?? :: : *= * |= %= |= == =
 		'pattern': /(\+\+|\+=|\+|--|-=|-|&lt;&lt;=|&lt;&lt;|&lt;=|=&gt;|&gt;&gt;=|&gt;&gt;|&gt;=|!=|!|~|\^|\|\||&amp;&amp;|&amp;=|&amp;|\?\?|::|:|\*=|\*|\/=|%=|\|=|==|=)/g
 	},
     {
-		// http://msdn.microsoft.com/en-us/library/ed8yd1ha%28v=vs.100%29.aspx
+		// @see http://msdn.microsoft.com/en-us/library/ed8yd1ha%28v=vs.100%29.aspx
 		'name': 'preprocessor',
 		'pattern': /(\#if|\#else|\#elif|\#endif|\#define|\#undef|\#warning|\#error|\#line|\#region|\#endregion|\#pragma)[\s\S]*?$/gm
 	}
-]);
+], true);
