@@ -55,5 +55,5 @@ Rainbow.extend('lua', [
             1: 'support.function'
         },
         'pattern': /\b(print|require|module|\w+\.\w+)(?=\()/g
-    },
+    }
 ]);
