@@ -2,14 +2,13 @@
 * C# patterns
 *
 * @author Dan Stewart
-* @version 1.1
-* Do not use generic.js with this.
+* @version 1.0.1
 */
 Rainbow.extend('csharp', [
 	{
         // @see http://msdn.microsoft.com/en-us/library/23954zh5.aspx
 		'name': 'constant',
-		'pattern': /\b(false|null|true)\b/g           
+		'pattern': /\b(false|null|true)\b/g
 	},
 	{
 		// @see http://msdn.microsoft.com/en-us/library/x53a06bb%28v=vs.100%29.aspx
@@ -58,7 +57,7 @@ Rainbow.extend('csharp', [
                 'name': 'support.class',
                 'pattern': /\w+/g
             }
-            
+
         },
         'pattern': /\b(new)\s([^\$].*?)(?=\)|\(|;|&)/g
     },
