@@ -7,9 +7,9 @@
  */
 Rainbow.extend('csharp', [
 	{
-		// @see http://msdn.microsoft.com/en-us/library/23954zh5.aspx
-		'name': 'constant',
-		'pattern': /\b(false|null|true)\b/g
+        // @see http://msdn.microsoft.com/en-us/library/23954zh5.aspx
+        'name': 'constant',
+        'pattern': /\b(false|null|true)\b/g
 	},
 	{
 		// @see http://msdn.microsoft.com/en-us/library/x53a06bb%28v=vs.100%29.aspx
