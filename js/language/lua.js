@@ -2,7 +2,7 @@
  * Lua patterns
  *
  * @author Javier Aguirre
- * @version 0.0.1
+ * @version 1.0
  */
 Rainbow.extend('lua', [
     {
