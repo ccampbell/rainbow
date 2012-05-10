@@ -2,7 +2,7 @@
  * C# tests
  *
  * @author Dan Stewart
- * These tests assume all rainbow js files are loaded.
+ * The csharp.js file is configured to not load generic.js
  */
 RainbowTester.startTest('csharp');
 
@@ -11,7 +11,7 @@ RainbowTester.run(
 
     'Console.WriteLine("hello world");',
 
-    'Console.<span class="function call">WriteLine</span>(<span class="string">"hello world"</span>);'
+    'Console.WriteLine(<span class="string">"hello world"</span>);'
 );
 
 RainbowTester.run(
@@ -35,7 +35,7 @@ RainbowTester.run(
 
     "var is_array_object = typeof(System.Array);",
 
-    '<span class="keyword">var</span> is_array_object <span class="operator">=</span> <span class="keyword">typeof</span>(System.<span class="keyword">Array</span>);'
+    '<span class="keyword">var</span> is_array_object <span class="operator">=</span> <span class="keyword">typeof</span>(System.Array);'
 );
 
 RainbowTester.run(
@@ -109,7 +109,7 @@ RainbowTester.run(
 
     'static void doSomethingElse() {}',
 
-    '<span class="keyword">static</span> <span class="keyword">void</span> <span class="function call">doSomethingElse</span>() {}'
+    '<span class="keyword">static</span> <span class="keyword">void</span> doSomethingElse() {}'
 );
 
 RainbowTester.run(
@@ -120,7 +120,7 @@ RainbowTester.run(
     '   // do whatever\n' +
     '}',
 
-    '<span class="keyword">protected</span> <span class="keyword">void</span> <span class="function call">Page_Load</span>(<span class="keyword">object</span> sender, EventArgs e)\n' +
+    '<span class="keyword">protected</span> <span class="keyword">void</span> Page_Load(<span class="keyword">object</span> sender, EventArgs e)\n' +
     '{\n' +
     '   <span class="comment">// do whatever</span>\n' +
     '}'
@@ -147,7 +147,7 @@ RainbowTester.run(
 
     'var path = Sonic.App.getInstance();',
 
-    '<span class="keyword">var</span> path <span class="operator">=</span> Sonic.App.<span class="function call">getInstance</span>();'
+    '<span class="keyword">var</span> path <span class="operator">=</span> Sonic.App.getInstance();'
 );
 
 RainbowTester.run(
@@ -155,7 +155,7 @@ RainbowTester.run(
 
     'public static string getForUser(User user, Sort sort) {}',
 
-    '<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">string</span> <span class="function call">getForUser</span>(User user, Sort sort) {}'
+    '<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">string</span> getForUser(User user, Sort sort) {}'
 );
 
 RainbowTester.run(
@@ -163,7 +163,7 @@ RainbowTester.run(
 
     'public IList&lt;string&gt; firstNames = new List&lt;string&gt;()',
 
-    '<span class="keyword">public</span> IList<span class="keyword operator">&lt;</span><span class="keyword">string</span><span class="keyword operator">&gt;</span> firstNames <span class="operator">=</span> <span class="keyword new">new</span> <span class="support class">List</span><span class="keyword operator">&lt;</span><span class="keyword">string</span><span class="keyword operator">&gt;</span>()'
+    '<span class="keyword">public</span> IList&lt;<span class="keyword">string</span>&gt; firstNames <span class="operator">=</span> <span class="keyword new">new</span> <span class="support class">List</span>&lt;<span class="keyword">string</span>&gt;()'
 );
 
 RainbowTester.endTest('csharp');
