@@ -22,6 +22,14 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'variable variable',
+
+    '$$foo = true;',
+
+    '<span class="variable dollar-sign">$$</span><span class="variable">foo</span> <span class="keyword operator">=</span> <span class="constant language">true</span>;'
+);
+
+RainbowTester.run(
     'string concatenation',
 
     "$foo = 'test' . 'string' . 'concatenation';",
@@ -89,6 +97,14 @@ RainbowTester.run(
     '&lt;?php echo $foo; ?&gt;',
 
     '<span class="variable language php-tag">&lt;?php</span> <span class="support">echo</span> <span class="variable dollar-sign">$</span><span class="variable">foo</span>; <span class="variable language php-tag">?&gt;</span>'
+);
+
+RainbowTester.run(
+    'php tag 2',
+
+    '&lt;?php echo \'?&gt;\'; ?&gt;',
+
+    '<span class="variable language php-tag">&lt;?php</span> <span class="support">echo</span> <span class="string">\'?&gt;\'</span>; <span class="variable language php-tag">?&gt;</span>'
 );
 
 RainbowTester.run(

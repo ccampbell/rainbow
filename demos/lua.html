@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!-- Code example from The Crash Course to Lua  http://luatut.com/crash_course.html
+     And GameMinion https://github.com/GameMinion/GM-Corona-SDK/blob/master/gameminion.lua
+-->
+<meta charset=utf-8>
+<title>Syntax Highlighting</title>
+<link href="../themes/blackboard.css" rel="stylesheet" type="text/css" media="screen">
+<body>
+
+<pre>
+<code data-language="lua">
+function get_all_factors(number)
+    --[[--
+    Gets all of the factors of a given number
+
+    @Parameter: number
+        The number to find the factors of
+
+    @Returns: A table of factors of the number
+    --]]--
+    local factors = {}
+    for possible_factor=1, math.sqrt(number), 1 do
+        local remainder = number%possible_factor
+
+        if remainder == 0 then
+            local factor, factor_pair = possible_factor, number/possible_factor
+            table.insert(factors, factor)
+
+            if factor ~= factor_pair then
+                table.insert(factors, factor_pair)
+            end
+        end
+    end
+
+    hello = nil  -- This is it!
+    hello = 3%2
+    print("I haz "..#bag_of_stuff.." things")
+    table.sort(factors)
+    return factors
+end
+
+--The Meaning of the Universe is 42. Let's find all of the factors driving the Universe.
+
+the_universe = 42
+factors_of_the_universe = get_all_factors(the_universe)
+
+--Print out each factor
+
+print("Count",  "The Factors of Life, the Universe, and Everything")
+table.foreach(factors_of_the_universe, print)
+
+
+-- Other example
+-------------------------------------------------
+-- PUBLIC FUNCTIONS
+-------------------------------------------------
+
+function gameminion.init(accessKey, secretKey)  -- constructor
+    -- initialize GM connection
+
+    GM_ACCESS_KEY = accessKey
+    GM_SECRET_KEY = secretKey
+
+    local newGameminion = {
+        authToken = authToken,
+        accessKey = GM_ACCESS_KEY,
+        secretKey = GM_SECRET_KEY,
+        gameID = "4f6f1e456b789d0001000002",
+        cloudStorageBox = cloudStorageBox,
+        gameminion = gameminion
+    }
+
+    return setmetatable( newGameminion, gameminion_mt )
+end
+
+-------------------------------------------------
+-- User
+-------------------------------------------------
+
+function gameminion:loginWeb()
+    local authToken
+
+    return authToken
+end
+
+-------------------------------------------------
+
+function gameminion:loginAPI(username, password)
+    local params = "login="..username.."&password="..password"
+
+    local path = "user_sessions/user_login.json"
+
+    -- set AuthToken when it gets it
+    local function networkListener(event)
+        if (event.isError) then
+            print("Network Error")
+            print("Error: "..event.response)
+            return false
+        else
+            self.authToken = json.decode(event.response).auth_token
+            print("User Logged In!")
+            print("Auth Token: "..self.authToken)
+            return true
+        end
+    end
+
+    postGM(path, params, networkListener)
+
+    return true
+end
+</code>
+</pre>
+    <script src="../js/rainbow.js"></script>
+    <script src="../js/language/lua.js"></script>
+</body>

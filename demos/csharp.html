@@ -48,31 +48,31 @@ namespace NerdDinner.Models
 		partial void DeleteRSVP(RSVP instance);
 		#endregion
 
-		public NerdDinnerDataContext() : 
+		public NerdDinnerDataContext() :
 			base(global::System.Configuration.ConfigurationManager.ConnectionStrings["NerdDinnerConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
 
-		public NerdDinnerDataContext(string connection) : 
+		public NerdDinnerDataContext(string connection) :
 			base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 
-		public NerdDinnerDataContext(System.Data.IDbConnection connection) : 
+		public NerdDinnerDataContext(System.Data.IDbConnection connection) :
 			base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 
-		public NerdDinnerDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public NerdDinnerDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) :
 			base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 
-		public NerdDinnerDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public NerdDinnerDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) :
 			base(connection, mappingSource)
 		{
 			OnCreated();
@@ -96,29 +96,29 @@ namespace NerdDinner.Models
 
 		[Function(Name="dbo.NearestDinners", IsComposable=true)]
 		public IQueryable&lt;NearestDinnersResult&gt; NearestDinners(
-			[Parameter(DbType="Real")] System.Nullable&lt;float&gt; lat, 
+			[Parameter(DbType="Real")] System.Nullable&lt;float&gt; lat,
 			[Parameter(Name="long", DbType="Real")] System.Nullable&lt;float&gt; @long)
 		{
 			return this.CreateMethodCallQuery&lt;NearestDinnersResult&gt;(
-				this, 
-				((MethodInfo)(MethodInfo.GetCurrentMethod())), 
-				lat, 
+				this,
+				((MethodInfo)(MethodInfo.GetCurrentMethod())),
+				lat,
 				@long);
 		}
 
 		[Function(Name="dbo.DistanceBetween", IsComposable=true)]
 		public System.Nullable&lt;float&gt; DistanceBetween(
-			[Parameter(Name="Lat1", DbType="Real")] System.Nullable&lt;float&gt; lat1, 
-			[Parameter(Name="Long1", DbType="Real")] System.Nullable&lt;float&gt; long1, 
-			[Parameter(Name="Lat2", DbType="Real")] System.Nullable&lt;float&gt; lat2, 
+			[Parameter(Name="Lat1", DbType="Real")] System.Nullable&lt;float&gt; lat1,
+			[Parameter(Name="Long1", DbType="Real")] System.Nullable&lt;float&gt; long1,
+			[Parameter(Name="Lat2", DbType="Real")] System.Nullable&lt;float&gt; lat2,
 			[Parameter(Name="Long2", DbType="Real")] System.Nullable&lt;float&gt; long2)
 		{
 			return ((System.Nullable&lt;float&gt;)(this.ExecuteMethodCall(
-				this, 
-				((MethodInfo)(MethodInfo.GetCurrentMethod())), 
-				lat1, 
-				long1, 
-				lat2, 
+				this,
+				((MethodInfo)(MethodInfo.GetCurrentMethod())),
+				lat1,
+				long1,
+				lat2,
 				long2).ReturnValue));
 		}
 	}
@@ -535,7 +535,7 @@ namespace NerdDinner.Models
 			set
 			{
 				Dinner previousValue = this._Dinner.Entity;
-				if (((previousValue != value) 
+				if (((previousValue != value)
 				|| (this._Dinner.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();

@@ -115,4 +115,52 @@ RainbowTester.run(
     '};'
 );
 
+RainbowTester.run(
+    'JSON 1',
+
+    '{\n' +
+    '   "generated_in": "0.0423",\n' +
+    '   "stat": "fail"\n' +
+    '   "err": {\n' +
+    '       "code": "1",\n' +
+    '       "expl": "The user id or name was either not valid or not provided.",\n' +
+    '       "msg": "User not found"\n' +
+    '   }\n' +
+    '}',
+
+    '{\n' +
+    '   <span class="string">"generated_in"</span>: <span class="string">"0.0423"</span>,\n' +
+    '   <span class="string">"stat"</span>: <span class="string">"fail"</span>\n' +
+    '   <span class="string">"err"</span>: {\n' +
+    '       <span class="string">"code"</span>: <span class="string">"1"</span>,\n' +
+    '       <span class="string">"expl"</span>: <span class="string">"The user id or name was either not valid or not provided."</span>,\n' +
+    '       <span class="string">"msg"</span>: <span class="string">"User not found"</span>\n' +
+    '   }\n' +
+    '}'
+);
+
+RainbowTester.run(
+    'JSON 2',
+
+    '{\n' +
+    '   "generated_in":"0.0423",\n' +
+    '   "stat":"fail"\n' +
+    '   "err":{\n' +
+    '       "code":"1",\n' +
+    '       "expl":"The user id or name was either not valid or not provided.",\n' +
+    '       "msg":"User not found"\n' +
+    '   }\n' +
+    '}',
+
+    '{\n' +
+    '   <span class="string">"generated_in"</span>:<span class="string">"0.0423"</span>,\n' +
+    '   <span class="string">"stat"</span>:<span class="string">"fail"</span>\n' +
+    '   <span class="string">"err"</span>:{\n' +
+    '       <span class="string">"code"</span>:<span class="string">"1"</span>,\n' +
+    '       <span class="string">"expl"</span>:<span class="string">"The user id or name was either not valid or not provided."</span>,\n' +
+    '       <span class="string">"msg"</span>:<span class="string">"User not found"</span>\n' +
+    '   }\n' +
+    '}'
+);
+
 RainbowTester.endTest('javascript');
