@@ -22,6 +22,14 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'variable variable',
+
+    '$$foo = true;',
+
+    '<span class="variable dollar-sign">$$</span><span class="variable">foo</span> <span class="keyword operator">=</span> <span class="constant language">true</span>;'
+);
+
+RainbowTester.run(
     'string concatenation',
 
     "$foo = 'test' . 'string' . 'concatenation';",
