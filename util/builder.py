@@ -16,7 +16,7 @@ class RainbowBuilder(object):
             'c': '1.0.6',
             'csharp': '1.0',
             'css': '1.0.7',
-            'generic': '1.0.8',
+            'generic': '1.0.9',
             'html': '1.0.6',
             'javascript': '1.0.6',
             'lua': '1.0',
