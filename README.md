@@ -63,6 +63,8 @@ Currently supported languages are:
 - C
 - Shell
 - Scheme
+- Lua
+- C#
 
 ## More Info
 
