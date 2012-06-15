@@ -117,5 +117,13 @@ RainbowTester.run(
     'Scaled decimal',
     '1.0s10',
     '<span class="constant numeric">1.0s10</span>');
+RainbowTester.run(
+    'Class name, normal',
+    'Class',
+    '<span class="entity name class">Class</span>');
+RainbowTester.run(
+    'Class name, with digits',
+    'Class0zero',
+    '<span class="entity name class">Class0zero</span>');
 
 RainbowTester.endTest('smalltalk');

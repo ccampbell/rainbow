@@ -27,7 +27,7 @@ Rainbow.extend('smalltalk', [
     {'name': 'constant.numeric',
      'pattern': /-?\d+(\.\d+)?((r-?|s)[A-Za-z0-9]+|e-?[0-9]+)?/g
     },
-    {'name': 'entity.name.global',
+    {'name': 'entity.name.class',
      'pattern': /\b[A-Z]\w*/g
     },
     {'name': 'entity.name.function',
