@@ -65,6 +65,7 @@ Currently supported languages are:
 - Scheme
 - Lua
 - C#
+- Smalltalk
 
 ## More Info
 
