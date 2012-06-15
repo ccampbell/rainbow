@@ -5,44 +5,38 @@
  * @version 1.0
  */
 Rainbow.extend('smalltalk', [
-    {
-        /* making peace with HTML */
-        'name': 'plain',
-        'pattern': /&gt;|&lt;|&amp;/g
+    {'name': 'keyword.pseudovariable',
+     'pattern': /self|thisContext/g
     },
-    {'name': 'keyword',
-     'pattern': /\b(self|thisContext|^)/g
-    },
-    {'name': 'keyword.operator',
-     'pattern': /[\|\\@%\^&*_\-+=~?><\(\)\[\]]{1,2}|#\[|#\(|:=/g
-    },
-    {'name': 'constant.language',
+    {'name': 'keyword.constant',
      'pattern': /false|nil|true/g
     },
-    {
-        'matches': {
-            1: 'storage.class',
-            2: 'entity.name.class',
-            3: 'entity.other.inherited-class'
-        },
-        'pattern': /\b[A-Z]\w*/g
-    },
-    {'name': 'constant.numeric',
-     'pattern': /\b\d+(?!r)|\d{1,2}r[\d|a-zA-Z]+\b/g
-    },
-    {'name': 'entity.name.function',
-     'pattern': /[a-z][A-Za-z0-9_]*\:?/g
-    },
     {'name': 'string',
-     'pattern': /'(?:[^']|'')*'/g
-    },
-    {'name': 'comment',
-     'pattern': /"(?:[^"]|"")*"/g
+     'pattern': /'([^']|'')*'/g
     },
     {'name': 'string.symbol',
-     'pattern': /#\w+/g
+     'pattern': /#\w+|#'([^']|'')*'/g
     },
     {'name': 'string.character',
-     'pattern': /\$./g
+     'pattern': /\$\w+/g
     },
-]);
+    {
+     'name': 'comment',
+     "pattern": /"([^"]|"")*"/g
+    },
+    {'name': 'constant.numeric',
+     'pattern': /-?\d+(\.\d+)?((r-?|s)[A-Za-z0-9]+|e-?[0-9]+)?/g
+    },
+    {'name': 'entity.name.global',
+     'pattern': /\b[A-Z]\w*/g
+    },
+    {'name': 'entity.name.function',
+     'pattern': /\b[a-z]\w*:?/g
+    },
+    {'name': 'entity.name.binary',
+     'pattern': /(&lt;|&gt;|&amp;|[=~\|\\\/!@*\-_+])+/g
+    },
+    {'name': 'operator.delimiter',
+     'pattern': /;[\(\)\[\]\{\}]|#\[|#\(^\./g
+    }
+], true);
