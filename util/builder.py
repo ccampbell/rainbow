@@ -24,7 +24,8 @@ class RainbowBuilder(object):
             'python': '1.0.6',
             'ruby': '1.0.5',
             'scheme': '1.0',
-            'shell': '1.0.3'
+            'shell': '1.0.3',
+            'smalltalk': '1.0'
         }
 
         self.js_path = js_path
