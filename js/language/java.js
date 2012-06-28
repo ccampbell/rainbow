@@ -37,7 +37,7 @@ Rainbow.extend( "java", [
 
   {
     name: "integer",
-    pattern: /\b(0x[\da-f]+|\d+)\b/g
+    pattern: /\b(0x[\da-f]+|\d+)L?\b/g
   },
 
   {
@@ -54,7 +54,7 @@ Rainbow.extend( "java", [
     matches: {
       1: "entity.function"
     },
-    pattern: /([^\.\s]+)\(/g
+    pattern: /([^@\.\s]+)\(/g
   },
 
   {
