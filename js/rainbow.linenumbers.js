@@ -39,7 +39,7 @@ if (window.Rainbow&&!window.Rainbow.linenumbers) window.Rainbow.linenumbers = (f
 			,oTestStyle = mTestDiv.style
 			,oTestCSS = {font:oCodeStyle.font,width:'auto',display:'inline-block'}
 		;
-		var N="\n";console.log(
+		/*var N="\n";console.log(
 			N,'iLineHeight',iLineHeight
 			,N,'lineHeight',oCodeStyle.lineHeight
 			,N,'fontSize',oCodeStyle.fontSize
@@ -47,7 +47,7 @@ if (window.Rainbow&&!window.Rainbow.linenumbers) window.Rainbow.linenumbers = (f
 			,N,'font',oCodeStyle.font
 			,N,'borderColor',oParentStyle.borderColor
 			,N,'oCodeStyle',oCodeStyle.wordWrap
-		); // log
+		);*/ // log
 		// add test div, set it's CSS, and measure width
 		mTestDiv.appendChild(document.createTextNode(new Array(1<<iTestExp).join('a')+'a'));
 		for (var s in oTestCSS) oTestStyle[s] = oTestCSS[s];
@@ -70,7 +70,7 @@ if (window.Rainbow&&!window.Rainbow.linenumbers) window.Rainbow.linenumbers = (f
 		mCnvLines.setAttribute('height',iLineHeight);
 		oCtxLines.fillStyle = oParentStyle.borderColor;
 		oCtxLines.fillRect(0,iLineHeight-1,1,1);
-		//
+		// todo: possibly set <code> word-wrap:normal; <pre> overflow:scroll-y;
 		// add images to <pre> background
 		if (bPre) {
 			// starting with the original background... then prepend lines and numbers
