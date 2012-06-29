@@ -16,4 +16,3 @@ pre code.rainbow .function.name{color:#97B;}
 pre code.rainbow .numeric{color:#38C;}
 pre code.rainbow .property{color:#9A8;}
 pre code.rainbow .operator{color:#C83;}
-pre code.rainbow:before{content:'/** ' attr(data-language) ' */';position:absolute;top:-30px;left:0;padding:2px 15px 0;background:#222;color:#FC2;-webkit-border-radius:15px 15px 0 0;-moz-border-radius:15px 15px 0 0;border-radius:15px 15px 0 0;-moz-background-clip:padding;-webkit-background-clip:padding-box;background-clip:padding-box;}

@@ -9,8 +9,11 @@
  * @requires Rainbow.js
  */
 if (window.Rainbow&&!window.Rainbow.linenumbers) window.Rainbow.linenumbers = (function(Rainbow){
-	var drawNumbers = true;
-	var drawLines = true;
+	var drawNumbers = true
+		,drawLines = true
+		,iLineHeight
+		,iCharWidth
+	;
 	Rainbow.onHighlight(function(block) {
 		var toInt = parseInt
 			,iLines = block.innerHTML.replace(/\r\n|\r/g,"\n").split("\n").length
@@ -24,7 +27,6 @@ if (window.Rainbow&&!window.Rainbow.linenumbers) window.Rainbow.linenumbers = (f
 			,getStyle = function(el){return el.currentStyle||(document.defaultView&&document.defaultView.getComputedStyle(el,null))||el.style}
 			,oCodeStyle = getStyle(block)
 			,oParentStyle = getStyle(mParent)
-			,iLineHeight = toInt(oCodeStyle.lineHeight)
 			,iTop = toInt(oParentStyle.paddingTop)+toInt(oCodeStyle.marginTop)+toInt(oCodeStyle.paddingTop)
 			// numbers canvas
 			,mCnvNumbers = document.createElement('canvas')
@@ -32,29 +34,31 @@ if (window.Rainbow&&!window.Rainbow.linenumbers) window.Rainbow.linenumbers = (f
 			// lines canvas
 			,mCnvLines = document.createElement('canvas')
 			,oCtxLines = mCnvLines.getContext('2d')
-			// calculate character width
-			,iCharWidth
-			,iTestExp = 5
-			,mTestDiv = document.createElement('div')
-			,oTestStyle = mTestDiv.style
-			,oTestCSS = {font:oCodeStyle.font,width:'auto',display:'inline-block'}
 		;
 		/*var N="\n";console.log(
-			N,'iLineHeight',iLineHeight
-			,N,'lineHeight',oCodeStyle.lineHeight
-			,N,'fontSize',oCodeStyle.fontSize
-			,N,'fontFamily',oCodeStyle.fontFamily
-			,N,'font',oCodeStyle.font
-			,N,'borderColor',oParentStyle.borderColor
-			,N,'oCodeStyle',oCodeStyle.wordWrap
-		);*/ // log
-		// add test div, set it's CSS, and measure width
-		mTestDiv.appendChild(document.createTextNode(new Array(1<<iTestExp).join('a')+'a'));
-		for (var s in oTestCSS) oTestStyle[s] = oTestCSS[s];
-		document.body.appendChild(mTestDiv);
-		iCharWidth = mTestDiv.offsetWidth>>iTestExp;
-		if (isNaN(iLineHeight)) iLineHeight = mTestDiv.offsetHeight; // for line-height: normal;
-		document.body.removeChild(mTestDiv);
+		 N,'iLineHeight',iLineHeight
+		 ,N,'lineHeight',oCodeStyle.lineHeight
+		 ,N,'fontSize',oCodeStyle.fontSize
+		 ,N,'fontFamily',oCodeStyle.fontFamily
+		 ,N,'font',oCodeStyle.font
+		 ,N,'borderColor',oParentStyle.borderColor
+		 ,N,'oCodeStyle',oCodeStyle.wordWrap
+		 );*/ // log
+		// measure character dimensions
+		if (isNaN(iCharWidth)) {
+			var iTestExp = 5
+				,mTestDiv = document.createElement('div')
+				,oTestStyle = mTestDiv.style
+				,oTestCSS = {font:oCodeStyle.font,width:'auto',display:'inline-block'}
+			;
+			mTestDiv.appendChild(document.createTextNode(new Array(1<<iTestExp).join('a')+'a'));
+			for (var s in oTestCSS) oTestStyle[s] = oTestCSS[s];
+			document.body.appendChild(mTestDiv);
+			iCharWidth = mTestDiv.offsetWidth>>iTestExp;
+			iLineHeight = toInt(oCodeStyle.lineHeight)
+			if (isNaN(iLineHeight)) iLineHeight = mTestDiv.offsetHeight; // for line-height: normal;
+			document.body.removeChild(mTestDiv);
+		}
 		// draw numbers canvas
 		mCnvNumbers.setAttribute('width',iChars*iCharWidth);
 		mCnvNumbers.setAttribute('height',(1+iLines)*iLineHeight);
@@ -70,9 +74,16 @@ if (window.Rainbow&&!window.Rainbow.linenumbers) window.Rainbow.linenumbers = (f
 		mCnvLines.setAttribute('height',iLineHeight);
 		oCtxLines.fillStyle = oParentStyle.borderColor;
 		oCtxLines.fillRect(0,iLineHeight-1,1,1);
+		// msg if wordwrapping is set
+		if (oCodeStyle.wordWrap!='normal'&&console&&console.warn) console.warn('rainbow.linenumbers: For correct linenumbers wordwrapping should be set to normal.');
+		/*
 		// adjust existing styles
 		block.style.wordWrap = 'normal';
+		block.style.display = 'inline-block';
+		block.style.width = '100%';
+		block.style.overflowX = 'auto';
 		mParent.style.overflowX = 'auto';
+		*/
 		// add images to <pre> background
 		if (bPre) {
 			// starting with the original background... then prepend lines and numbers
