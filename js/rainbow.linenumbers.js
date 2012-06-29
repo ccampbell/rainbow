@@ -13,9 +13,9 @@ if (window.Rainbow&&!window.Rainbow.linenumbers) window.Rainbow.linenumbers = (f
 	var drawLines = true;
 	Rainbow.onHighlight(function(block) {
 		var toInt = parseInt
-			,iLines = block.innerHTML.split("\n").length // todo: should \r be needed as well?
+			,iLines = block.innerHTML.replace(/\r\n|\r/g,"\n").split("\n").length
 			,iLineStart = block.getAttribute('data-line')<<0
-			,iChars = iLines===0?1:(Math.log(iLines)/2.303<<0)+1 // 2.302585092994046 safely rounded to 2.303
+			,iChars = iLines===0?1:(Math.log(iLines+iLineStart)/2.303<<0)+1 // 2.302585092994046 safely rounded to 2.303
 			,i = iLines
 			// <pre>
 			,mParent = block.parentNode
@@ -70,7 +70,9 @@ if (window.Rainbow&&!window.Rainbow.linenumbers) window.Rainbow.linenumbers = (f
 		mCnvLines.setAttribute('height',iLineHeight);
 		oCtxLines.fillStyle = oParentStyle.borderColor;
 		oCtxLines.fillRect(0,iLineHeight-1,1,1);
-		// todo: possibly set <code> word-wrap:normal; <pre> overflow:scroll-y;
+		// adjust existing styles
+		block.style.wordWrap = 'normal';
+		mParent.style.overflowX = 'auto';
 		// add images to <pre> background
 		if (bPre) {
 			// starting with the original background... then prepend lines and numbers
