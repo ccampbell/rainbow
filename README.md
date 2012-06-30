@@ -54,19 +54,20 @@ You can include the php language then in the markup on your page add:
 ## Supported Languages
 
 Currently supported languages are:
-- Javascript
-- HTML
+- C
+- C#
 - CSS
+- HTML
+- Java
+- Javascript
+- Lua
 - PHP
 - Python
-- Ruby
-- C
-- Shell
-- Scheme
-- Lua
-- C#
-- Smalltalk
 - R
+- Ruby
+- Scheme
+- Shell
+- Smalltalk
 
 ## More Info
 
