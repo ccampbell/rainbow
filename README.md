@@ -56,6 +56,7 @@ You can include the php language then in the markup on your page add:
 Currently supported languages are:
 - C
 - C#
+- Coffeescript
 - CSS
 - HTML
 - Java
