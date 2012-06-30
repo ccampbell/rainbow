@@ -66,6 +66,7 @@ Currently supported languages are:
 - Lua
 - C#
 - Smalltalk
+- R
 
 ## More Info
 
