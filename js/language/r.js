@@ -25,6 +25,7 @@ Rainbow.extend('r', [
         },
         'pattern': /(\(|\s|\[|\=|:)(('|")([^\\\1]|\\.)*?(\3))/gm
     },
+
     /**
      * Most of these are known via the Language Reference.
      * The built-in constant symbols are known via ?Constants.
@@ -41,6 +42,7 @@ Rainbow.extend('r', [
         },
         'pattern': /[^0-9a-zA-Z\._](LETTERS|letters|month\.(abb|name)|pi)/g
     },
+
     /**
      * @todo: The list subsetting operator isn't quite working properly.
      *        It includes the previous variable when it should only match [[
@@ -70,6 +72,7 @@ Rainbow.extend('r', [
         },
         'pattern': /([a-zA-Z][a-zA-Z0-9._]+)([:]{2,3})([.a-zA-Z][a-zA-Z0-9._]*(?=\s*\())\b/g
     },
+
     /*
      * Note that we would perhaps match more builtin functions and
      * variables, but there are so many that most are ommitted for now.
