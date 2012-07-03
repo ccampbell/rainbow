@@ -17,7 +17,7 @@ Rainbow.extend( "java", [
     pattern: /(import|package)\s(.+)/g
   },
   {
-    //@see http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
+    // see http://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html
     name: "keyword",
     pattern: /\b(abstract|assert|boolean|break|byte|case|catch|char|class|const|continue|default|do|double|else|enum|extends|final|finally|float|for|goto|if|implements|import|instanceof|int|interface|long|native|new|package|private|protected|public|return|short|static|strictfp|super|switch|synchronized|this|throw|throws|transient|try|void|volatile|while)\b/g
   },
@@ -52,7 +52,7 @@ Rainbow.extend( "java", [
     pattern: /\b([A-Z]\w*)\b/g
   },
   {
-    //@see http://docs.oracle.com/javase/tutorial/java/nutsandbolts/operators.html
+    // see http://docs.oracle.com/javase/tutorial/java/nutsandbolts/operators.html
     name: "operator",
     pattern: /(\+{1,2}|-{1,2}|~|!|\*|\/|%|(?:&lt;){1,2}|(?:&gt;){1,3}|instanceof|(?:&amp;){1,2}|\^|\|{1,2}|\?|:|(?:=|!|\+|-|\*|\/|%|\^|\||(?:&lt;){1,2}|(?:&gt;){1,3})?=)/g
   }
