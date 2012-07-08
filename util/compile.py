@@ -19,7 +19,7 @@ for language in languages[:]:
     if language.startswith('--'):
         languages.remove(language)
 
-builder = RainbowBuilder(js_path, '/usr/local/compiler-latest/compiler.jar')
+builder = RainbowBuilder(js_path, os.environ.get('CLOSURE_COMPILER', '/usr/local/compiler-latest/compiler.jar'))
 
 print 'waiting for closure compiler...'
 contents = builder.getFileForLanguages(languages)

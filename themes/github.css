@@ -2,7 +2,7 @@
  * GitHub theme
  *
  * @author Craig Campbell
- * @version 1.0.2
+ * @version 1.0.3
  */
 pre {
     border: 1px solid #ccc;
@@ -29,7 +29,7 @@ pre code {
 }
 
 pre, code {
-    font-family: 'Bitstream Vera Sans Mono', Courier, monospace;
+    font-family: Consolas, Menlo, 'Liberation Mono', Courier, monospace;
     color: #333;
     background: #f8f8f8;
     -moz-border-radius: 3px;

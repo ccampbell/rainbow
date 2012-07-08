@@ -241,6 +241,14 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'constant language',
+
+    'true; TRUE;',
+
+    '<span class="constant language">true</span>; <span class="constant language">TRUE</span>;'
+);
+
+RainbowTester.run(
     'constant',
 
     'TEST_CONSTANT',
