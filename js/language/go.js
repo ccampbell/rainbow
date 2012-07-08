@@ -1,10 +1,10 @@
 /**
- * Generic language patterns
+ * GO Language
  *
- * @author Craig Campbell
- * @version 1.0.9
+ * @author Javier Aguirre
+ * @version 1.0
  */
-Rainbow.extend([
+Rainbow.extend('go', [
     {
         'matches': {
             1: {
@@ -23,7 +23,7 @@ Rainbow.extend([
     },
     {
         'name': 'comment',
-        'pattern': /\/\*[\s\S]*?\*\/|(\/\/|\#)[\s\S]*?$/gm
+        'pattern': /\/\*[\s\S]*?\*\/|(\/\/)[\s\S]*?$/gm
     },
     {
         'name': 'constant.numeric',
@@ -33,11 +33,11 @@ Rainbow.extend([
         'matches': {
             1: 'keyword'
         },
-        'pattern': /\b(break|c(ase|onst|ontinue)|d(efault|efer)|else|fallthrough|for|func|go(to)?|if|import|interface|map|package|range|return|select|struct|switch|type|var)(?=\(|\b)/gi
+        'pattern': /\b(break|c(ase|onst|ontinue)|d(efault|efer)|else|fallthrough|for|go(to)?|if|import|interface|map|package|range|return|select|struct|switch|type|var)(?=\(|\b)/gi
     },
     {
         'name': 'constant.language',
-        'pattern': /true|false|null|string|int(64)?/g
+        'pattern': /true|false|null|string|byte|rune|u?int(8|16|32|64)?|float(32|64)|complex(64|128)/g
     },
     {
         'name': 'keyword.operator',

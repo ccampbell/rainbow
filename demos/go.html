@@ -1,95 +1,91 @@
 <!DOCTYPE html>
-<!-- Code example from ...
+<!-- Code example from https://github.com/hoisie/web.git and from
+     Go official web site http://golang.org/
 -->
 <meta charset=utf-8>
 <title>Syntax Highlighting</title>
 <link href="../themes/blackboard.css" rel="stylesheet" type="text/css" media="screen">
 <body>
+<h3>GO language</h3>
+<p>First example: </p>
+<pre>
+    <code data-language="go">
+        // You can edit this code!
+        // Click here and start typing.
+        package main
+
+        import "fmt"
+
+        func main() {
+            fmt.Println("Hello, world!")
+        }
+    </code>
+    <code data-language="go">
+        package main
+
+        // fib returns a function that returns
+        // successive Fibonacci numbers.
+        func fib() func() int {
+            a, b := 0, 1
+            return func() int {
+                a, b = b, a+b
+                c = 256
+                return a
+            }
+        }
+
+        func main() {
+            f := fib()
+            // Function calls are evaluated left-to-right.
+            println(f(), f(), f(), f(), f())
+        }
+    </code>
+</pre>
+
+<p>Another Example: </p>
 
 <pre>
-<code data-language="go">
-// You can edit this code!
-// Click here and start typing.
-package main
+    <code data-language="go">
+        /*
+            This is a long comment
+            Second line.
+        */
+        package main
 
-import "fmt"
+        import (
+            "fmt"
+            "github.com/hoisie/web.go"
+        )
 
-func main() {
-    fmt.Println("Hello, world!")
-}
-</code>
-<code data-language="go">
-package main
+        type mytype struct {
+            A   string
+            B   string
+            C   int
+            D   int64
+            E   uint8
+            F   complex128
+            G   float32
+        }
 
-// fib returns a function that returns
-// successive Fibonacci numbers.
-func fib() func() int {
-    a, b := 0, 1
-    return func() int {
-        a, b = b, a+b
-        return a
-    }
-}
+        var page = `
+            This is a long string
+            This is another string
+        `
 
-func main() {
-    f := fib()
-    // Function calls are evaluated left-to-right.
-    println(f(), f(), f(), f(), f())
-}
-</code>
-<code data-language="go">
-package main
+        func index() string { return page }
 
-import (
-    "fmt"
-    "github.com/hoisie/web.go"
-)
+        func process(ctx *web.Context) string {
+            var data mytype
+            ctx.UnmarshalParams(&data)
+            return fmt.Sprintf("%v\n", data)
+        }
 
-type mytype struct {
-    A   string
-    B   string
-    C   int
-    D   int64
-}
-
-var page = `
-<html>
-<head><title>Multipart Test</title></head>
-<body>
-<form action="/process" method="POST">
-
-<label for="a"> Please write some text </label>
-<input id="a" type="text" name="a"/>
-<br>
-<label for="b"> Please write some more text </label>
-<input id="b" type="text" name="b"/>
-<br>
-<label for="c"> Please write a number </label>
-<input id="c" type="text" name="c"/>
-<br>
-<label for="d"> Please write another number </label>
-<input id="d" type="text" name="d"/>
-<br>
-<input type="submit" name="Submit" value="Submit"/>
-
-</body>
-</html>
-`
-
-func index() string { return page }
-
-func process(ctx *web.Context) string {
-    var data mytype
-    ctx.UnmarshalParams(&data)
-    return fmt.Sprintf("%v\n", data)
-}
-
-func main() {
-    web.Get("/", index)
-    web.Post("/process", process)
-    web.Run("0.0.0.0:9999")
-}
-</code>
+        func main() {
+            web.Get("/", index)
+            web.Post("/process", process)
+            web.Run("0.0.0.0:9999")
+        }
+    </code>
 </pre>
     <script src="../js/rainbow.js"></script>
     <script src="../js/language/go.js"></script>
