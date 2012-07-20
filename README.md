@@ -74,11 +74,13 @@ Currently supported languages are:
 
 Rainbow now support [NodeJS](http://nodejs.org/) environnement :
 
-    var Rainbow = require('rainbow');
-    var code    = 'console.log("Rainbow is a great highlighting tool to use with NodeJS");';
+```javascript
+var Rainbow = require('rainbow');
+var code    = 'console.log("Rainbow is a great highlighting tool to use with NodeJS");';
 
-    // Output synchronous :
-    console.log(Rainbow.color(code));
+// Output synchronous :
+console.log(Rainbow.color(code));
+```
 
 Installation using npm (maybe soon ?) :
 
