@@ -553,12 +553,12 @@ var Rainbow = (function() {
                 delete replacement_positions[CURRENT_LEVEL];
                 --CURRENT_LEVEL;
                 code = resultingCode;
-                callback(code);
+                callback(resultingCode);
             });
-            return code;
         }
 
-        return _workOnPatterns(patterns, 0);
+       _workOnPatterns(patterns, 0);
+       return code;
     }
 
     /**
@@ -600,11 +600,11 @@ var Rainbow = (function() {
             }
 
             onComplete(code);
-            return code;
         }
 
         var string_positions = keys(replacements[CURRENT_LEVEL]);
-        return _processReplacement(code, string_positions, 0, onComplete);
+        _processReplacement(code, string_positions, 0, onComplete);
+        return code;
     }
 
     /**

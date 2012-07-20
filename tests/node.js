@@ -4,15 +4,18 @@ var color   = require('..').color
 
 
 function test(language) {
-	var content    = "var foo = 'bar';";
-	var syncResult = color(content, language, function(highlighted_code) {
-		if(highlighted_code == syncResult) {
-			console.log('OK : synchronized result');
-		} else {
-			console.log('ERR : synchronized result : "%s" != "%s"',highlighted_code, syncResult)
-		}
+	var content    = "var foo = 'bar';"
+	  , asyncResult, syncResult;
+
+	syncResult = color(content, language, function(highlighted_code) {
+		asyncResult = highlighted_code;
 	});
-	console.log('syncResult', syncResult);
+
+	if(asyncResult == syncResult) {
+		console.log('OK : synchronized result');
+	} else {
+		console.log('ERR : synchronized result : "%s" != "%s"',highlighted_code, syncResult)
+	}
 }
 
 test('javascript');

@@ -4,7 +4,7 @@
  * @author Craig Campbell
  * @version 1.0
  */
-if(require && !Rainbow) var Rainbow = require('../rainbow.js');
+if(typeof(process) != 'undefined') var Rainbow = require('../rainbow.js');
 Rainbow.extend('coffeescript', [
     {
         'name': 'comment.block',
