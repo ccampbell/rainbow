@@ -82,6 +82,12 @@ var code    = 'console.log("Rainbow is a great highlighting tool to use with Nod
 console.log(Rainbow.color(code));
 ```
 
+Result :
+```html
+console.<span class="function call">log</span>(<span class="string">"Rainbow is a great highlighting tool to use with NodeJS"</span>);
+```
+
+
 Installation using npm (maybe soon ?) :
 
     npm install rainbow
