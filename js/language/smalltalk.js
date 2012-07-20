@@ -4,6 +4,7 @@
  * @author Frank Shearar <frank@angband.za.org>
  * @version 1.0
  */
+if(require && !Rainbow) var Rainbow = require('../rainbow.js');
 Rainbow.extend('smalltalk', [
     {
         'name': 'keyword.pseudovariable',

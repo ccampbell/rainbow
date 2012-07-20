@@ -18,7 +18,8 @@
  * @preserve @version 1.1.8
  * @url rainbowco.de
  */
-window['Rainbow'] = (function() {
+
+var Rainbow = (function() {
 
     /**
      * array of replacements to process at the end
@@ -759,12 +760,17 @@ window['Rainbow'] = (function() {
 /**
  * adds event listener to start highlighting
  */
-(function() {
-    if (window.addEventListener) {
-        return window.addEventListener('load', Rainbow.color, false);
-    }
-    window.attachEvent('onload', Rainbow.color);
-}) ();
+if(typeof window != 'undefined') {
+    window.Rainbow = Rainbow;
+    (function() {
+        if (window.addEventListener) {
+            return window.addEventListener('load', Rainbow.color, false);
+        }
+        window.attachEvent('onload', Rainbow.color);
+    }) ();
+} else if((typeof module != 'undefined') && module.exports) {
+    module = module.exports = Rainbow;
+}
 
 // When using Google closure compiler in advanced mode some methods
 // get renamed.  This keeps a public reference to these methods so they can

@@ -4,6 +4,7 @@
  * @author Simon Potter
  * @version 1.0
  */
+if(require && !Rainbow) var Rainbow = require('../rainbow.js');
 Rainbow.extend('r', [
     /**
      * Note that a valid variable name is of the form:

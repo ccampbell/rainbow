@@ -6,7 +6,7 @@
  * @author actsasflinn
  * @version 1.0.5
  */
-
+if(require && !Rainbow) var Rainbow = require('../rainbow.js');
 Rainbow.extend('ruby', [
     /**
      * Strings

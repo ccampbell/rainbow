@@ -5,6 +5,7 @@
  * @author Craig Campbell
  * @version 1.0.6
  */
+if(require && !Rainbow) var Rainbow = require('../rainbow.js');
 Rainbow.extend('c', [
     {
         'name': 'meta.preprocessor',

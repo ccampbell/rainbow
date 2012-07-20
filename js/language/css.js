@@ -4,6 +4,7 @@
  * @author Craig Campbell
  * @version 1.0.7
  */
+if(require && !Rainbow) var Rainbow = require('../rainbow.js');
 Rainbow.extend('css', [
     {
         'name': 'comment',

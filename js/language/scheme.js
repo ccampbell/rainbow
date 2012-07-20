@@ -4,6 +4,7 @@
  * @author Alex Queiroz <alex@artisancoder.com>
  * @version 1.0
  */
+if(require && !Rainbow) var Rainbow = require('../rainbow.js');
 Rainbow.extend('scheme', [
     {
         /* making peace with HTML */
