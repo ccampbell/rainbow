@@ -19,6 +19,8 @@
  * @url rainbowco.de
  */
 
+var isNode  = typeof(process) != 'undefined';
+
 var Rainbow = (function() {
 
     /**
@@ -312,9 +314,13 @@ var Rainbow = (function() {
                     _processPattern(regex, pattern, code, callback);
                 };
 
-                // every 100 items we process let's call set timeout
-                // to let the ui breathe a little
-                return match_counter % 100 > 0 ? nextCall() : setTimeout(nextCall, 0);
+                if(isNode) {
+                    return nextCall();
+                } else {
+                    // every 100 items we process let's call set timeout
+                    // to let the ui breathe a little
+                    return match_counter % 100 > 0 ? nextCall() : setTimeout(nextCall, 0);
+                }
             };
 
         // if this is not a child match and it falls inside of another
@@ -539,18 +545,20 @@ var Rainbow = (function() {
 
             // we are done processing the patterns
             // process the replacements and update the DOM
-            _processReplacements(code, function(code) {
+            _processReplacements(code, function(resultingCode) {
 
                 // when we are done processing replacements
                 // we are done at this level so we can go back down
                 delete replacements[CURRENT_LEVEL];
                 delete replacement_positions[CURRENT_LEVEL];
                 --CURRENT_LEVEL;
+                code = resultingCode;
                 callback(code);
             });
+            return code;
         }
 
-        _workOnPatterns(patterns, 0);
+        return _workOnPatterns(patterns, 0);
     }
 
     /**
@@ -580,18 +588,23 @@ var Rainbow = (function() {
 
                 // process next function
                 var next = function() {
-                    _processReplacement(code, positions, ++i, onComplete);
+                    return _processReplacement(code, positions, ++i, onComplete);
                 };
 
-                // use a timeout every 250 to not freeze up the UI
-                return replacement_counter % 250 > 0 ? next() : setTimeout(next, 0);
+                if(isNode) {
+                    return next();
+                } else {
+                    // use a timeout every 250 to not freeze up the UI
+                    return replacement_counter % 250 > 0 ? next() : setTimeout(next, 0);
+                }
             }
 
             onComplete(code);
+            return code;
         }
 
         var string_positions = keys(replacements[CURRENT_LEVEL]);
-        _processReplacement(code, string_positions, 0, onComplete);
+        return _processReplacement(code, string_positions, 0, onComplete);
     }
 
     /**
@@ -604,7 +617,7 @@ var Rainbow = (function() {
      */
     function _highlightBlockForLanguage(code, language, onComplete) {
         var patterns = _getPatternsForLanguage(language);
-        _processCodeWithPatterns(_htmlEntities(code), patterns, onComplete);
+        return _processCodeWithPatterns(_htmlEntities(code), patterns, onComplete);
     }
 
     /**
@@ -737,6 +750,17 @@ var Rainbow = (function() {
          * @returns void
          */
         color: function() {
+            // if running in node environnement, force using
+            // _highlightBlockForLanguage() and automaticaly load the generic and required language
+            if(isNode) {
+                var code     = arguments[0]
+                    language = arguments[1] || 'generic',
+                    callback = arguments[2] || function() {};
+                // Load generic and required language :
+                require("./language/generic.js");
+                require('./language/' + language + '.js');
+                return _highlightBlockForLanguage(code, language, callback);
+            }
 
             // if you want to straight up highlight a string you can pass the string of code,
             // the language, and a callback function
@@ -757,10 +781,14 @@ var Rainbow = (function() {
     };
 }) ();
 
-/**
- * adds event listener to start highlighting
- */
-if(typeof window != 'undefined') {
+
+
+if(isNode) {
+    module = module.exports = Rainbow;
+} else {
+    /**
+     * adds event listener to start highlighting
+     */
     window.Rainbow = Rainbow;
     (function() {
         if (window.addEventListener) {
@@ -768,8 +796,6 @@ if(typeof window != 'undefined') {
         }
         window.attachEvent('onload', Rainbow.color);
     }) ();
-} else if((typeof module != 'undefined') && module.exports) {
-    module = module.exports = Rainbow;
 }
 
 // When using Google closure compiler in advanced mode some methods

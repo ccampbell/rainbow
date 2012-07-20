@@ -4,10 +4,15 @@ var color   = require('..').color
 
 
 function test(language) {
-	var content = fs.readFileSync(__dirname + '/language/'+language+'-test.js', 'utf8');
-	color(content, language, function(highlighted_code) {
-		console.log('<html><body><pre>' + highlighted_code + '</pre></body></html>');
-	})
+	var content    = "var foo = 'bar';";
+	var syncResult = color(content, language, function(highlighted_code) {
+		if(highlighted_code == syncResult) {
+			console.log('OK : synchronized result');
+		} else {
+			console.log('ERR : synchronized result : "%s" != "%s"',highlighted_code, syncResult)
+		}
+	});
+	console.log('syncResult', syncResult);
 }
 
 test('javascript');
