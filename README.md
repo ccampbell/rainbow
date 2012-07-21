@@ -73,4 +73,6 @@ Currently supported languages are:
 
 ## More Info
 
+If you are looking for line number support you can try https://github.com/Sjeiti/rainbow.linenumbers
+
 You can check out additional documentation and build custom packages at [rainbowco.de](http://rainbowco.de).
