@@ -58,6 +58,7 @@ Currently supported languages are:
 - C#
 - Coffeescript
 - CSS
+- Go
 - HTML
 - Java
 - Javascript
