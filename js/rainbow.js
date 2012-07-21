@@ -624,7 +624,13 @@ window['Rainbow'] = (function() {
                 _addClass(block, 'rainbow');
 
                 return _highlightBlockForLanguage(block.innerHTML, language, function(code) {
-                    block.innerHTML = code;
+                    // fill in the code, the outerHTML/innerHTML logic is a fix for old IEs that break newlines
+                    // see http://www.quirksmode.org/bugreports/archives/2004/11/innerhtml_and_t.html
+                    if ((block.tagName == "CODE" || block.tagName == "PRE") && "outerHTML" in block) {
+                        block.outerHTML = "<" + block.tagName + ">" + code + "</" + block.tagName + ">";
+                    } else {
+                        block.innerHTML = code;
+                    }
 
                     // reset the replacement arrays
                     replacements = {};
