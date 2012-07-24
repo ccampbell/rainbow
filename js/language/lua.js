@@ -4,7 +4,6 @@
  * @author Javier Aguirre
  * @version 1.0
  */
-if(typeof(process) != 'undefined') var Rainbow = require('../rainbow.js');
 Rainbow.extend('lua', [
     {
         'matches': {

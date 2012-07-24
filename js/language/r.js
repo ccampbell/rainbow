@@ -4,7 +4,6 @@
  * @author Simon Potter
  * @version 1.0
  */
-if(typeof(process) != 'undefined') var Rainbow = require('../rainbow.js');
 Rainbow.extend('r', [
     /**
      * Note that a valid variable name is of the form:

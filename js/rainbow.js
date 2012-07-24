@@ -19,9 +19,7 @@
  * @url rainbowco.de
  */
 
-var isNode  = typeof(process) != 'undefined';
-
-var Rainbow = (function() {
+(function() {
 
     /**
      * array of replacements to process at the end
@@ -314,13 +312,9 @@ var Rainbow = (function() {
                     _processPattern(regex, pattern, code, callback);
                 };
 
-                if(isNode) {
-                    return nextCall();
-                } else {
-                    // every 100 items we process let's call set timeout
-                    // to let the ui breathe a little
-                    return match_counter % 100 > 0 ? nextCall() : setTimeout(nextCall, 0);
-                }
+                // every 100 items we process let's call set timeout
+                // to let the ui breathe a little
+                return match_counter % 100 > 0 ? nextCall() : setTimeout(nextCall, 0);
             };
 
         // if this is not a child match and it falls inside of another
@@ -591,12 +585,8 @@ var Rainbow = (function() {
                     return _processReplacement(code, positions, ++i, onComplete);
                 };
 
-                if(isNode) {
-                    return next();
-                } else {
-                    // use a timeout every 250 to not freeze up the UI
-                    return replacement_counter % 250 > 0 ? next() : setTimeout(next, 0);
-                }
+                // use a timeout every 250 to not freeze up the UI
+                return replacement_counter % 250 > 0 ? next() : setTimeout(next, 0);
             }
 
             onComplete(code);
@@ -612,10 +602,11 @@ var Rainbow = (function() {
      *
      * @param {string} code
      * @param {string} language
-     * @param {Function} onComplete
+     * @param {Function} onComplete (optional)
      * @returns void
      */
     function _highlightBlockForLanguage(code, language, onComplete) {
+        onComplete = onComplete || function() {}; // onComplete must be optional
         var patterns = _getPatternsForLanguage(language);
         return _processCodeWithPatterns(_htmlEntities(code), patterns, onComplete);
     }
@@ -650,8 +641,8 @@ var Rainbow = (function() {
                     }
 
                     // process the next block
-                    setTimeout(function() {
-                        _highlightCodeBlock(code_blocks, ++i, onComplete);
+                    return setTimeout(function() {
+                        return _highlightCodeBlock(code_blocks, ++i, onComplete);
                     }, 0);
                 });
             }
@@ -704,7 +695,7 @@ var Rainbow = (function() {
     /**
      * public methods
      */
-    return {
+    var Rainbow = {
 
         /**
          * extends the language pattern matches
@@ -750,18 +741,6 @@ var Rainbow = (function() {
          * @returns void
          */
         color: function() {
-            // if running in node environnement, force using
-            // _highlightBlockForLanguage() and automaticaly load the generic and required language
-            if(isNode) {
-                var code     = arguments[0]
-                    language = arguments[1] || 'generic',
-                    callback = arguments[2] || function() {};
-                // Load generic and required language :
-                require("./language/generic.js");
-                require('./language/' + language + '.js');
-                return _highlightBlockForLanguage(code, language, callback);
-            }
-
             // if you want to straight up highlight a string you can pass the string of code,
             // the language, and a callback function
             if (typeof arguments[0] == 'string') {
@@ -779,27 +758,38 @@ var Rainbow = (function() {
             _highlight(arguments[0], arguments[1]);
         }
     };
-}) ();
 
 
+    var root     = this // window or global
+        isNode   = (typeof(module) === 'object') && module.exports;
 
-if(isNode) {
-    module = module.exports = Rainbow;
-} else {
+    // If using node, force using synchronous API by localy overriding setTimeout  :
+    var setTimeout  = isNode ? function(func, timeout) { return func(); } : root.setTimeout;
+
+    if(isNode) {
+        // Export Rainbow as nodejs module
+        module.exports = Rainbow;
+    } else {
+        // Else expose Rainbow to root object (usualy window)
+        root['Rainbow'] = Rainbow;
+
+        // When using Google closure compiler in advanced mode some methods
+        // get renamed.  This keeps a public reference to these methods so they can
+        // still be referenced from outside this library.
+        root['Rainbow']["onHighlight"] = Rainbow.onHighlight;
+        root['Rainbow']["addClass"]    = Rainbow.addClass;
+    }
+
     /**
      * adds event listener to start highlighting
      */
-    window.Rainbow = Rainbow;
     (function() {
-        if (window.addEventListener) {
-            return window.addEventListener('load', Rainbow.color, false);
+        if (root.addEventListener) {
+            return root.addEventListener('load', Rainbow.color, false);
         }
-        window.attachEvent('onload', Rainbow.color);
+        if (root.attachEvent) {
+            root.attachEvent('onload', Rainbow.color);
+        }
     }) ();
-}
 
-// When using Google closure compiler in advanced mode some methods
-// get renamed.  This keeps a public reference to these methods so they can
-// still be referenced from outside this library.
-Rainbow["onHighlight"] = Rainbow.onHighlight;
-Rainbow["addClass"] = Rainbow.addClass;
+}).call(this);

@@ -4,7 +4,6 @@
 * @author Leo Accend
 * @version 1.0.0
 */
-if(typeof(process) != 'undefined') var Rainbow = require('../rainbow.js');
 Rainbow.extend( "java", [
   {
     name: "constant",

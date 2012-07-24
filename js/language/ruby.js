@@ -6,7 +6,6 @@
  * @author actsasflinn
  * @version 1.0.5
  */
-if(typeof(process) != 'undefined') var Rainbow = require('../rainbow.js');
 Rainbow.extend('ruby', [
     /**
      * Strings

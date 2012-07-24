@@ -4,7 +4,6 @@
 * @author Dan Stewart
 * @version 1.0.1
 */
-if(typeof(process) != 'undefined') var Rainbow = require('../rainbow.js');
 Rainbow.extend('csharp', [
 	{
         // @see http://msdn.microsoft.com/en-us/library/23954zh5.aspx

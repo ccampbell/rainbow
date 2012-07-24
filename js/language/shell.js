@@ -5,7 +5,6 @@
  * @author Craig Campbell
  * @version 1.0.3
  */
-if(typeof(process) != 'undefined') var Rainbow = require('../rainbow.js');
 Rainbow.extend('shell', [
     /**
      * This handles the case where subshells contain quotes.

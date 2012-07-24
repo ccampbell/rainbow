@@ -4,7 +4,6 @@
  * @author Craig Campbell
  * @version 1.0.6
  */
-if(typeof(process) != 'undefined') var Rainbow = require('../rainbow.js');
 Rainbow.extend('javascript', [
 
     /**
