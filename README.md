@@ -6,6 +6,8 @@ It was designed to be lightweight (1.4kb), easy to use, and extendable.
 
 It is completely themable via CSS.
 
+If you would like to donate to help support Rainbow development use [Gittip](https://www.gittip.com/ccampbell).
+
 ## Quick Start
 
 1. Include some markup for code you want to be highlighted:
