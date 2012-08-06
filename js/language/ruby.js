@@ -6,7 +6,6 @@
  * @author actsasflinn
  * @version 1.0.5
  */
-
 Rainbow.extend('ruby', [
     /**
      * Strings

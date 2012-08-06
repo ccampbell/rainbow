@@ -18,7 +18,8 @@
  * @preserve @version 1.1.8
  * @url rainbowco.de
  */
-window['Rainbow'] = (function() {
+
+(function() {
 
     /**
      * array of replacements to process at the end
@@ -538,18 +539,20 @@ window['Rainbow'] = (function() {
 
             // we are done processing the patterns
             // process the replacements and update the DOM
-            _processReplacements(code, function(code) {
+            _processReplacements(code, function(resultingCode) {
 
                 // when we are done processing replacements
                 // we are done at this level so we can go back down
                 delete replacements[CURRENT_LEVEL];
                 delete replacement_positions[CURRENT_LEVEL];
                 --CURRENT_LEVEL;
-                callback(code);
+                code = resultingCode;
+                callback(resultingCode);
             });
         }
 
-        _workOnPatterns(patterns, 0);
+       _workOnPatterns(patterns, 0);
+       return code;
     }
 
     /**
@@ -579,7 +582,7 @@ window['Rainbow'] = (function() {
 
                 // process next function
                 var next = function() {
-                    _processReplacement(code, positions, ++i, onComplete);
+                    return _processReplacement(code, positions, ++i, onComplete);
                 };
 
                 // use a timeout every 250 to not freeze up the UI
@@ -591,6 +594,7 @@ window['Rainbow'] = (function() {
 
         var string_positions = keys(replacements[CURRENT_LEVEL]);
         _processReplacement(code, string_positions, 0, onComplete);
+        return code;
     }
 
     /**
@@ -598,12 +602,13 @@ window['Rainbow'] = (function() {
      *
      * @param {string} code
      * @param {string} language
-     * @param {Function} onComplete
+     * @param {Function} onComplete (optional)
      * @returns void
      */
     function _highlightBlockForLanguage(code, language, onComplete) {
+        onComplete = onComplete || function() {}; // onComplete must be optional
         var patterns = _getPatternsForLanguage(language);
-        _processCodeWithPatterns(_htmlEntities(code), patterns, onComplete);
+        return _processCodeWithPatterns(_htmlEntities(code), patterns, onComplete);
     }
 
     /**
@@ -636,8 +641,8 @@ window['Rainbow'] = (function() {
                     }
 
                     // process the next block
-                    setTimeout(function() {
-                        _highlightCodeBlock(code_blocks, ++i, onComplete);
+                    return setTimeout(function() {
+                        return _highlightCodeBlock(code_blocks, ++i, onComplete);
                     }, 0);
                 });
             }
@@ -690,7 +695,7 @@ window['Rainbow'] = (function() {
     /**
      * public methods
      */
-    return {
+    var Rainbow = {
 
         /**
          * extends the language pattern matches
@@ -736,7 +741,6 @@ window['Rainbow'] = (function() {
          * @returns void
          */
         color: function() {
-
             // if you want to straight up highlight a string you can pass the string of code,
             // the language, and a callback function
             if (typeof arguments[0] == 'string') {
@@ -754,20 +758,38 @@ window['Rainbow'] = (function() {
             _highlight(arguments[0], arguments[1]);
         }
     };
-}) ();
 
-/**
- * adds event listener to start highlighting
- */
-(function() {
-    if (window.addEventListener) {
-        return window.addEventListener('load', Rainbow.color, false);
+
+    var root     = this // window or global
+        isNode   = (typeof(module) === 'object') && module.exports;
+
+    // If using node, force using synchronous API by localy overriding setTimeout  :
+    var setTimeout  = isNode ? function(func, timeout) { return func(); } : root.setTimeout;
+
+    if(isNode) {
+        // Export Rainbow as nodejs module
+        module.exports = Rainbow;
+    } else {
+        // Else expose Rainbow to root object (usualy window)
+        root['Rainbow'] = Rainbow;
+
+        // When using Google closure compiler in advanced mode some methods
+        // get renamed.  This keeps a public reference to these methods so they can
+        // still be referenced from outside this library.
+        root['Rainbow']["onHighlight"] = Rainbow.onHighlight;
+        root['Rainbow']["addClass"]    = Rainbow.addClass;
     }
-    window.attachEvent('onload', Rainbow.color);
-}) ();
 
-// When using Google closure compiler in advanced mode some methods
-// get renamed.  This keeps a public reference to these methods so they can
-// still be referenced from outside this library.
-Rainbow["onHighlight"] = Rainbow.onHighlight;
-Rainbow["addClass"] = Rainbow.addClass;
+    /**
+     * adds event listener to start highlighting
+     */
+    (function() {
+        if (root.addEventListener) {
+            return root.addEventListener('load', Rainbow.color, false);
+        }
+        if (root.attachEvent) {
+            root.attachEvent('onload', Rainbow.color);
+        }
+    }) ();
+
+}).call(this);

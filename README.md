@@ -73,6 +73,28 @@ Currently supported languages are:
 - Shell
 - Smalltalk
 
+## NodeJS support
+
+Rainbow now support [NodeJS](http://nodejs.org/) environnement :
+
+```javascript
+var Rainbow = require('rainbow');
+var code    = 'console.log("Rainbow is a great highlighting tool to use with NodeJS");';
+
+// Output synchronous :
+console.log(Rainbow.color(code));
+```
+
+Result :
+```html
+console.<span class="function call">log</span>(<span class="string">"Rainbow is a great highlighting tool to use with NodeJS"</span>);
+```
+
+
+Installation using npm (maybe soon ?) :
+
+    npm install rainbow
+
 ## More Info
 
 If you are looking for line number support you can try https://github.com/Sjeiti/rainbow.linenumbers
