@@ -4,24 +4,12 @@
  * @author pygments.org
  * @author pastie.org
  * @author Simon Potter
- * @version 1.0
+ * @version 1.1.0
  */
 
 pre {
-    /* original is white background with no border */
     background-color: #F8F8FF;
-    border: 1px solid #DEDEDE;
-    word-wrap: break-word;
-    margin: 0;
-    padding: 0;
     color: #000;
-    font-size: 13px;
-    line-height: 16px;
-    margin-bottom: 20px
-}
-
-pre, code {
-    font-family: monospace;
 }
 
 pre .comment {

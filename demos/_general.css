@@ -1,0 +1,8 @@
+pre, code {
+    font: 14px/1.4 'Monaco', courier, monospace;
+}
+
+pre {
+    border-radius: 5px;
+    padding: 10px;
+}

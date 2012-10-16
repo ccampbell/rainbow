@@ -5,21 +5,11 @@
  *
  * @author Michael Sheets
  * @author Jesse Farmer <jesse@20bits.com>
- * @version 1.0.1
+ * @version 1.1.0
  */
 pre {
     background: #141414;
-    word-wrap: break-word;
-    margin: 0px;
-    padding: 0px;
-    padding: 10px;
     color: #F8F8F8;
-    font-size: 14px;
-    margin-bottom: 20px;
-}
-
-pre, code {
-    font-family: 'Monaco', courier, monospace;
 }
 
 pre .comment {
