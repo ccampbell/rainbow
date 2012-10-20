@@ -73,6 +73,8 @@ Currently supported languages are:
 
 ## More Info
 
-If you are looking for line number support you can try https://github.com/Sjeiti/rainbow.linenumbers
+If you are looking for line number support you can try one of the following:
+- https://github.com/Blender3D/rainbow.linenumbers.js
+- https://github.com/Sjeiti/rainbow.linenumbers
 
 You can check out additional documentation and build custom packages at [rainbowco.de](http://rainbowco.de).
