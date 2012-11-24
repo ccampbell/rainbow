@@ -70,6 +70,14 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'class instantiation',
+
+    'var animal = new Animal();',
+
+    '<span class="keyword">var</span> animal <span class="keyword operator">=</span> <span class="keyword">new</span> <span class="entity function">Animal</span>();'
+);
+
+RainbowTester.run(
     'inline function',
 
     'var foo = true,\n' +

@@ -2,7 +2,7 @@
  * Javascript patterns
  *
  * @author Craig Campbell
- * @version 1.0.6
+ * @version 1.0.7
  */
 Rainbow.extend('javascript', [
 
@@ -87,6 +87,17 @@ Rainbow.extend('javascript', [
             3: 'entity.function'
         },
         'pattern': /(var)?(\s|^)(.*)(?=\s?=\s?function\()/g
+    },
+
+    /**
+     * matches constructor call
+     */
+    {
+        'matches': {
+            1: 'keyword',
+            2: 'entity.function'
+        },
+        'pattern': /(new)\s+(.*)(?=\()/g
     },
 
     /**

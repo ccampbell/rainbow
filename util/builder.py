@@ -21,7 +21,7 @@ class RainbowBuilder(object):
             'go': '1.0',
             'html': '1.0.6',
             'java': '1.0',
-            'javascript': '1.0.6',
+            'javascript': '1.0.7',
             'lua': '1.0',
             'php': '1.0.6',
             'python': '1.0.6',
