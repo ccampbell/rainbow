@@ -185,6 +185,14 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'attribute camel case',
+
+    '<button onClick="test()">Click me</button>',
+
+    '<span class="support tag"><span class="support tag">&lt;</span><span class="support tag-name">button</span></span> <span class="support attribute">onClick</span><span class="support operator">=</span><span class="string quote">"</span><span class="string value">test()</span><span class="string quote">"</span><span class="support tag close">&gt;</span>Click me<span class="support tag"><span class="support tag">&lt;</span><span class="support tag special">/</span><span class="support tag-name">button</span></span><span class="support tag close">&gt;</span>'
+);
+
+RainbowTester.run(
     'string inside tags',
 
     '<pre><code data-language="python">def openFile(path):\n' +
