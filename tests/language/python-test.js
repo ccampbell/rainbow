@@ -151,4 +151,24 @@ RainbowTester.run(
     'yes"""</span>'
 );
 
+RainbowTester.run(
+    'multiple docstrings',
+
+    '"""\n' +
+    'x\n' +
+    '"""\n' +
+    '2 + 2\n' +
+    '"""\n' +
+    'y\n' +
+    '"""',
+
+    '<span class="comment docstring">"""\n' +
+    'x\n' +
+    '"""</span>\n' +
+    '<span class="constant numeric">2</span> <span class="keyword operator">+</span> <span class="constant numeric">2</span>\n' +
+    '<span class="comment docstring">"""\n' +
+    'y\n' +
+    '"""</span>'
+);
+
 RainbowTester.endTest('python');
