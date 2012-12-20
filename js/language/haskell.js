@@ -69,10 +69,9 @@ Rainbow.extend('haskell', [
     {
         'name': 'keyword',
         'pattern': /[\`][a-zA-Z_']*?[\`]/g
-    }
-    ,
+    },
     {
-        'name': 'keyword',
-        'pattern': /\b[A-Z][A-Za-z_']*/g
+        'name': 'entity.class',
+        'pattern': /\b[^\'|^\"][A-Z][A-Za-z_']*/g
     }
 ]);
