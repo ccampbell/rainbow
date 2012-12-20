@@ -50,7 +50,7 @@ Rainbow.extend('haskell', [
     },
     {
         'matches': {
-            1: 'keyword.namespace',
+            1: 'keyword',
             2: {
                 'name': 'support.namespace',
                 'pattern': /\w+/g
