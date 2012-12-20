@@ -34,6 +34,18 @@ foreach ($fruits as $key => $value) {
 <code data-language="php">&lt;?php
 namespace Sonic;
 
+use Sonic;
+
+interface IUtil {
+    
+}
+
+trait HelloWorld {
+    public function sayHello() {
+        echo 'Hello World!';
+    }
+}
+
 /**
  * Util
  *
@@ -41,7 +53,7 @@ namespace Sonic;
  * @package Util
  * @author Craig Campbell
  */
-class Util
+class Util implements IUtil
 {
     /**
      * deletes a directory recursively
