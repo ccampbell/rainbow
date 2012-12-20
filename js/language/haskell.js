@@ -64,7 +64,7 @@ Rainbow.extend('haskell', [
     },
     {
         'name': 'keyword',
-        'pattern': /\b(case|class|foreign|hiddin|qualified|data|family|default|deriving|do|else|if|import|in|infix|infixl|infixr|instance|let|in|module|newtype|of|then|type|where|_)\b/g
+        'pattern': /\b(case|class|foreign|hiddin|qualified|data|family|default|deriving|do|else|if|import|in|infix|infixl|infixr|instance|let|in|otherwise|module|newtype|of|then|type|where|_)\b/g
     },
     {
         'name': 'keyword',
