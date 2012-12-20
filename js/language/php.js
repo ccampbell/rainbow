@@ -30,7 +30,7 @@ Rainbow.extend('php', [
     },
     {
         'name': 'keyword',
-        'pattern': /\b(use|continue|break|die|end(for(each)?|switch|if)|case|require(_once)?|include(_once)?)(?=\(|\b)/g
+        'pattern': /\b(continue|break|die|end(for(each)?|switch|if)|case|require(_once)?|include(_once)?)(?=\(|\b)/g
     },
     {
         'matches': {
@@ -66,7 +66,7 @@ Rainbow.extend('php', [
                 'pattern': /\w+/g
             }
         },
-        'pattern': /\b(namespace)\s(.*?);/g
+        'pattern': /\b(namespace|use)\s(.*?);/g
     },
     {
         'matches': {
