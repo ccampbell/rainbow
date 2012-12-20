@@ -5,7 +5,8 @@
 <body>
 
 <pre>
-<code data-language="haskell">{-# LANGUAGE Trustworthy #-}
+<code data-language="haskell">
+{-# LANGUAGE Trustworthy #-}
 {-# LANGUAGE CPP #-}
 
 -----------------------------------------------------------------------------
@@ -31,6 +32,8 @@ module System.Exit
   ) where
 
 import Prelude
+
+a = [1..10]
 
 #ifdef __GLASGOW_HASKELL__
 import GHC.IO
