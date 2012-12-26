@@ -2,12 +2,25 @@
  * PHP patterns
  *
  * @author Craig Campbell
- * @version 1.0.6
+ * @author Nijiko Yonskai
+ * @version 1.0.7
  */
 Rainbow.extend('php', [
     {
         'name': 'support',
         'pattern': /\becho\b/g
+    },
+    {
+        'name': 'string',
+        'matches': {
+            1: 'string.open',
+            2: {
+                'name': 'string.keyword',
+                'pattern': /(\$.*?)/g
+            },
+            3: 'string.close'
+        },
+        'pattern': /("|')(.*?[^\\\1])?(\1)/g
     },
     {
         'matches': {
