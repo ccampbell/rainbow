@@ -5,21 +5,11 @@
  *
  * @author Ethan Schoonover
  * @author David Litmark
- * @version 1.0.0
+ * @version 1.1.0
  */
 pre {
     background: #002b36; /* base03 */
-    word-wrap: break-word;
-    margin: 0px;
-    padding: 0px;
-    padding: 10px;
     color: #839496; /* base0 */
-    font-size: 14px;
-    margin-bottom: 20px;
-}
-
-pre, code {
-    font-family: 'Monaco', courier, monospace;
 }
 
 pre .comment {

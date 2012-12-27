@@ -3,20 +3,11 @@
  *
  * @author Chris Kempson
  * @author skim
- * @version 1.0.0
+ * @version 1.1.0
  */
 pre {
     background-color: #1d1f21;
-    word-wrap: break-word;
-    margin: 0px;
-    padding: 0 10px;
     color: #c5c8c6;
-    font-size: 14px;
-    margin-bottom: 20px;
-}
-
-pre, code {
-    font-family: 'Monaco', courier, monospace;
 }
 
 pre .comment {

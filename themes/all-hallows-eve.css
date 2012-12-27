@@ -4,21 +4,11 @@
  * Adapted from Ultraviolet RubyGem
  *
  * @author Flinn Mueller
- * @version 1.0.1
+ * @version 1.1.0
  */
 pre {
     background: #000;
-    word-wrap: break-word;
-    margin: 0px;
-    padding: 0px;
-    padding: 10px;
     color: #fff;
-    font-size: 14px;
-    margin-bottom: 20px;
-}
-
-pre, code {
-    font-family: 'Monaco', courier, monospace;
 }
 
 pre .comment {
