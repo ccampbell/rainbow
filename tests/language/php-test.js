@@ -132,6 +132,14 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'trait declaration',
+
+    'trait MyClass {}',
+
+    '<span class="storage class">trait</span> <span class="entity name class">MyClass</span> {}'
+);
+
+RainbowTester.run(
     'abstract class declaration',
 
     'abstract class MyClass {}',
