@@ -76,7 +76,7 @@ Rainbow.extend('php', [
             4: 'storage.modifier.extends',
             5: 'entity.other.inherited-class'
         },
-        'pattern': /\b(abstract|final)?\s?(class)\s(\w+)(\sextends\s)?([\w\\]*)?\s?\{?(\n|\})/g
+        'pattern': /\b(abstract|final)?\s?(class|trait)\s(\w+)(\sextends\s)?([\w\\]*)?\s?\{?(\n|\})/g
     },
     {
         'name': 'keyword.static',
