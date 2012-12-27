@@ -116,11 +116,35 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'use declaration',
+
+    'use Sonic;',
+
+    '<span class="keyword namespace">use</span> <span class="support namespace">Sonic</span>;'
+);
+
+RainbowTester.run(
     'class declaration',
 
     'class MyClass {}',
 
     '<span class="storage class">class</span> <span class="entity name class">MyClass</span> {}'
+);
+
+RainbowTester.run(
+    'trait declaration',
+
+    'trait MyClass {}',
+
+    '<span class="storage class">trait</span> <span class="entity name class">MyClass</span> {}'
+);
+
+RainbowTester.run(
+    'interface declaration',
+
+    'interface IMyClass {}',
+
+    '<span class="storage class">interface</span> <span class="entity name class">IMyClass</span> {}'
 );
 
 RainbowTester.run(
@@ -144,6 +168,14 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'class with an implementation declaration',
+
+    'class Collection implements IList {}',
+
+    '<span class="storage class">class</span> <span class="entity name class">Collection</span><span class="storage modifier extends"> implements </span><span class="entity other inherited-class">IList</span> {}'
+);
+
+RainbowTester.run(
     'child class declaration',
 
     'class Collection extends ArrayObject {}',
@@ -151,6 +183,13 @@ RainbowTester.run(
     '<span class="storage class">class</span> <span class="entity name class">Collection</span><span class="storage modifier extends"> extends </span><span class="entity other inherited-class">ArrayObject</span> {}'
 );
 
+RainbowTester.run(
+    'child class with an implementation declaration',
+
+    'class Collection extends ArrayObject implements IList {}',
+
+    '<span class="storage class">class</span> <span class="entity name class">Collection</span><span class="storage modifier extends"> extends </span><span class="entity other inherited-class">ArrayObject</span><span class="storage modifier extends"> implements </span><span class="entity other inherited-class">IList</span> {}'
+);
 
 RainbowTester.run(
     'final child class declaration',
