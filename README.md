@@ -73,6 +73,27 @@ Currently supported languages are:
 - Shell
 - Smalltalk
 
+## Building
+
+Rainbow gets minified with the closure compiler. You can install it on OS X via Homebrew:
+
+    brew install closure-compiler
+
+To build a minified version of your changes, you can run the compile script:
+
+    ./util/compile.py --core
+
+In case the compiler cannot be found (which is the case if you installed via Homebrew),
+you will have to specify the path to the compiler.jar (see `brew info closure-compiler`) -
+here's an example:
+
+    CLOSURE_COMPILER=/usr/local/Cellar/closure-compiler/20120710/libexec/build/compiler.jar util/compile.py --core
+
+If you want to build a custom version, list the languages you would like to include as
+command line arguments:
+
+    util/compile.py ruby javascript
+
 ## More Info
 
 If you are looking for line number support you can try one of the following:
