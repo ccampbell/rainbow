@@ -168,6 +168,14 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'class with an implementation declaration',
+
+    'class Collection implements IList {}',
+
+    '<span class="storage class">class</span> <span class="entity name class">Collection</span><span class="storage modifier extends"> implements </span><span class="entity other inherited-class">IList</span> {}'
+);
+
+RainbowTester.run(
     'child class declaration',
 
     'class Collection extends ArrayObject {}',
