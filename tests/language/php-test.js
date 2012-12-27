@@ -140,6 +140,14 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'interface declaration',
+
+    'interface IMyClass {}',
+
+    '<span class="storage class">interface</span> <span class="entity name class">IMyClass</span> {}'
+);
+
+RainbowTester.run(
     'abstract class declaration',
 
     'abstract class MyClass {}',
