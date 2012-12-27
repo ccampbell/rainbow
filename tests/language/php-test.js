@@ -116,6 +116,14 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'use declaration',
+
+    'use Sonic;',
+
+    '<span class="keyword namespace">use</span> <span class="support namespace">Sonic</span>;'
+);
+
+RainbowTester.run(
     'class declaration',
 
     'class MyClass {}',
