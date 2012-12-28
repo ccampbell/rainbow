@@ -132,3 +132,17 @@ RainbowTester.run(
   '  _ -&gt; Nothing',
   '<span class="keyword">case</span> e <span class="keyword">of</span>\n  <span class="entity class">A</span> <span class="keyword operator">-</span><span class="keyword operator">&gt;</span> <span class="entity class">Just</span> a\n  _ <span class="keyword operator">-</span><span class="keyword operator">&gt;</span> <span class="entity class">Nothing</span>'
 );
+
+RainbowTester.run(
+  'C Preprocessors',
+  '#ifndef __NHC__\n' +
+  'exitWith :: ExitCode -> IO a\n' +
+  'exitWith ExitSuccess = throwIO ExitSuccess\n' +
+  'exitWith code@(ExitFailure n)\n' +
+  '  | n /= 0 = throwIO code\n' +
+  '#ifdef __GLASGOW_HASKELL__\n' +
+  '  | otherwise = ioError (IOError Nothing InvalidArgument "exitWith" "ExitFailure 0" Nothing Nothing)\n' +
+  '#endif\n' +
+  '#endif  /* ! __NHC__ */',
+  '<span class="meta preprocessor">#<span class="keyword define">ifndef</span> <span class="entity name">__NHC__</span></span>\nexitWith <span class="keyword operator">:</span><span class="keyword operator">:</span> <span class="entity class">ExitCode</span> <span class="keyword operator">-</span><span class="keyword operator">&gt;</span> <span class="entity class">IO</span> a\nexitWith <span class="entity class">ExitSuccess</span> <span class="keyword operator">=</span> throwIO <span class="entity class">ExitSuccess</span>\nexitWith code<span class="keyword operator">@</span>(<span class="entity class">ExitFailure</span> n)\n  <span class="keyword operator">|</span> n <span class="keyword operator">/=</span> <span class="constant numeric">0</span> <span class="keyword operator">=</span> throwIO code\n<span class="meta preprocessor">#<span class="keyword define">ifdef</span> <span class="entity name">__GLASGOW_HASKELL__</span></span>\n  <span class="keyword operator">|</span> <span class="keyword">otherwise</span> <span class="keyword operator">=</span> ioError (<span class="entity class">IOError</span> <span class="entity class">Nothing</span> <span class="entity class">InvalidArgument</span> <span class="string">"exitWith"</span> <span class="string">"ExitFailure 0"</span> <span class="entity class">Nothing</span> <span class="entity class">Nothing</span>)\n<span class="meta preprocessor">#<span class="keyword define">endif</span></span>\n<span class="meta preprocessor">#<span class="keyword define">endif</span>  /* ! __NHC__ */</span>'
+);
