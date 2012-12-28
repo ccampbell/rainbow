@@ -61,6 +61,7 @@ Currently supported languages are:
 - Coffeescript
 - CSS
 - Go
+- Haskell
 - HTML
 - Java
 - Javascript
