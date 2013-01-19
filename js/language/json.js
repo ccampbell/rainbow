@@ -2,12 +2,16 @@
  * JSON Patterns
  *
  * @author Nijiko Yonskai
- * @version 1.0.0
+ * @version 1.0.2
  */
 Rainbow.extend('json', [
     {
         'name': 'comment.json',
         'pattern': /\\\*[\S\s]*?\*\//g
+    },
+    {
+        'name': 'support.attribute',
+        'pattern': /((?:"|')\\?.*?(?:"|'))\s+?(\:)/g
     },
     {
         'matches': {
@@ -17,35 +21,13 @@ Rainbow.extend('json', [
         'pattern': /(\{|\[)|(\]|\})/g
     },
     {
-        'matches': {
-            1: 'string.quote',
-            2: 'support.attribute',
-            3: 'string.quote',
-            4: 'string.operator'
-        },
-        'pattern': /(\")([^\"]+)(\")(\:)/g
+        'name': 'string.value',
+        'pattern': /(\"|\')(\\?.)*?\1/g
     },
     {
         'matches': {
-            1: 'string.quote',
-            2: 'support.attribute',
-            3: 'string.quote',
-            4: 'string.operator'
+            1: 'constant.numeric'
         },
-        'pattern': /(\')([^\']+)(\')(\:)/g
-    },
-    {
-        'matches': {
-            1: 'string.quote',
-            2: 'string.value',
-            3: 'string.quote'
-        },
-        'pattern': /(\'|\")([^\1]+?)(\1)/g
-    },
-    {
-        'matches': {
-            1: 'string.value'
-        },
-        'pattern': /\s+?([a-z0-9\-\+\*\%\^\!\~\.]+)/gi
+        'pattern': /\b(-?(0x)?\d*\.?[\da-f]+|NaN|-?Infinity)\b/gi
     }
 ], true);

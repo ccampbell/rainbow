@@ -11,18 +11,6 @@ Rainbow.extend('php', [
         'pattern': /\becho\b/g
     },
     {
-        'name': 'string',
-        'matches': {
-            1: 'string.open',
-            2: {
-                'name': 'string.keyword',
-                'pattern': /(\$.*?)/g
-            },
-            3: 'string.close'
-        },
-        'pattern': /("|')(.*?[^\\\1])?(\1)/g
-    },
-    {
         'matches': {
             1: 'variable.dollar-sign',
             2: 'variable'
