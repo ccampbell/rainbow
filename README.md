@@ -65,7 +65,9 @@ Currently supported languages are:
 - HTML
 - Java
 - Javascript
+- JSON
 - Lua
+- Markdown
 - PHP
 - Python
 - R
@@ -73,6 +75,7 @@ Currently supported languages are:
 - Scheme
 - Shell
 - Smalltalk
+- XML
 
 ## Building
 

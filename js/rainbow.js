@@ -27,66 +27,71 @@ window['Rainbow'] = (function() {
      */
     var replacements = {},
 
-        /**
-         * an array of start and end positions of blocks to be replaced
-         *
-         * @type {Object}
-         */
-        replacement_positions = {},
+    /**
+     * an array of start and end positions of blocks to be replaced
+     *
+     * @type {Object}
+     */
+    replacement_positions = {},
 
-        /**
-         * an array of the language patterns specified for each language
-         *
-         * @type {Object}
-         */
-        language_patterns = {},
+    /**
+     * an array of the language patterns specified for each language
+     *
+     * @type {Object}
+     */
+    language_patterns = {},
 
-        /**
-         * an array of languages and whether they should bypass the default patterns
-         *
-         * @type {Object}
-         */
-        bypass_defaults = {},
+    /**
+     * an array of languages and whether they should bypass the default patterns
+     *
+     * @type {Object}
+     */
+    bypass_defaults = {},
 
-        /**
-         * processing level
-         *
-         * replacements are stored at this level so if there is a sub block of code
-         * (for example php inside of html) it runs at a different level
-         *
-         * @type {number}
-         */
-        CURRENT_LEVEL = 0,
+    /**
+     * processing level
+     *
+     * replacements are stored at this level so if there is a sub block of code
+     * (for example php inside of html) it runs at a different level
+     *
+     * @type {number}
+     */
+    CURRENT_LEVEL = 0,
 
-        /**
-         * constant used to refer to the default language
-         *
-         * @type {number}
-         */
-        DEFAULT_LANGUAGE = 0,
+    /**
+     * constant used to refer to the default language
+     *
+     * @type {number}
+     */
+    DEFAULT_LANGUAGE = 0,
 
-        /**
-         * used as counters so we can selectively call setTimeout
-         * after processing a certain number of matches/replacements
-         *
-         * @type {number}
-         */
-        match_counter = 0,
+    /**
+     * used as counters so we can selectively call setTimeout
+     * after processing a certain number of matches/replacements
+     *
+     * @type {number}
+     */
+    match_counter = 0,
 
-        /**
-         * @type {number}
-         */
-        replacement_counter = 0,
+    /**
+     * @type {number}
+     */
+    replacement_counter = 0,
 
-        /**
-         * @type {null|string}
-         */
-        global_class,
+    /**
+     * @type {null|string}
+     */
+    global_class,
 
-        /**
-         * @type {null|Function}
-         */
-        onHighlight;
+    /**
+     * @type {null|Function}
+     */
+    onHighlight,
+
+    /**
+     * @type {null|Function}
+     */
+    onReady;
 
     /**
      * cross browser get attribute for an element
@@ -644,9 +649,8 @@ window['Rainbow'] = (function() {
             return _highlightCodeBlock(code_blocks, ++i, onComplete);
         }
 
-        if (onComplete) {
-            onComplete();
-        }
+        if (onComplete) onComplete();
+        if (typeof onReady === 'function') onReady();
     }
 
     /**
@@ -685,6 +689,15 @@ window['Rainbow'] = (function() {
         }
 
         _highlightCodeBlock(final_blocks, 0, onComplete);
+    }
+
+    /**
+     * delegate ready function to base variables
+     *
+     * @returns void
+     */
+    function _onReady (method) {
+        onReady = method;
     }
 
     /**
@@ -728,6 +741,11 @@ window['Rainbow'] = (function() {
          */
         addClass: function(class_name) {
             global_class = class_name;
+        },
+
+        ready: function (callback) {
+            if (typeof callback === 'function')
+                _onReady(callback);
         },
 
         /**
