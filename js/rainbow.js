@@ -86,7 +86,12 @@ window['Rainbow'] = (function() {
     /**
      * @type {null|Function}
      */
-    onHighlight;
+    onHighlight,
+
+    /**
+     * @type {null|Function}
+     */
+    onReady;
 
     /**
      * cross browser get attribute for an element
@@ -644,9 +649,8 @@ window['Rainbow'] = (function() {
             return _highlightCodeBlock(code_blocks, ++i, onComplete);
         }
 
-        if (onComplete) {
-            onComplete();
-        }
+        if (onComplete) onComplete();
+        if (typeof onReady === 'function') onReady();
     }
 
     /**
@@ -685,6 +689,15 @@ window['Rainbow'] = (function() {
         }
 
         _highlightCodeBlock(final_blocks, 0, onComplete);
+    }
+
+    /**
+     * delegate ready function to base variables
+     *
+     * @returns void
+     */
+    function _onReady (method) {
+        onReady = method;
     }
 
     /**
@@ -728,6 +741,11 @@ window['Rainbow'] = (function() {
          */
         addClass: function(class_name) {
             global_class = class_name;
+        },
+
+        ready: function (callback) {
+            if (typeof callback === 'function')
+                _onReady(callback);
         },
 
         /**
