@@ -2,9 +2,13 @@
  * JSON Patterns
  *
  * @author Nijiko Yonskai
- * @version 1.0.2
+ * @version 1.0.3
  */
 Rainbow.extend('json', [
+    {
+        'name': 'constant.language',
+        'pattern': /\b(false|null|true)\b/g
+    },
     {
         'name': 'comment.json',
         'pattern': /\\\*[\S\s]*?\*\//g
