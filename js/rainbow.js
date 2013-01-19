@@ -778,8 +778,8 @@ window['Rainbow'] = (function() {
  * adds event listener to start highlighting
  */
 (function() {
-    if (window.addEventListener) {
-        return window.addEventListener('load', Rainbow.color, false);
+    if (document.addEventListener) {
+        return document.addEventListener('DOMContentLoaded', Rainbow.color, false);
     }
     window.attachEvent('onload', Rainbow.color);
 }) ();

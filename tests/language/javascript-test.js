@@ -66,7 +66,7 @@ RainbowTester.run(
 
     'var Animal = function() { /* some comment */ };',
 
-    '<span class="storage">var</span> <span class="entity function">Animal </span><span class="keyword operator">=</span> <span class="keyword">function</span>() { <span class="comment">/* some comment */</span> };'
+    '<span class="storage">var</span> <span class="entity function">Animal</span> <span class="keyword operator">=</span> <span class="keyword">function</span>() { <span class="comment">/* some comment */</span> };'
 );
 
 RainbowTester.run(
@@ -86,7 +86,7 @@ RainbowTester.run(
     '    };',
 
     '<span class="keyword">var</span> foo <span class="keyword operator">=</span> <span class="constant language">true</span>,\n' +
-    '<span class="entity function">    something </span><span class="keyword operator">=</span> <span class="keyword">function</span>() {\n' +
+    '    <span class="entity function">something</span> <span class="keyword operator">=</span> <span class="keyword">function</span>() {\n' +
     '       <span class="comment">// do something</span>\n' +
     '    };'
 );
@@ -98,7 +98,7 @@ RainbowTester.run(
     '   // do something\n' +
     '};',
 
-    '<span class="entity function">something </span><span class="keyword operator">=</span> <span class="keyword">function</span>() {\n' +
+    '<span class="entity function">something</span> <span class="keyword operator">=</span> <span class="keyword">function</span>() {\n' +
     '   <span class="comment">// do something</span>\n' +
     '};'
 );
@@ -169,6 +169,18 @@ RainbowTester.run(
     '       <span class="string">"msg"</span>:<span class="string">"User not found"</span>\n' +
     '   }\n' +
     '}'
+);
+
+RainbowTester.run(
+    'multiple var declarations',
+
+    'var language = getLanguage(source);\n' +
+    'var parseAndHighlight = function() {};\n' +
+    'var parseAndHighlight2 = function() {};',
+
+    '<span class="keyword">var</span> language <span class="keyword operator">=</span> <span class="function call">getLanguage</span>(source);\n' +
+    '<span class="storage">var</span> <span class="entity function">parseAndHighlight</span> <span class="keyword operator">=</span> <span class="keyword">function</span>() {};\n' +
+    '<span class="storage">var</span> <span class="entity function">parseAndHighlight2</span> <span class="keyword operator">=</span> <span class="keyword">function</span>() {};'
 );
 
 RainbowTester.endTest('javascript');
