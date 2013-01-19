@@ -2,7 +2,6 @@
  * PHP patterns
  *
  * @author Craig Campbell
- * @author Nijiko Yonskai
  * @version 1.0.7
  */
 Rainbow.extend('php', [
