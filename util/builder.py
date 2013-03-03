@@ -17,6 +17,7 @@ class RainbowBuilder(object):
             'csharp': '1.0.1',
             'coffeescript': '1.0',
             'css': '1.0.7',
+            'd': '1.0',
             'generic': '1.0.9',
             'go': '1.0',
             'haskell': '1.0.1',
