@@ -60,6 +60,7 @@ Currently supported languages are:
 - C#
 - Coffeescript
 - CSS
+- D
 - Go
 - Haskell
 - HTML
