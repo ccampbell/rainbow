@@ -2,7 +2,7 @@
  * Lua patterns
  *
  * @author Javier Aguirre
- * @version 1.0
+ * @version 1.0.1
  */
 Rainbow.extend('lua', [
     {
@@ -56,4 +56,4 @@ Rainbow.extend('lua', [
         },
         'pattern': /\b(print|require|module|\w+\.\w+)(?=\()/g
     }
-]);
+], true);
