@@ -184,11 +184,7 @@ window['Rainbow'] = (function() {
      * @returns {boolean}
      */
     function _intersects(start1, end1, start2, end2) {
-        if (start2 >= start1 && start2 < end1) {
-            return true;
-        }
-
-        return end2 > start1 && end2 < end1;
+        return start2 <= end1 && end2 >= start1;
     }
 
     /**
@@ -220,23 +216,29 @@ window['Rainbow'] = (function() {
      * @returns {boolean}
      */
     function _matchIsInsideOtherMatch(start, end) {
+        var toBeDeleted = [ ];
         for (var key in replacement_positions[CURRENT_LEVEL]) {
             key = parseInt(key, 10);
 
-            // if this block completely overlaps with another block
-            // then we should remove the other block and return false
-            if (_hasCompleteOverlap(key, replacement_positions[CURRENT_LEVEL][key], start, end)) {
-                delete replacement_positions[CURRENT_LEVEL][key];
-                delete replacements[CURRENT_LEVEL][key];
-            }
-
             if (_intersects(key, replacement_positions[CURRENT_LEVEL][key], start, end)) {
-                return true;
+                if (!_hasCompleteOverlap(key, replacement_positions[CURRENT_LEVEL][key], start, end)) {
+                    return true;
+                }
+                else {
+                    toBeDeleted.push(key);
+                }
             }
+        }
+        
+        for (var key in toBeDeleted) {
+            // this block completely overlaps with another block
+            // then we should remove the other block and return false
+            delete replacement_positions[CURRENT_LEVEL][key];
+            delete replacements[CURRENT_LEVEL][key];
         }
 
         return false;
-    }
+    }    
 
     /**
      * takes a string of code and wraps it in a span tag based on the name
