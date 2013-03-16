@@ -184,11 +184,7 @@ window['Rainbow'] = (function() {
      * @returns {boolean}
      */
     function _intersects(start1, end1, start2, end2) {
-        if (start2 >= start1 && start2 < end1) {
-            return true;
-        }
-
-        return end2 > start1 && end2 < end1;
+        return start2 <= end1 && end2 >= start1;
     }
 
     /**
