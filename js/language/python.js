@@ -14,7 +14,7 @@ Rainbow.extend('python', [
     },
     {
         'name': 'constant.language',
-        'pattern': /None|True|False/g
+        'pattern': /None|True|False|NotImplemented|\.\.\./g
     },
     {
         'name': 'support.object',
@@ -38,7 +38,7 @@ Rainbow.extend('python', [
         'matches': {
             1: 'keyword'
         },
-        'pattern': /\b(pass|lambda|with|is|not|in|from|elif)(?=\(|\b)/g
+        'pattern': /\b(pass|lambda|with|is|not|in|from|elif|import|return|if|else|continue|try|except|finally)(?=\(|\b)/g
     },
     {
         'matches': {
@@ -75,7 +75,7 @@ Rainbow.extend('python', [
     },
     {
         'name': 'entity.name.function.decorator',
-        'pattern': /@(\w+)/g
+        'pattern': /@([\w\.]+)/g
     },
     {
         'name': 'comment.docstring',
