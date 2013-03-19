@@ -2,7 +2,7 @@
  * Python patterns
  *
  * @author Craig Campbell
- * @version 1.0.8
+ * @version 1.0.9
  */
 Rainbow.extend('python', [
     /**
@@ -38,7 +38,7 @@ Rainbow.extend('python', [
         'matches': {
             1: 'keyword'
         },
-        'pattern': /\b(pass|lambda|with|is|not|in|from|elif|continue|break|raise|del)(?=\(|\b)/g
+        'pattern': /\b(pass|lambda|with|is|not|in|from|elif|raise|del)(?=\(|\b)/g
     },
     {
         'matches': {

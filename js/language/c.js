@@ -3,7 +3,7 @@
  *
  * @author Daniel Holden
  * @author Craig Campbell
- * @version 1.0.6
+ * @version 1.0.7
  */
 Rainbow.extend('c', [
     {
@@ -38,7 +38,7 @@ Rainbow.extend('c', [
     },
     {
         'name': 'keyword',
-        'pattern': /\b(do|goto|continue|break|switch|case|typedef)\b/g
+        'pattern': /\b(do|goto|typedef)\b/g
     },
     {
         'name': 'entity.label',
