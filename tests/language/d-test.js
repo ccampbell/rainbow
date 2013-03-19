@@ -32,9 +32,9 @@ RainbowTester.run(
 RainbowTester.run(
     'typeof',
 
-    "var is_array_object = typeof(System.Array);",
+    "auto is_array_object = typeof(System.Array);",
 
-    '<span class="keyword">var</span> is_array_object <span class="operator">=</span> <span class="keyword">typeof</span>(System.Array);'
+    '<span class="keyword">auto</span> is_array_object <span class="operator">=</span> <span class="keyword">typeof</span>(System.Array);'
 );
 
 RainbowTester.run(
@@ -134,9 +134,9 @@ RainbowTester.run(
 RainbowTester.run(
     'template',
 
-    'public List!string firstNames = new List!string()',
+    'public List!string firstNames = new List!(string)()',
 
-    '<span class="keyword">public</span> List!<span class="keyword">string</span> firstNames <span class="operator">=</span> <span class="keyword new">new</span> List!<span class="keyword">string</span>()'
+    '<span class="keyword">public</span> List<span class="operator">!</span><span class="keyword">string</span> firstNames <span class="operator">=</span> <span class="keyword new">new</span> <span class="support class">List</span>!(<span class="keyword">string</span>)()'
 );
 
 RainbowTester.endTest('d');
