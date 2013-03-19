@@ -152,6 +152,14 @@ RainbowTester.run(
 );
 
 RainbowTester.run(
+    'decorator with dot',
+
+    '@tornado.web.asynchronous',
+
+    '<span class="entity name function decorator">@tornado.web.asynchronous</span>'
+);
+
+RainbowTester.run(
     'multiple docstrings',
 
     '"""\n' +
