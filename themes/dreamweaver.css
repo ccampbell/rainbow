@@ -2,7 +2,7 @@
  * Dreamweaver theme
  *
  * @author Sean Coker
- * @url http://seancoker.com;
+ * @url http://seancoker.com
  * @version 1.0
  */
 
@@ -25,6 +25,7 @@ pre, code {
 pre .comment {
     color: #888;
 }
+
 pre .support {
     color: #cd57d5;
 }
@@ -33,6 +34,7 @@ pre .constant.numeric, pre .php.embedded {
     color: #fa0002;
     font-weight: bold;
 }
+
 pre .keyword, pre .constant.language {
     color: #000789;
     font-weight: bold;
@@ -46,10 +48,12 @@ pre .storage.function, pre .variable.self, pre .support.function, pre .constant.
     color: #000;
     font-weight: bold;
 }
+
 pre .string {
     color: #0d43fa;
     font-weight: normal;
 }
+
 pre .css-property + span, pre .keyword.unit, pre .support.css-value {
     color: #0d43fa !important;
     font-weight: normal !important;
@@ -66,6 +70,7 @@ pre .support.method {
 pre .entity.name {
     color: #fd74e0;
 }
+
 pre .support.css-property, pre .support.tag-name, pre .support.tag, pre .support.attribute, pre .support.attribute + .operator {
     color: #000789;
 }
@@ -74,6 +79,7 @@ pre .storage.module, pre .storage.class {
     color: #122573;
     font-weight: bold;
 }
+
 pre .css.embedded .support.tag, pre .css.embedded .style.tag {
     color: #cd57d5;
 }
@@ -82,17 +88,21 @@ pre .keyword.operator {
     color: #2852eb;
     font-weight: normal;
 }
+
 pre .php.embedded .variable, pre .php.embedded .storage.function {
      color: #0d43fa;
      font-weight: normal;
 }
+
 pre .php.embedded .string, pre .js.embedded .tag.script {
      color: #c4001e;
 }
+
 pre .php.embedded .comment {
      color: #f4b441;
      font-weight: normal;
 }
+
 pre .php.embedded .function.name {
      color: #000;
      font-weight: normal;
