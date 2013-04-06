@@ -667,24 +667,45 @@ window['Rainbow'] = (function() {
         var pre_blocks = node.getElementsByTagName('pre'),
             code_blocks = node.getElementsByTagName('code'),
             i,
-            final_blocks = [];
+            final_pre_blocks = [],
+            final_code_blocks = [];
+
+        // first loop through all pre blocks to find which ones to highlight
+        // also strip whitespace
+        for (i = 0; i < pre_blocks.length; ++i) {
+
+            // strip whitespace around code tags when they are inside of a pre tag
+            // this makes the themes look better because you can't accidentally
+            // add extra linebreaks at the start and end
+            //
+            // when the pre tag contains a code tag then strip any extra whitespace
+            // for example
+            // <pre>
+            //      <code>var foo = true;</code>
+            // </pre>
+            //
+            // will become
+            // <pre><code>var foo = true;</code></pre>
+            //
+            // if you want to preserve whitespace you can use a pre tag on its own
+            // without a code tag inside of it
+            if (pre_blocks[i].getElementsByTagName('code').length) {
+                pre_blocks[i].innerHTML = pre_blocks[i].innerHTML.replace(/^\s+/, '').replace(/\s+$/, '');
+                continue;
+            }
+
+            // if the pre block has no code blocks then we are going to want to
+            // process it directly
+            final_pre_blocks.push(pre_blocks[i]);
+        }
 
         // @see http://stackoverflow.com/questions/2735067/how-to-convert-a-dom-node-list-to-an-array-in-javascript
         // we are going to process all <code> blocks
         for (i = 0; i < code_blocks.length; ++i) {
-            final_blocks.push(code_blocks[i]);
+            final_code_blocks.push(code_blocks[i]);
         }
 
-        // loop through the pre blocks to see which ones we should add
-        for (i = 0; i < pre_blocks.length; ++i) {
-
-            // if the pre block has no code blocks then process it directly
-            if (!pre_blocks[i].getElementsByTagName('code').length) {
-                final_blocks.push(pre_blocks[i]);
-            }
-        }
-
-        _highlightCodeBlock(final_blocks, 0, onComplete);
+        _highlightCodeBlock(final_code_blocks.concat(final_pre_blocks), 0, onComplete);
     }
 
     /**
