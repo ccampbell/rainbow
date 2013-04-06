@@ -1,5 +1,5 @@
 /**
- * Copyright 2012 Craig Campbell
+ * Copyright 2013 Craig Campbell
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  *
  * Rainbow is a simple code syntax highlighter
  *
- * @preserve @version 1.1.9
+ * @preserve @version 1.2
  * @url rainbowco.de
  */
 window['Rainbow'] = (function() {
