@@ -169,4 +169,22 @@ RainbowTester.run(
     '<span class="entity name tag">p</span> { <span class="support css-property">color</span>: <span class="constant hex-color">#fff</span>; <span class="support css-property">margin-top</span>: <span class="constant numeric">10</span><span class="keyword unit">px</span>; }'
 );
 
+RainbowTester.run(
+    'linear gradients',
+
+    '.gradient {\n' +
+    '    background: -webkit-linear-gradient(#f7f7f7, #e8e8e8);\n' +
+    '    background:    -moz-linear-gradient(#f7f7f7, #e8e8e8);\n' +
+    '    background:      -o-linear-gradient(#f7f7f7, #e8e8e8);\n' +
+    '    background:         linear-gradient(#f7f7f7, #e8e8e8);\n' +
+    '}',
+
+    '<span class="entity name class">.gradient</span> {\n' +
+    '    <span class="support css-property">background</span>: <span class="support vendor-prefix">-webkit-</span><span class="support css-value">linear-gradient</span>(<span class="constant hex-color">#f7f7f7</span>, <span class="constant hex-color">#e8e8e8</span>);\n' +
+    '    <span class="support css-property">background</span>:    <span class="support vendor-prefix">-moz-</span><span class="support css-value">linear-gradient</span>(<span class="constant hex-color">#f7f7f7</span>, <span class="constant hex-color">#e8e8e8</span>);\n' +
+    '    <span class="support css-property">background</span>:      <span class="support vendor-prefix">-o-</span><span class="support css-value">linear-gradient</span>(<span class="constant hex-color">#f7f7f7</span>, <span class="constant hex-color">#e8e8e8</span>);\n' +
+    '    <span class="support css-property">background</span>:         <span class="support css-value">linear-gradient</span>(<span class="constant hex-color">#f7f7f7</span>, <span class="constant hex-color">#e8e8e8</span>);\n' +
+    '}'
+);
+
 RainbowTester.endTest('css');
