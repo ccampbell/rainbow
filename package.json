@@ -1,5 +1,5 @@
 {   "name": "rainbow"
-  , "description": "A code syntax library written in Javascript"
+  , "description": "A code syntax highlighting library written in Javascript"
   , "version": "1.1.8"
   , "repository" :
   {
