@@ -1,6 +1,11 @@
 {   "name": "rainbow"
-  , "description": "A code syntax  library written in Javascript"
+  , "description": "A code syntax library written in Javascript"
   , "version": "1.1.8"
+  , "repository" :
+  {
+  	"type" : "git"
+  , "url" : "https://github.com/ccampbell/rainbow.git"
+  }
   , "author": "Craig Campbell <iamcraigcampbell@gmail.com>"
   , "contributor": [ "Jean Ponchon <jean.ponchon@novadiscovery.com>" ]
   , "keywords": ["syntax", "highlighting", "color"]
