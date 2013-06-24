@@ -632,8 +632,8 @@ window['Rainbow'] = (function() {
 
                     // if you have a listener attached tell it that this block is now highlighted
                     if (onHighlight.length > 0) {
-                        for(i=0; i<onHighlight.length; i++)
-                        onHighlight[i](block, language);
+                        for(ohn=0; ohn<onHighlight.length; ohn++)
+                        onHighlight[ohn](block, language);
                     }
 
                     // process the next block
