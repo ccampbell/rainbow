@@ -96,6 +96,35 @@ command line arguments:
 
     util/compile.py ruby javascript
 
+## Tests
+
+Unit tests run via <a href="http://visionmedia.github.io/mocha" target="_blank">mocha</a>.
+
+### Running in browser
+
+Download the repo and go to `tests/rainbow.html` in your browser.
+
+### Running with Grunt and PhantomJS
+
+1.  Install grunt-cli
+
+    ```bash
+    npm install -g grunt-cli
+    ```
+
+2.  Install npm packages
+
+    ```bash
+    cd /path/to/repo
+    npm install
+    ```
+
+3.  Run tests
+
+    ```bash
+    grunt mocha
+    ```
+
 ## More Info
 
 If you are looking for line number support you can try one of the following:
