@@ -173,26 +173,6 @@ describe(language, function() {
     run(
         language,
 
-        'style tag',
-
-        '<style></style>',
-
-        '<span class="support tag style">&lt;</span><span class="entity tag style">style</span><span class="support tag style">&gt;</span><span class="support tag style">&lt;/</span><span class="entity tag style">style</span><span class="support tag style">&gt;</span>'
-    );
-
-    run(
-        language,
-
-        'style tag with type',
-
-        '<style type="text/css"></style>',
-
-        '<span class="support tag style">&lt;</span><span class="entity tag style">style</span> <span class="entity tag style">type</span>=<span class="string">"text/css"</span><span class="support tag style">&gt;</span><span class="support tag style">&lt;/</span><span class="entity tag style">style</span><span class="support tag style">&gt;</span>'
-    );
-
-    run(
-        language,
-
         'one line',
 
         'p { color: #fff; margin-top: 10px; }',
@@ -217,6 +197,26 @@ describe(language, function() {
         '    <span class="support css-property">background</span>:    <span class="support vendor-prefix">-moz-</span><span class="support css-value">linear-gradient</span>(<span class="constant hex-color">#f7f7f7</span>, <span class="constant hex-color">#e8e8e8</span>);\n' +
         '    <span class="support css-property">background</span>:      <span class="support vendor-prefix">-o-</span><span class="support css-value">linear-gradient</span>(<span class="constant hex-color">#f7f7f7</span>, <span class="constant hex-color">#e8e8e8</span>);\n' +
         '    <span class="support css-property">background</span>:         <span class="support css-value">linear-gradient</span>(<span class="constant hex-color">#f7f7f7</span>, <span class="constant hex-color">#e8e8e8</span>);\n' +
+        '}'
+    );
+
+    run(
+        language,
+
+        'multi line selectors',
+
+        '.maps-headline,\n' +
+        '.maps-subline,\n' +
+        '.chart-headline,\n' +
+        '.chart-subline {\n' +
+        '   font-weight: bold;\n' +
+        '}',
+
+        '<span class="entity name class">.maps-headline</span>,\n' +
+        '<span class="entity name class">.maps-subline</span>,\n' +
+        '<span class="entity name class">.chart-headline</span>,\n' +
+        '<span class="entity name class">.chart-subline</span> {\n' +
+        '   <span class="support css-property">font-weight</span>: <span class="support css-value">bold</span>;\n' +
         '}'
     );
 });
