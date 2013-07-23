@@ -36,23 +36,6 @@ Rainbow.extend('javascript', [
         },
         'pattern': /\.(getAttribute|push|getElementById|getElementsByClassName|log|setTimeout|setInterval)(?=\()/g
     },
-    {
-        'matches': {
-            1: 'support.tag.script',
-            2: [
-                {
-                    'name': 'string',
-                    'pattern': /('|")(.*?)(\1)/g
-                },
-                {
-                    'name': 'entity.tag.script',
-                    'pattern': /(\w+)/g
-                }
-            ],
-            3: 'support.tag.script'
-        },
-        'pattern': /(&lt;\/?)(script.*?)(&gt;)/g
-    },
 
     /**
      * matches any escaped characters inside of a js regex pattern

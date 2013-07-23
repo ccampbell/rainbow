@@ -17,20 +17,60 @@ Rainbow.extend('html', [
     {
         'name': 'source.css.embedded',
         'matches': {
-            0: {
+            1: {
+                'matches': {
+                    1: 'support.tag.style',
+                    2: [
+                        {
+                            'name': 'string',
+                            'pattern': /('|")(.*?)(\1)/g
+                        },
+                        {
+                            'name': 'entity.tag.style',
+                            'pattern': /(\w+)/g
+                        }
+                    ],
+                    3: 'support.tag.style'
+                },
+                'pattern': /(&lt;\/?)(style.*?)(&gt;)/g
+            },
+            2: {
                 'language': 'css'
-            }
+            },
+            3: 'support.tag.style',
+            4: 'entity.tag.style',
+            5: 'support.tag.style'
         },
-        'pattern': /&lt;style(.*?)&gt;([\s\S]*?)&lt;\/style&gt;/gm
+        'pattern': /(&lt;style.*?&gt;)([\s\S]*?)(&lt;\/)(style)(&gt;)/gm
     },
     {
         'name': 'source.js.embedded',
         'matches': {
-            0: {
+            1: {
+                'matches': {
+                    1: 'support.tag.script',
+                    2: [
+                        {
+                            'name': 'string',
+                            'pattern': /('|")(.*?)(\1)/g
+                        },
+                        {
+                            'name': 'entity.tag.script',
+                            'pattern': /(\w+)/g
+                        }
+                    ],
+                    3: 'support.tag.script'
+                },
+                'pattern': /(&lt;\/?)(script.*?)(&gt;)/g
+            },
+            2: {
                 'language': 'javascript'
-            }
+            },
+            3: 'support.tag.script',
+            4: 'entity.tag.script',
+            5: 'support.tag.script'
         },
-        'pattern': /&lt;script(?! src)(.*?)&gt;([\s\S]*?)&lt;\/script&gt;/gm
+        'pattern': /(&lt;script(?! src).*?&gt;)([\s\S]*?)(&lt;\/)(script)(&gt;)/gm
     },
     {
         'name': 'comment.html',
