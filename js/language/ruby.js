@@ -16,10 +16,17 @@ Rainbow.extend('ruby', [
         'name': 'string',
         'matches': {
             1: 'string.open',
-            2: {
-                'name': 'string.keyword',
-                'pattern': /(\#\{.*?\})/g
-            },
+            2: [{
+                'name': 'string.interpolation',
+                'matches': {
+                    1: 'string.open',
+                    2: {
+                      'language': 'ruby'
+                    },
+                    3: 'string.close'
+                },
+                'pattern': /(\#\{)(.*?)(\})/g
+            }],
             3: 'string.close'
         },
         'pattern': /("|`)(.*?[^\\\1])?(\1)/g
