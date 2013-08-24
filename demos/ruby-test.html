@@ -135,6 +135,12 @@ end
 foo(::Foo::Bar.something)
 
 
+__END__
+if (parsed)
+  "this should not be classified as a string"
+else
+  raise "Epic Fail"
+end
 </code></pre>
     <script src="../js/rainbow.js"></script>
     <script src="../js/language/generic.js"></script>
