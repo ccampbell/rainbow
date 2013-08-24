@@ -285,6 +285,10 @@ window['Rainbow'] = (function() {
      */
     function _processPattern(regex, pattern, code, callback)
     {
+        if (typeof regex === "undefined" || regex === null) {
+            //console.warn("undefined regular expression")
+            return callback();
+        }
         var match = regex.exec(code);
 
         if (!match) {

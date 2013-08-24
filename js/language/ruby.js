@@ -9,6 +9,19 @@
 
 Rainbow.extend('ruby', [
     /**
+    * __END__ DATA
+    */
+    {
+        'matches': {
+            1: 'variable.language',
+            2: {
+              'language': null
+            },
+        },
+        //find __END__ and consume remaining text
+        'pattern': /^(__END__)\n((?:.*\n)*)/gm
+    },
+    /**
      * Strings
      *   1. No support for multi-line strings
      */

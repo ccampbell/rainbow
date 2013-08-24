@@ -41,4 +41,17 @@ describe(language, function() {
         '<span class="string"><span class="string open">"</span>two<span class="string close">"</span></span>, ' +
         '<span class="string"><span class="string open">"</span>three<span class="string close">"</span></span>];'
     );
+
+    run(
+        language,
+
+        '__END__',
+
+        'class Test;end;\n__END__\nthis is just text\ntrue\n',
+
+        '<span class="storage class">class</span> <span class="entity name class">Test</span>;' +
+        '<span class="keyword control">end</span>;\n<span class="variable language">__END__</span>\n' +
+        'this is just text\ntrue\n'
+    );
+
 });
