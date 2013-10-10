@@ -68,5 +68,9 @@ Rainbow.extend('css', [
             3: 'support.css-value'
         },
         'pattern': /(:|,|\s)\s*(-o-|-moz-|-webkit-|-ms-)?([a-zA-Z-]*)(?=\b)(?!.*\{)/g
+    },
+    {
+        'name': 'support.css-important',
+        'pattern': /!important/g
     }
 ], true);
