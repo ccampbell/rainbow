@@ -18,7 +18,7 @@ Rainbow.extend('css', [
             1: 'constant.numeric',
             2: 'keyword.unit'
         },
-        'pattern': /(\d+)(px|em|cm|s|%)?/g
+        'pattern': /(\d+(?:.\d+)?)(px|em|cm|s|%)?/g
     },
     {
         'name': 'string',
