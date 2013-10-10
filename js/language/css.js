@@ -56,11 +56,11 @@ Rainbow.extend('css', [
                 },
                 {
                     'name': 'entity.name.tag',
-                    'pattern': /[\w\-_]+/g
+                    'pattern': /[\@\w\-_]+/g
                 }
             ]
         },
-        'pattern': /([\w\ ,\n:\.\#\&\;\-_]+)(?=.*\{)/g
+        'pattern': /([\w\ ,\n:\.\#\@\&\;\-_]+)(?=.*\{)/g
     },
     {
         'matches': {
