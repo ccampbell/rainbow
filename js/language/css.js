@@ -2,6 +2,7 @@
  * CSS patterns
  *
  * @author Craig Campbell
+ * @author Teddy Bradford
  * @version 1.0.9
  */
 Rainbow.extend('css', [
