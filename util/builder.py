@@ -28,7 +28,7 @@ class RainbowBuilder(object):
             'php': '1.0.8',
             'python': '1.0.9',
             'r': '1.0',
-            'ruby': '1.0.5',
+            'ruby': '1.0.6',
             'scheme': '1.0',
             'shell': '1.0.3',
             'smalltalk': '1.0'
