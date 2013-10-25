@@ -2,14 +2,14 @@
  * Generic language patterns
  *
  * @author Craig Campbell
- * @version 1.0.10
+ * @version 1.0.11
  */
 Rainbow.extend([
     {
         'matches': {
             1: {
                 'name': 'keyword.operator',
-                'pattern': /\=/g
+                'pattern': /\=|\+/g
             },
             2: {
                 'name': 'string',
@@ -19,7 +19,7 @@ Rainbow.extend([
                 }
             }
         },
-        'pattern': /(\(|\s|\[|\=|:)(('|")([^\\\1]|\\.)*?(\3))/gm
+        'pattern': /(\(|\s|\[|\=|:|\+)(('|")([^\\\1]|\\.)*?(\3))/gm
     },
     {
         'name': 'comment',
