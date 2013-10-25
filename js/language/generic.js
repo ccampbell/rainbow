@@ -7,10 +7,16 @@
 Rainbow.extend([
     {
         'matches': {
-            1: {
-                'name': 'keyword.operator',
-                'pattern': /\=|\+/g
-            },
+            1: [
+                {
+                    'name': 'keyword.operator',
+                    'pattern': /\=|\+/g
+                },
+                {
+                    'name': 'keyword.dot',
+                    'pattern': /\./g
+                }
+            ],
             2: {
                 'name': 'string',
                 'matches': {
@@ -19,7 +25,7 @@ Rainbow.extend([
                 }
             }
         },
-        'pattern': /(\(|\s|\[|\=|:|\+)(('|")([^\\\1]|\\.)*?(\3))/gm
+        'pattern': /(\(|\s|\[|\=|:|\+|\.)(('|")([^\\\1]|\\.)*?(\3))/gm
     },
     {
         'name': 'comment',
