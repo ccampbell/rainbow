@@ -17,6 +17,10 @@ comment
   not_comment
   =end
 
+#string interpolation
+12.times do |x|
+  &quot;Chapter #{x+1}:&quot;
+end
 # Strings
 &#39;string&#39;
 &quot;string&quot;
@@ -135,6 +139,12 @@ end
 foo(::Foo::Bar.something)
 
 
+__END__
+if (parsed)
+  "this should not be classified as a string"
+else
+  raise "Epic Fail"
+end
 </code></pre>
     <script src="../js/rainbow.js"></script>
     <script src="../js/language/generic.js"></script>
