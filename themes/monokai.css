@@ -1,0 +1,70 @@
+/**
+ * Monokai theme
+ *
+ * Adapted from Wimer Hazenberg's TextMate theme of the same name
+ *
+ * @author Wimer Hazenberg
+ * @author Michael Fasani
+ * @version 1.0.0
+ */
+pre {
+    background: #272822;
+    word-wrap: break-word;
+    margin: 0px;
+    padding: 10px;
+    color: #fff;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+pre, code {
+    font-family: 'Monaco', courier, monospace;
+}
+
+pre .comment {
+    color: #75715E;
+}
+
+pre .constant {
+    color: #D8FA3C;
+}
+
+pre .storage {
+    color: #66D9EF;
+}
+
+pre .string, pre .comment.docstring {
+    color: #E6DB74;
+}
+
+pre .string.regexp, pre .support.tag.script, pre .support.tag.style {
+    color: #fff;
+}
+
+pre .keyword {
+    color: #66D9EF;
+}
+
+pre .selector {
+    color: #F92672;
+}
+
+pre .inherited-class {
+    font-style: italic;
+}
+
+pre .operator {
+    color: #F92672;
+}
+
+pre .entity {
+    color: #A6E22E;
+}
+
+pre .support, *[data-language="c"] .function.call {
+    color: #66D9EF;
+}
+
+pre .variable.global, pre .variable.class, pre .variable.instance {
+    color: #A6E22E;
+}
