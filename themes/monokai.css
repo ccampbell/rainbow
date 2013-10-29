@@ -5,6 +5,7 @@
  *
  * @author Wimer Hazenberg
  * @author Michael Fasani
+ * @author Craig Campbell
  * @version 1.0.0
  */
 pre {
@@ -26,7 +27,7 @@ pre .comment {
 }
 
 pre .constant {
-    color: #D8FA3C;
+    color: #AE81FF;
 }
 
 pre .storage {
@@ -37,12 +38,14 @@ pre .string, pre .comment.docstring {
     color: #E6DB74;
 }
 
-pre .string.regexp, pre .support.tag.script, pre .support.tag.style {
+pre .support.tag {
     color: #fff;
 }
 
 pre .keyword {
-    color: #66D9EF;
+    /* @todo some keywords use this light blue, most use the pink */
+    /*color: #66D9EF;*/
+    color: #F92672;
 }
 
 pre .selector {
@@ -53,16 +56,24 @@ pre .inherited-class {
     font-style: italic;
 }
 
-pre .operator {
+pre .operator, pre .support.tag-name , pre .entity.tag {
     color: #F92672;
 }
 
-pre .entity {
+pre .entity, pre .support.attribute, pre .entity.attribute {
     color: #A6E22E;
 }
 
 pre .support, *[data-language="c"] .function.call {
     color: #66D9EF;
+}
+
+*[data-language="html"] .support.operator {
+    color: #fff;
+}
+
+pre .css-property, pre .storage.function {
+    font-style: italic;
 }
 
 pre .variable.global, pre .variable.class, pre .variable.instance {
