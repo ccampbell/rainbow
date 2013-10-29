@@ -92,7 +92,7 @@ describe(language, function() {
         '    }\n' +
         '</style>',
 
-        '<span class="source css embedded"><span class="support tag style">&lt;</span><span class="entity tag style">style</span> <span class="entity tag style">type</span>=<span class="string">"text/css"</span><span class="support tag style">&gt;</span>\n' +
+        '<span class="source css embedded"><span class="support tag style">&lt;</span><span class="entity tag style">style</span> <span class="entity tag style attribute">type</span>=<span class="string">"text/css"</span><span class="support tag style">&gt;</span>\n' +
         '    <span class="entity name tag">body</span> <span class="entity name tag">span</span><span class="entity name class">.blah</span> {\n' +
         '        <span class="support css-property">background</span>: <span class="constant hex-color">#000</span>;\n' +
         '        <span class="support css-property">color</span>: <span class="constant hex-color">#fff</span>;\n' +
@@ -133,7 +133,7 @@ describe(language, function() {
         '    }\n' +
         '</script>',
 
-        '<span class="source js embedded"><span class="support tag script">&lt;</span><span class="entity tag script">script</span> <span class="entity tag script">type</span>=<span class="string">"text/javascript"</span><span class="support tag script">&gt;</span>\n' +
+        '<span class="source js embedded"><span class="support tag script">&lt;</span><span class="entity tag script">script</span> <span class="entity tag script attribute">type</span>=<span class="string">"text/javascript"</span><span class="support tag script">&gt;</span>\n' +
         '    <span class="storage function">function</span> <span class="entity name function">prettyCool</span>() {\n' +
         '        <span class="function call">doSomeJQueryOrWhatever</span>();\n' +
         '    }\n' +
