@@ -2,7 +2,7 @@
  * HTML patterns
  *
  * @author Craig Campbell
- * @version 1.0.8
+ * @version 1.0.9
  */
 Rainbow.extend('html', [
     {
@@ -22,11 +22,15 @@ Rainbow.extend('html', [
                     1: 'support.tag.style',
                     2: [
                         {
+                            'name': 'entity.tag.style',
+                            'pattern': /^style/g
+                        },
+                        {
                             'name': 'string',
                             'pattern': /('|")(.*?)(\1)/g
                         },
                         {
-                            'name': 'entity.tag.style',
+                            'name': 'entity.tag.style.attribute',
                             'pattern': /(\w+)/g
                         }
                     ],
@@ -51,11 +55,16 @@ Rainbow.extend('html', [
                     1: 'support.tag.script',
                     2: [
                         {
+                            'name': 'entity.tag.script',
+                            'pattern': /^script/g
+                        },
+
+                        {
                             'name': 'string',
                             'pattern': /('|")(.*?)(\1)/g
                         },
                         {
-                            'name': 'entity.tag.script',
+                            'name': 'entity.tag.script.attribute',
                             'pattern': /(\w+)/g
                         }
                     ],
