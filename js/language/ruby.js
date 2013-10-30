@@ -16,7 +16,7 @@ Rainbow.extend('ruby', [
             1: 'variable.language',
             2: {
               'language': null
-            },
+            }
         },
         //find __END__ and consume remaining text
         'pattern': /^(__END__)\n((?:.*\n)*)/gm
