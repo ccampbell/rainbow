@@ -130,6 +130,9 @@ class RainbowBuilder(object):
         proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         output, err = proc.communicate()
 
+        if err:
+            print err
+
         lines = output.splitlines()
         comments = lines[0:4]
         version = comments[1].replace(' @version ', '')
