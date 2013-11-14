@@ -788,7 +788,6 @@ window['Rainbow'] = (function() {
     if (document.addEventListener) {
         return document.addEventListener('DOMContentLoaded', Rainbow.color, false);
     }
-    window.attachEvent('onload', Rainbow.color);
 }) ();
 
 // When using Google closure compiler in advanced mode some methods
