@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!-- Code example from https://github.com/hoisie/web.git and from
+     Go official web site http://golang.org/
+-->
+<meta charset=utf-8>
+<title>Syntax Highlighting</title>
+<link href="../themes/github.css" rel="stylesheet" type="text/css" media="screen">
+<body>
+<h3>SQL language</h3>
+<p>Simple MSSQL example: </p>
+<pre><code data-language="sql">/* MSSQL example */
+USE AdventureWorks2012;
+GO
+SELECT Name, ProductNumber, ListPrice AS Price
+FROM Production.Product 
+WHERE ProductLine = "XYZ"
+AND DaysToManufacture < 4
+ORDER BY Name ASC;
+GO</code></pre>
+
+<p>Simple Oracle example: </p>
+<pre><code data-language="sql">-- Oracle example
+SELECT object_name, LOWER(object_name) LOWER_ONAME
+FROM all_objects --where all objects come from
+WHERE ROWNUM < 11;
+</code></pre>
+
+    <script src="../js/rainbow.js"></script>
+    <script src="../js/language/sql.js"></script>
+</body>
