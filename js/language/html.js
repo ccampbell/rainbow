@@ -105,7 +105,7 @@ Rainbow.extend('html', [
         'matches': {
             1: 'support.attribute'
         },
-        'pattern': /([a-z-]+)(?=\=)/gi
+        'pattern': /([a-z-]+)(?=(\=|((^&lt;)*?)&gt;))/gi
     },
     {
         'matches': {
