@@ -2,7 +2,7 @@
  * Groovy language patterns
  *
  * @author Matt Cholick
- * @version 1.0.0
+ * @version 1.0.1
  */
 Rainbow.extend("groovy", [
     {
@@ -40,6 +40,10 @@ Rainbow.extend("groovy", [
     {
         name: "comment",
         pattern: /\/\*[\s\S]*?\*\/|(\/\/).*?$/gm
+    },
+    {
+        name: "support.languagelabel",
+        pattern: /(\w+:)/g
     },
     // see http://groovy.codehaus.org/Operators and http://docs.oracle.com/javase/tutorial/java/nutsandbolts/operators.html
     {

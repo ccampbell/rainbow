@@ -199,4 +199,11 @@ describe(language, function () {
         'a <span class="operator">=~</span> b; a <span class="operator">==~</span> b;'
     );
 
+    run(
+        language,
+        "lbl",
+        "given: 'A preconditon'",
+        '<span class="support languagelabel">given:</span> <span class="string">\'A preconditon\'</span>'
+    );
+
 });
