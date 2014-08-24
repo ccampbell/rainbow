@@ -785,7 +785,18 @@ window['Rainbow'] = (function() {
  * adds event listener to start highlighting
  */
 (function() {
-	document.onreadystatechange = function () {
+	var count=0, readystateListners = [];
+
+	// keep possibly existing readystatechange callback...
+	if ( document.onreadystatechange )
+		readystateListners.push(document.onreadystatechange);
+
+	document.onreadystatechange = function (event) {
+		// call readystatechange callbacks...
+		for ( var i=0;i<readystateListners.length;i++ )
+			if (readystateListners[i].call) 
+				readystateListners[i].call(this,event);
+		
 		if ( document.readyState === "complete" ) {
 			Rainbow.color();
 		}
