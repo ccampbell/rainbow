@@ -475,9 +475,7 @@
      * @return {Array}
      */
     function keys(object) {
-        var locations = [],
-            replacement,
-            pos;
+        var locations = [];
 
         for(var location in object) {
             if (object.hasOwnProperty(location)) {
