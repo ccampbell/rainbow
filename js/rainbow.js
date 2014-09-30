@@ -18,7 +18,7 @@
  * @preserve @version 1.2
  * @url rainbowco.de
  */
-window['Rainbow'] = (function() {
+(function() {
 
     /**
      * array of replacements to process at the end
@@ -688,72 +688,78 @@ window['Rainbow'] = (function() {
     }
 
     /**
+     * extends the language pattern matches
+     *
+     * @param {*} language     name of language
+     * @param {*} patterns      array of patterns to add on
+     * @param {boolean|null} bypass      if true this will bypass the default language patterns
+     */
+    function _extend(language, patterns, bypass) {
+
+        // if there is only one argument then we assume that we want to
+        // extend the default language rules
+        if (arguments.length == 1) {
+            patterns = language;
+            language = DEFAULT_LANGUAGE;
+        }
+
+        bypassDefaults[language] = bypass;
+        languagePatterns[language] = patterns.concat(languagePatterns[language] || []);
+    }
+
+    /**
+     * call back to let you do stuff in your app after a piece of code has been highlighted
+     *
+     * @param {Function} callback
+     */
+    function _onHighlight(callback) {
+        onHighlight = callback;
+    }
+
+    /**
+     * method to set a global class that will be applied to all spans
+     *
+     * @param {string} className
+     */
+    function _addClass(className) {
+        globalClass = className;
+    }
+
+    /**
+     * starts the magic rainbow
+     *
+     * @returns void
+     */
+    function _color() {
+
+        // if you want to straight up highlight a string you can pass the string of code,
+        // the language, and a callback function
+        if (typeof arguments[0] == 'string') {
+            return _highlightBlockForLanguage(arguments[0], arguments[1], arguments[2]);
+        }
+
+        // if you pass a callback function then we rerun the color function
+        // on all the code and call the callback function on complete
+        if (typeof arguments[0] == 'function') {
+            return _highlight(0, arguments[0]);
+        }
+
+        // otherwise we use whatever node you passed in with an optional
+        // callback function as the second parameter
+        _highlight(arguments[0], arguments[1]);
+    }
+
+    /**
      * public methods
      */
-    return {
-
-        /**
-         * extends the language pattern matches
-         *
-         * @param {*} language     name of language
-         * @param {*} patterns      array of patterns to add on
-         * @param {boolean|null} bypass      if true this will bypass the default language patterns
-         */
-        extend: function(language, patterns, bypass) {
-
-            // if there is only one argument then we assume that we want to
-            // extend the default language rules
-            if (arguments.length == 1) {
-                patterns = language;
-                language = DEFAULT_LANGUAGE;
-            }
-
-            bypassDefaults[language] = bypass;
-            languagePatterns[language] = patterns.concat(languagePatterns[language] || []);
-        },
-
-        /**
-         * call back to let you do stuff in your app after a piece of code has been highlighted
-         *
-         * @param {Function} callback
-         */
-        onHighlight: function(callback) {
-            onHighlight = callback;
-        },
-
-        /**
-         * method to set a global class that will be applied to all spans
-         *
-         * @param {string} className
-         */
-        addClass: function(className) {
-            globalClass = className;
-        },
-
-        /**
-         * starts the magic rainbow
-         *
-         * @returns void
-         */
-        color: function() {
-
-            // if you want to straight up highlight a string you can pass the string of code,
-            // the language, and a callback function
-            if (typeof arguments[0] == 'string') {
-                return _highlightBlockForLanguage(arguments[0], arguments[1], arguments[2]);
-            }
-
-            // if you pass a callback function then we rerun the color function
-            // on all the code and call the callback function on complete
-            if (typeof arguments[0] == 'function') {
-                return _highlight(0, arguments[0]);
-            }
-
-            // otherwise we use whatever node you passed in with an optional
-            // callback function as the second parameter
-            _highlight(arguments[0], arguments[1]);
-        }
+    var _rainbow = {
+        extend: _extend,
+        onHighlight: _onHighlight,
+        addClass: _addClass,
+        color: _color
     };
+
+    window.Rainbow = _rainbow;
 }) ();
 
 /**
@@ -764,9 +770,3 @@ window['Rainbow'] = (function() {
         return document.addEventListener('DOMContentLoaded', Rainbow.color, false);
     }
 }) ();
-
-// When using Google closure compiler in advanced mode some methods
-// get renamed.  This keeps a public reference to these methods so they can
-// still be referenced from outside this library.
-Rainbow["onHighlight"] = Rainbow.onHighlight;
-Rainbow["addClass"] = Rainbow.addClass;
