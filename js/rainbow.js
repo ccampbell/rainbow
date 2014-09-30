@@ -32,21 +32,21 @@ window['Rainbow'] = (function() {
          *
          * @type {Object}
          */
-        replacement_positions = {},
+        replacementPositions = {},
 
         /**
          * an array of the language patterns specified for each language
          *
          * @type {Object}
          */
-        language_patterns = {},
+        languagePatterns = {},
 
         /**
          * an array of languages and whether they should bypass the default patterns
          *
          * @type {Object}
          */
-        bypass_defaults = {},
+        bypassDefaults = {},
 
         /**
          * processing level
@@ -71,17 +71,17 @@ window['Rainbow'] = (function() {
          *
          * @type {number}
          */
-        match_counter = 0,
+        matchCounter = 0,
 
         /**
          * @type {number}
          */
-        replacement_counter = 0,
+        replacementCounter = 0,
 
         /**
          * @type {null|string}
          */
-        global_class,
+        globalClass,
 
         /**
          * @type {null|Function}
@@ -195,17 +195,17 @@ window['Rainbow'] = (function() {
      * @returns {boolean}
      */
     function _matchIsInsideOtherMatch(start, end) {
-        for (var key in replacement_positions[CURRENT_LEVEL]) {
+        for (var key in replacementPositions[CURRENT_LEVEL]) {
             key = parseInt(key, 10);
 
             // if this block completely overlaps with another block
             // then we should remove the other block and return false
-            if (_hasCompleteOverlap(key, replacement_positions[CURRENT_LEVEL][key], start, end)) {
-                delete replacement_positions[CURRENT_LEVEL][key];
+            if (_hasCompleteOverlap(key, replacementPositions[CURRENT_LEVEL][key], start, end)) {
+                delete replacementPositions[CURRENT_LEVEL][key];
                 delete replacements[CURRENT_LEVEL][key];
             }
 
-            if (_intersects(key, replacement_positions[CURRENT_LEVEL][key], start, end)) {
+            if (_intersects(key, replacementPositions[CURRENT_LEVEL][key], start, end)) {
                 return true;
             }
         }
@@ -221,7 +221,7 @@ window['Rainbow'] = (function() {
      * @returns {string}
      */
     function _wrapCodeInSpan(name, code) {
-        return '<span class="' + name.replace(/\./g, ' ') + (global_class ? ' ' + global_class : '') + '">' + code + '</span>';
+        return '<span class="' + name.replace(/\./g, ' ') + (globalClass ? ' ' + globalClass : '') + '">' + code + '</span>';
     }
 
     /**
@@ -270,7 +270,7 @@ window['Rainbow'] = (function() {
             return callback();
         }
 
-        ++match_counter;
+        ++matchCounter;
 
         // treat match 0 the same way as name
         if (!pattern['name'] && typeof pattern['matches'][0] == 'string') {
@@ -292,7 +292,7 @@ window['Rainbow'] = (function() {
 
                 // every 100 items we process let's call set timeout
                 // to let the ui breathe a little
-                return match_counter % 100 > 0 ? nextCall() : setTimeout(nextCall, 0);
+                return matchCounter % 100 > 0 ? nextCall() : setTimeout(nextCall, 0);
             };
 
         // if this is not a child match and it falls inside of another
@@ -318,7 +318,7 @@ window['Rainbow'] = (function() {
                 // store what needs to be replaced with what at this position
                 if (!replacements[CURRENT_LEVEL]) {
                     replacements[CURRENT_LEVEL] = {};
-                    replacement_positions[CURRENT_LEVEL] = {};
+                    replacementPositions[CURRENT_LEVEL] = {};
                 }
 
                 replacements[CURRENT_LEVEL][start_pos] = {
@@ -328,7 +328,7 @@ window['Rainbow'] = (function() {
 
                 // store the range of this match so we can use it for comparisons
                 // with other matches later
-                replacement_positions[CURRENT_LEVEL][start_pos] = end_pos;
+                replacementPositions[CURRENT_LEVEL][start_pos] = end_pos;
 
                 // process the next match
                 processNext();
@@ -438,7 +438,7 @@ window['Rainbow'] = (function() {
      */
     function _bypassDefaultPatterns(language)
     {
-        return bypass_defaults[language];
+        return bypassDefaults[language];
     }
 
     /**
@@ -448,8 +448,8 @@ window['Rainbow'] = (function() {
      * @returns {Array}
      */
     function _getPatternsForLanguage(language) {
-        var patterns = language_patterns[language] || [],
-            default_patterns = language_patterns[DEFAULT_LANGUAGE] || [];
+        var patterns = languagePatterns[language] || [],
+            default_patterns = languagePatterns[DEFAULT_LANGUAGE] || [];
 
         return _bypassDefaultPatterns(language) ? patterns : patterns.concat(default_patterns);
     }
@@ -522,7 +522,7 @@ window['Rainbow'] = (function() {
                 // when we are done processing replacements
                 // we are done at this level so we can go back down
                 delete replacements[CURRENT_LEVEL];
-                delete replacement_positions[CURRENT_LEVEL];
+                delete replacementPositions[CURRENT_LEVEL];
                 --CURRENT_LEVEL;
                 callback(code);
             });
@@ -551,7 +551,7 @@ window['Rainbow'] = (function() {
          */
         function _processReplacement(code, positions, i, onComplete) {
             if (i < positions.length) {
-                ++replacement_counter;
+                ++replacementCounter;
                 var pos = positions[i],
                     replacement = replacements[CURRENT_LEVEL][pos];
                 code = _replaceAtPosition(pos, replacement['replace'], replacement['with'], code);
@@ -562,7 +562,7 @@ window['Rainbow'] = (function() {
                 };
 
                 // use a timeout every 250 to not freeze up the UI
-                return replacement_counter % 250 > 0 ? next() : setTimeout(next, 0);
+                return replacementCounter % 250 > 0 ? next() : setTimeout(next, 0);
             }
 
             onComplete(code);
@@ -607,7 +607,7 @@ window['Rainbow'] = (function() {
 
                     // reset the replacement arrays
                     replacements = {};
-                    replacement_positions = {};
+                    replacementPositions = {};
 
                     // if you have a listener attached tell it that this block is now highlighted
                     if (onHighlight) {
@@ -708,8 +708,8 @@ window['Rainbow'] = (function() {
                 language = DEFAULT_LANGUAGE;
             }
 
-            bypass_defaults[language] = bypass;
-            language_patterns[language] = patterns.concat(language_patterns[language] || []);
+            bypassDefaults[language] = bypass;
+            languagePatterns[language] = patterns.concat(languagePatterns[language] || []);
         },
 
         /**
@@ -727,7 +727,7 @@ window['Rainbow'] = (function() {
          * @param {string} class_name
          */
         addClass: function(class_name) {
-            global_class = class_name;
+            globalClass = class_name;
         },
 
         /**
