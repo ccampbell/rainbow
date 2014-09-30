@@ -391,7 +391,7 @@ window['Rainbow'] = (function() {
                      * we treat the 'matches' part as the pattern and keep
                      * the name around to wrap it with later
                      */
-                    process_group = group['name'] && group['matches'] ? group['matches'] : group,
+                    groupToProcess = group['name'] && group['matches'] ? group['matches'] : group,
 
                     /**
                      * takes the code block matched at this group, replaces it
@@ -399,11 +399,11 @@ window['Rainbow'] = (function() {
                      * a span with a name
                      *
                      * @param {string} block
-                     * @param {string} replace_block
-                     * @param {string|null} match_name
+                     * @param {string} replaceBlock
+                     * @param {string|null} matchName
                      */
-                    _replaceAndContinue = function(block, replace_block, match_name) {
-                        replacement = _replaceAtPosition(_indexOfGroup(match, groupKeys[i]), block, match_name ? _wrapCodeInSpan(match_name, replace_block) : replace_block, replacement);
+                    _replaceAndContinue = function(block, replaceBlock, matchName) {
+                        replacement = _replaceAtPosition(_indexOfGroup(match, groupKeys[i]), block, matchName ? _wrapCodeInSpan(matchName, replaceBlock) : replaceBlock, replacement);
                         processNextGroup();
                     };
 
@@ -422,7 +422,7 @@ window['Rainbow'] = (function() {
 
                 // the process group can be a single pattern or an array of patterns
                 // _processCodeWithPatterns always expects an array so we convert it here
-                _processCodeWithPatterns(block, process_group.length ? process_group : [process_group], function(code) {
+                _processCodeWithPatterns(block, groupToProcess.length ? groupToProcess : [groupToProcess], function(code) {
                     _replaceAndContinue(block, code, group['matches'] ? group['name'] : 0);
                 });
             };
@@ -449,9 +449,9 @@ window['Rainbow'] = (function() {
      */
     function _getPatternsForLanguage(language) {
         var patterns = languagePatterns[language] || [],
-            default_patterns = languagePatterns[DEFAULT_LANGUAGE] || [];
+            defaultPatterns = languagePatterns[DEFAULT_LANGUAGE] || [];
 
-        return _bypassDefaultPatterns(language) ? patterns : patterns.concat(default_patterns);
+        return _bypassDefaultPatterns(language) ? patterns : patterns.concat(defaultPatterns);
     }
 
     /**
@@ -459,13 +459,13 @@ window['Rainbow'] = (function() {
      *
      * @param {number} position         the position where the replacement should happen
      * @param {string} replace          the text we want to replace
-     * @param {string} replace_with     the text we want to replace it with
+     * @param {string} replaceWith      the text we want to replace it with
      * @param {string} code             the code we are doing the replacing in
      * @returns {string}
      */
-    function _replaceAtPosition(position, replace, replace_with, code) {
-        var sub_string = code.substr(position);
-        return code.substr(0, position) + sub_string.replace(replace, replace_with);
+    function _replaceAtPosition(position, replace, replaceWith, code) {
+        var subString = code.substr(position);
+        return code.substr(0, position) + subString.replace(replace, replaceWith);
     }
 
    /**
@@ -568,8 +568,8 @@ window['Rainbow'] = (function() {
             onComplete(code);
         }
 
-        var string_positions = keys(replacements[CURRENT_LEVEL]);
-        _processReplacement(code, string_positions, 0, onComplete);
+        var stringPositions = keys(replacements[CURRENT_LEVEL]);
+        _processReplacement(code, stringPositions, 0, onComplete);
     }
 
     /**
@@ -588,13 +588,13 @@ window['Rainbow'] = (function() {
     /**
      * highlight an individual code block
      *
-     * @param {Array} code_blocks
+     * @param {Array} codeBlocks
      * @param {number} i
      * @returns void
      */
-    function _highlightCodeBlock(code_blocks, i, onComplete) {
-        if (i < code_blocks.length) {
-            var block = code_blocks[i],
+    function _highlightCodeBlock(codeBlocks, i, onComplete) {
+        if (i < codeBlocks.length) {
+            var block = codeBlocks[i],
                 language = _getLanguageForBlock(block);
 
             if (!_hasClass(block, 'rainbow') && language) {
@@ -616,11 +616,11 @@ window['Rainbow'] = (function() {
 
                     // process the next block
                     setTimeout(function() {
-                        _highlightCodeBlock(code_blocks, ++i, onComplete);
+                        _highlightCodeBlock(codeBlocks, ++i, onComplete);
                     }, 0);
                 });
             }
-            return _highlightCodeBlock(code_blocks, ++i, onComplete);
+            return _highlightCodeBlock(codeBlocks, ++i, onComplete);
         }
 
         if (onComplete) {
@@ -643,15 +643,15 @@ window['Rainbow'] = (function() {
         //
         node = node && typeof node.getElementsByTagName == 'function' ? node : document;
 
-        var pre_blocks = node.getElementsByTagName('pre'),
-            code_blocks = node.getElementsByTagName('code'),
+        var preBlocks = node.getElementsByTagName('pre'),
+            codeBlocks = node.getElementsByTagName('code'),
             i,
-            final_pre_blocks = [],
-            final_code_blocks = [];
+            finalPreBlocks = [],
+            finalCodeBlocks = [];
 
         // first loop through all pre blocks to find which ones to highlight
         // also strip whitespace
-        for (i = 0; i < pre_blocks.length; ++i) {
+        for (i = 0; i < preBlocks.length; ++i) {
 
             // strip whitespace around code tags when they are inside of a pre tag
             // this makes the themes look better because you can't accidentally
@@ -668,23 +668,23 @@ window['Rainbow'] = (function() {
             //
             // if you want to preserve whitespace you can use a pre tag on its own
             // without a code tag inside of it
-            if (pre_blocks[i].getElementsByTagName('code').length) {
-                pre_blocks[i].innerHTML = pre_blocks[i].innerHTML.replace(/^\s+/, '').replace(/\s+$/, '');
+            if (preBlocks[i].getElementsByTagName('code').length) {
+                preBlocks[i].innerHTML = preBlocks[i].innerHTML.replace(/^\s+/, '').replace(/\s+$/, '');
                 continue;
             }
 
             // if the pre block has no code blocks then we are going to want to
             // process it directly
-            final_pre_blocks.push(pre_blocks[i]);
+            finalPreBlocks.push(preBlocks[i]);
         }
 
         // @see http://stackoverflow.com/questions/2735067/how-to-convert-a-dom-node-list-to-an-array-in-javascript
         // we are going to process all <code> blocks
-        for (i = 0; i < code_blocks.length; ++i) {
-            final_code_blocks.push(code_blocks[i]);
+        for (i = 0; i < codeBlocks.length; ++i) {
+            finalCodeBlocks.push(codeBlocks[i]);
         }
 
-        _highlightCodeBlock(final_code_blocks.concat(final_pre_blocks), 0, onComplete);
+        _highlightCodeBlock(finalCodeBlocks.concat(finalPreBlocks), 0, onComplete);
     }
 
     /**
@@ -724,10 +724,10 @@ window['Rainbow'] = (function() {
         /**
          * method to set a global class that will be applied to all spans
          *
-         * @param {string} class_name
+         * @param {string} className
          */
-        addClass: function(class_name) {
-            globalClass = class_name;
+        addClass: function(className) {
+            globalClass = className;
         },
 
         /**
