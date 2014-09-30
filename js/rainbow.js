@@ -92,22 +92,22 @@ window['Rainbow'] = (function() {
      * adds a class to a given code block
      *
      * @param {Element} el
-     * @param {string} class_name   class name to add
+     * @param {string} className   class name to add
      * @returns void
      */
-    function _addClass(el, class_name) {
-        el.className += el.className ? ' ' + class_name : class_name;
+    function _addClass(el, className) {
+        el.className += el.className ? ' ' + className : className;
     }
 
     /**
      * checks if a block has a given class
      *
      * @param {Element} el
-     * @param {string} class_name   class name to check for
+     * @param {string} className   class name to check for
      * @returns {boolean}
      */
-    function _hasClass(el, class_name) {
-        return (' ' + el.className + ' ').indexOf(' ' + class_name + ' ') > -1;
+    function _hasClass(el, className) {
+        return (' ' + el.className + ' ').indexOf(' ' + className + ' ') > -1;
     }
 
     /**
@@ -230,14 +230,14 @@ window['Rainbow'] = (function() {
      * @see http://stackoverflow.com/questions/1985594/how-to-find-index-of-groups-in-match
      *
      * @param {Object} match
-     * @param {number} group_number
+     * @param {number} groupNumber
      * @returns {number}
      */
-    function _indexOfGroup(match, group_number) {
+    function _indexOfGroup(match, groupNumber) {
         var index = 0,
             i;
 
-        for (i = 1; i < group_number; ++i) {
+        for (i = 1; i < groupNumber; ++i) {
             if (match[i]) {
                 index += match[i].length;
             }
@@ -279,8 +279,8 @@ window['Rainbow'] = (function() {
         }
 
         var replacement = match[0],
-            start_pos = match.index,
-            end_pos = match[0].length + start_pos,
+            startPos = match.index,
+            endPos = match[0].length + startPos,
 
             /**
              * callback to process the next match of this pattern
@@ -297,7 +297,7 @@ window['Rainbow'] = (function() {
 
         // if this is not a child match and it falls inside of another
         // match that already happened we should skip it and continue processing
-        if (_matchIsInsideOtherMatch(start_pos, end_pos)) {
+        if (_matchIsInsideOtherMatch(startPos, endPos)) {
             return processNext();
         }
 
@@ -313,7 +313,7 @@ window['Rainbow'] = (function() {
                     replacement = _wrapCodeInSpan(pattern['name'], replacement);
                 }
 
-                // console.log('LEVEL', CURRENT_LEVEL, 'replace', match[0], 'with', replacement, 'at position', start_pos, 'to', end_pos);
+                // console.log('LEVEL', CURRENT_LEVEL, 'replace', match[0], 'with', replacement, 'at position', startPos, 'to', endPos);
 
                 // store what needs to be replaced with what at this position
                 if (!replacements[CURRENT_LEVEL]) {
@@ -321,14 +321,14 @@ window['Rainbow'] = (function() {
                     replacementPositions[CURRENT_LEVEL] = {};
                 }
 
-                replacements[CURRENT_LEVEL][start_pos] = {
+                replacements[CURRENT_LEVEL][startPos] = {
                     'replace': match[0],
                     'with': replacement
                 };
 
                 // store the range of this match so we can use it for comparisons
                 // with other matches later
-                replacementPositions[CURRENT_LEVEL][start_pos] = end_pos;
+                replacementPositions[CURRENT_LEVEL][startPos] = endPos;
 
                 // process the next match
                 processNext();
