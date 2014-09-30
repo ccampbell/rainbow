@@ -341,31 +341,31 @@ window['Rainbow'] = (function() {
             // we run through them backwards because the match position of earlier
             // matches will not change depending on what gets replaced in later
             // matches
-            group_keys = keys(pattern['matches']),
+            groupKeys = keys(pattern['matches']),
 
             /**
              * callback for processing a sub group
              *
              * @param {number} i
-             * @param {Array} group_keys
+             * @param {Array} groupKeys
              * @param {Function} callback
              */
-            processGroup = function(i, group_keys, callback) {
-                if (i >= group_keys.length) {
+            processGroup = function(i, groupKeys, callback) {
+                if (i >= groupKeys.length) {
                     return callback(replacement);
                 }
 
                 var processNextGroup = function() {
-                        processGroup(++i, group_keys, callback);
+                        processGroup(++i, groupKeys, callback);
                     },
-                    block = match[group_keys[i]];
+                    block = match[groupKeys[i]];
 
                 // if there is no match here then move on
                 if (!block) {
                     return processNextGroup();
                 }
 
-                var group = pattern['matches'][group_keys[i]],
+                var group = pattern['matches'][groupKeys[i]],
                     language = group['language'],
 
                     /**
@@ -403,7 +403,7 @@ window['Rainbow'] = (function() {
                      * @param {string|null} match_name
                      */
                     _replaceAndContinue = function(block, replace_block, match_name) {
-                        replacement = _replaceAtPosition(_indexOfGroup(match, group_keys[i]), block, match_name ? _wrapCodeInSpan(match_name, replace_block) : replace_block, replacement);
+                        replacement = _replaceAtPosition(_indexOfGroup(match, groupKeys[i]), block, match_name ? _wrapCodeInSpan(match_name, replace_block) : replace_block, replacement);
                         processNextGroup();
                     };
 
@@ -427,7 +427,7 @@ window['Rainbow'] = (function() {
                 });
             };
 
-        processGroup(0, group_keys, onMatchSuccess);
+        processGroup(0, groupKeys, onMatchSuccess);
     }
 
     /**
