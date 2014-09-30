@@ -721,7 +721,7 @@
      *
      * @param {string} className
      */
-    function _addClass(className) {
+    function _addGlobalClass(className) {
         globalClass = className;
     }
 
@@ -755,7 +755,7 @@
     var _rainbow = {
         extend: _extend,
         onHighlight: _onHighlight,
-        addClass: _addClass,
+        addClass: _addGlobalClass,
         color: _color
     };
 
