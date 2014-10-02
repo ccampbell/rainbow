@@ -12,7 +12,7 @@ Rainbow.extend( "ceylon", [
   {
     matches: {
       1: "keyword",
-      2: "support.namespace"
+      3: "support.namespace"
     },
     pattern: /(import|module|package)(\s)*((\w|\.)+)/g
   },
