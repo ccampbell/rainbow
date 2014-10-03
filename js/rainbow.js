@@ -530,7 +530,6 @@
         if (element) {
             element.innerHTML = message.data.result;
         }
-        console.log(message.data);
     }
 
     function _highlightCodeBlocks(codeBlocks, onComplete) {
