@@ -15,7 +15,7 @@
  *
  * Rainbow is a simple code syntax highlighter
  *
- * @preserve @version 1.2
+ * @version 1.2
  * @url rainbowco.de
  */
 (function(global) {
@@ -690,22 +690,20 @@
         color: _color
     };
 
+    var isSupported = !isWorker && typeof Worker !== 'undefined';
+
+    /**
+     * adds event listener to start highlighting
+     */
     // @see http://stackoverflow.com/questions/5408406/web-workers-without-a-separate-javascript-file
-    if (!isWorker && typeof Worker !== 'undefined') {
+    if (isSupported) {
         var id = Date.now();
         document.write('<script id="wts' + id + '"></script>');
         var src = document.getElementById('wts' + id).previousSibling.src;
         worker = new Worker(src);
         worker.addEventListener('message', _handleResponseFromWorker, false);
-    }
-
-    global.Rainbow = _rainbow;
-
-    /**
-     * adds event listener to start highlighting
-     */
-    if (!isWorker && document.addEventListener) {
-        return document.addEventListener('DOMContentLoaded', _rainbow.color, false);
+        global.Rainbow = _rainbow;
+        document.addEventListener('DOMContentLoaded', _rainbow.color, false);
     }
 
     if (isWorker) {
