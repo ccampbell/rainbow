@@ -86,7 +86,9 @@
             }
         }
 
-        return language.toLowerCase();
+        if (language) {
+            return language.toLowerCase();
+        }
     }
 
     /**
@@ -310,6 +312,11 @@
          */
         function _processPattern(pattern, code) {
             var regex = pattern.pattern;
+
+            if (!regex) {
+                return;
+            }
+
             var match = regex.exec(code);
 
             if (!match) {
@@ -656,7 +663,11 @@
         // if you want to straight up highlight a string you can pass the string of code,
         // the language, and a callback function
         if (typeof arguments[0] == 'string') {
-            return _highlightBlockForLanguage(arguments[0], arguments[1], arguments[2]);
+            var drop = new Raindrop();
+            var result = drop.refract(arguments[0], arguments[1]);
+            if (arguments[2]) {
+                arguments[2](result);
+            }
         }
 
         // if you pass a callback function then we rerun the color function
