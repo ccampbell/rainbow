@@ -41,11 +41,6 @@
         DEFAULT_LANGUAGE = 0,
 
         /**
-         * @type {number}
-         */
-        replacementCounter = 0,
-
-        /**
          * @type {null|string}
          */
         globalClass,
@@ -313,15 +308,10 @@
          * @param {string} code
          * @returns void
          */
-        function _processPattern(pattern, code, callback) {
+        function _processPattern(pattern, code) {
             var regex = pattern.pattern;
-
-            if (typeof regex === 'undefined' || regex === null) {
-                //console.warn("undefined regular expression")
-                return;
-            }
-
             var match = regex.exec(code);
+
             if (!match) {
                 return;
             }
@@ -339,6 +329,7 @@
             // if this is not a child match and it falls inside of another
             // match that already happened we should skip it and continue processing
             if (_matchIsInsideOtherMatch(startPos, endPos)) {
+                _processPattern(pattern, code);
                 return;
             }
 
@@ -354,7 +345,7 @@
                     replacement = _wrapCodeInSpan(pattern['name'], replacement);
                 }
 
-                // console.log('LEVEL', currentLevel, 'replace', match[0], 'with', replacement, 'at position', startPos, 'to', endPos);
+                // console.log('LEVEL ' + currentLevel + ' replace ' + match[0] + ' with ' + replacement + ' at position ' + startPos + ' to ' + endPos);
 
                 // store what needs to be replaced with what at this position
                 if (!replacements[currentLevel]) {
@@ -370,6 +361,8 @@
                 // store the range of this match so we can use it for comparisons
                 // with other matches later
                 replacementPositions[currentLevel][startPos] = endPos;
+
+                _processPattern(pattern, code);
             }
 
             /**
@@ -425,30 +418,30 @@
                  * @param {string|null} matchName
                  */
                 var _getReplacement = function(block, replaceBlock, matchName) {
-                    return _replaceAtPosition(_indexOfGroup(match, groupKeys[i]), block, matchName ? _wrapCodeInSpan(matchName, replaceBlock) : replaceBlock, replacement);
+                    replacement = _replaceAtPosition(_indexOfGroup(match, groupKey), block, matchName ? _wrapCodeInSpan(matchName, replaceBlock) : replaceBlock, replacement);
+                    return replacement;
                 };
+
+                var localCode;
 
                 // if this is a sublanguage go and process the block using that language
                 if (language) {
-                    var code = _highlightBlockForLanguage(block, language);
-                    replacement = _getReplacement(block, code);
-                    onMatchSuccess(replacement);
+                    localCode = _highlightBlockForLanguage(block, language);
+                    _getReplacement(block, localCode);
                     return;
                 }
 
                 // if this is a string then this match is directly mapped to selector
                 // so all we have to do is wrap it in a span and continue
                 if (typeof group === 'string') {
-                    replacement = _getReplacement(block, block, group);
-                    onMatchSuccess(replacement);
+                    _getReplacement(block, block, group);
                     return;
                 }
 
-                    // the process group can be a single pattern or an array of patterns
-                    // _processCodeWithPatterns always expects an array so we convert it here
-                var code = _processCodeWithPatterns(block, groupToProcess.length ? groupToProcess : [groupToProcess]);
-                replacement = _getReplacement(block, code, group['matches'] ? group['name'] : 0);
-                onMatchSuccess(replacement);
+                // the process group can be a single pattern or an array of patterns
+                // _processCodeWithPatterns always expects an array so we convert it here
+                localCode = _processCodeWithPatterns(block, groupToProcess.length ? groupToProcess : [groupToProcess]);
+                _getReplacement(block, localCode, group['matches'] ? group['name'] : 0);
             }
 
             // if this pattern has sub matches for different groups in the regex
@@ -462,6 +455,8 @@
             for (var i = 0; i < groupKeys.length; i++) {
                 _processGroup(groupKeys[i]);
             }
+
+            onMatchSuccess(replacement);
         }
 
         /**
