@@ -560,11 +560,31 @@
         var drop = new Raindrop();
         var result = drop.refract(message.data.code, message.data.lang);
         self.postMessage({
-            id: message.data.id,
             start: message.data.time,
             lang: message.data.lang,
             result: result
         });
+    }
+
+    /**
+     * Browser Only - Helper for matching up callbacks directly with the
+     * post message requests to a web worker.
+     *
+     * @see http://stackoverflow.com/questions/18056637/html5-web-worker-communication
+     * @param {object} message      data to send to web worker
+     * @param {Function} callback   callback function for worker to reply to
+     * @return void
+     */
+    function _messageWorker(message, callback) {
+        function _listen(e){
+            if (e.data.funcName === message.funcName){
+                worker.removeEventListener('message', _listen);
+                callback(e.data);
+            }
+        }
+
+        worker.addEventListener('message', _listen);
+        worker.postMessage(message);
     }
 
     /**
@@ -574,15 +594,13 @@
      * @param {object} message      message received from self.postMessage
      * @returns void
      */
-    function _handleResponseFromWorker(message) {
-        console.log('_handleResponseFromWorker', performance.now() - message.data.start);
-        var element = document.querySelector('.' + message.data.id);
-        if (element) {
-            element.innerHTML = message.data.result;
-            element.classList.remove(message.data.id);
+    function _generateHandler(element) {
+        return function _handleResponseFromWorker(data) {
+            console.log('_handleResponseFromWorker', performance.now() - data.start);
+            element.innerHTML = data.result;
             element.classList.add('rainbow');
-            _onHighlight(element, message.data.lang);
-        }
+            _onHighlight(element, data.lang);
+        };
     }
 
     /**
@@ -601,18 +619,15 @@
                 continue;
             }
 
-            var randLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
-            var uniqueId = randLetter.toLowerCase() + Date.now();
-            block.classList.add(uniqueId);
-
-            worker.postMessage({
+            var workerData = {
                 time: performance.now(),
-                id: uniqueId,
                 lang: language,
                 code: block.innerHTML,
                 languagePatterns: languagePatterns,
                 bypassDefaults: bypassDefaults
-            });
+            };
+
+            _messageWorker(workerData, _generateHandler(block));
         }
     }
 
@@ -776,7 +791,6 @@
         document.write('<script id="wts' + id + '"></script>');
         var src = document.getElementById('wts' + id).previousSibling.src;
         worker = new Worker(src);
-        worker.addEventListener('message', _handleResponseFromWorker, false);
         global.Rainbow = _rainbow;
         document.addEventListener('DOMContentLoaded', _rainbow.color, false);
     }
