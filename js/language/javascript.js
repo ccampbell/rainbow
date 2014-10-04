@@ -2,7 +2,7 @@
  * Javascript patterns
  *
  * @author Craig Campbell
- * @version 1.0.9
+ * @version 1.0.10
  */
 Rainbow.extend('javascript', [
 
@@ -34,7 +34,7 @@ Rainbow.extend('javascript', [
         'matches': {
             1: 'support.method'
         },
-        'pattern': /\.(getAttribute|push|getElementById|getElementsByClassName|log|setTimeout|setInterval)(?=\()/g
+        'pattern': /\.(getAttribute|replace|push|getElementById|getElementsByClassName|log|setTimeout|setInterval)(?=\()/g
     },
 
     /**
@@ -58,7 +58,7 @@ Rainbow.extend('javascript', [
             3: 'string.regexp.close',
             4: 'string.regexp.modifier'
         },
-        'pattern': /(\/)(?!\*)(.+)(\/)([igm]{0,3})/g
+        'pattern': /(\/)(?!\*)(.+?)(\/)([igm]{0,3})/g
     },
 
     /**

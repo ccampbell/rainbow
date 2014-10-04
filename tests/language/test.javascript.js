@@ -209,4 +209,14 @@ describe(language, function() {
         '<span class="storage">var</span> <span class="entity function">parseAndHighlight</span> <span class="keyword operator">=</span> <span class="keyword">function</span>() {};\n' +
         '<span class="storage">var</span> <span class="entity function">parseAndHighlight2</span> <span class="keyword operator">=</span> <span class="keyword">function</span>() {};'
     );
+
+    run(
+        language,
+
+        'multiple regex same line',
+
+        "code.replace(/</g, '&lt;').replace(/>/g, '&gt;')",
+
+        'code.<span class="support method">replace</span>(<span class="string regexp"><span class="string regexp open">/</span>&lt;<span class="string regexp close">/</span><span class="string regexp modifier">g</span></span>, <span class="string">\'&lt;\'</span>).<span class="support method">replace</span>(<span class="string regexp"><span class="string regexp open">/</span>&gt;<span class="string regexp close">/</span><span class="string regexp modifier">g</span></span>, <span class="string">\'&gt;\'</span>)'
+    );
 });

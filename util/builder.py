@@ -23,7 +23,7 @@ class RainbowBuilder(object):
             'haskell': '1.0.1',
             'html': '1.0.9',
             'java': '1.0',
-            'javascript': '1.0.9',
+            'javascript': '1.0.10',
             'lua': '1.0.1',
             'php': '1.0.8',
             'python': '1.0.9',
