@@ -15,8 +15,7 @@
  *
  * Rainbow is a simple code syntax highlighter
  *
- * @version 1.2
- * @url rainbowco.de
+ * @see rainbowco.de
  */
 (function(global) {
     "use strict";
