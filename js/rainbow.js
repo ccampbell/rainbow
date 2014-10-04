@@ -584,7 +584,11 @@
         return function _handleResponseFromWorker(data) {
             element.innerHTML = data.result;
             element.classList.add('rainbow');
-            _onHighlight(element, data.lang);
+
+            if (onHighlight) {
+                onHighlight(element, data.lang);
+            }
+
             if (--waitingOn.c === 0) {
                 callback();
             }
@@ -781,7 +785,7 @@
      */
     var _rainbow = {
         extend: _extend,
-        onHighlight: _onHighlight || function() {},
+        onHighlight: _onHighlight,
         addClass: _addGlobalClass,
         color: _color
     };
