@@ -19,56 +19,57 @@
  * @url rainbowco.de
  */
 (function(global) {
+    "use strict";
 
     /**
      * An array of the language patterns specified for each language
      *
      * @type {Object}
      */
-    var languagePatterns = {},
+    var languagePatterns = {};
 
-        /**
-         * An array of languages and whether they should bypass the
-         * default patterns
-         *
-         * @type {Object}
-         */
-        bypassDefaults = {},
+    /**
+     * An array of languages and whether they should bypass the
+     * default patterns
+     *
+     * @type {Object}
+     */
+    var bypassDefaults = {};
 
-        /**
-         * Constant used to refer to the default language
-         *
-         * @type {number}
-         */
-        DEFAULT_LANGUAGE = 0,
+    /**
+     * Constant used to refer to the default language
+     *
+     * @type {number}
+     */
+    var DEFAULT_LANGUAGE = 0;
 
-        /**
-         * Global class added to each span in the highlighted code
-         *
-         * @type {null|string}
-         */
-        globalClass,
+    /**
+     * Global class added to each span in the highlighted code
+     *
+     * @type {null|string}
+     */
+    var globalClass;
 
-        /**
-         * Callback to fire after each block is highlighted
-         *
-         * @type {null|Function}
-         */
-        onHighlight,
+    /**
+     * Callback to fire after each block is highlighted
+     *
+     * @type {null|Function}
+     */
+    var onHighlight;
 
-        /**
-         * Reference to web worker for doing the heavy lifting
-         *
-         * @type Worker
-         */
-        worker,
+    /**
+     * Reference to web worker for doing the heavy lifting
+     *
+     * @type Worker
+     */
+    var worker;
 
-        /**
-         * Flag for if this is the web worker or not
-         *
-         * @type {Boolean}
-         */
-        isWorker = typeof document === 'undefined';
+    /**
+     * Flag for if this is the web worker or not
+     *
+     * @type {Boolean}
+     */
+    var isWorker = typeof document === 'undefined';
 
     /**
      * Browser Only - Gets the language for this block of code
@@ -90,8 +91,8 @@
         // You can use the Google Code Prettify style: <pre class="lang-php">
         // or the HTML5 style: <pre><code class="language-php">
         if (!language) {
-            var pattern = /\blang(?:uage)?-(\w+)/,
-                match = block.className.match(pattern) || block.parentNode.className.match(pattern);
+            var pattern = /\blang(?:uage)?-(\w+)/;
+            var match = block.className.match(pattern) || block.parentNode.className.match(pattern);
 
             if (match) {
                 language = match[1];
@@ -170,8 +171,8 @@
      * @returns {number}
      */
     function _indexOfGroup(match, groupNumber) {
-        var index = 0,
-            i;
+        var index = 0;
+        var i;
 
         for (i = 1; i < groupNumber; ++i) {
             if (match[i]) {
@@ -203,8 +204,8 @@
      * @returns {Array}
      */
     function _getPatternsForLanguage(language) {
-        var patterns = languagePatterns[language] || [],
-            defaultPatterns = languagePatterns[DEFAULT_LANGUAGE] || [];
+        var patterns = languagePatterns[language] || [];
+        var defaultPatterns = languagePatterns[DEFAULT_LANGUAGE] || [];
 
         return _bypassDefaultPatterns(language) ? patterns : patterns.concat(defaultPatterns);
     }
@@ -580,7 +581,7 @@
             element.innerHTML = message.data.result;
             element.classList.remove(message.data.id);
             element.classList.add('rainbow');
-            Rainbow.onHighlight(element, message.data.lang);
+            _onHighlight(element, message.data.lang);
         }
     }
 
@@ -631,11 +632,11 @@
         // @see https://github.com/ccampbell/rainbow/issues/32
         node = node && typeof node.getElementsByTagName == 'function' ? node : document;
 
-        var preBlocks = node.getElementsByTagName('pre'),
-            codeBlocks = node.getElementsByTagName('code'),
-            i,
-            finalPreBlocks = [],
-            finalCodeBlocks = [];
+        var preBlocks = node.getElementsByTagName('pre');
+        var codeBlocks = node.getElementsByTagName('code');
+        var i;
+        var finalPreBlocks = [];
+        var finalCodeBlocks = [];
 
         // First loop through all pre blocks to find which ones to highlight
         for (i = 0; i < preBlocks.length; ++i) {
