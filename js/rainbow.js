@@ -19,63 +19,75 @@
  * @url rainbowco.de
  */
 (function(global) {
+
     /**
-     * an array of the language patterns specified for each language
+     * An array of the language patterns specified for each language
      *
      * @type {Object}
      */
     var languagePatterns = {},
 
         /**
-         * an array of languages and whether they should bypass the default patterns
+         * An array of languages and whether they should bypass the
+         * default patterns
          *
          * @type {Object}
          */
         bypassDefaults = {},
 
         /**
-         * constant used to refer to the default language
+         * Constant used to refer to the default language
          *
          * @type {number}
          */
         DEFAULT_LANGUAGE = 0,
 
         /**
+         * Global class added to each span in the highlighted code
+         *
          * @type {null|string}
          */
         globalClass,
 
         /**
+         * Callback to fire after each block is highlighted
+         *
          * @type {null|Function}
          */
         onHighlight,
 
         /**
+         * Reference to web worker for doing the heavy lifting
+         *
          * @type Worker
          */
         worker,
 
         /**
+         * Flag for if this is the web worker or not
+         *
          * @type {Boolean}
          */
         isWorker = typeof document === 'undefined';
 
     /**
-     * gets the language for this block of code
+     * Browser Only - Gets the language for this block of code
      *
      * @param {Element} block
      * @returns {string|null}
      */
     function _getLanguageForBlock(block) {
 
-        // if this doesn't have a language but the parent does then use that
-        // this means if for example you have: <pre data-language="php">
+        // If this doesn't have a language but the parent does then use that.
+        //
+        // This means if for example you have: <pre data-language="php">
         // with a bunch of <code> blocks inside then you do not have
-        // to specify the language for each block
+        // to specify the language for each block.
         var language = block.getAttribute('data-language') || block.parentNode.getAttribute('data-language');
 
-        // this adds support for specifying language via a css class
-        // you can use the Google Code Prettify style: <pre class="lang-php">
+        // This adds support for specifying language via a CSS class.
+        //
+        // You can use the Google Code Prettify style: <pre class="lang-php">
         // or the HTML5 style: <pre><code class="language-php">
         if (!language) {
             var pattern = /\blang(?:uage)?-(\w+)/,
@@ -92,7 +104,7 @@
     }
 
     /**
-     * makes sure html entities are always used for tags
+     * Encodes < and > as html entities
      *
      * @param {string} code
      * @returns {string}
@@ -102,7 +114,7 @@
     }
 
     /**
-     * determines if a new match intersects with an existing one
+     * Determines if a new match intersects with an existing one
      *
      * @param {number} start1    start position of existing match
      * @param {number} end1      end position of existing match
@@ -119,7 +131,7 @@
     }
 
     /**
-     * determines if two different matches have complete overlap with each other
+     * Determines if two different matches have complete overlap with each other
      *
      * @param {number} start1   start position of existing match
      * @param {number} end1     end position of existing match
@@ -129,8 +141,8 @@
      */
     function _hasCompleteOverlap(start1, end1, start2, end2) {
 
-        // if the starting and end positions are exactly the same
-        // then the first one should stay and this one should be ignored
+        // If the starting and end positions are exactly the same
+        // then the first one should stay and this one should be ignored.
         if (start2 == start1 && end2 == end1) {
             return false;
         }
@@ -139,7 +151,7 @@
     }
 
     /**
-     * takes a string of code and wraps it in a span tag based on the name
+     * Takes a string of code and wraps it in a span tag based on the name
      *
      * @param {string} name     name of the pattern (ie keyword.regex)
      * @param {string} code     block of code to wrap
@@ -150,10 +162,9 @@
     }
 
     /**
-     * finds out the position of group match for a regular expression
+     * Finds out the position of group match for a regular expression
      *
      * @see http://stackoverflow.com/questions/1985594/how-to-find-index-of-groups-in-match
-     *
      * @param {Object} match
      * @param {number} groupNumber
      * @returns {number}
@@ -172,10 +183,13 @@
     }
 
     /**
-     * should a language bypass the default patterns?
+     * Determines if a language should bypass the default patterns
      *
-     * if you call Rainbow.extend() and pass true as the third argument
-     * it will bypass the defaults
+     * If you create a language and call Rainbow.extend() with `true` as the
+     * third argument it will bypass the defaults.
+     *
+     * @param {string} language
+     * @returns {boolean}
      */
     function _bypassDefaultPatterns(language)
     {
@@ -183,7 +197,7 @@
     }
 
     /**
-     * returns a list of regex patterns for this language
+     * Returns a list of regex patterns for this language
      *
      * @param {string} language
      * @returns {Array}
@@ -196,9 +210,10 @@
     }
 
     /**
-     * substring replace call to replace part of a string at a certain position
+     * Substring replace call to replace part of a string at a certain position
      *
-     * @param {number} position         the position where the replacement should happen
+     * @param {number} position         the position where the replacement
+     *                                  should happen
      * @param {string} replace          the text we want to replace
      * @param {string} replaceWith      the text we want to replace it with
      * @param {string} code             the code we are doing the replacing in
@@ -210,7 +225,7 @@
     }
 
    /**
-     * sorts an object by index descending
+     * Sorts an objects keys by index descending
      *
      * @param {Object} object
      * @return {Array}
@@ -230,45 +245,55 @@
         });
     }
 
+    /**
+     * Raindrop is a class used to highlight individual blocks of code
+     *
+     * @class
+     */
     function Raindrop() {
+
         /**
-         * array of replacements to process at the end
+         * Object of replacements to process at the end of the processing
          *
          * @type {Object}
          */
         var replacements = {};
 
         /**
-         * an array of start and end positions of blocks to be replaced
+         * Object of start and end positions of blocks to be replaced
          *
          * @type {Object}
          */
         var replacementPositions = {};
 
         /**
-         * processing level
+         * Processing level
          *
-         * replacements are stored at this level so if there is a sub block of code
-         * (for example php inside of html) it runs at a different level
+         * Replacements are stored at this level so if there is a sub block of
+         * code (for example PHP inside of HTML) it runs at a different level.
          *
          * @type {number}
          */
         var currentLevel = 0;
 
         /**
-         * determines if the match passed in falls inside of an existing match
-         * this prevents a regex pattern from matching inside of a bigger pattern
+         * Determines if the match passed in falls inside of an existing match.
+         * This prevents a regex pattern from matching inside of another pattern
+         * that matches a larger amount of code.
          *
-         * @param {number} start - start position of new match
-         * @param {number} end - end position of new match
+         * For example this prevents a keyword from matching `function` if there
+         * is already a match for `function (.*)`.
+         *
+         * @param {number} start    start position of new match
+         * @param {number} end      end position of new match
          * @returns {boolean}
          */
         function _matchIsInsideOtherMatch(start, end) {
             for (var key in replacementPositions[currentLevel]) {
                 key = parseInt(key, 10);
 
-                // if this block completely overlaps with another block
-                // then we should remove the other block and return false
+                // If this block completely overlaps with another block
+                // then we should remove the other block and return `false`.
                 if (_hasCompleteOverlap(key, replacementPositions[currentLevel][key], start, end)) {
                     delete replacementPositions[currentLevel][key];
                     delete replacements[currentLevel][key];
@@ -283,7 +308,8 @@
         }
 
         /**
-         * process replacements in the string of code to actually update the markup
+         * Process replacements in the string of code to actually update
+         * the markup
          *
          * @param {string} code         the code to process replacements in
          * @returns void
@@ -299,12 +325,12 @@
         }
 
         /**
-         * matches a regex pattern against a block of code
-         * finds all matches that should be processed and stores the positions
-         * of where they should be replaced within the string
+         * Matches a regex pattern against a block of code, finds all matches
+         * that should be processed, and stores the positions of where they
+         * should be replaced within the string.
          *
-         * this is where pretty much all the work is done but it should not
-         * be called directly
+         * This is where pretty much all the work is done but it should not
+         * be called directly.
          *
          * @param {Object} pattern
          * @param {string} code
@@ -323,7 +349,7 @@
                 return;
             }
 
-            // treat match 0 the same way as name
+            // Treat match 0 the same way as name
             if (!pattern['name'] && typeof pattern['matches'][0] == 'string') {
                 pattern['name'] = pattern['matches'][0];
                 delete pattern['matches'][0];
@@ -333,28 +359,31 @@
             var startPos = match.index;
             var endPos = match[0].length + startPos;
 
-            // if this is not a child match and it falls inside of another
-            // match that already happened we should skip it and continue processing
+            // If this is not a child match and it falls inside of another
+            // match that already happened we should skip it and continue
+            // processing.
             if (_matchIsInsideOtherMatch(startPos, endPos)) {
                 _processPattern(pattern, code);
                 return;
             }
 
             /**
-             * callback for when a match was successfully processed
+             * Callback for when a match was successfully processed
              *
              * @param {string} replacement
              * @returns void
              */
             function onMatchSuccess(replacement) {
-                // if this match has a name then wrap it in a span tag
+
+                // If this match has a name then wrap it in a span tag
                 if (pattern['name']) {
                     replacement = _wrapCodeInSpan(pattern['name'], replacement);
                 }
 
+                // For debugging
                 // console.log('LEVEL ' + currentLevel + ' replace ' + match[0] + ' with ' + replacement + ' at position ' + startPos + ' to ' + endPos);
 
-                // store what needs to be replaced with what at this position
+                // Store what needs to be replaced with what at this position
                 if (!replacements[currentLevel]) {
                     replacements[currentLevel] = {};
                     replacementPositions[currentLevel] = {};
@@ -365,24 +394,23 @@
                     'with': replacement
                 };
 
-                // store the range of this match so we can use it for comparisons
-                // with other matches later
+                // Store the range of this match so we can use it for
+                // comparisons with other matches later.
                 replacementPositions[currentLevel][startPos] = endPos;
 
                 _processPattern(pattern, code);
             }
 
             /**
-             * callback for processing a sub group
+             * Helper function for processing a sub group
              *
-             * @param {number} i
-             * @param {Array} groupKeys
-             * @param {Function} callback
+             * @param {number} groupKey      index of group
+             * @returns void
              */
             function _processGroup(groupKey) {
                 var block = match[groupKey];
 
-                // if there is no match here then move on
+                // If there is no match here then move on
                 if (!block) {
                     return;
                 }
@@ -391,16 +419,17 @@
                 var language = group['language'];
 
                 /**
-                 * process group is what group we should use to actually process
-                 * this match group
+                 * Process group is what group we should use to actually process
+                 * this match group.
                  *
-                 * for example if the subgroup pattern looks like this
+                 * For example if the subgroup pattern looks like this:
+                 *
                  * 2: {
                  *     'name': 'keyword',
                  *     'pattern': /true/g
                  * }
                  *
-                 * then we use that as is, but if it looks like this
+                 * then we use that as is, but if it looks like this:
                  *
                  * 2: {
                  *     'name': 'keyword',
@@ -416,7 +445,7 @@
                 var groupToProcess = group['name'] && group['matches'] ? group['matches'] : group;
 
                 /**
-                 * takes the code block matched at this group, replaces it
+                 * Takes the code block matched at this group, replaces it
                  * with the highlighted block, and optionally wraps it with
                  * a span with a name
                  *
@@ -426,52 +455,56 @@
                  */
                 var _getReplacement = function(block, replaceBlock, matchName) {
                     replacement = _replaceAtPosition(_indexOfGroup(match, groupKey), block, matchName ? _wrapCodeInSpan(matchName, replaceBlock) : replaceBlock, replacement);
-                    return replacement;
+                    return;
                 };
 
                 var localCode;
 
-                // if this is a sublanguage go and process the block using that language
+                // If this is a sublanguage go and process the block using
+                // that language
                 if (language) {
                     localCode = _highlightBlockForLanguage(block, language);
                     _getReplacement(block, localCode);
                     return;
                 }
 
-                // if this is a string then this match is directly mapped to selector
-                // so all we have to do is wrap it in a span and continue
+                // If this is a string then this match is directly mapped
+                // to selector so all we have to do is wrap it in a span
+                // and continue.
                 if (typeof group === 'string') {
                     _getReplacement(block, block, group);
                     return;
                 }
 
-                // the process group can be a single pattern or an array of patterns
-                // _processCodeWithPatterns always expects an array so we convert it here
+                // The process group can be a single pattern or an array of
+                // patterns. `_processCodeWithPatterns` always expects an array
+                // so we convert it here.
                 localCode = _processCodeWithPatterns(block, groupToProcess.length ? groupToProcess : [groupToProcess]);
                 _getReplacement(block, localCode, group['matches'] ? group['name'] : 0);
             }
 
-            // if this pattern has sub matches for different groups in the regex
-            // then we should process them one at a time by rerunning them through
-            // this function to generate the new replacement
+            // If this pattern has sub matches for different groups in the regex
+            // then we should process them one at a time by running them through
+            // the _processGroup function to generate the new replacement.
             //
-            // we run through them backwards because the match position of earlier
-            // matches will not change depending on what gets replaced in later
-            // matches
+            // We use the `keys` function to run through them backwards because
+            // the match position of earlier matches will not change depending
+            // on what gets replaced in later matches.
             var groupKeys = keys(pattern['matches']);
             for (var i = 0; i < groupKeys.length; i++) {
                 _processGroup(groupKeys[i]);
             }
 
+            // Finally, call `onMatchSuccess` with the replacement
             onMatchSuccess(replacement);
         }
 
         /**
-         * takes a string of code and highlights it according to the language specified
+         * Takes a string of code and highlights it according to the language
+         * specified
          *
          * @param {string} code
          * @param {string} language
-         * @param {Function} onComplete
          * @returns void
          */
         function _highlightBlockForLanguage(code, language) {
@@ -480,28 +513,27 @@
         }
 
         /**
-         * processes a block of code using specified patterns
+         * Processes a block of code using specified patterns
          *
          * @param {string} code
          * @param {Array} patterns
          * @returns void
          */
         function _processCodeWithPatterns(code, patterns) {
-            // we have to increase the level here so that the
-            // replacements will not conflict with each other when
-            // processing sub blocks of code
+            // We have to increase the level here so that the replacements will
+            // not conflict with each other when processing sub blocks of code.
             ++currentLevel;
 
             for (var i = 0; i < patterns.length; i++) {
                 _processPattern(patterns[i], code);
             }
 
-            // we are done processing the patterns
-            // process the replacements and update the DOM
+            // We are done processing the patterns so we should actually replace
+            // what needs to be replaced in the code.
             code = _processReplacements(code);
 
-            // when we are done processing replacements
-            // we are done at this level so we can go back down
+            // When we are done processing replacements we can move back down to
+            // the previous level.
             delete replacements[currentLevel];
             delete replacementPositions[currentLevel];
             --currentLevel;
@@ -514,6 +546,13 @@
         };
     }
 
+    /**
+     * Web Worker Only - Handles message from main script giving commands about
+     * what to highlight
+     *
+     * @param {object} message      message received from worker.postMessage
+     * @returns void
+     */
     function _handleMessageFromRainbow(message) {
         languagePatterns = message.data.languagePatterns;
         bypassDefaults = message.data.bypassDefaults;
@@ -527,6 +566,13 @@
         });
     }
 
+    /**
+     * Browser Only - Handles response from web worker, updates DOM with
+     * resulting code, and fires callback
+     *
+     * @param {object} message      message received from self.postMessage
+     * @returns void
+     */
     function _handleResponseFromWorker(message) {
         console.log('_handleResponseFromWorker', performance.now() - message.data.start);
         var element = document.querySelector('.' + message.data.id);
@@ -538,6 +584,13 @@
         }
     }
 
+    /**
+     * Browser Only - Sends messages to web worker to highlight elements passed
+     * in
+     *
+     * @param {Array} codeBlocks
+     * @returns void
+     */
     function _highlightCodeBlocks(codeBlocks) {
         for (var i = 0; i < codeBlocks.length; i++) {
             var block = codeBlocks[i];
@@ -563,18 +616,19 @@
     }
 
     /**
-     * start highlighting all the code blocks
+     * Browser Only - Start highlighting all the code blocks
      *
+     * @param {Element} node       HTMLElement to search within
      * @returns void
      */
-    function _highlight(node, onComplete) {
+    function _highlight(node) {
 
-        // the first argument can be an Event or a DOM Element
-        // I was originally checking instanceof Event but that makes it break
-        // when using mootools
+        // The first argument can be an Event or a DOM Element.
+        //
+        // I was originally checking instanceof Event but that made it break
+        // when using mootools.
         //
         // @see https://github.com/ccampbell/rainbow/issues/32
-        //
         node = node && typeof node.getElementsByTagName == 'function' ? node : document;
 
         var preBlocks = node.getElementsByTagName('pre'),
@@ -583,55 +637,59 @@
             finalPreBlocks = [],
             finalCodeBlocks = [];
 
-        // first loop through all pre blocks to find which ones to highlight
-        // also strip whitespace
+        // First loop through all pre blocks to find which ones to highlight
         for (i = 0; i < preBlocks.length; ++i) {
 
-            // strip whitespace around code tags when they are inside of a pre tag
-            // this makes the themes look better because you can't accidentally
-            // add extra linebreaks at the start and end
+            // Strip whitespace around code tags when they are inside of a pre
+            // tag.  This makes the themes look better because you can't
+            // accidentally add extra linebreaks at the start and end.
             //
-            // when the pre tag contains a code tag then strip any extra whitespace
-            // for example
+            // When the pre tag contains a code tag then strip any extra
+            // whitespace.
+            //
+            // For example:
+            //
             // <pre>
             //      <code>var foo = true;</code>
             // </pre>
             //
-            // will become
+            // will become:
+            //
             // <pre><code>var foo = true;</code></pre>
             //
-            // if you want to preserve whitespace you can use a pre tag on its own
-            // without a code tag inside of it
+            // If you want to preserve whitespace you can use a pre tag on
+            // its own without a code tag inside of it.
             if (preBlocks[i].getElementsByTagName('code').length) {
                 preBlocks[i].innerHTML = preBlocks[i].innerHTML.replace(/^\s+/, '').replace(/\s+$/, '');
                 continue;
             }
 
-            // if the pre block has no code blocks then we are going to want to
-            // process it directly
+            // If the pre block has no code blocks then we are going to want to
+            // process it directly.
             finalPreBlocks.push(preBlocks[i]);
         }
 
         // @see http://stackoverflow.com/questions/2735067/how-to-convert-a-dom-node-list-to-an-array-in-javascript
-        // we are going to process all <code> blocks
+        // We are going to process all <code> blocks
         for (i = 0; i < codeBlocks.length; ++i) {
             finalCodeBlocks.push(codeBlocks[i]);
         }
 
-        _highlightCodeBlocks(finalCodeBlocks.concat(finalPreBlocks), onComplete);
+        _highlightCodeBlocks(finalCodeBlocks.concat(finalPreBlocks));
     }
 
     /**
-     * extends the language pattern matches
+     * Extends the language pattern matches
      *
-     * @param {*} language     name of language
-     * @param {*} patterns      array of patterns to add on
-     * @param {boolean|null} bypass      if true this will bypass the default language patterns
+     * @param {string} language         name of language
+     * @param {object} patterns         object of patterns to add on
+     * @param {boolean|null} bypass     if `true` this will not inherit the
+     *                                  default language patterns
      */
     function _extend(language, patterns, bypass) {
 
-        // if there is only one argument then we assume that we want to
-        // extend the default language rules
+        // If there is only one argument then we assume that we want to
+        // extend the default language rules.
         if (arguments.length == 1) {
             patterns = language;
             language = DEFAULT_LANGUAGE;
@@ -642,7 +700,8 @@
     }
 
     /**
-     * call back to let you do stuff in your app after a piece of code has been highlighted
+     * Callback to let you do stuff in your app after a piece of code has
+     * been highlighted
      *
      * @param {Function} callback
      */
@@ -651,23 +710,30 @@
     }
 
     /**
-     * method to set a global class that will be applied to all spans
+     * Method to set a global class that will be applied to all spans.
+     *
+     * This is realy only useful for the effect on rainbowco.de where you can
+     * force all blocks to not be highlighted and remove this class to
+     * transition them to being highlighted.
      *
      * @param {string} className
+     * @returns void
      */
     function _addGlobalClass(className) {
         globalClass = className;
     }
 
     /**
-     * starts the magic rainbow
+     * Starts the magic rainbow
      *
      * @returns void
      */
     function _color() {
 
-        // if you want to straight up highlight a string you can pass the string of code,
-        // the language, and a callback function
+        // If you want to straight up highlight a string you can pass the
+        // string of code, the language, and a callback function.
+        //
+        // @todo make this async in the browser
         if (typeof arguments[0] == 'string') {
             var drop = new Raindrop();
             var result = drop.refract(arguments[0], arguments[1]);
@@ -676,14 +742,14 @@
             }
         }
 
-        // if you pass a callback function then we rerun the color function
-        // on all the code and call the callback function on complete
+        // If you pass a callback function then we rerun the color function
+        // on all the code and call the callback function on complete.
         if (typeof arguments[0] == 'function') {
             return _highlight(0, arguments[0]);
         }
 
-        // otherwise we use whatever node you passed in with an optional
-        // callback function as the second parameter
+        // Otherwise we use whatever node you passed in with an optional
+        // callback function as the second parameter.
         _highlight(arguments[0], arguments[1]);
     }
 
@@ -700,9 +766,10 @@
     var isSupported = !isWorker && typeof Worker !== 'undefined';
 
     /**
-     * adds event listener to start highlighting
+     * Set up web worker and add event listener to start highlighting
+     *
+     * @see http://stackoverflow.com/questions/5408406/web-workers-without-a-separate-javascript-file
      */
-    // @see http://stackoverflow.com/questions/5408406/web-workers-without-a-separate-javascript-file
     if (isSupported) {
         var id = Date.now();
         document.write('<script id="wts' + id + '"></script>');
