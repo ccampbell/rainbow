@@ -563,25 +563,25 @@
         bypassDefaults = message.data.bypassDefaults;
         var drop = new Raindrop();
         var result = drop.refract(message.data.code, message.data.lang);
-        self.postMessage({
-            start: message.data.time,
+        var data = {
+            id: message.data.id,
             lang: message.data.lang,
             result: result
-        });
+        };
+        self.postMessage(data);
     }
 
     /**
      * Browser Only - Helper for matching up callbacks directly with the
      * post message requests to a web worker.
      *
-     * @see http://stackoverflow.com/questions/18056637/html5-web-worker-communication
      * @param {object} message      data to send to web worker
      * @param {Function} callback   callback function for worker to reply to
      * @return void
      */
     function _messageWorker(message, callback) {
         function _listen(e) {
-            if (e.data.funcName === message.funcName) {
+            if (e.data.id === message.id) {
                 callback(e.data);
                 worker.removeEventListener('message', _listen);
             }
@@ -617,7 +617,7 @@
      */
     function _getWorkerData(code, lang) {
         var workerData = {
-            // time: performance.now(),
+            id: String.fromCharCode(65 + Math.floor(Math.random() * 26)) + Date.now(),
             code: code,
             lang: lang,
             languagePatterns: languagePatterns,
