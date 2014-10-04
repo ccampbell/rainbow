@@ -64,12 +64,16 @@
      */
     var worker;
 
+    var isNode = typeof module !== 'undefined' && typeof module.exports === 'object';
     /**
      * Flag for if this is the web worker or not
      *
      * @type {Boolean}
      */
-    var isWorker = typeof document === 'undefined';
+    var isWorker = !isNode && typeof document === 'undefined';
+    if (isNode) {
+        global.Worker = require('webworker-threads').Worker;
+    }
 
     /**
      * Browser Only - Gets the language for this block of code
@@ -576,10 +580,10 @@
      * @return void
      */
     function _messageWorker(message, callback) {
-        function _listen(e){
-            if (e.data.funcName === message.funcName){
-                worker.removeEventListener('message', _listen);
+        function _listen(e) {
+            if (e.data.funcName === message.funcName) {
                 callback(e.data);
+                worker.removeEventListener('message', _listen);
             }
         }
 
@@ -596,7 +600,6 @@
      */
     function _generateHandler(element, waitingOn, callback) {
         return function _handleResponseFromWorker(data) {
-            console.log('_handleResponseFromWorker', performance.now() - data.start);
             element.innerHTML = data.result;
             element.classList.add('rainbow');
             _onHighlight(element, data.lang);
@@ -614,7 +617,7 @@
      */
     function _getWorkerData(code, lang) {
         var workerData = {
-            time: performance.now(),
+            // time: performance.now(),
             code: code,
             lang: lang,
             languagePatterns: languagePatterns,
@@ -646,7 +649,6 @@
         }
 
         if (waitingOn.c === 0) {
-            console.log(codeBlocks, callback);
             callback();
         }
     }
@@ -766,7 +768,6 @@
      * @returns void
      */
     function _color() {
-
         // If you want to straight up highlight a string you can pass the
         // string of code, the language, and a callback function.
         if (typeof arguments[0] == 'string') {
@@ -784,7 +785,6 @@
         // If you pass a callback function then we rerun the color function
         // on all the code and call the callback function on complete.
         if (typeof arguments[0] == 'function') {
-            console.log('this one');
             return _highlight(0, arguments[0]);
         }
 
@@ -803,20 +803,31 @@
         color: _color
     };
 
-    var isSupported = !isWorker && typeof Worker !== 'undefined';
+    var setUpWorker = !isWorker && typeof global.Worker !== 'undefined';
 
     /**
      * Set up web worker and add event listener to start highlighting
      *
      * @see http://stackoverflow.com/questions/5408406/web-workers-without-a-separate-javascript-file
      */
-    if (isSupported) {
-        var id = Date.now();
-        document.write('<script id="wts' + id + '"></script>');
-        var src = document.getElementById('wts' + id).previousSibling.src;
-        worker = new Worker(src);
-        global.Rainbow = _rainbow;
-        document.addEventListener('DOMContentLoaded', _rainbow.color, false);
+    global.Rainbow = _rainbow;
+    if (setUpWorker) {
+        var src;
+        if (!isNode) {
+            var id = Date.now();
+            document.write('<script id="wts' + id + '"></script>');
+            src = document.getElementById('wts' + id).previousSibling.src;
+        }
+
+        worker = new global.Worker(isNode ? __filename : src);
+
+        if (!isNode) {
+            document.addEventListener('DOMContentLoaded', _rainbow.color, false);
+        }
+    }
+
+    if (isNode) {
+        module.exports = _rainbow;
     }
 
     if (isWorker) {
