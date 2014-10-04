@@ -542,6 +542,7 @@
     function _handleMessageFromRainbow(message) {
         languagePatterns = message.data.languagePatterns;
         bypassDefaults = message.data.bypassDefaults;
+        globalClass = message.data.globalClass;
         var drop = new Raindrop();
         var result = drop.refract(message.data.code, message.data.lang);
         var data = {
@@ -602,7 +603,8 @@
             code: code,
             lang: lang,
             languagePatterns: languagePatterns,
-            bypassDefaults: bypassDefaults
+            bypassDefaults: bypassDefaults,
+            globalClass: globalClass
         };
 
         return workerData;
