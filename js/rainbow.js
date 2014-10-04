@@ -803,6 +803,13 @@
         color: _color
     };
 
+    if (isNode) {
+        _rainbow.colorSync = function(code, lang) {
+            var drop = new Raindrop();
+            return drop.refract(code, lang);
+        };
+    }
+
     var setUpWorker = !isWorker && typeof global.Worker !== 'undefined';
 
     /**
