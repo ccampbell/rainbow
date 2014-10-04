@@ -264,21 +264,18 @@
         var replacements = {};
 
         /**
+         * Language associated with this Raindrop object
+         *
+         * @type {string}
+         */
+        var currentLanguage;
+
+        /**
          * Object of start and end positions of blocks to be replaced
          *
          * @type {Object}
          */
         var replacementPositions = {};
-
-        /**
-         * Processing level
-         *
-         * Replacements are stored at this level so if there is a sub block of
-         * code (for example PHP inside of HTML) it runs at a different level.
-         *
-         * @type {number}
-         */
-        var currentLevel = 0;
 
         /**
          * Determines if the match passed in falls inside of an existing match.
@@ -293,17 +290,17 @@
          * @returns {boolean}
          */
         function _matchIsInsideOtherMatch(start, end) {
-            for (var key in replacementPositions[currentLevel]) {
+            for (var key in replacementPositions) {
                 key = parseInt(key, 10);
 
                 // If this block completely overlaps with another block
                 // then we should remove the other block and return `false`.
-                if (_hasCompleteOverlap(key, replacementPositions[currentLevel][key], start, end)) {
-                    delete replacementPositions[currentLevel][key];
-                    delete replacements[currentLevel][key];
+                if (_hasCompleteOverlap(key, replacementPositions[key], start, end)) {
+                    delete replacementPositions[key];
+                    delete replacements[key];
                 }
 
-                if (_intersects(key, replacementPositions[currentLevel][key], start, end)) {
+                if (_intersects(key, replacementPositions[key], start, end)) {
                     return true;
                 }
             }
@@ -319,10 +316,10 @@
          * @returns void
          */
         function _processReplacements(code) {
-            var positions = keys(replacements[currentLevel]);
+            var positions = keys(replacements);
             for (var i = 0; i < positions.length; i++) {
                 var pos = positions[i];
-                var replacement = replacements[currentLevel][pos];
+                var replacement = replacements[pos];
                 code = _replaceAtPosition(pos, replacement['replace'], replacement['with'], code);
             }
             return code;
@@ -385,22 +382,17 @@
                 }
 
                 // For debugging
-                // console.log('LEVEL ' + currentLevel + ' replace ' + match[0] + ' with ' + replacement + ' at position ' + startPos + ' to ' + endPos);
+                // console.log('Replace ' + match[0] + ' with ' + replacement + ' at position ' + startPos + ' to ' + endPos);
 
                 // Store what needs to be replaced with what at this position
-                if (!replacements[currentLevel]) {
-                    replacements[currentLevel] = {};
-                    replacementPositions[currentLevel] = {};
-                }
-
-                replacements[currentLevel][startPos] = {
+                replacements[startPos] = {
                     'replace': match[0],
                     'with': replacement
                 };
 
                 // Store the range of this match so we can use it for
                 // comparisons with other matches later.
-                replacementPositions[currentLevel][startPos] = endPos;
+                replacementPositions[startPos] = endPos;
 
                 _processPattern(pattern, code);
             }
@@ -462,16 +454,6 @@
                     return;
                 };
 
-                var localCode;
-
-                // If this is a sublanguage go and process the block using
-                // that language
-                if (language) {
-                    localCode = _highlightBlockForLanguage(block, language);
-                    _getReplacement(block, localCode);
-                    return;
-                }
-
                 // If this is a string then this match is directly mapped
                 // to selector so all we have to do is wrap it in a span
                 // and continue.
@@ -480,10 +462,21 @@
                     return;
                 }
 
+                var localCode;
+                var drop = new Raindrop();
+
+                // If this is a sublanguage go and process the block using
+                // that language
+                if (language) {
+                    localCode = drop.refract(block, language);
+                    _getReplacement(block, localCode);
+                    return;
+                }
+
                 // The process group can be a single pattern or an array of
                 // patterns. `_processCodeWithPatterns` always expects an array
                 // so we convert it here.
-                localCode = _processCodeWithPatterns(block, groupToProcess.length ? groupToProcess : [groupToProcess]);
+                localCode = drop.refract(block, currentLanguage, groupToProcess.length ? groupToProcess : [groupToProcess]);
                 _getReplacement(block, localCode, group['matches'] ? group['name'] : 0);
             }
 
@@ -511,8 +504,9 @@
          * @param {string} language
          * @returns void
          */
-        function _highlightBlockForLanguage(code, language) {
-            var patterns = _getPatternsForLanguage(language);
+        function _highlightBlockForLanguage(code, language, patterns) {
+            currentLanguage = language;
+            patterns = patterns || _getPatternsForLanguage(language);
             return _processCodeWithPatterns(_htmlEntities(code), patterns);
         }
 
@@ -524,25 +518,13 @@
          * @returns void
          */
         function _processCodeWithPatterns(code, patterns) {
-            // We have to increase the level here so that the replacements will
-            // not conflict with each other when processing sub blocks of code.
-            ++currentLevel;
-
             for (var i = 0; i < patterns.length; i++) {
                 _processPattern(patterns[i], code);
             }
 
             // We are done processing the patterns so we should actually replace
             // what needs to be replaced in the code.
-            code = _processReplacements(code);
-
-            // When we are done processing replacements we can move back down to
-            // the previous level.
-            delete replacements[currentLevel];
-            delete replacementPositions[currentLevel];
-            --currentLevel;
-
-            return code;
+            return _processReplacements(code);
         }
 
         return {
@@ -821,8 +803,8 @@
         var src;
         if (!isNode) {
             var id = Date.now();
-            document.write('<script id="wts' + id + '"></script>');
-            src = document.getElementById('wts' + id).previousSibling.src;
+            document.write('<script id="w' + id + '"></script>');
+            src = document.getElementById('w' + id).previousSibling.src;
         }
 
         worker = new global.Worker(isNode ? __filename : src);
