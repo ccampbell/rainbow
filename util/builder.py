@@ -4,6 +4,7 @@ import zipfile
 import hashlib
 import re
 import glob
+import json
 from zipfile import ZipFile
 from StringIO import StringIO
 
@@ -90,10 +91,9 @@ class RainbowBuilder(object):
         file.write(content)
         file.close()
 
-    def getVersion(self):
-        contents = self.openFile(self.getRainbowPath())
-        match = re.search(r'@version\s(.*)\s+?', contents)
-        return match.group(1)
+    def getPackageJSON(self):
+        contents = self.openFile(os.path.join(self.js_path, '../package.json'))
+        return json.loads(contents)
 
     def getLanguageVersions(self, languages):
         groups = []
@@ -126,7 +126,7 @@ class RainbowBuilder(object):
             if cached_version:
                 return cached_version
 
-        command = ['java', '-jar', self.closure_path, '--compilation_level', 'ADVANCED_OPTIMIZATIONS'] + self.js_files_to_include
+        command = ['java', '-jar', self.closure_path, '--compilation_level', 'SIMPLE_OPTIMIZATIONS'] + self.js_files_to_include
         proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         output, err = proc.communicate()
 
@@ -134,17 +134,18 @@ class RainbowBuilder(object):
             print err
 
         lines = output.splitlines()
-        comments = lines[0:4]
-        version = comments[1].replace(' @version ', '')
-        url = comments[2].replace(' @url ', '')
-        new_comment = '/* Rainbow v' + version + ' ' + url
 
-        if len(languages):
-            new_comment += ' | included languages: ' + ', '.join(languages)
+        data = self.getPackageJSON()
 
-        new_comment += ' */'
+        new_comment = "/* Rainbow v%s %s | included languages: %s */" % (
+            data['version'],
+            data['homepage'].replace('http://', ''),
+            ', '.join(languages)
+        )
 
-        output = new_comment + '\n' + '\n'.join(lines[4:])
+        lines.insert(0, new_comment)
+
+        output = '\n'.join(lines)
 
         if cache is not None:
             cache.set(cache_key, output, 14400)  # 4 hours
