@@ -519,20 +519,26 @@
         bypassDefaults = message.data.bypassDefaults;
         var drop = new Raindrop();
         var result = drop.refract(message.data.code, message.data.lang);
-        postMessage({
+        self.postMessage({
             id: message.data.id,
+            start: message.data.time,
+            lang: message.data.lang,
             result: result
         });
     }
 
     function _handleResponseFromWorker(message) {
+        console.log('_handleResponseFromWorker', performance.now() - message.data.start);
         var element = document.querySelector('.' + message.data.id);
         if (element) {
             element.innerHTML = message.data.result;
+            element.classList.remove(message.data.id);
+            element.classList.add('rainbow');
+            Rainbow.onHighlight(element, message.data.lang);
         }
     }
 
-    function _highlightCodeBlocks(codeBlocks, onComplete) {
+    function _highlightCodeBlocks(codeBlocks) {
         for (var i = 0; i < codeBlocks.length; i++) {
             var block = codeBlocks[i];
             var language = _getLanguageForBlock(block);
@@ -546,6 +552,7 @@
             block.classList.add(uniqueId);
 
             worker.postMessage({
+                time: performance.now(),
                 id: uniqueId,
                 lang: language,
                 code: block.innerHTML,
@@ -685,7 +692,7 @@
      */
     var _rainbow = {
         extend: _extend,
-        onHighlight: _onHighlight,
+        onHighlight: _onHighlight || function() {},
         addClass: _addGlobalClass,
         color: _color
     };
