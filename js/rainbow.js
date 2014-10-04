@@ -769,8 +769,6 @@
 
         // If you want to straight up highlight a string you can pass the
         // string of code, the language, and a callback function.
-        //
-        // @todo make this async in the browser
         if (typeof arguments[0] == 'string') {
             var workerData = _getWorkerData(arguments[0], arguments[1]);
             _messageWorker(workerData, (function(cb) {
