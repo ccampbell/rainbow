@@ -699,7 +699,7 @@
             // If you want to preserve whitespace you can use a pre tag on
             // its own without a code tag inside of it.
             if (preBlocks[i].getElementsByTagName('code').length) {
-                preBlocks[i].innerHTML = preBlocks[i].innerHTML.replace(/^\s+/, '').replace(/\s+$/, '');
+                preBlocks[i].innerHTML = preBlocks[i].innerHTML.trim();
                 continue;
             }
 
