@@ -594,13 +594,34 @@
      * @param {object} message      message received from self.postMessage
      * @returns void
      */
-    function _generateHandler(element) {
+    function _generateHandler(element, waitingOn, callback) {
         return function _handleResponseFromWorker(data) {
             console.log('_handleResponseFromWorker', performance.now() - data.start);
             element.innerHTML = data.result;
             element.classList.add('rainbow');
             _onHighlight(element, data.lang);
+            if (--waitingOn.c === 0) {
+                callback();
+            }
         };
+    }
+
+    /**
+     * Browser Only - Gets data to send to webworker
+     * @param  {string} code
+     * @param  {string} lang
+     * @return {object}
+     */
+    function _getWorkerData(code, lang) {
+        var workerData = {
+            time: performance.now(),
+            code: code,
+            lang: lang,
+            languagePatterns: languagePatterns,
+            bypassDefaults: bypassDefaults
+        };
+
+        return workerData;
     }
 
     /**
@@ -610,7 +631,8 @@
      * @param {Array} codeBlocks
      * @returns void
      */
-    function _highlightCodeBlocks(codeBlocks) {
+    function _highlightCodeBlocks(codeBlocks, callback) {
+        var waitingOn = {c: 0};
         for (var i = 0; i < codeBlocks.length; i++) {
             var block = codeBlocks[i];
             var language = _getLanguageForBlock(block);
@@ -619,15 +641,13 @@
                 continue;
             }
 
-            var workerData = {
-                time: performance.now(),
-                lang: language,
-                code: block.innerHTML,
-                languagePatterns: languagePatterns,
-                bypassDefaults: bypassDefaults
-            };
+            ++waitingOn.c;
+            _messageWorker(_getWorkerData(block.innerHTML, language), _generateHandler(block, waitingOn, callback));
+        }
 
-            _messageWorker(workerData, _generateHandler(block));
+        if (waitingOn.c === 0) {
+            console.log(codeBlocks, callback);
+            callback();
         }
     }
 
@@ -637,7 +657,8 @@
      * @param {Element} node       HTMLElement to search within
      * @returns void
      */
-    function _highlight(node) {
+    function _highlight(node, callback) {
+        callback = callback || function() {};
 
         // The first argument can be an Event or a DOM Element.
         //
@@ -691,7 +712,7 @@
             finalCodeBlocks.push(codeBlocks[i]);
         }
 
-        _highlightCodeBlocks(finalCodeBlocks.concat(finalPreBlocks));
+        _highlightCodeBlocks(finalCodeBlocks.concat(finalPreBlocks), callback);
     }
 
     /**
@@ -751,16 +772,21 @@
         //
         // @todo make this async in the browser
         if (typeof arguments[0] == 'string') {
-            var drop = new Raindrop();
-            var result = drop.refract(arguments[0], arguments[1]);
-            if (arguments[2]) {
-                arguments[2](result);
-            }
+            var workerData = _getWorkerData(arguments[0], arguments[1]);
+            _messageWorker(workerData, (function(cb) {
+                return function(data) {
+                    if (cb) {
+                        cb(data.result, data.lang);
+                    }
+                };
+            } (arguments[2])));
+            return;
         }
 
         // If you pass a callback function then we rerun the color function
         // on all the code and call the callback function on complete.
         if (typeof arguments[0] == 'function') {
+            console.log('this one');
             return _highlight(0, arguments[0]);
         }
 
