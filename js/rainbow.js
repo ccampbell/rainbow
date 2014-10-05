@@ -36,6 +36,13 @@
     var bypassDefaults = {};
 
     /**
+     * A mapping of language aliases
+     *
+     * @type {Object}
+     */
+    var aliases = {};
+
+    /**
      * Constant used to refer to the default language
      *
      * @type {number}
@@ -603,6 +610,10 @@
      * @return {object}
      */
     function _getWorkerData(code, lang) {
+        if (aliases[lang]) {
+            lang = aliases[lang];
+        }
+
         var workerData = {
             id: String.fromCharCode(65 + Math.floor(Math.random() * 26)) + Date.now(),
             code: code,
@@ -756,6 +767,17 @@
     }
 
     /**
+     * Method to add an alias for an existing language.
+     *
+     * For example if you want to have "coffee" map to "coffeescript"
+     *
+     * @see https://github.com/ccampbell/rainbow/issues/154
+     */
+    function _addAlias(alias, originalLanguage) {
+        aliases[alias] = originalLanguage;
+    }
+
+    /**
      * Starts the magic rainbow
      *
      * @returns void
@@ -819,6 +841,7 @@
         extend: _extend,
         onHighlight: _onHighlight,
         addClass: _addGlobalClass,
+        addAlias: _addAlias,
         transition: 'opacity 50ms ease-in-out',
         color: _color
     };
