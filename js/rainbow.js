@@ -806,14 +806,15 @@
      */
     global.Rainbow = _rainbow;
     if (setUpWorker) {
-        var src;
+        var currentSrc;
         if (!isNode) {
-            var id = Date.now();
-            document.write('<script id="w' + id + '"></script>');
-            src = document.getElementById('w' + id).previousSibling.src;
+
+            // @see http://stackoverflow.com/questions/2255689/how-to-get-the-file-path-of-the-currently-executing-javascript-code
+            var scripts = document.getElementsByTagName('script');
+            currentSrc = scripts[scripts.length - 1].src;
         }
 
-        worker = new global.Worker(isNode ? __filename : src);
+        worker = new global.Worker(isNode ? __filename : currentSrc);
 
         if (!isNode) {
             document.addEventListener('DOMContentLoaded', _rainbow.color, false);
