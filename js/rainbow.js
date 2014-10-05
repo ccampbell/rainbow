@@ -761,8 +761,15 @@
      * @returns void
      */
     function _color() {
+
         // If you want to straight up highlight a string you can pass the
         // string of code, the language, and a callback function.
+        //
+        // Example:
+        //
+        // Rainbow.color(code, language, function(highlightedCode, language) {
+        //     // this code block is now highlighted
+        // });
         if (typeof arguments[0] == 'string') {
             var workerData = _getWorkerData(arguments[0], arguments[1]);
             _messageWorker(workerData, (function(cb) {
@@ -777,12 +784,31 @@
 
         // If you pass a callback function then we rerun the color function
         // on all the code and call the callback function on complete.
+        //
+        // Example:
+        //
+        // Rainbow.color(function() {
+        //     console.log('All matching tags on the page are now highlighted');
+        // });
         if (typeof arguments[0] == 'function') {
             return _highlight(0, arguments[0]);
         }
 
         // Otherwise we use whatever node you passed in with an optional
         // callback function as the second parameter.
+        //
+        // Example:
+        //
+        // var preElement = document.createElement('pre');
+        // var codeElement = document.createElement('code');
+        // codeElement.setAttribute('data-language', 'javascript');
+        // codeElement.innerHTML = '// Here is some JavaScript';
+        // preElement.appendChild(codeElement);
+        // Rainbow.color(preElement, function() {
+        //     // New element is now highlighted
+        // });
+        //
+        // If you don't pass an element it will default to `document`
         _highlight(arguments[0], arguments[1]);
     }
 
