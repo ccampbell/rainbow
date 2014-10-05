@@ -713,6 +713,9 @@
      *                                  default language patterns
      */
     function _extend(language, patterns, bypass) {
+        if (isWorker) {
+            return;
+        }
 
         // If there is only one argument then we assume that we want to
         // extend the default language rules.
