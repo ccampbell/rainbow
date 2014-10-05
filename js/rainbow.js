@@ -610,9 +610,7 @@
      * @return {object}
      */
     function _getWorkerData(code, lang) {
-        if (aliases[lang]) {
-            lang = aliases[lang];
-        }
+        lang = aliases[lang] || lang;
 
         var workerData = {
             id: String.fromCharCode(65 + Math.floor(Math.random() * 26)) + Date.now(),
@@ -849,7 +847,7 @@
     if (isNode) {
         _rainbow.colorSync = function(code, lang) {
             var drop = new Raindrop();
-            return drop.refract(code, lang);
+            return drop.refract(code, aliases[lang] || lang);
         };
     }
 
