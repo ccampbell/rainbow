@@ -123,3 +123,6 @@ Rainbow.extend('coffeescript', [
         'pattern': /\b(new)\s(.*?)(?=\s)/g
     }
 ]);
+
+Rainbow.addAlias('coffee', 'coffeescript');
+

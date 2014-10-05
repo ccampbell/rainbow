@@ -91,3 +91,6 @@ Rainbow.extend('javascript', [
         'pattern': /(\w+)(?=:\s{0,}function)/g
     }
 ]);
+
+Rainbow.addAlias('js', 'javascript');
+
