@@ -1,5 +1,5 @@
 /**
- * Copyright 2014 Craig Campbell
+ * Copyright 2012-2014 Craig Campbell
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -584,6 +584,7 @@
         return function _handleResponseFromWorker(data) {
             element.innerHTML = data.result;
             element.classList.add('rainbow');
+            element.style.opacity = 1;
 
             if (onHighlight) {
                 onHighlight(element, data.lang);
@@ -630,6 +631,8 @@
             if (block.classList.contains('rainbow') || !language) {
                 continue;
             }
+
+            block.style.transition = Rainbow.transition;
 
             ++waitingOn.c;
             _messageWorker(_getWorkerData(block.innerHTML, language), _generateHandler(block, waitingOn, callback));
@@ -790,6 +793,7 @@
         extend: _extend,
         onHighlight: _onHighlight,
         addClass: _addGlobalClass,
+        transition: 'opacity 50ms ease-in-out',
         color: _color
     };
 
@@ -800,6 +804,11 @@
         };
     }
 
+    global.Rainbow = _rainbow;
+    if (isNode) {
+        module.exports = _rainbow;
+    }
+
     var setUpWorker = !isWorker && typeof global.Worker !== 'undefined';
 
     /**
@@ -807,7 +816,6 @@
      *
      * @see http://stackoverflow.com/questions/5408406/web-workers-without-a-separate-javascript-file
      */
-    global.Rainbow = _rainbow;
     if (setUpWorker) {
         var currentSrc;
         if (!isNode) {
@@ -822,13 +830,16 @@
         if (!isNode) {
             document.addEventListener('DOMContentLoaded', _rainbow.color, false);
         }
+
+        return;
     }
 
-    if (isNode) {
-        module.exports = _rainbow;
+    // this is for older browsers where they don't have webworker support
+    // but we still want to show the code
+    if (!isWorker) {
+        document.write('<style>.js [data-language] code,.js pre [data-language]{opacity:1}</style>');
+        return;
     }
 
-    if (isWorker) {
-        self.addEventListener('message', _handleMessageFromRainbow);
-    }
+    self.addEventListener('message', _handleMessageFromRainbow);
 }) (this);
