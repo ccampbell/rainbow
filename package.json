@@ -2,7 +2,7 @@
   "name": "rainbow",
   "version": "1.2.0",
   "description": "Simple library for code syntax highlighting",
-  "main": "./js/rainbow.js",
+  "main": "./js/rainbow-node.js",
   "homepage": "http://rainbowco.de",
   "directories": {
     "test": "tests"
