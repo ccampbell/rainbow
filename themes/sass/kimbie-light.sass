@@ -1,0 +1,33 @@
+/**
+ * Kimbie (Light)
+ *
+ * @author Jan T. Sott
+ * @version 1.0.0
+ * @url http://github.com/idleberg/Kimbie-Rainbow
+ */
+@import "_base.sass"
+
+pre
+    background-color: #fbebd4
+    color: #221a0f
+
+    .comment
+        color: #d6baad
+
+    .variable.global, .variable.class, .variable.instance
+        color: #dc3958 /* red */
+
+    .constant.numeric, .constant.language, .constant.hex-color, .keyword.unit
+        color: #f79a32 /* orange */
+
+    .constant, .entity, .entity.class, .support
+        color: #f06431 /* yellow */
+
+    .constant.symbol, .string
+        color: #889b4a /* green */
+
+    .entity.function, .support.css-property, .selector
+        color: #8ab1b0 /* blue */
+
+    .keyword, .storage
+        color: #98676a /* purple */

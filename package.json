@@ -26,7 +26,8 @@
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-complexity": "~0.1.2",
-    "grunt-mocha": "~0.3.1"
+    "grunt-mocha": "~0.3.1",
+    "grunt-contrib-sass": "^0.8.1"
   },
   "dependencies": {
     "webworker-threads": "^0.5.1"

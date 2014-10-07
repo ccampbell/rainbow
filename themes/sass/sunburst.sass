@@ -1,0 +1,64 @@
+/**
+ * Sunburst theme
+ *
+ * Adapted from the Textmate Sunburst theme by Stanley Rost
+ *
+ * @author Stanley Rost
+ * @author Rachel Baker
+ * @version 1.0.0
+ */
+@import "_base.sass"
+
+pre
+    .comment
+        color: #AEAEAE
+        font-style: italic
+
+    .constant
+        color: #3387CC
+
+    .storage
+        color: #99CF50
+
+    .string, .entity.name.class, .comment.docstring
+        color: #65B042 /* green */
+
+    .string.regexp
+        color: #E9C062
+
+    .string.constant
+        color: #DDF2A4
+
+    .constant.hex-color
+        color: #DD7B3B /* orange */
+
+    .support, .tag.script, .function.call
+        color: #dad085
+
+    .support.css-property
+        color: #C5AF75
+
+    .support.tag.style
+        color: #fff
+
+    .keyword, .selector
+        color: #E28964 /* dark pink */
+
+    .keyword.namespace
+        color: #3387CC
+        font-weight: bold
+
+    .inherited-class
+        font-style: italic
+
+    .entity, .variable.instance, .support.namespace, .support.tag, .support.tag-name
+        color: #89BDFF
+
+    .entity.name.id
+        color: #8693A5
+
+    .variable, .variable.global
+        color: #3E87E3
+
+*[data-language="c"] .function.call
+    color: #8DA6CE
