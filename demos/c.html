@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <meta charset=utf-8>
 <title>Syntax Highlighting</title>
-<link href="../themes/blackboard.css" rel="stylesheet" type="text/css" media="screen">
+<link href="../themes/css/blackboard.css" rel="stylesheet" type="text/css" media="screen">
 <body>
 
 <pre>
@@ -56,7 +56,7 @@ int main (int argc, char *argv[])
 
     while ((opt = getopt(argc, argv, ":a")) != -1) {
 	switch (opt) {
-	case 'a': 
+	case 'a':
 	    openFlags |= O_APPEND;
 	default:
 	    die("Unrecognized option");
@@ -115,25 +115,25 @@ int type_index = 0;
 
 /* Dynamically enter types into table */
 int type_find(const char* type) {
-  
+
   if (strlen(type) >= MAX_TYPE_LEN) {
     error("Type name %s is too long to index into type table.", type);
   }
   if (type_index >= MAX_NUM_TYPES) {
     error("Too many types in type table already. Cannot add %s.", type);
   }
-  
+
   for (int i = 0; i &lt; type_index; i++) {
     // Return type index if found
     if (strcmp(type, type_table[i]) == 0) {
       return i;
     }
   }
-  
+
   // If not found add to table and return
   strcpy(type_table[type_index], type);
   type_index++;
-  
+
   return type_index-1;
 }
 
@@ -177,24 +177,24 @@ static void flip_endian(char* data, int length) {
 }
 
 sound* wav_load_file(char* filename) {
-  
+
   sound* s = malloc(sizeof(sound));
-  
+
   SDL_AudioSpec spec;
-  
+
   if( SDL_LoadWAV(filename, &amp;spec, (Uint8**)&amp;s->data, (Uint32*)&amp;s->length) == NULL) {
     error("Unable to load sound file %s", filename);
   }
-  
+
   if ((spec.format != AUDIO_S16LSB) &amp;&amp;
       (spec.format != AUDIO_S16MSB)) {
     error("Unsupported sound format for file %s, id %i.", filename, spec.format);
   }
-  
+
   if (spec.format != AUDIO_S16SYS) {
     flip_endian(s-&gt;data, s-&gt;length);
   }
-  
+
   return s;
 }
 
