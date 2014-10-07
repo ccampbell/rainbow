@@ -591,6 +591,7 @@
         return function _handleResponseFromWorker(data) {
             element.innerHTML = data.result;
             element.classList.add('rainbow');
+            element.classList.remove('loading');
             element.style.opacity = 1;
 
             if (onHighlight) {
@@ -642,6 +643,11 @@
             }
 
             block.style.transition = Rainbow.transition;
+
+            // for long files show a spinner
+            if (block.innerHTML.length > 20000) {
+                block.classList.add('loading');
+            }
 
             ++waitingOn.c;
             _messageWorker(_getWorkerData(block.innerHTML, language), _generateHandler(block, waitingOn, callback));
