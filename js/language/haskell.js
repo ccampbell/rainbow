@@ -105,7 +105,7 @@ Rainbow.extend('haskell', [
 				},
 				{
 					'name': 'keyword.define',
-					'pattern': /endif/g
+					'pattern': /else|endif/g
 				},
 				{
 					'name': 'constant.numeric',
