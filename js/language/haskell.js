@@ -53,11 +53,13 @@ Rainbow.extend('haskell', [
 		'pattern': /\b(infix|infixr|infixl)+\s\d+\s(\w+)*/g
 	},
 	///- End Infix|Infixr|Infixl
-	
+
+	///- Class
 	{
 		'name': 'entity.class',
-		'pattern': /\b([A-Z][A-Za-z0-9_'\.]*)/g
+		'pattern': /\b([A-Z][A-Za-z0-9_'\.]*)(#)/g
 	},
+	///- End Class
 
 	///- String
 	{
