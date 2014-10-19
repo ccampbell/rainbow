@@ -57,7 +57,7 @@ Rainbow.extend('haskell', [
 	///- Class
 	{
 		'name': 'entity.class',
-		'pattern': /\b([A-Z][A-Za-z0-9_'\.#]*)/g
+		'pattern': /\b([A-Z][A-Za-z0-9_'\.]*[#]*)/g
 	},
 	///- End Class
 
@@ -69,6 +69,39 @@ Rainbow.extend('haskell', [
 	///- End String
 
 	// From c.js
+	{
+		'name': 'meta.preprocessor',
+		'matches': {
+			1: [
+				{
+					'matches': {
+						1: 'keyword.define',
+						2: [
+							{
+								'name': 'entity.name',
+								 // CPP is needed to treat as an entity, otherwise it will parse as a definition.
+								'pattern': /(\w+)|CPP/g
+							},
+							{
+								'name': 'keyword.define',
+								'pattern': /[A-Z][A-Z]+/g
+							},
+							{
+								'name': 'constant.string',
+								'pattern': /(")(.*?)\1/g
+							},
+							{
+								'name': 'keyword.operator',
+								'pattern': /\+|\!|\:{2}|-&gt;|\-|&(gt|lt|amp);|\/\=|\||\@|\:|\.|\+{2}|\:|\$|\*|\=|#|\.{2}|(\\)[a-zA-Z_]/g
+							}
+						]
+					},
+					'pattern': /(\w+)\s(.*)/g
+				}
+			]
+		},
+		'pattern': /\{-#([\S\s]*?)[#-\}]*$/gm
+	},
 	{
 		'name': 'meta.preprocessor',
 		'matches': {
@@ -93,10 +126,10 @@ Rainbow.extend('haskell', [
 						1: 'keyword.include',
 						2: 'string'
 					},
-				 'pattern': /(include)\s(.*?)$/g
+					'pattern': /(include)\s(.*?)$/g
 				}
 			]
 		},
-		'pattern': /^\#([\S\s]*?)$/gm
+		'pattern': /\#([\S\s]*?)$/gm
 	}
 ]); 
