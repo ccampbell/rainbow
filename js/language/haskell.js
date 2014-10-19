@@ -17,17 +17,7 @@ Rainbow.extend('haskell', [
 		'pattern': /\-\-(.*)/g
 	},
 	///- End Comments
-	
-	///- Namespace (module)
-	{
-		'matches': {
-			1: 'keyword',
-			2: 'support.namespace'
-		},
-		'pattern': /\b(module)\s(\w+)\s[\(]?(\w+)?[\)?]\swhere/g
-	},
-	///- End Namespace (module)
-	
+
 	///- Keywords and Operators
 	{
 		'name': 'keyword.operator',
