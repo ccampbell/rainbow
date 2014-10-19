@@ -68,7 +68,7 @@ Rainbow.extend('haskell', [
 	},
 	///- End String
 
-	// From c.js
+	// Haskell pragmas
 	{
 		'name': 'meta.preprocessor',
 		'matches': {
@@ -78,13 +78,13 @@ Rainbow.extend('haskell', [
 						1: 'keyword.define',
 						2: [
 							{
-								'name': 'entity.name',
-								 // CPP is needed to treat as an entity, otherwise it will parse as a definition.
-								'pattern': /(\w+)|CPP/g
+								'name': 'keyword.define',
+								'pattern': /SPECIALIZED|UNPACK|[NO]?INLIN[E|ABLE]|LANGUAGE|DEPRECATED|OPTIONS_GHC|CONLIKE|RULES|CORE|INCLUDE|WARNING|LINE|SOURCE|MINIMAL/g
 							},
 							{
-								'name': 'keyword.define',
-								'pattern': /[A-Z][A-Z]+/g
+								'name': 'entity.name',
+								 // CPP is needed to treat as an entity, otherwise it will parse as a definition.
+								'pattern': /[\-]*\w+[\-]*/g
 							},
 							{
 								'name': 'constant.string',
