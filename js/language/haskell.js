@@ -62,7 +62,7 @@ Rainbow.extend('haskell', [
 	///- String
 	{
 		'name': 'constant.string',
-		'pattern': /(")(.*?)\1/g
+		'pattern': /('|")(.*?)\1/g
 	},
 	///- End String
 
