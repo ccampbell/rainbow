@@ -31,7 +31,7 @@ Rainbow.extend('haskell', [
 	///- Keywords and Operators
 	{
 		'name': 'keyword.operator',
-		'pattern': /\+|\!|\-|&(gt|lt|amp);|\/\=|\||\@|\:|\.|\+{2}|\:|\*|\=|#|\.{2}|(\\)[a-zA-Z_]/g
+		'pattern': /\+|\!|\-|&(gt|lt|amp);|\/\=|\||\@|\:|\.|\+{2}|\:|\$|\*|\=|#|\.{2}|(\\)[a-zA-Z_]/g
 	},
 	{
 		'name': 'keyword',
