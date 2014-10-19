@@ -4,7 +4,6 @@
  * @author Bruno Dias
  * @version 1.0.1
  */
-//TODO: {-# ... #-} stuff...
 Rainbow.extend('haskell', [
 	///- Comments (block comment)
 	{
@@ -90,7 +89,7 @@ Rainbow.extend('haskell', [
 				}
 			]
 		},
-		'pattern': /\{-#([\S\s]*?)[#-\}]*$/gm
+		'pattern': /\{-#([\S\s]*?)\#-\}/gm
 	},
 	{
 		'name': 'meta.preprocessor',
