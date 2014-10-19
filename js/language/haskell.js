@@ -56,7 +56,7 @@ Rainbow.extend('haskell', [
 	
 	{
 		'name': 'entity.class',
-		'pattern': /\b([A-Z][A-Za-z0-9_']*)/g
+		'pattern': /\b([A-Z][A-Za-z0-9_'\.]*)/g
 	},
 
 	///- String
