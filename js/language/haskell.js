@@ -6,16 +6,15 @@
  */
 //TODO: {-# ... #-} stuff...
 Rainbow.extend('haskell', [
-	///- Comments
+	///- Comments (block comment)
 	{
 		'name': 'comment',
-		'pattern': /\{\-\-[\s\S(\w+)]+[\-\-][\}$]/gm
-		// /\{\-{2}[\s\S(.*)]+[\-\-][\}$]/gm [multiple lines]
+		'pattern': /\{\-{2}[\s\S]*?\-{2}\}/mg
 	}, 
+	///- Comments (line comment)
 	{
 		'name': 'comment',
 		'pattern': /\-\-(.*)/g
-		// /\-\-\s(.+)$/gm [single]
 	},
 	///- End Comments
 	
