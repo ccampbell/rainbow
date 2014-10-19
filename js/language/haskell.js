@@ -60,6 +60,13 @@ Rainbow.extend('haskell', [
 		'pattern': /\b([A-Z][A-Za-z0-9_']*)/g
 	},
 
+	///- String
+	{
+		'name': 'constant.string',
+		'pattern': /(")(.*?)\1/g
+	},
+	///- End String
+
 	// From c.js
 	{
 		'name': 'meta.preprocessor',
