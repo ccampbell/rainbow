@@ -57,6 +57,13 @@ Rainbow.extend('haskell', [
 	},
 	///- End String
 
+	///- String
+	{
+		'name': 'constant.numeric',
+		'pattern': /\d+/g
+	},
+	///- End String
+
 	// Haskell pragmas
 	{
 		'name': 'meta.preprocessor',
