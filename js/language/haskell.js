@@ -2,7 +2,7 @@
  * Haskell patterns
  *
  * @author Bruno Dias
- * @version 1.0.1
+ * @version 1.0.2
  */
 Rainbow.extend('haskell', [
 	///- Comments (block comment)
