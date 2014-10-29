@@ -1,8 +1,55 @@
-.js [data-language] code, .js pre [data-language]
-    opacity: 0
+
+@mixin animation($animation)
+    -webkit-animation: $animation
+    animation: $animation
+
+@mixin animation-play-state($state)
+    -webkit-animation-play-state: $state
+    animation-play-state: $state
+
+/**
+ * @todo not sure we need all the prefixed keyframes
+ */
+@mixin keyframes($animationName)
+    @-webkit-keyframes #{$animationName}
+        @content
+
+    @-moz-keyframes #{$animationName}
+        @content
+
+    @-o-keyframes #{$animationName}
+        @content
+
+    @keyframes #{$animationName}
+        @content
 
 @mixin border-radius($args)
     border-radius: $args
     -moz-border-radius: $args
     -webkit-border-radius: $args
 
+@include keyframes(fade-in)
+    0%
+        opacity: 0
+
+    100%
+        opacity: 1
+
+@include keyframes(start)
+    0%
+        opacity: 0
+
+[data-language] code, pre [data-language]
+    opacity: 0
+
+    // IE9 supports unprefixed opacity property but does not support keyframe
+    // animations.  This means in order to get the code to show up in IE 9 when
+    // javascript is disabled we have to include this ugly bad boy.
+    //
+    // IE 10+ and all modern browsers support CSS animations
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"
+
+    @include animation((fade-in 50ms 100ms forwards ease-in-out))
+
+    &.stop-animation
+        @include animation-play-state(paused)

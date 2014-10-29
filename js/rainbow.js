@@ -592,7 +592,7 @@
             element.innerHTML = data.result;
             element.classList.add('rainbow');
             element.classList.remove('loading');
-            element.style.opacity = 1;
+            element.classList.remove('stop-animation');
 
             if (onHighlight) {
                 onHighlight(element, data.lang);
@@ -636,13 +636,17 @@
         var waitingOn = {c: 0};
         for (var i = 0; i < codeBlocks.length; i++) {
             var block = codeBlocks[i];
+
+            // This cancels the pending animation to fade the code in on load
+            // since we want to delay doing this until it is actually
+            // highlighted
+            block.classList.add('stop-animation');
+
             var language = _getLanguageForBlock(block);
 
             if (block.classList.contains('rainbow') || !language) {
                 continue;
             }
-
-            block.style.transition = Rainbow.transition;
 
             // for long files show a spinner
             if (block.innerHTML.length > 20000) {
@@ -846,7 +850,6 @@
         onHighlight: _onHighlight,
         addClass: _addGlobalClass,
         addAlias: _addAlias,
-        transition: 'opacity 50ms ease-in-out',
         color: _color
     };
 
@@ -884,13 +887,6 @@
             document.addEventListener('DOMContentLoaded', _rainbow.color, false);
         }
 
-        return;
-    }
-
-    // this is for older browsers where they don't have webworker support
-    // but we still want to show the code
-    if (!isWorker) {
-        document.write('<style>.js [data-language] code,.js pre [data-language]{opacity:1}</style>');
         return;
     }
 
