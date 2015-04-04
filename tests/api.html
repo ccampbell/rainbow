@@ -49,5 +49,31 @@
                 $("#stuff").append('<p>got callback<p>');
             });
         }, 1000);
+
+        // Set an onHighlight() callback
+        setTimeout(function() {
+            Rainbow.onHighlight(function(){
+                $("#stuff").append('<p>Got onHighlight() callback</p>')
+            });
+
+            $("#stuff").append('<p>code inserted dynamically with callback:</p><pre><code data-language="javascript">var html = $("#stuff").html();</code></pre>');
+            Rainbow.color();
+        }, 1250);
+
+        // Set multiple onHighlight() callbacks
+        setTimeout(function() {
+            Rainbow.onHighlight(function(){
+                window._OHTest = 1;
+            });
+
+            Rainbow.onHighlight(function(){
+                window._OHTest++;
+                $("#stuff").append('<p>This number should be 2: <b>'
+                    + window._OHTest + '</b></p>');
+            });
+
+            $("#stuff").append('<p>code inserted dynamically with callback:</p><pre><code data-language="javascript">var html = $("#stuff").html();</code></pre>');
+            Rainbow.color();
+        }, 1500);
     </script>
 </body>

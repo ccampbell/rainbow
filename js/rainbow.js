@@ -84,9 +84,9 @@ window['Rainbow'] = (function() {
         global_class,
 
         /**
-         * @type {null|Function}
+         * @type {Array}
          */
-        onHighlight;
+        onHighlight = [];
 
     /**
      * cross browser get attribute for an element
@@ -635,8 +635,9 @@ window['Rainbow'] = (function() {
                     replacement_positions = {};
 
                     // if you have a listener attached tell it that this block is now highlighted
-                    if (onHighlight) {
-                        onHighlight(block, language);
+                    if (onHighlight.length > 0) {
+                        for(ohn=0; ohn<onHighlight.length; ohn++)
+                        onHighlight[ohn](block, language);
                     }
 
                     // process the next block
@@ -743,7 +744,7 @@ window['Rainbow'] = (function() {
          * @param {Function} callback
          */
         onHighlight: function(callback) {
-            onHighlight = callback;
+            onHighlight.push(callback);
         },
 
         /**
