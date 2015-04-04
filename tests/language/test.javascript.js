@@ -209,4 +209,16 @@ describe(language, function() {
         '<span class="storage">var</span> <span class="entity function">parseAndHighlight</span> <span class="keyword operator">=</span> <span class="keyword">function</span>() {};\n' +
         '<span class="storage">var</span> <span class="entity function">parseAndHighlight2</span> <span class="keyword operator">=</span> <span class="keyword">function</span>() {};'
     );
+
+    run(
+        language,
+
+        'quotes inside curly brackets',
+
+        '{\' \'}\n' +
+        'var str = \'something\';',
+
+        '{<span class="string">\' \'</span>}\n' +
+        '<span class="keyword">var</span> str <span class="keyword operator">=</span> <span class="string">\'something\'</span>;'
+    );
 });
