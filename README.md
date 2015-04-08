@@ -62,6 +62,7 @@ Currently supported languages are:
 - CSS
 - D
 - Go
+- Groovy
 - Haskell
 - HTML
 - Java
