@@ -785,10 +785,22 @@ window['Rainbow'] = (function() {
  * adds event listener to start highlighting
  */
 (function() {
-    if (document.addEventListener) {
-        return document.addEventListener('DOMContentLoaded', Rainbow.color, false);
-    }
-    window.attachEvent('onload', Rainbow.color);
+	var count=0, readystateListeners = [];
+
+	// keep possibly existing readystatechange callback...
+	if ( document.onreadystatechange )
+		readystateListeners.push(document.onreadystatechange);
+
+	document.onreadystatechange = function (event) {
+		// call readystatechange callbacks...
+		for ( var i=0;i<readystateListeners.length;i++ )
+			if (readystateListeners[i].call) 
+				readystateListeners[i].call(this,event);
+		
+		if ( document.readyState === "complete" ) {
+			Rainbow.color();
+		}
+	}
 }) ();
 
 // When using Google closure compiler in advanced mode some methods
