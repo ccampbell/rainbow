@@ -2,6 +2,7 @@
  * CSS patterns
  *
  * @author Craig Campbell
+ * @author Teddy Bradford
  * @version 1.0.9
  */
 Rainbow.extend('css', [
@@ -18,7 +19,7 @@ Rainbow.extend('css', [
             1: 'constant.numeric',
             2: 'keyword.unit'
         },
-        'pattern': /(\d+)(px|em|cm|s|%)?/g
+        'pattern': /(\d+(?:.\d+)?)(px|em|cm|s|%)?/g
     },
     {
         'name': 'string',
@@ -56,17 +57,21 @@ Rainbow.extend('css', [
                 },
                 {
                     'name': 'entity.name.tag',
-                    'pattern': /\w+/g
+                    'pattern': /[\@\w\-_]+/g
                 }
             ]
         },
-        'pattern': /([\w\ ,\n:\.\#\&\;\-_]+)(?=.*\{)/g
+        'pattern': /([\w\ ,\n:\.\#\@\&\;\-_]+)(?=[^\}]*\{)/g
     },
     {
         'matches': {
             2: 'support.vendor-prefix',
             3: 'support.css-value'
         },
-        'pattern': /(:|,)\s*(-o-|-moz-|-webkit-|-ms-)?([a-zA-Z-]*)(?=\b)(?!.*\{)/g
+        'pattern': /(:|,|\s)\s*(-o-|-moz-|-webkit-|-ms-)?([a-zA-Z-]*)(?=\b)(?!.*\{)/g
+    },
+    {
+        'name': 'support.css-important',
+        'pattern': /!important/g
     }
 ], true);
