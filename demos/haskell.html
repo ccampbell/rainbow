@@ -1,107 +1,96 @@
 <!DOCTYPE html>
 <meta charset=utf-8>
-<title>Syntax Highlighting</title>
-<link href="../themes/blackboard.css" rel="stylesheet" type="text/css" media="screen">
+<title>rainbow - haskell Syntax Highlighting</title>
+<link href="../themes/solarized-dark.css" rel="stylesheet" type="text/css" media="screen">
+<style type="text/css">
+html, body { margin: 0; padding: 0; }
+pre { margin-bottom: 0; }
+</style>
 <body>
 
 <pre>
-<code data-language="haskell">
-{-# LANGUAGE Trustworthy #-}
-{-# LANGUAGE CPP #-}
+<code data-language="haskell">{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# LANGUAGE ForeignFunctionInterface, CPP #-}
 
 -----------------------------------------------------------------------------
--- |
--- Module      :  System.Exit
--- Copyright   :  (c) The University of Glasgow 2001
--- License     :  BSD-style (see the file libraries/base/LICENSE)
--- 
--- Maintainer  :  libraries@haskell.org
--- Stability   :  provisional
--- Portability :  portable
 --
--- Exiting the program.
+-- Module:  Def.ModuleA
 --
 -----------------------------------------------------------------------------
 
-module System.Exit
-    (
-      ExitCode(ExitSuccess,ExitFailure)
-    , exitWith      -- :: ExitCode -> IO a
-    , exitFailure   -- :: IO a
-    , exitSuccess   -- :: IO a
-  ) where
+module Test.ModuleA {-# DEPRECATED "Use Wobble instead" #-}
+(
+  A(..)
+, C
+, someFunc -- return Maybe a function applyied with an argument.
+) where
 
-import Prelude
+import Test.ModuleB (funcG)
+import qualified Test.ModuleC as C
 
-a = [1..10]
+class A a where
+  func  :: (a -> a) -> Maybe a
+  funcB :: (a -> a) -> Maybe a
 
+instance A Int where
+  func  = someFunc
+  funcB = someFuncB
+
+-- | Defines a simple haskell module.
+
+someFunc :: (a -> a) -> Maybe a
+someFunc f a = Just $ f a
+
+someFuncB :: (a -> a) -- ^ a function from a to a.
+          -> Maybe a  -- ^ always returns Nothing
+someFuncB _ _ = Nothing
+
+funcA :: a -> IO a
+funcA s = 
 #ifdef __GLASGOW_HASKELL__
-import GHC.IO
-import GHC.IO.Exception
+  doSomething s
+#else
+  anError
 #endif
 
-#ifdef __HUGS__
-import Hugs.Prelude (ExitCode(..))
-import Control.Exception.Base
+(!:) :: Arr e -> Int -> e
+{-# SPECIALISE INLINE (!:) :: Arr Int -> Int -> Int #-}
+{-# SPECIALISE INLINE (!:) :: Arr (a, b) -> Int -> (a, b) #-}
+(ArrInt _ ba)     !: (I# i) = I# (indexIntArray# ba i)
+(ArrPair _ a1 a2) !: i      = (a1 !: i, a2 !: i)
+
+a = (I# i)
+
+{-# DEPRECATED f, C, T "Don't use these" #-}
+appendF xs s = s : xs
+{-# INLINABLE appendF #-}
+
+(&*) :: !a -> !a -> !a
+a &* a = a * a
+
+#ifdef A
 #endif
 
-#ifdef __NHC__
-import System
-  ( ExitCode(..)
-  , exitWith
-  )
-#endif
+data F =
+   A
+ | B
+ | C deriving (Show, Eq)
 
--- ---------------------------------------------------------------------------
--- exitWith
+data E = E { a :: A, b :: B, c :: C }
 
--- | Computation 'exitWith' @code@ throws 'ExitCode' @code@.
--- Normally this terminates the program, returning @code@ to the
--- program's caller.
---
--- On program termination, the standard 'Handle's 'stdout' and
--- 'stderr' are flushed automatically; any other buffered 'Handle's
--- need to be flushed manually, otherwise the buffered data will be
--- discarded.
---
--- A program that fails in any other way is treated as if it had
--- called 'exitFailure'.
--- A program that terminates successfully without calling 'exitWith'
--- explicitly is treated as it it had called 'exitWith' 'ExitSuccess'.
---
--- As an 'ExitCode' is not an 'IOError', 'exitWith' bypasses
--- the error handling in the 'IO' monad and cannot be intercepted by
--- 'catch' from the "Prelude".  However it is a 'SomeException', and can
--- be caught using the functions of "Control.Exception".  This means
--- that cleanup computations added with 'Control.Exception.bracket'
--- (from "Control.Exception") are also executed properly on 'exitWith'.
---
--- Note: in GHC, 'exitWith' should be called from the main program
--- thread in order to exit the process.  When called from another
--- thread, 'exitWith' will throw an 'ExitException' as normal, but the
--- exception will not cause the process itself to exit.
---
-#ifndef __NHC__
-exitWith :: ExitCode -> IO a
-exitWith ExitSuccess = throwIO ExitSuccess
-exitWith code@(ExitFailure n)
-  | n /= 0 = throwIO code
-#ifdef __GLASGOW_HASKELL__
-  | otherwise = ioError (IOError Nothing InvalidArgument "exitWith" "ExitFailure 0" Nothing Nothing)
-#endif
-#endif  /* ! __NHC__ */
+-- | a constant string.
+version = "version 0.1.0"
 
--- | The computation 'exitFailure' is equivalent to
--- 'exitWith' @(@'ExitFailure' /exitfail/@)@,
--- where /exitfail/ is implementation-dependent.
-exitFailure :: IO a
-exitFailure = exitWith (ExitFailure 1)
+charD = 'd'
 
--- | The computation 'exitSuccess' is equivalent to
--- 'exitWith' 'ExitSuccess', It terminates the program
--- successfully.
-exitSuccess :: IO a
-exitSuccess = exitWith ExitSuccess</code>
+{--
+...still not sure what this function should do.
+--}
+funcCommented = let r = x
+--              in r * r
+                in r `mult` {-- 3 --} 1
+
+</code>
 </pre>
 
     <script src="../js/rainbow.js"></script>

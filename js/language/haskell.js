@@ -2,41 +2,29 @@
  * Haskell patterns
  *
  * @author Bruno Dias
- * @version 1.0.1
+ * @version 1.0.2
  */
-//TODO: {-# ... #-} stuff...
 Rainbow.extend('haskell', [
-	///- Comments
+	///- Comments (block comment)
 	{
 		'name': 'comment',
-		'pattern': /\{\-\-[\s\S(\w+)]+[\-\-][\}$]/gm
-		// /\{\-{2}[\s\S(.*)]+[\-\-][\}$]/gm [multiple lines]
+		'pattern': /\{\-{2}[\s\S]*?\-{2}\}/mg
 	}, 
+	///- Comments (line comment)
 	{
 		'name': 'comment',
 		'pattern': /\-\-(.*)/g
-		// /\-\-\s(.+)$/gm [single]
 	},
 	///- End Comments
-	
-	///- Namespace (module)
-	{
-		'matches': {
-			1: 'keyword',
-			2: 'support.namespace'
-		},
-		'pattern': /\b(module)\s(\w+)\s[\(]?(\w+)?[\)?]\swhere/g
-	},
-	///- End Namespace (module)
-	
+
 	///- Keywords and Operators
 	{
 		'name': 'keyword.operator',
-		'pattern': /\+|\!|\-|&(gt|lt|amp);|\/\=|\||\@|\:|\.|\+{2}|\:|\*|\=|#|\.{2}|(\\)[a-zA-Z_]/g
+		'pattern': /\+|\!|\:{2}|-&gt;|\-|&(gt|lt|amp);|\/\=|\||\@|\:|\.|\+{2}|\:|\$|\*|\=|#|\.{2}|(\\)[a-zA-Z_]/g
 	},
 	{
 		'name': 'keyword',
-		'pattern': /\b(case|class|foreign|hiding|qualified|data|family|default|deriving|do|else|if|import|in|infix|infixl|infixr|instance|let|in|otherwise|module|newtype|of|then|type|where)\b/g
+		'pattern': /\b(case|class|foreign|hiding|qualified|data|family|default|deriving|do|else|if|import|as|in|infix|infixl|infixr|instance|let|in|otherwise|module|newtype|of|then|type|where)\b/g
 	},
 	{
 		'name': 'keyword',
@@ -54,13 +42,62 @@ Rainbow.extend('haskell', [
 		'pattern': /\b(infix|infixr|infixl)+\s\d+\s(\w+)*/g
 	},
 	///- End Infix|Infixr|Infixl
-	
+
+	///- Class
 	{
 		'name': 'entity.class',
-		'pattern': /\b([A-Z][A-Za-z0-9_']*)/g
+		'pattern': /\b([A-Z][A-Za-z0-9_'\.]*[#]*)/g
 	},
+	///- End Class
 
-	// From c.js
+	///- String
+	{
+		'name': 'constant.string',
+		'pattern': /('|")(.*?)\1/g
+	},
+	///- End String
+
+	///- String
+	{
+		'name': 'constant.numeric',
+		'pattern': /\d+/g
+	},
+	///- End String
+
+	// Haskell pragmas
+	{
+		'name': 'meta.preprocessor',
+		'matches': {
+			1: [
+				{
+					'matches': {
+						1: 'keyword.define',
+						2: [
+							{
+								'name': 'keyword.define',
+								'pattern': /SPECIALIZED|UNPACK|[NO]?INLIN[E|ABLE]|LANGUAGE|DEPRECATED|OPTIONS_GHC|CONLIKE|RULES|CORE|INCLUDE|WARNING|LINE|SOURCE|MINIMAL/g
+							},
+							{
+								'name': 'entity.name',
+								 // CPP is needed to treat as an entity, otherwise it will parse as a definition.
+								'pattern': /[\-]*\w+[\-]*/g
+							},
+							{
+								'name': 'constant.string',
+								'pattern': /(")(.*?)\1/g
+							},
+							{
+								'name': 'keyword.operator',
+								'pattern': /\+|\!|\:{2}|-&gt;|\-|&(gt|lt|amp);|\/\=|\||\@|\:|\.|\+{2}|\:|\$|\*|\=|#|\.{2}|(\\)[a-zA-Z_]/g
+							}
+						]
+					},
+					'pattern': /(\w+)\s(.*)/g
+				}
+			]
+		},
+		'pattern': /\{-#([\S\s]*?)\#-\}/gm
+	},
 	{
 		'name': 'meta.preprocessor',
 		'matches': {
@@ -74,7 +111,7 @@ Rainbow.extend('haskell', [
 				},
 				{
 					'name': 'keyword.define',
-					'pattern': /endif/g
+					'pattern': /else|endif/g
 				},
 				{
 					'name': 'constant.numeric',
@@ -85,10 +122,10 @@ Rainbow.extend('haskell', [
 						1: 'keyword.include',
 						2: 'string'
 					},
-				 'pattern': /(include)\s(.*?)$/g
+					'pattern': /(include)\s(.*?)$/g
 				}
 			]
 		},
-		'pattern': /^\#([\S\s]*?)$/gm
+		'pattern': /\#([\S\s]*?)$/gm
 	}
 ]); 

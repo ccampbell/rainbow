@@ -4,25 +4,40 @@ var language = 'haskell';
 describe(language, function() {
     run(
         language,
-        '-- comments',
+        'line comments',
         '-- fn2 :: String -> [String]',
         '<span class="comment">-- fn2 :: String -&gt; [String]</span>'
     );
 
     run(
         language,
-        '{-- comments --}',
+        'block comments',
         '{-- this is a comment --}',
         '<span class="comment">{-- this is a comment --}</span>'
     );
 
     run(
         language,
-        '{-- comments with multiple lines --}',
+        'block comments with multiple lines',
         '{--\n' +
         '  this is a comment\n' +
         '--}',
         '<span class="comment">{--\n  this is a comment\n--}</span>'
+    );
+
+    run(
+        language,
+        'pragmas',
+        '{-# LANGUAGE ForeignFunctionInterface, CPP #-}',
+        '<span class="meta preprocessor">{-# <span class="keyword define">LANGUAGE</span> <span class="entity name">ForeignFunctionInterface</span>, <span class="entity name">CPP</span> #-}</span>'
+    );
+
+    //TODO: bug? it does not parse/tokenize 'where'.
+    run(
+        language,
+        'haskell pragma in module',
+        'module Test.ModuleA {-# DEPRECATED "Use Wobble instead" #-} where',
+        '<span class="keyword">module</span> <span class="entity class">Test.ModuleA</span> <span class="meta preprocessor">{-# <span class="keyword define">DEPRECATED</span> <span class="constant string">"Use Wobble instead"</span> #-}</span> where'
     );
 
     run(
@@ -34,7 +49,7 @@ describe(language, function() {
 
     run(
         language,
-        'module with exported functions and comments',
+        'full module declaration',
         'module A (\n' +
         '  B,\n' +
         '  C(..),\n' +
@@ -48,27 +63,32 @@ describe(language, function() {
     run(
         language,
         'import',
-        'import Data.List qualified DL\n' +
         'import Prelude hiding ((*))',
-        '<span class="keyword">import</span> <span class="entity class">Data</span><span class="keyword operator">.</span><span class="entity class">List</span> <span class="keyword">qualified</span> <span class="entity class">DL</span>\n<span class="keyword">import</span> <span class="entity class">Prelude</span> <span class="keyword">hiding</span> ((<span class="keyword operator">*</span>))'
+        '<span class="keyword">import</span> <span class="entity class">Prelude</span> <span class="keyword">hiding</span> ((<span class="keyword operator">*</span>))'
     );
 
     run(
         language,
-        'function declaration',
+        'import qualified',
+        'import Data.List qualified DL',
+        '<span class="keyword">import</span> <span class="entity class">Data.List</span> <span class="keyword">qualified</span> <span class="entity class">DL</span>'
+    );
+
+    run(
+        language,
+        'function type signature',
         'fn :: String -> [(String,Int)]',
-        'fn <span class="keyword operator">:</span><span class="keyword operator">:</span> <span class="entity class">String</span> <span class="keyword operator">-</span><span class="keyword operator">&gt;</span> [(<span class="entity class">String</span>,<span class="entity class">Int</span>)]'
+        'fn <span class="keyword operator">::</span> <span class="entity class">String</span> <span class="keyword operator">-&gt;</span> [(<span class="entity class">String</span>,<span class="entity class">Int</span>)]'
     );
 
     run(
         language,
         'IO function declaration',
-        'getLine :: IO String\n' +
         'getLine = do c <- getChar\n' +
         '             if c == \'\\n\' then return ""\n' +
         '                          else do s <- getLine\n' +
         '                                  return (c:s)',
-        'getLine <span class="keyword operator">:</span><span class="keyword operator">:</span> <span class="entity class">IO</span> <span class="entity class">String</span>\ngetLine <span class="keyword operator">=</span> <span class="keyword">do</span> c <span class="keyword operator">&lt;</span><span class="keyword operator">-</span> getChar\n             <span class="keyword">if</span> c <span class="keyword operator">=</span><span class="keyword operator">=</span> <span class="string">\'\\n\'</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="string">""</span>\n                          <span class="keyword">else</span> <span class="keyword">do</span> s <span class="keyword operator">&lt;</span><span class="keyword operator">-</span> getLine\n                                  <span class="keyword">return</span> (c<span class="keyword operator">:</span>s)'
+        'getLine <span class="keyword operator">=</span> <span class="keyword">do</span> c <span class="keyword operator">&lt;</span><span class="keyword operator">-</span> getChar\n             <span class="keyword">if</span> c <span class="keyword operator">=</span><span class="keyword operator">=</span> <span class="string">\'\\n\'</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="string">""</span>\n                          <span class="keyword">else</span> <span class="keyword">do</span> s <span class="keyword operator">&lt;</span><span class="keyword operator">-</span> getLine\n                                  <span class="keyword">return</span> (c<span class="keyword operator">:</span>s)'
     );
 
     run(
@@ -83,16 +103,14 @@ describe(language, function() {
         'let declaration',
         'let a\' = s :: String\n' +
         'in a\' \"some string\"',
-        '<span class="keyword">let</span> a\' <span class="keyword operator">=</span> s <span class="keyword operator">:</span><span class="keyword operator">:</span> <span class="entity class">String</span>\n<span class="keyword">in</span> a\' <span class="string">"some string"</span>'
+        '<span class="keyword">let</span> a\' <span class="keyword operator">=</span> s <span class="keyword operator">::</span> <span class="entity class">String</span>\n<span class="keyword">in</span> a\' <span class="string">"some string"</span>'
     );
 
     run(
         language,
         'if declaration',
-        'if a == 0\n' +
-        'then A\n' +
-        'else B',
-        '<span class="keyword">if</span> a <span class="keyword operator">=</span><span class="keyword operator">=</span> <span class="constant numeric">0</span>\n<span class="keyword">then</span> <span class="entity class">A</span>\n<span class="keyword">else</span> <span class="entity class">B</span>'
+        'if a == 0 then A else B',
+        '<span class="keyword">if</span> a <span class="keyword operator">=</span><span class="keyword operator">=</span> <span class="constant numeric">0</span> <span class="keyword">then</span> <span class="entity class">A</span> <span class="keyword">else</span> <span class="entity class">B</span>'
     );
 
     run(
@@ -100,10 +118,22 @@ describe(language, function() {
         'data types decaration',
         'data S = S1 { x :: Int }\n' +
         '       | S2 { x :: Int }\n' +
-        '       deriving (Show, Eq)\n\n' +
-        'newtype NString = [String]\n\n' +
+        '       deriving (Show, Eq)',
+        '<span class="keyword">data</span> <span class="entity class">S</span> <span class="keyword operator">=</span> <span class="entity class">S1</span> { x <span class="keyword operator">::</span> <span class="entity class">Int</span> }\n       <span class="keyword operator">|</span> <span class="entity class">S2</span> { x <span class="keyword operator">::</span> <span class="entity class">Int</span> }\n       <span class="keyword">deriving</span> (<span class="entity class">Show</span>, <span class="entity class">Eq</span>)'
+    );
+
+    run(
+        language,
+        'newtypes decaration',
+        'newtype NString = [String]',
+        '<span class="keyword">newtype</span> <span class="entity class">NString</span> <span class="keyword operator">=</span> [<span class="entity class">String</span>]'
+    );
+
+    run(
+        language,
+        'types decaration',
         'type String = [Char]',
-        '<span class="keyword">data</span> <span class="entity class">S</span> <span class="keyword operator">=</span> <span class="entity class">S1</span> { x <span class="keyword operator">:</span><span class="keyword operator">:</span> <span class="entity class">Int</span> }\n       <span class="keyword operator">|</span> <span class="entity class">S2</span> { x <span class="keyword operator">:</span><span class="keyword operator">:</span> <span class="entity class">Int</span> }\n       <span class="keyword">deriving</span> (<span class="entity class">Show</span>, <span class="entity class">Eq</span>)\n\n<span class="keyword">newtype</span> <span class="entity class">NString</span> <span class="keyword operator">=</span> [<span class="entity class">String</span>]\n\n<span class="keyword">type</span> <span class="entity class">String</span> <span class="keyword operator">=</span> [<span class="entity class">Char</span>]'
+        '<span class="keyword">type</span> <span class="entity class">String</span> <span class="keyword operator">=</span> [<span class="entity class">Char</span>]'
     );
 
     run(
@@ -113,7 +143,7 @@ describe(language, function() {
         '      (==), (/=) :: a -&gt; a -&gt; Bool\n\n' +
         '      x /= y  = not (x == y)\n' +
         '      x == y  = not (x /= y)',
-        '<span class="keyword">class</span> <span class="entity class">Eq</span> a <span class="keyword">where</span>\n      (<span class="keyword operator">=</span><span class="keyword operator">=</span>), (<span class="keyword operator">/=</span>) <span class="keyword operator">:</span><span class="keyword operator">:</span> a <span class="keyword operator">-</span><span class="keyword operator">&gt;</span> a <span class="keyword operator">-</span><span class="keyword operator">&gt;</span> <span class="entity class">Bool</span>\n\n      x <span class="keyword operator">/=</span> y  <span class="keyword operator">=</span> not (x <span class="keyword operator">=</span><span class="keyword operator">=</span> y)\n      x <span class="keyword operator">=</span><span class="keyword operator">=</span> y  <span class="keyword operator">=</span> not (x <span class="keyword operator">/=</span> y)'
+        '<span class="keyword">class</span> <span class="entity class">Eq</span> a <span class="keyword">where</span>\n      (<span class="keyword operator">=</span><span class="keyword operator">=</span>), (<span class="keyword operator">/=</span>) <span class="keyword operator">::</span> a <span class="keyword operator">-&gt;</span> a <span class="keyword operator">-&gt;</span> <span class="entity class">Bool</span>\n\n      x <span class="keyword operator">/=</span> y  <span class="keyword operator">=</span> not (x <span class="keyword operator">=</span><span class="keyword operator">=</span> y)\n      x <span class="keyword operator">=</span><span class="keyword operator">=</span> y  <span class="keyword operator">=</span> not (x <span class="keyword operator">/=</span> y)'
     );
 
     run(
@@ -137,21 +167,27 @@ describe(language, function() {
         'case e of\n' +
         '  A -&gt; Just a\n' +
         '  _ -&gt; Nothing',
-        '<span class="keyword">case</span> e <span class="keyword">of</span>\n  <span class="entity class">A</span> <span class="keyword operator">-</span><span class="keyword operator">&gt;</span> <span class="entity class">Just</span> a\n  _ <span class="keyword operator">-</span><span class="keyword operator">&gt;</span> <span class="entity class">Nothing</span>'
+        '<span class="keyword">case</span> e <span class="keyword">of</span>\n  <span class="entity class">A</span> <span class="keyword operator">-&gt;</span> <span class="entity class">Just</span> a\n  _ <span class="keyword operator">-&gt;</span> <span class="entity class">Nothing</span>'
     );
 
     run(
         language,
-        'C Preprocessors',
-        '#ifndef __NHC__\n' +
-        'exitWith :: ExitCode -> IO a\n' +
-        'exitWith ExitSuccess = throwIO ExitSuccess\n' +
-        'exitWith code@(ExitFailure n)\n' +
-        '  | n /= 0 = throwIO code\n' +
-        '#ifdef __GLASGOW_HASKELL__\n' +
-        '  | otherwise = ioError (IOError Nothing InvalidArgument "exitWith" "ExitFailure 0" Nothing Nothing)\n' +
-        '#endif\n' +
-        '#endif  /* ! __NHC__ */',
-        '<span class="meta preprocessor">#<span class="keyword define">ifndef</span> <span class="entity name">__NHC__</span></span>\nexitWith <span class="keyword operator">:</span><span class="keyword operator">:</span> <span class="entity class">ExitCode</span> <span class="keyword operator">-</span><span class="keyword operator">&gt;</span> <span class="entity class">IO</span> a\nexitWith <span class="entity class">ExitSuccess</span> <span class="keyword operator">=</span> throwIO <span class="entity class">ExitSuccess</span>\nexitWith code<span class="keyword operator">@</span>(<span class="entity class">ExitFailure</span> n)\n  <span class="keyword operator">|</span> n <span class="keyword operator">/=</span> <span class="constant numeric">0</span> <span class="keyword operator">=</span> throwIO code\n<span class="meta preprocessor">#<span class="keyword define">ifdef</span> <span class="entity name">__GLASGOW_HASKELL__</span></span>\n  <span class="keyword operator">|</span> <span class="keyword">otherwise</span> <span class="keyword operator">=</span> ioError (<span class="entity class">IOError</span> <span class="entity class">Nothing</span> <span class="entity class">InvalidArgument</span> <span class="string">"exitWith"</span> <span class="string">"ExitFailure 0"</span> <span class="entity class">Nothing</span> <span class="entity class">Nothing</span>)\n<span class="meta preprocessor">#<span class="keyword define">endif</span></span>\n<span class="meta preprocessor">#<span class="keyword define">endif</span>  /* ! __NHC__ */</span>'
+        'C Preprocessor (ifdef)',
+        '#ifdef __GLASGOW_HASKELL__',
+        '<span class=\"meta preprocessor\">#<span class=\"keyword define\">ifdef</span> <span class=\"entity name\">__GLASGOW_HASKELL__</span></span>'
+    );
+
+    run(
+        language,
+        'C Preprocessors (else)',
+        '#else',
+        '<span class=\"meta preprocessor\">#<span class=\"keyword define\">else</span></span>'
+    );
+
+    run(
+        language,
+        'C Preprocessors (endif)',
+        '#endif',
+        '<span class=\"meta preprocessor\">#<span class=\"keyword define\">endif</span></span>'
     );
 });
