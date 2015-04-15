@@ -35,11 +35,11 @@ pre .storage {
 
 /* This includes regexes */
 pre .string {
-    color: #FF2020;
+    color: #CC9393;
 }
 
 pre .keyword, pre .selector {
-    color: #ffffa0;
+    color: #FFFFA0;
 }
 
 pre .inherited-class {
