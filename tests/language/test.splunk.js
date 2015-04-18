@@ -27,13 +27,13 @@ describe(language, function() {
     language,
     'constant.language',
     'stats count as counted by host',
-    '<span class="keyword">stats</span> count <span class="constant language">as</span> counted <span class="constant language">by</span> <span class="variable global">host</span>'
+    '<span class="keyword">stats</span> count <span class="constant language">as</span> counted <span class="constant language">by</span> host'
     );
   
   run(
     language,
     'variable.gloabl',
     'host=web source=/opt/log* sourcetype=access_combined index=abtest',
-    '<span class="variable global">host</span><span class="keyword operator">=</span>web <span class="variable global">source</span><span class="keyword operator">=</span>/opt/log<span class="keyword operator">*</span> <span class="variable global">source</span>type<span class="keyword operator">=</span>access_combined <span class="variable global">index</span><span class="keyword operator">=</span>abtest'
+    '<span class="variable global">host</span><span class="keyword operator">=</span>web <span class="variable global">source</span><span class="keyword operator">=</span>/opt/log<span class="keyword operator">*</span> <span class="variable global">sourcetype</span><span class="keyword operator">=</span>access_combined <span class="variable global">index</span><span class="keyword operator">=</span>abtest'
     );
 });
