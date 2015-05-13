@@ -1,0 +1,49 @@
+/**
+ * Base16 Atelier Forest Dark
+ *
+ * @author Bram de Haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/forest)
+ *
+ * Rainbow template by Jan T. Sott (https://github.com/idleberg/)
+ * Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16)
+ */
+pre {
+    background-color: #1b1918;
+    word-wrap: break-word;
+    margin: 0px;
+    padding: 10px;
+    color: #f1efee;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+pre, code {
+    font-family: Consolas, Menlo, 'DejaVu Sans Mono', Monaco, 'Courier New', Courier, monospace;
+}
+
+pre .comment {
+    color: #766e6b;
+}
+
+pre .variable.global, pre .variable.class, pre .variable.instance {
+    color: #f22c40; /* red */
+}
+
+pre .constant.numeric, pre .constant.language, pre .constant.hex-color, pre .keyword.unit {
+    color: #df5320; /* orange */
+}
+
+pre .constant, pre .entity, pre .entity.class, pre .support {
+    color: #c38418; /* yellow */
+}
+
+pre .constant.symbol, pre .string {
+    color: #7b9726; /* green */
+}
+
+pre .entity.function, pre .support.css-property, pre .selector {
+    color: #407ee7; /* blue */
+}
+
+pre .keyword, pre .storage {
+    color: #6666ea; /* purple */
+}

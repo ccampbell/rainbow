@@ -1,0 +1,49 @@
+/**
+ * Base16 Atelier Lakeside Dark
+ *
+ * @author Bram de Haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/lakeside/)
+ *
+ * Rainbow template by Jan T. Sott (https://github.com/idleberg/)
+ * Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16)
+ */
+pre {
+    background-color: #161b1d;
+    word-wrap: break-word;
+    margin: 0px;
+    padding: 10px;
+    color: #ebf8ff;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+pre, code {
+    font-family: Consolas, Menlo, 'DejaVu Sans Mono', Monaco, 'Courier New', Courier, monospace;
+}
+
+pre .comment {
+    color: #5a7b8c;
+}
+
+pre .variable.global, pre .variable.class, pre .variable.instance {
+    color: #d22d72; /* red */
+}
+
+pre .constant.numeric, pre .constant.language, pre .constant.hex-color, pre .keyword.unit {
+    color: #935c25; /* orange */
+}
+
+pre .constant, pre .entity, pre .entity.class, pre .support {
+    color: #8a8a0f; /* yellow */
+}
+
+pre .constant.symbol, pre .string {
+    color: #568c3b; /* green */
+}
+
+pre .entity.function, pre .support.css-property, pre .selector {
+    color: #257fad; /* blue */
+}
+
+pre .keyword, pre .storage {
+    color: #6b6bb8; /* purple */
+}

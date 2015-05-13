@@ -1,0 +1,49 @@
+/**
+ * Base16 Atelier Dune Dark
+ *
+ * @author Bram de Haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/dune)
+ *
+ * Rainbow template by Jan T. Sott (https://github.com/idleberg/)
+ * Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16)
+ */
+pre {
+    background-color: #20201d;
+    word-wrap: break-word;
+    margin: 0px;
+    padding: 10px;
+    color: #fefbec;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+pre, code {
+    font-family: Consolas, Menlo, 'DejaVu Sans Mono', Monaco, 'Courier New', Courier, monospace;
+}
+
+pre .comment {
+    color: #7d7a68;
+}
+
+pre .variable.global, pre .variable.class, pre .variable.instance {
+    color: #d73737; /* red */
+}
+
+pre .constant.numeric, pre .constant.language, pre .constant.hex-color, pre .keyword.unit {
+    color: #b65611; /* orange */
+}
+
+pre .constant, pre .entity, pre .entity.class, pre .support {
+    color: #ae9513; /* yellow */
+}
+
+pre .constant.symbol, pre .string {
+    color: #60ac39; /* green */
+}
+
+pre .entity.function, pre .support.css-property, pre .selector {
+    color: #6684e1; /* blue */
+}
+
+pre .keyword, pre .storage {
+    color: #b854d4; /* purple */
+}

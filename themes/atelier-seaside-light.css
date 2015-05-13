@@ -1,0 +1,49 @@
+/**
+ * Base16 Atelier Seaside Light
+ *
+ * @author Bram de Haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/seaside/)
+ *
+ * Rainbow template by Jan T. Sott (https://github.com/idleberg/)
+ * Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16)
+ */
+pre {
+    background-color: #f4fbf4;
+    word-wrap: break-word;
+    margin: 0px;
+    padding: 10px;
+    color: #131513;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+pre, code {
+    font-family: Consolas, Menlo, 'DejaVu Sans Mono', Monaco, 'Courier New', Courier, monospace;
+}
+
+pre .comment {
+    color: #809980;
+}
+
+pre .variable.global, pre .variable.class, pre .variable.instance {
+    color: #e6193c; /* red */
+}
+
+pre .constant.numeric, pre .constant.language, pre .constant.hex-color, pre .keyword.unit {
+    color: #87711d; /* orange */
+}
+
+pre .constant, pre .entity, pre .entity.class, pre .support {
+    color: #98981b; /* yellow */
+}
+
+pre .constant.symbol, pre .string {
+    color: #29a329; /* green */
+}
+
+pre .entity.function, pre .support.css-property, pre .selector {
+    color: #3d62f5; /* blue */
+}
+
+pre .keyword, pre .storage {
+    color: #ad2bee; /* purple */
+}

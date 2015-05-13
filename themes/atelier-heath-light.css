@@ -1,0 +1,49 @@
+/**
+ * Base16 Atelier Heath Light
+ *
+ * @author Bram de Haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/heath)
+ *
+ * Rainbow template by Jan T. Sott (https://github.com/idleberg/)
+ * Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16)
+ */
+pre {
+    background-color: #f7f3f7;
+    word-wrap: break-word;
+    margin: 0px;
+    padding: 10px;
+    color: #1b181b;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+pre, code {
+    font-family: Consolas, Menlo, 'DejaVu Sans Mono', Monaco, 'Courier New', Courier, monospace;
+}
+
+pre .comment {
+    color: #9e8f9e;
+}
+
+pre .variable.global, pre .variable.class, pre .variable.instance {
+    color: #ca402b; /* red */
+}
+
+pre .constant.numeric, pre .constant.language, pre .constant.hex-color, pre .keyword.unit {
+    color: #a65926; /* orange */
+}
+
+pre .constant, pre .entity, pre .entity.class, pre .support {
+    color: #bb8a35; /* yellow */
+}
+
+pre .constant.symbol, pre .string {
+    color: #918b3b; /* green */
+}
+
+pre .entity.function, pre .support.css-property, pre .selector {
+    color: #516aec; /* blue */
+}
+
+pre .keyword, pre .storage {
+    color: #7b59c0; /* purple */
+}
