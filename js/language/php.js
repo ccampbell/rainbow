@@ -137,7 +137,7 @@ Rainbow.extend('php', [
                 'pattern': /\s+@\w+/g
             }
         },
-        'pattern': /\/\*\*([\s\S]*)?\*\//gm
+        'pattern': /\/\*\*([^\/]([^\/]+)|[^\*]\/)*\*\//gm
     },
     {
         'name': 'shell.command',
