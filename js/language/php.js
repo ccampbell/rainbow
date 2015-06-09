@@ -119,5 +119,28 @@ Rainbow.extend('php', [
             }
         },
         'pattern': /(\(|,\s?)([\w\\]*?)(?=\s\$)/g
+    },
+
+/**
+ * New PHP patterns for:
+ *      PHPDoc comment
+ *      PHPDoc variable
+ *      Shell command
+ *
+ * @author Alexandre Paradis
+ */
+    {
+        'name': 'comment.phpdoc',
+        'matches': {
+            1: {
+                'name': 'keyword.phpdoc',
+                'pattern': /\s+@\w+/g
+            }
+        },
+        'pattern': /\/\*\*([\s\S]*)?\*\//gm
+    },
+    {
+        'name': 'shell.command',
+        'pattern': /`([\s\S]*)?`/gm
     }
 ]);
