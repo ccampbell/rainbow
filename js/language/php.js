@@ -134,10 +134,10 @@ Rainbow.extend('php', [
         'matches': {
             1: {
                 'name': 'keyword.phpdoc',
-                'pattern': /\s+@\w+/g
+                'pattern': /@\w+/g
             }
         },
-        'pattern': /\/\*\*([^\/]([^\/]+)|[^\*]\/)*\*\//gm
+        'pattern': /\/\*\*([\s\S]*?)\*\//gm
     },
     {
         'name': 'shell.command',
