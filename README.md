@@ -74,6 +74,7 @@ Currently supported languages are:
 - Scheme
 - Shell
 - Smalltalk
+- SPL (Splunk Processing Language)
 
 ## Building
 
