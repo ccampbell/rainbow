@@ -5,11 +5,7 @@
  * @version 1.0.0
  */
 Rainbow.extend('nsis', [
-
-    {
-        'name': 'keyword.operator',
-        'pattern': /&lt;|&gt;|&amp;/g
-    },
+    
     {
         'name': 'comment.line',
         'pattern': /(\#|;)[\s\S]*?$/gm
@@ -48,11 +44,11 @@ Rainbow.extend('nsis', [
     },
     {
         'name': 'support.compiler',
-        'pattern': /\s(\!)(include|addincludedir|addplugindir|appendfile|cd|delfile|echo|error|execute|packhdr|finalize|getdllversion|system|tempfile|warning|verbose|define|undef|insertmacro|macro|macroend|makensis|searchparse|searchreplace)(?=\(|\b)/g
+        'pattern': /\!(include|addincludedir|addplugindir|appendfile|cd|delfile|echo|error|execute|packhdr|finalize|getdllversion|system|tempfile|warning|verbose|define|undef|insertmacro|macro|macroend|makensis|searchparse|searchreplace)(?=\(|\b)/g
     },
     {
         'name': 'entity.compiler.block',
-        'pattern': /\s(\!)(ifdef|ifndef|if|ifmacrodef|ifmacrondef|else|endif)(?=\(|\b)/g
+        'pattern': /(\!)(ifdef|ifndef|if|ifmacrodef|ifmacrondef|else|endif)(?=\(|\b)/g
     },
     {
         'name': 'keyword.command',
