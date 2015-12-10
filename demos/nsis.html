@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<title>Syntax Highlighting</title>
+<link href="../themes/blackboard.css" rel="stylesheet" type="text/css" media="screen">
+<body>
+<style type="text/css">
+</style>
+<pre>
+<code data-language="nsis">/*
+ * Multi-line comment, baby
+ */
+
+; Includes ---------------------------------
+!include MUI2.nsh
+!include LogicLib.nsh
+
+; Settings ---------------------------------
+Name "installer_name"
+OutFile "installer_name.exe"
+RequestExecutionLevel user
+InstallDir "$PROGRAMFILES\installer_name"
+
+; Pages ------------------------------------
+!insertmacro MUI_PAGE_COMPONENTS 
+!insertmacro MUI_PAGE_DIRECTORY
+!insertmacro MUI_PAGE_INSTFILES
+
+; Languages --------------------------------
+!insertmacro MUI_LANGUAGE "English"
+
+; Sections ---------------------------------
+Section "section" SECTION_INDEX
+
+    ${If} 0 == 1
+      nsExec::Exec "calc.exe" 
+    ${Else}
+      DetailPrint "Zero will never be one"
+    ${EndIf}
+
+SectionEnd
+
+; Descriptions -----------------------------
+LangString DESC_SECTION_INDEX ${LANG_ENGLISH} "section_description"
+
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+    !insertmacro MUI_DESCRIPTION_TEXT ${SECTION_INDEX} $(DESC_SECTION_INDEX)
+!insertmacro MUI_FUNCTION_DESCRIPTION_END</code>
+</pre>
+
+    <script src="../js/rainbow.js"></script>
+    <script src="../js/language/generic.js"></script>
+    <script src="../js/language/nsis.js"></script>
+
+</body>
