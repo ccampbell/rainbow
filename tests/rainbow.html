@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>Rainbow Tests</title>
+    <link rel="stylesheet" href="libs/mocha-1.9.0.css" />
+</head>
+<body>
+    <div id="mocha"></div>
+    <script src="libs/chai-1.6.0.js"></script>
+    <script src="libs/sinon-chai-2.4.0.js"></script>
+    <script src="libs/sinon-1.7.1.js"></script>
+    <script src="libs/sinon-ie-1.7.1.js"></script>
+    <script src="libs/mocha-1.9.0.js"></script>
+    <script>mocha.setup('bdd')</script>
+
+    <script src="../js/rainbow.js"></script>
+    <script src="../js/language/generic.js"></script>
+    <script src="../js/language/coffeescript.js"></script>
+    <script src="../js/language/csharp.js"></script>
+    <script src="../js/language/css.js"></script>
+    <script src="../js/language/d.js"></script>
+    <script src="../js/language/haskell.js"></script>
+    <script src="../js/language/html.js"></script>
+    <script src="../js/language/java.js"></script>
+    <script src="../js/language/javascript.js"></script>
+    <script src="../js/language/php.js"></script>
+    <script src="../js/language/python.js"></script>
+    <script src="../js/language/r.js"></script>
+    <script src="../js/language/ruby.js"></script>
+    <script src="../js/language/smalltalk.js"></script>
+
+    <script>
+        function skip(language, name, code, expected) {
+            it.skip(name);
+        }
+
+        function run(language, name, code, expected) {
+            it(name, function(done) {
+                Rainbow.color(code, language, function(result) {
+                    chai.expect(result).to.equal(expected);
+                    done();
+                });
+            });
+        }
+    </script>
+
+    <script src="language/test.generic.js"></script>
+    <script src="language/test.coffeescript.js"></script>
+    <script src="language/test.csharp.js"></script>
+    <script src="language/test.css.js"></script>
+    <script src="language/test.d.js"></script>
+    <script src="language/test.haskell.js"></script>
+    <script src="language/test.html.js"></script>
+    <script src="language/test.java.js"></script>
+    <script src="language/test.javascript.js"></script>
+    <script src="language/test.php.js"></script>
+    <script src="language/test.python.js"></script>
+    <script src="language/test.r.js"></script>
+    <script src="language/test.ruby.js"></script>
+    <script src="language/test.smalltalk.js"></script>
+
+    <script>
+        mocha.globals(['Rainbow']);
+
+        if (window.mochaPhantomJS) {
+            window.mochaPhantomJS.run();
+        }
+        else if (!window.PHANTOMJS) {
+            mocha.run();
+        }
+    </script>
+</body>

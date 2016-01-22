@@ -1,0 +1,30 @@
+{
+  "name": "Rainbow",
+  "version": "1.2.0",
+  "description": "Simple library for code syntax highlighting",
+  "main": "Gruntfile.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "grunt mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ccampbell/rainbow.git"
+  },
+  "keywords": [
+    "code",
+    "highlight",
+    "highlighter"
+  ],
+  "author": "Craig Campbell",
+  "license": "Apache 2.0",
+  "readmeFilename": "README.md",
+  "gitHead": "cfa00dea70da289c0e3a3c12392251979e18730a",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-complexity": "~0.1.2",
+    "grunt-mocha": "~0.3.1"
+  }
+}

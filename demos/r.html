@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>R Demo</title>
+    <link href="../themes/tomorrow-night.css" rel="stylesheet">
+  </head>
+  <body>
+    <pre>
+<code data-language="r">## Probability density function for the Generalised Normal Laplace distribution
+dgnl &lt;- function(x, mu = 0, sigma = 1, alpha = 1, beta = 1, rho = 1,
+                 param = c(mu, sigma, alpha, beta, rho)) {
+
+  ## check parameters
+  parResult &lt;- gnlCheckPars(param)
+  case &lt;- parResult$case
+  errMessage &lt;- parResult$errMessage
+
+  if (case == "error")
+    stop(errMessage)
+
+  mu &lt;- param[1]
+  sigma &lt;- param[2]
+  alpha &lt;- param[3]
+  beta &lt;- param[4]
+  rho &lt;- param[5]
+
+  ## Shifting by mu
+  x &lt;- x - mu
+
+  ## Initialising result vector
+  pdfValues &lt;- rep(0, length(x))
+  
+  ## Because 'integrate' doesn't take vectors as input, we need to iterate over
+  ## x to evaluate densities
+  for (i in 1:length(x)) {
+    ## Modified characteristic function. Includes minor calculation regarding
+    ## complex numbers to ensure the function returns a real number
+    chfn &lt;- function(s) {
+      result &lt;- (alpha * beta * exp(-((sigma^2 * s^2) / 2))) /
+                (complex(real = alpha, imaginary = -s) *
+                 complex(real = beta, imaginary = s))
+      result &lt;- result^rho  ## Scaling result by rho
+      r &lt;- Mod(result)
+      theta &lt;- Arg(result)  
+      r * cos(theta - (s * x[i]))
+    }
+    
+    ## Integrating modified characteristic function
+    pdfValues[i] &lt;- (1 / pi) * integrate(chfn, 0, Inf)$value
+  }
+  
+  ## Returning vector of densities
+  pdfValues
+}
+</code></pre>
+    <script src="../js/rainbow.js"></script>
+    <script src="../js/language/generic.js"></script>
+    <script src="../js/language/r.js"></script>
+  </body>
+</html>

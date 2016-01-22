@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!-- Code example from https://github.com/hoisie/web.git and from
+     Go official web site http://golang.org/
+-->
+<meta charset=utf-8>
+<title>Syntax Highlighting</title>
+<link href="../themes/blackboard.css" rel="stylesheet" type="text/css" media="screen">
+<body>
+<h3>GO language</h3>
+<p>First example: </p>
+<pre><code data-language="go">// You can edit this code!
+// Click here and start typing.
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello, world!")
+}</code></pre>
+
+<pre><code data-language="go">package main
+
+// fib returns a function that returns
+// successive Fibonacci numbers.
+func fib() func() int {
+    a, b := 0, 1
+    return func() int {
+        a, b = b, a+b
+        c = 256
+        return a
+    }
+}
+
+func main() {
+    f := fib()
+    // Function calls are evaluated left-to-right.
+    println(f(), f(), f(), f(), f())
+}</code></pre>
+
+<p>Another Example: </p>
+
+<pre><code data-language="go">/*
+    This is a long comment
+    Second line.
+*/
+package main
+
+import (
+    "fmt"
+    "github.com/hoisie/web.go"
+)
+
+type mytype struct {
+    A   string
+    B   string
+    C   int
+    D   int64
+    E   uint8
+    F   complex128
+    G   float32
+}
+
+var page = `
+    This is a long string
+    This is another string
+`
+
+func index() string { return page }
+
+func process(ctx *web.Context) string {
+    var data mytype
+    ctx.UnmarshalParams(&data)
+    return fmt.Sprintf("%v\n", data)
+}
+
+func main() {
+    web.Get("/", index)
+    web.Post("/process", process)
+    web.Run("0.0.0.0:9999")
+}</code></pre>
+    <script src="../js/rainbow.js"></script>
+    <script src="../js/language/go.js"></script>
+</body>

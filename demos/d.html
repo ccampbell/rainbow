@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<title>Syntax Highlighting</title>
+<link href="../themes/obsidian.css" rel="stylesheet" type="text/css" media="screen">
+<body>
+
+<pre>
+<code data-language="d">
+// Single line comment
+
+/*
+ Multi line comment
+*/
+
+/+
+ Multi line doc comment
++/
+
+import std.stdio;
+
+// Integers
+ushort a = 0;
+short b = 1;
+int c = 2;
+uint d = 3;
+long e = 4;
+ulong f = 5;
+size_t g = 90;
+
+// Boolean
+bool h = true;
+bool m = false;
+
+// Floating point
+float j = 7.9;
+real k = 0;
+double l = 0.8;
+
+// Strings, chars, bytes
+string s = "derp";
+string t = null;
+char u = 'a';
+wchar v = 'b';
+byte w = 0;
+ubyte x = 0;
+
+// Struct
+struct Thing {
+    int count;
+}
+
+auto thing = Thing();
+thing.count = 35;
+writefln("thing.count: %d", thing.count);
+
+// Class
+class Animal {
+    string _name;
+
+    string name() { return _name; }
+
+    this(string name) {
+        _name = name;
+    }
+}
+
+auto ani = new Animal("dog");
+writefln("ani.name: %s", ani.name);
+
+// Class Inheritance
+class Dog : Animal {
+    this(string name) {
+        super(name);
+    }
+
+    void bark() {
+        writeln("Woof!");
+    }
+}
+
+auto dog = new Dog("Rover");
+writefln("dog.name: %s", dog.name);
+dog.bark();
+
+// For loop
+for(size_t i=0; i<5; ++i) {
+    writefln("i: %d", i);
+}
+
+// For each loop
+foreach(i; [0, 1, 2, 3, 4]) {
+    writefln("i: %d", i);
+}
+
+// While loop
+int counter = 0;
+while(counter < 5) {
+    writefln("counter: %d", counter);
+    counter++;
+}
+
+// Do while loop
+counter = 0;
+do {
+    writefln("counter: %d", counter);
+    counter++;
+} while(counter < 5);
+
+
+// If condition
+bool flag_a = true;
+bool flag_b = false;
+if(flag_a && flag_b) {
+
+}
+
+// Switch condition
+string name = "Derper";
+switch(name) {
+    case "Bobrick": write("Stupid name"); break;
+    case "Rickyrick": write("Awesome name"); break;
+    default: write("Unexpected name"); break;
+}
+</code>
+</pre>
+    <script src="../js/rainbow.js"></script>
+    <script src="../js/language/d.js"></script>
+</body>
+
