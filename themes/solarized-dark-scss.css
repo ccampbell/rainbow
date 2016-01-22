@@ -1,0 +1,175 @@
+/**
+ * Solarized Dark theme
+ *
+ * Adaptation of Solarized Dark from ethanschoonover.com/solarized
+ *
+ * @author Ethan Schoonover
+ * @author David Litmark
+ * @version 1.0.0
+ */
+pre {
+    background: #002b36; /* base03 */
+    border-color: #333333;
+    color: #839496; /* base0 */
+    font-size: 16px;
+    line-height: 20px;
+    margin: 0;
+    padding: 10px;
+}
+
+pre, code {
+    font-family: 'Monaco', courier, monospace;
+}
+
+pre .comment {
+    color: #586e75; /* base01 */
+}
+
+pre .constant {
+    color: #839496; /* base0 */
+}
+
+pre .constant.language {
+    color: #268bd2; /* blue */
+}
+
+pre .constant.regexp {
+    color: #2aa198; /* cyan */
+}
+
+pre .storage {
+    color: #268bd2; /* blue */
+}
+
+pre .string, pre .comment.docstring {
+    color: #2aa198; /* cyan */
+}
+
+pre .support.tag.script, pre .support.tag.style {
+    color: #2aa198; /* cyan */
+}
+
+pre .string.regexp {
+    color: #2aa198; /* cyan */
+}
+
+pre .string.regexp.open, pre .string.regexp.close {
+    color: #2aa198; /* cyan */
+}
+
+pre .keyword, pre .selector {
+    color: #859900; /* green */
+}
+
+pre .inherited-class {
+    font-style: italic;
+}
+
+pre .entity {
+    color: #b58900; /* yellow */
+}
+
+pre .support, *[data-language="c"] .function.call {
+    color: #859900; /* green */
+}
+
+pre .support.method {
+    color: #839496; /* base0 */
+}
+
+pre .support.property {
+    color: #839496; /* base0 */
+}
+
+pre .variable.global, pre .variable.class, pre .variable.instance {
+    color: #839496; /* base0 */
+}
+
+/**
+ * Solarized Dark theme
+ * Additional styles for SCSS syntax
+ *
+ * @author Fabio Bucci Di Monte
+ * @version 1.0.1
+ */
+
+pre .mediaquery.type {
+     color: #b58900; /* yellow */
+}
+
+pre .mediaquery.feature {
+     color: #8866dd; /* purple */
+}
+
+pre .method-name {
+    color: #c5ab0b; /* light yellow */
+}
+
+pre .constant.path {
+     color: #268bd2; /* blue */
+}
+
+pre .constant.numeric {
+     color: #2aa198; /* cyan */
+}
+
+pre .constant.hex-color {
+     color: #2aa198; /* cyan */
+}
+
+pre .css-property {
+    color: #8866dd; /* purple */
+}
+
+pre .selector {
+    color: #839496; /* base0 */
+}
+
+pre .entity.tag {
+     color: #ad5a18; /* orange */
+}
+
+pre .pseudo,
+pre .vendor-prefix {
+    font-style: italic;
+}
+
+pre .vendor-prefix {
+    opacity: 0.7;
+}
+
+pre .attribute-name {
+    color: #b58900; /* yellow */
+}
+
+pre .at-directive,
+pre .reserved,
+pre .exception {
+    color: #b58900; /* yellow */
+    font-weight: bold;
+}
+
+pre .scss.interpolation {
+     background-color: #17436e; /* dark blue */
+     color: #839496; /* base0 */
+     font-style: italic;
+}
+
+pre .scss.variable {
+     color: #268bd2; /* blue */
+}
+
+pre .scss.constant {
+     color: #859900; /* green */
+     font-weight: bold;
+}
+
+pre .scss.method-name,
+pre .scss.mixin-name {
+     color: #c5ab0b; /* light yellow */
+}
+
+pre .scss.ternary-method {
+     color: #b58900; /* yellow */
+     font-weight: bold;
+}
