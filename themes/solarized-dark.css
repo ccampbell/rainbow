@@ -13,7 +13,6 @@ pre {
     margin: 0px;
     padding: 10px;
     color: #839496; /* base0 */
-    font-size: 14px;
     margin-bottom: 20px;
 }
 
@@ -83,4 +82,64 @@ pre .support.property {
 
 pre .variable.global, pre .variable.class, pre .variable.instance {
     color: #839496; /* base0 */
+}
+
+/**
+ * Solarized Dark theme 
+ *
+ * Additional styles for enhanced CSS syntax
+ */
+
+pre {
+    border-color: #333333;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+pre .entity, pre .mediaquery.type {
+    font: inherit;
+}
+
+pre .pseudo, pre .vendor-prefix {
+    font-style: italic;
+}
+
+pre .at-directive, pre .reserved, pre .exception {
+    font-weight: bold;
+}
+
+pre .hack {
+    color: #ff0000; /* red */
+}
+
+pre .selector {
+    color: #839496; /* base0 */
+}
+
+pre .at-directive, pre .reserved, pre .exception, pre .attribute-name, pre .mediaquery.type {
+    color: #b58900; /* yellow */
+}
+
+pre .method-name {
+    color: #c5ab0b; /* light yellow */
+}
+
+pre .constant.numeric, pre .constant.hex-color {
+    color: #2aa198; /* cyan */
+}
+
+pre .css-property, pre .mediaquery.feature {
+    color: #8866dd; /* purple */
+}
+
+pre .entity.tag {
+    color: #ad5a18; /* orange */
+}
+
+pre .constant.path {
+    color: #268bd2; /* blue */
+}
+
+pre .vendor-prefix {
+    opacity: 0.7;
 }
