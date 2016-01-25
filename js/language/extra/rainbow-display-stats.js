@@ -43,15 +43,8 @@ $(function() {
     function getElementStats($target){
         var classes = getClasses($target.next()),
             $stats = $('<div>').attr('class','rainbow-stats'),
-            $class = $('<span>').attr('class','rainbow-stats-class').css('cursor','pointer'),
-            $count = $('<span>').attr('class','rainbow-stats-count').css(
-                {
-                    display: 'inline-block',
-                    margin: '0 8px 0 0',
-                    textAlign: 'right',
-                    width: '30px'
-                }
-            );
+            $class = $('<span>').attr('class','rainbow-stats-class'),
+            $count = $('<span>').attr('class','rainbow-stats-count');
 
         for(var c in classes){
             if(classes.hasOwnProperty(c)){
@@ -140,8 +133,8 @@ $(function() {
         var $t = $(e.currentTarget),
             cl = $t.text().split(' ');
 
-        $('.rainbow-stats-class').css('font-weight','normal');
-        $t.css('font-weight','bold');
+        $('.rainbow-stats-class').removeClass('rainbow-stats-selected');
+        $t.addClass('rainbow-stats-selected');
 
         cl.unshift('');
         Rainbow.doHighlight && Rainbow.doHighlight($t.closest('.rainbow-stats').next(),cl.join('.'));
