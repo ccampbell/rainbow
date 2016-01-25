@@ -5,7 +5,8 @@
  *
  * @author Ethan Schoonover
  * @author David Litmark
- * @version 1.0.0
+ * @author Fabio Bucci Di Monte (Additional styles for enhanced CSS syntax and SCSS syntax)
+ * @version 1.1.0
  */
 pre {
     background: #002b36; /* base03 */
@@ -14,6 +15,9 @@ pre {
     padding: 10px;
     color: #839496; /* base0 */
     margin-bottom: 20px;
+    border-color: #333333;
+    font-size: 16px;
+    line-height: 20px;
 }
 
 pre, code {
@@ -85,26 +89,20 @@ pre .variable.global, pre .variable.class, pre .variable.instance {
 }
 
 /**
- * Solarized Dark theme
- * 
- * Additional styles for SCSS syntax
+ * Additional styles for enhanced CSS syntax and SCSS syntax
  */
-
-pre {
-    border-color: #333333;
-    font-size: 16px;
-    line-height: 20px;
-}
 
 pre .entity, pre .mediaquery.type {
     font: inherit;
 }
 
-pre .scss.interpolation, pre .pseudo, pre .vendor-prefix {
+pre .pseudo, pre .vendor-prefix,
+pre .scss.interpolation {
     font-style: italic;
 }
 
-pre .scss.constant, pre .at-directive, pre .reserved, pre .exception, pre .scss.ternary-method {
+pre .at-directive, pre .reserved, pre .exception,
+pre .scss.constant, pre .scss.ternary-method {
     font-weight: bold;
 }
 
@@ -112,15 +110,18 @@ pre .hack {
     color: #ff0000; /* red */
 }
 
-pre .scss.interpolation, pre .scss.map-pair, pre .selector {
+pre .selector,
+pre .scss.interpolation, pre .scss.map-pair {
     color: #839496; /* base0 */
 }
 
-pre .at-directive, pre .reserved, pre .exception, pre .scss.ternary-method, pre .attribute-name, pre .mediaquery.type {
+pre .at-directive, pre .reserved, pre .exception, pre .attribute-name, pre .mediaquery.type,
+pre .scss.ternary-method {
     color: #b58900; /* yellow */
 }
 
-pre .method-name, pre .scss.method-name, pre .scss.mixin-name {
+pre .method-name,
+pre .scss.method-name, pre .scss.mixin-name {
     color: #c5ab0b; /* light yellow */
 }
 
@@ -128,7 +129,8 @@ pre .constant.numeric, pre .constant.hex-color {
     color: #2aa198; /* cyan */
 }
 
-pre .css-property, pre .mediaquery.feature, pre .scss.map-name, pre .scss.map-value {
+pre .css-property, pre .mediaquery.feature,
+pre .scss.map-name, pre .scss.map-value {
     color: #8866dd; /* purple */
 }
 
@@ -136,7 +138,8 @@ pre .entity.tag {
     color: #ad5a18; /* orange */
 }
 
-pre .constant.path, pre .scss.variable {
+pre .constant.path,
+pre .scss.variable {
     color: #268bd2; /* blue */
 }
 
