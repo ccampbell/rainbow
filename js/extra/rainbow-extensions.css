@@ -23,6 +23,7 @@ pre .highlighted {
     padding: 8px 16px;
     position: fixed;
 }
+
 #rainbowOverlay strong {
     color: #acb8b9;
 }
@@ -35,12 +36,14 @@ pre .highlighted {
 .rainbow-stats-class {
     cursor: pointer;
 }
+
 .rainbow-stats-count {
     display: inline-block;
     margin: 0 8px 0 0;
     text-align: right;
     width: 30px;
 }
+
 .rainbow-stats-selected {
     font-weight: bold;
 }
