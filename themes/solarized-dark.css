@@ -10,14 +10,13 @@
  */
 pre {
     background: #002b36; /* base03 */
-    word-wrap: break-word;
-    margin: 0px;
-    padding: 10px;
-    color: #839496; /* base0 */
-    margin-bottom: 20px;
     border-color: #333333;
+    color: #839496; /* base0 */
     font-size: 16px;
     line-height: 20px;
+    margin: 0 0 20px 0;
+    padding: 10px;
+    word-wrap: break-word;
 }
 
 pre, code {
