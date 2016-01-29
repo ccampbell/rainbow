@@ -53,6 +53,7 @@
         /* ie hacks */
         cssPropertyWithHack : /([\*\+#_])?([a-z-]+)( *\/\*(?:\\\*)?\*\/)?(?= *:)/g,
         hackValue           : /((?:\\0|\\9|\\0\\9|\\9\\0)|!\w+?|\\0\/)(?= *[;}])/g,
+        ieHacks             : /(_)|(\*|#|!.+)|(\*?\+|\+\*?)|(\\9)|(\\0\\9|\\9\\0)|(\/\*(?:\\\*)?\*\/)|(\\0\/)/g,
 
         /* entities */
         entityClass         : /\.(?!\.)\w+(?:-\w+)*/g,
@@ -72,8 +73,8 @@
         mediaFeature        : /\b(?:(?:(?:min|max)-)?(?:(?:device-)?(?:width|height|aspect-ratio)|color(?:-index)?|monochrome|resolution)|scan|grid|orientation)\b/g,
         mediaExpression     : /\((.+?)(?: *: *(.+?))?\)/g,
         mediaQuery          : /(?:(not|only) +)?(.+)/g,
-        mediaQueryList      : / *([^,\{\n\r]+) */g,
-        mediaQueryRule      : /(@media) +(.+)/g
+        mediaQueryList      : / *([^,\n\r]+) */g,
+        mediaQueryRule      : /(@media) +(.+)(?=\{)/g
 
     };
 
@@ -98,15 +99,6 @@
     var exception = {
         name: 'keyword.exception',
         pattern: regexes.exception
-    };
-
-    /********************
-     * COMMENTS
-     ********************/
-
-    var commentMultiline = {
-        name: 'comment',
-        pattern: regexes.commentMulti
     };
 
     /********************
@@ -210,7 +202,7 @@
             6: 'ie-gt6',
             7: 'ie-8-9'
         },
-        pattern: /(_)|(\*|#|!.+)|(\*?\+|\+\*?)|(\\9)|(\\0\\9|\\9\\0)|(\/\*(?:\\\*)?\*\/)|(\\0\/)/g
+        pattern: regexes.ieHacks
     };
 
     var cssHacks = {
@@ -272,6 +264,15 @@
     };
 
     /********************
+     * COMMENTS
+     ********************/
+
+    var commentMultiline = {
+        name: 'comment',
+        pattern: regexes.commentMulti
+    };
+
+    /********************
      * SELECTORS
      ********************/
 
@@ -323,8 +324,7 @@
     var arr_siblings = [
         sibling.direct,
         sibling.general,
-        sibling.adjacent,
-        reserved
+        sibling.adjacent
     ];
 
     var arr_commonEntities = [
@@ -341,7 +341,7 @@
     var cssSelectors = {
         name: 'selector',
         matches: {
-            1: arr_siblings.concat(arr_entities)
+            1: arr_siblings.concat([reserved]).concat(arr_entities)
         },
         pattern: regexes.cssSelector
     };
