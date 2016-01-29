@@ -26,7 +26,7 @@
         reserved            : /(?:and|or|not|in|from|through|to(?! (?:top|bottom|right|left)))/g,// <- enhanced for SCSS
 
         /* comments */
-        commentMulti        : /\/\*([^]*?)\*\//gm,
+        commentMulti        : /\/\*([^]*?)\*\//gm,// <- enhanced for SCSS (interpolations)
         commentSingle       : /\/\/(.*?)$/gm,// <- added for SCSS
 
         /* units */
