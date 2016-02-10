@@ -57,7 +57,7 @@
 
         /* entities */
         entityClass         : /\.(?!\.)\w+(?:-\w+)*/g,
-        entityId            : /#(?!#[^\{])\w+(?:-\w+)*/g,
+        entityId            : /#(?!#)\w+(?:-\w+)*/g,
         entityPseudo        : /::?(?!::?)[a-z-]+/g,
         entityTag           : /[a-z]+\d?(?! *:.*;)/gi,
         entityAttribute     : /\[(\w+(?:-\w+)*)=(("|')?\w+(?:-\w+)*\3)]/g,
@@ -71,7 +71,7 @@
         mediaReserved       : /\b(?:not|only|and)\b/g,
         mediaType           : /\b(?:all|aural|braille|handheld|print|projection|screen|tty|tv|embossed)\b/g,
         mediaFeature        : /\b(?:(?:(?:min|max)-)?(?:(?:device-)?(?:width|height|aspect-ratio)|color(?:-index)?|monochrome|resolution)|scan|grid|orientation)\b/g,
-        mediaExpression     : /\((.+?)(?: *: *(.+?))?\)/g,
+        mediaExpression     : /\(([^:]+)(?: *: *([^)]+))?\)/g,
         mediaQuery          : /(?:(not|only) +)?(.+)/g,
         mediaQueryList      : / *([^,\n\r]+) */g,
         mediaQueryRule      : /(@media) +(.+)(?=\{)/g
