@@ -38,7 +38,7 @@
         unitPercentage      : /%/g,
 
         /* values */
-        valueText           : /\b\w+(?:-\w+)*\b/g,
+        valueText           : /(-(?:webkit|moz|ms|o)-)\b\w+(?:-\w+)*\b/g,
         valueString         : /('|").*?\1/g,
         valuePath           : /[\w/-]+\.[a-z0-9]{3,4}\b(?!["'])/gi,
         valueHex            : /#(?:[a-f0-9]{6}|[a-f0-9]{3})\b/gi,
@@ -70,7 +70,7 @@
         /* media queries */
         mediaReserved       : /\b(?:not|only|and)\b/g,
         mediaType           : /\b(?:all|aural|braille|handheld|print|projection|screen|tty|tv|embossed)\b/g,
-        mediaFeature        : /\b(?:(?:(?:min|max)-)?(?:(?:device-)?(?:width|height|aspect-ratio)|color(?:-index)?|monochrome|resolution)|scan|grid|orientation)\b/g,
+        mediaFeature        : /(-(?:webkit|moz|ms|o)-)?\b(?:(?:(?:min|max)-)?(?:(?:device-)?(?:width|height|(?:pixel|aspect)-ratio)|color(?:-index)?|monochrome|resolution)|scan|grid|orientation)\b/g,
         mediaExpression     : /\(([^:]+)(?: *: *([^)]+))?\)/g,
         mediaQuery          : /(?:(not|only) +)?(.+)/g,
         mediaQueryList      : / *([^,\n\r]+) */g,
@@ -99,6 +99,11 @@
     var exception = {
         name: 'keyword.exception',
         pattern: regexes.exception
+    };
+
+    var prefix = {
+        name: 'vendor-prefix',
+        pattern: regexes.prefix
     };
 
     /********************
@@ -147,6 +152,9 @@
         },
         text: {
             name: 'support.text-value',
+            matches: {
+                1: [prefix]
+            },
             pattern: regexes.valueText
         },
         string: {
@@ -215,11 +223,6 @@
     /********************
      * CSS PROPERTIES / METHODS
      ********************/
-
-    var prefix = {
-        name: 'vendor-prefix',
-        pattern: regexes.prefix
-    };
 
     var cssProperties = {
         name: 'css-property',
@@ -362,6 +365,9 @@
         },
         features: {
             name: 'mediaquery.feature',
+            matches: {
+                1: [prefix]
+            },
             pattern: regexes.mediaFeature
         }
     };
