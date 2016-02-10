@@ -16,7 +16,7 @@
 
         /* common */
         anyChars            : /(.+)/g,// <- added for SCSS
-        commonName          : /(?=-?[\w#]+)((?:[\w-]+)*(?:#\{.+?})?(?:[\w-]*\w+)*)/g,// <- enhanced for SCSS (interpolations)
+        commonName          : /(?=-?[\w#]+)((?:[\w-]+)*(?:#\{[^}]+})?(?:[\w-]*\w+)*)/g,// <- enhanced for SCSS (interpolations)
         parameters          : /\((.*)\)/g,// <- enhanced for SCSS (accepts void parameters)
         parametersEnhanced  : /\((.*)\)/g,// <- added for SCSS (same regex as above)
 
@@ -50,7 +50,7 @@
         prefix              : /-(?:webkit|moz|ms|o)-/g,
         cssProperty         : /([a-z-]+)/g,
         cssMethod           : /(-?\w+(?:-\w+)*)(\(.+\))/g,
-        cssMethodEnhanced   : /(?=(?:-?[\w#\{$} "'!=*/+])+\(.*\))((?:[\w-]+)*(?:#\{.+?})?(?:[\w-]*\w+)*)(\(.*\))/g,// <- added for SCSS
+        cssMethodEnhanced   : /(?=(?:-?[\w#{$} "'!=*/+])+\(.*\))((?:[\w-]+)*(?:#\{[^}]+})?(?:[\w-]*\w+)*)(\(.*\))/g,// <- added for SCSS
         cssSelector         : /((?:[\w.#:()%+>~\[="\] -]|\{.+}|,\s?|&(?:gt|amp);)+)(?=\{)/g,// <- enhanced for SCSS (interpolations, placeholders, parent selectors)
 
         /* ie hacks */
@@ -60,11 +60,11 @@
 
         // TODO: improve entity regexes - eg. change [\w-]+ into \w+(?:-\w+)*
         /* entities */
-        entityClass         : /\.(?!\.)[\w-]*(#\{.+?})?[\w-]*/g,// <- enhanced for SCSS (interpolations)
-        entityId            : /#(?!#[^\{])[\w-]*(#\{.+?})?[\w-]*/g,// <- enhanced for SCSS (interpolations)
-        entityPseudo        : /::?(?!::?)[a-z-]*(#\{.+?})?[a-z-]*/g,// <- enhanced for SCSS (interpolations)
-        entityTag           : /[a-z]+\d?(#\{.+?})?(?! *:.*;)/gi,// <- enhanced for SCSS (interpolations)
-        entityAttribute     : /\[([\w#\{$}-]+)=(("|')?[\w#\{$}-]+\3)]/g,// <- enhanced for SCSS (interpolations)
+        entityClass         : /\.(?!\.)[\w-]*(#\{[^}]+})?[\w-]*/g,// <- enhanced for SCSS (interpolations)
+        entityId            : /#(?!#[^{])[\w-]*(#\{[^}]+})?[\w-]*/g,// <- enhanced for SCSS (interpolations)
+        entityPseudo        : /::?(?!::?)[a-z-]*(#\{[^}]+})?[a-z-]*/g,// <- enhanced for SCSS (interpolations)
+        entityTag           : /[a-z]+\d?(#\{[^}]+})?(?! *:.*;)/gi,// <- enhanced for SCSS (interpolations)
+        entityAttribute     : /\[([\w#{$}-]+)=(("|')?[\w#{$}-]+\3)]/g,// <- enhanced for SCSS (interpolations)
         entityParent        : /(?:&amp;|&)(?!(?:&amp;|&))/g,// <- added for SCSS
         entityPlaceholder   : /%(?!%)\w+(?:-\w+)*/g,// <- added for SCSS
 
@@ -77,7 +77,7 @@
         mediaReserved       : /\b(?:not|only|and)\b/g,
         mediaType           : /\b(?:all|aural|braille|handheld|print|projection|screen|tty|tv|embossed)\b/g,
         mediaFeature        : /\b(?:(?:(?:min|max)-)?(?:(?:device-)?(?:width|height|aspect-ratio)|color(?:-index)?|monochrome|resolution)|scan|grid|orientation)\b/g,
-        mediaExpression     : /\((.+?)(?: *: *(.+?))?\)/g,
+        mediaExpression     : /\(([^:]+)(?: *: *([^)]+))?\)/g,
         mediaQuery          : /(?:(not|only) +)?(.+)/g,
         mediaQueryList      : / *([^,\n\r]+) */g,
         mediaQueryRule      : /(@media) +(.+)(?=\{)/g,
@@ -86,7 +86,7 @@
         constant            : /\b(?:true|false|null)\b/g,
         variable            : /\$\w+(?:-\w+)*/g,
         operator            : /(&[lg]t;|<|>|==|!=|\/|\*|\+|\-)(?!\1)/g,
-        interpolation       : /#\{(.+?)}/g,
+        interpolation       : /#\{([^}]+)}/g,
 
         /* scss directives */
         scssList            : /\(((?:[^,\s]+ ?, ?)+)([^,\s]+)\)/g,
