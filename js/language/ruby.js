@@ -4,10 +4,23 @@
  * @author Matthew King
  * @author Jesse Farmer <jesse@20bits.com>
  * @author actsasflinn
- * @version 1.0.5
+ * @version 1.0.6
  */
 
 Rainbow.extend('ruby', [
+    /**
+    * __END__ DATA
+    */
+    {
+        'matches': {
+            1: 'variable.language',
+            2: {
+              'language': null
+            }
+        },
+        //find __END__ and consume remaining text
+        'pattern': /^(__END__)\n((?:.*\n)*)/gm
+    },
     /**
      * Strings
      *   1. No support for multi-line strings
@@ -16,17 +29,24 @@ Rainbow.extend('ruby', [
         'name': 'string',
         'matches': {
             1: 'string.open',
-            2: {
-                'name': 'string.keyword',
-                'pattern': /(\#\{.*?\})/g
-            },
+            2: [{
+                'name': 'string.interpolation',
+                'matches': {
+                    1: 'string.open',
+                    2: {
+                      'language': 'ruby'
+                    },
+                    3: 'string.close'
+                },
+                'pattern': /(\#\{)(.*?)(\})/g
+            }],
             3: 'string.close'
         },
         'pattern': /("|`)(.*?[^\\\1])?(\1)/g
     },
     {
         'name': 'string',
-        'pattern': /('|"|`)([^\\\1\n]|\\.)*\1/g
+        'pattern': /('|"|`)([^\\\1\n]|\\.)*?\1/g
     },
     {
         'name': 'string',

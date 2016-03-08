@@ -18,17 +18,17 @@ class RainbowBuilder(object):
             'coffeescript': '1.0',
             'css': '1.0.9',
             'd': '1.0',
-            'generic': '1.0.10',
+            'generic': '1.0.12',
             'go': '1.0',
             'haskell': '1.0.1',
-            'html': '1.0.8',
+            'html': '1.0.9',
             'java': '1.0',
             'javascript': '1.0.9',
             'lua': '1.0.1',
             'php': '1.0.8',
             'python': '1.0.9',
             'r': '1.0',
-            'ruby': '1.0.5',
+            'ruby': '1.0.6',
             'scheme': '1.0',
             'shell': '1.0.3',
             'smalltalk': '1.0'
@@ -129,6 +129,9 @@ class RainbowBuilder(object):
         command = ['java', '-jar', self.closure_path, '--compilation_level', 'ADVANCED_OPTIMIZATIONS'] + self.js_files_to_include
         proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         output, err = proc.communicate()
+
+        if err:
+            print err
 
         lines = output.splitlines()
         comments = lines[0:4]

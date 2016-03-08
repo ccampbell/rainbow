@@ -325,4 +325,24 @@ describe(language, function() {
 
         '<span class="keyword">var</span> test <span class="keyword operator">=</span> <span class="string">"someone<span class="constant character escape">\\\"</span>s string"</span>'
     );
+
+    run(
+        language,
+
+        'string concatenation with +',
+
+        'time=h+":"+m+":"+s;',
+
+        'time<span class="keyword operator">=</span>h<span class="keyword operator">+</span><span class="string">":"</span><span class="keyword operator">+</span>m<span class="keyword operator">+</span><span class="string">":"</span><span class="keyword operator">+</span>s;'
+    );
+
+    run(
+        language,
+
+        'string concatenation with .',
+
+        'NV_CSS.\'/app.css\'',
+
+        'NV_CSS<span class="keyword dot">.</span><span class="string">\'/app.css\'</span>'
+    );
 });
