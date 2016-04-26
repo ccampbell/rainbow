@@ -93,9 +93,9 @@ describe(language, function() {
         '</style>',
 
         '<span class="source css embedded"><span class="support tag style">&lt;</span><span class="entity tag style">style</span> <span class="entity tag style attribute">type</span>=<span class="string">"text/css"</span><span class="support tag style">&gt;</span>\n' +
-        '    <span class="entity name tag">body</span> <span class="entity name tag">span</span><span class="entity name class">.blah</span> {\n' +
-        '        <span class="support css-property">background</span>: <span class="constant hex-color">#000</span>;\n' +
-        '        <span class="support css-property">color</span>: <span class="constant hex-color">#fff</span>;\n' +
+        '<span class="selector">    <span class="entity name tag">body</span> <span class="entity name tag">span</span><span class="entity name class">.blah</span> </span>{\n' +
+        '        <span class="css-property">background</span>: <span class="constant hex-color">#000</span>;\n' +
+        '        <span class="css-property">color</span>: <span class="constant hex-color">#fff</span>;\n' +
         '    }\n' +
         '<span class="support tag style">&lt;/</span><span class="entity tag style">style</span><span class="support tag style">&gt;</span></span>'
     );
@@ -114,9 +114,9 @@ describe(language, function() {
         '</style>',
 
         '<span class="source css embedded"><span class="support tag style">&lt;</span><span class="entity tag style">style</span><span class="support tag style">&gt;</span>\n' +
-        '    <span class="entity name tag">body</span> <span class="entity name tag">span</span><span class="entity name class">.blah</span> {\n' +
-        '        <span class="support css-property">background</span>: <span class="constant hex-color">#000</span>;\n' +
-        '        <span class="support css-property">color</span>: <span class="constant hex-color">#fff</span>;\n' +
+        '<span class="selector">    <span class="entity name tag">body</span> <span class="entity name tag">span</span><span class="entity name class">.blah</span> </span>{\n' +
+        '        <span class="css-property">background</span>: <span class="constant hex-color">#000</span>;\n' +
+        '        <span class="css-property">color</span>: <span class="constant hex-color">#fff</span>;\n' +
         '    }\n' +
         '<span class="support tag style">&lt;/</span><span class="entity tag style">style</span><span class="support tag style">&gt;</span></span>'
     );
