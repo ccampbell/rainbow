@@ -8,10 +8,6 @@
 
     'use strict';
 
-    if(!Rainbow){
-        return;
-    }
-
     var regexes = {
 
         /* common */
