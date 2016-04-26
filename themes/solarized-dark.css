@@ -5,16 +5,18 @@
  *
  * @author Ethan Schoonover
  * @author David Litmark
- * @version 1.0.0
+ * @author Fabio Bucci Di Monte (Additional styles for enhanced CSS syntax and SCSS syntax)
+ * @version 1.1.1
  */
 pre {
     background: #002b36; /* base03 */
-    word-wrap: break-word;
-    margin: 0px;
-    padding: 10px;
+    border-color: #333333;
     color: #839496; /* base0 */
-    font-size: 14px;
-    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 20px;
+    margin: 0 0 20px 0;
+    padding: 10px;
+    word-wrap: break-word;
 }
 
 pre, code {
@@ -83,4 +85,75 @@ pre .support.property {
 
 pre .variable.global, pre .variable.class, pre .variable.instance {
     color: #839496; /* base0 */
+}
+
+/**
+ * Additional styles for enhanced CSS syntax and SCSS syntax
+ */
+
+pre .entity, pre .mediaquery.type {
+    font: inherit;
+}
+
+pre .pseudo, pre .vendor-prefix,
+pre .scss.interpolation {
+    font-style: italic;
+}
+
+pre .at-directive, pre .reserved, pre .exception,
+pre .scss.constant, pre .scss.ternary-method {
+    font-weight: bold;
+}
+
+pre .hack {
+    color: #ff0000; /* red */
+}
+
+pre .selector,
+pre .scss.interpolation, pre .scss.map-pair {
+    color: #839496; /* base0 */
+}
+
+pre .at-directive, pre .reserved, pre .exception, pre .attribute-name, pre .mediaquery.type,
+pre .scss.ternary-method {
+    color: #b58900; /* yellow */
+}
+
+pre .method-name,
+pre .scss.method-name, pre .scss.mixin-name {
+    color: #c5ab0b; /* light yellow */
+}
+
+pre .constant.numeric, pre .constant.hex-color {
+    color: #2aa198; /* cyan */
+}
+
+pre .css-property, pre .mediaquery.feature,
+pre .scss.map-name, pre .scss.map-value {
+    color: #8866dd; /* purple */
+}
+
+pre .entity.tag {
+    color: #ad5a18; /* orange */
+}
+
+pre .constant.path,
+pre .scss.variable {
+    color: #268bd2; /* blue */
+}
+
+pre .scss.constant {
+    color: #859900; /* green */
+}
+
+pre .scss.interpolation {
+    background-color: #17436e; /* dark blue */
+}
+
+pre .scss.map-pair {
+    background-color: #26254a; /* dark purple */
+}
+
+pre .vendor-prefix {
+    opacity: 0.7;
 }
