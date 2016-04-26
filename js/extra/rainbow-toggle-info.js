@@ -2,10 +2,6 @@ $(function() {
 
     'use strict';
 
-    if(!Rainbow) {
-        return;
-    }
-
     /**
      * Rainbow.toggleInfoOn(tag:String, toggle:Boolean);
      *

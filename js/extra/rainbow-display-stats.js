@@ -2,10 +2,6 @@ $(function() {
 
     'use strict';
 
-    if(!Rainbow) {
-        return;
-    }
-
     var labels = {
         show: 'show usage counts',
         hide: 'hide usage counts'
