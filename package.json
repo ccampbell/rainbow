@@ -54,5 +54,8 @@
     "sinon": "1.17.4",
     "sinon-chai": "2.8.0",
     "yargs": "4.7.1"
+  },
+  "dependencies": {
+      "webworker-threads": "0.7.5"
   }
 }
