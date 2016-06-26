@@ -11,14 +11,14 @@ Rainbow.extend('haskell', [
 		'name': 'comment',
 		'pattern': /\{\-\-[\s\S(\w+)]+[\-\-][\}$]/gm
 		// /\{\-{2}[\s\S(.*)]+[\-\-][\}$]/gm [multiple lines]
-	}, 
+	},
 	{
 		'name': 'comment',
 		'pattern': /\-\-(.*)/g
 		// /\-\-\s(.+)$/gm [single]
 	},
 	///- End Comments
-	
+
 	///- Namespace (module)
 	{
 		'matches': {
@@ -28,7 +28,7 @@ Rainbow.extend('haskell', [
 		'pattern': /\b(module)\s(\w+)\s[\(]?(\w+)?[\)?]\swhere/g
 	},
 	///- End Namespace (module)
-	
+
 	///- Keywords and Operators
 	{
 		'name': 'keyword.operator',
@@ -54,7 +54,7 @@ Rainbow.extend('haskell', [
 		'pattern': /\b(infix|infixr|infixl)+\s\d+\s(\w+)*/g
 	},
 	///- End Infix|Infixr|Infixl
-	
+
 	{
 		'name': 'entity.class',
 		'pattern': /\b([A-Z][A-Za-z0-9_']*)/g
@@ -91,4 +91,4 @@ Rainbow.extend('haskell', [
 		},
 		'pattern': /^\#([\S\s]*?)$/gm
 	}
-]); 
+]);
