@@ -203,7 +203,13 @@ function _highlight(node, callback) {
         // If you want to preserve whitespace you can use a pre tag on
         // its own without a code tag inside of it.
         if (preBlock.getElementsByTagName('code').length) {
-            preBlock.innerHTML = preBlock.innerHTML.trim();
+
+            // This fixes a race condition when Rainbow.color is called before
+            // the previous color call has finished.
+            if (!preBlock.getAttribute('data-trimmed')) {
+                preBlock.setAttribute('data-trimmed', true);
+                preBlock.innerHTML = preBlock.innerHTML.trim();
+            }
             continue;
         }
 
