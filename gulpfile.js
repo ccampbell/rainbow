@@ -66,7 +66,7 @@ gulp.task('pack', function() {
 });
 
 function _getComment() {
-    return '/* ' + lowercaseAppName + ' v' + argv.version + ' */';
+    return '/* ' + appName + ' v' + argv.version + ' rainbowco.de */';
 }
 
 gulp.task('update-version', function() {
@@ -78,12 +78,12 @@ gulp.task('update-version', function() {
         .pipe(inject.prepend(_getComment()))
         .pipe(gulp.dest('dist'));
 
-    var message = 'Update version to v' + argv.version;
+    var message = 'Update version to ' + argv.version;
     gulp.src(['./package.json', 'dist/' + lowercaseAppName + '.min.js'])
         .pipe(git.add())
         .pipe(git.commit(message))
         .on('data', function(err) {
-            git.tag('v' + argv.version, message);
+            git.tag(argv.version, message);
         });
 });
 
