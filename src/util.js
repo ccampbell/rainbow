@@ -78,12 +78,18 @@ export function createWorker(fn, globals) {
         globals = [globals];
     }
 
-    let code = '"use strict"';
+    let code = '';
     for (const thing of globals) {
         code += _addGlobal(thing);
     }
 
-    const str = fn.toString();
+    // This is an awful hack, but something to do with how uglify renames stuff
+    // and rollup means that the variable the worker.js is using to reference
+    // Raindrop will not be the same one available in this context
+    const raindropName = globals[0].toString().match(/function (\w*?)\(/)[1];
+    let str = fn.toString();
+    str = str.replace(/=new \w*/, `= new ${raindropName}`);
+
     const fullString = `${code}\tthis.onmessage =${str}`;
 
     const blob = new Blob([fullString], { type: 'text/javascript' });
