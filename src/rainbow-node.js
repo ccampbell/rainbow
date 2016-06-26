@@ -1,6 +1,7 @@
 #!/usr/bin/env node
+/* eslint-disable */
 var fs = require('fs');
-global.Rainbow = require('./rainbow.js');
+global.Rainbow = require('../dist/rainbow.js');
 
 var files = fs.readdirSync(__dirname + '/language');
 for (var i = 0; i < files.length; i++) {
@@ -8,4 +9,5 @@ for (var i = 0; i < files.length; i++) {
 }
 
 module.exports = global.Rainbow;
-delete global['Rainbow'];
+delete global.Rainbow;
+/* eslint-enable */
