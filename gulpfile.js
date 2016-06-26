@@ -14,6 +14,8 @@ var inject = require('gulp-inject-string');
 var git = require('gulp-git');
 var bump = require('gulp-bump');
 var semver = require('semver');
+var sass = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer');
 var version = require('./package.json').version;
 
 var appName = 'Rainbow';
@@ -38,10 +40,9 @@ gulp.task('pack', function() {
     }
 
     var dest = 'dist/' + lowercaseAppName + '.js';
-    var format = 'iife';
+    var format = 'umd';
     if (argv.release) {
         dest = 'dist/' + lowercaseAppName + '.min.js';
-        format = 'umd';
     }
 
     return rollup({
@@ -120,8 +121,16 @@ gulp.task('release', function(callback) {
     runSequence('test', 'pack', 'update-version', callback);
 });
 
+gulp.task('sass', function() {
+    return gulp.src('./themes/sass/*.sass')
+        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+        .pipe(autoprefixer({browsers: ['last 2 versions']}))
+        .pipe(gulp.dest('./themes/css'));
+});
+
 gulp.task('watch', function() {
     gulp.watch('src/**/*.js', ['pack']);
+    gulp.watch('themes/sass/*.sass', ['sass']);
 });
 
 gulp.task('default', ['lint', 'test', 'pack']);
