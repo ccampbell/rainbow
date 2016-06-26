@@ -215,9 +215,7 @@ gulp.task('build', function(callback) {
     }
 
     argv.ugly = true;
-    if (argv.languages !== 'all') {
-        argv.custom = true;
-    }
+    argv.custom = true;
 
     if (argv.languages === 'none') {
         argv.languages = '';
