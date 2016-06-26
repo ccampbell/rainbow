@@ -69,7 +69,7 @@ task 'build:parser', 'rebuild the Jison parser', (options) ->
   code = require('./lib/grammar').parser.generate()
   dir  = options.output or 'lib'
   fs.writeFile "#{dir}/parser.js", code</code></pre>
-    <script src="../js/rainbow.js"></script>
-    <script src="../js/language/generic.js"></script>
-    <script src="../js/language/coffeescript.js"></script>
+    <script src="../dist/rainbow.js"></script>
+    <script src="../src/language/generic.js"></script>
+    <script src="../src/language/coffeescript.js"></script>
 </body>
