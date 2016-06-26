@@ -23,11 +23,12 @@ var appName = 'Rainbow';
 var lowercaseAppName = 'rainbow';
 
 function _getDestinationPath() {
-    var destination = 'dist/' + lowercaseAppName + '.js';
     if (argv.release) {
         destination = 'dist/' + lowercaseAppName + '.min.js';
+        return destination;
     }
 
+    var destination = 'dist/' + lowercaseAppName + '.js';
     if (argv.custom) {
         destination = 'dist/' + lowercaseAppName + '-custom.min.js';
     }
