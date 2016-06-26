@@ -114,7 +114,7 @@ function _getLanguageList() {
 function _getComment() {
     var comment = '/* ' + appName + ' v' + (argv.version || version) + ' rainbowco.de'
 
-    if (argv.languages) {
+    if (argv.languages !== 'all') {
         var languages = _getLanguageList();
         comment += ' | included languages: ' + languages.sort().join(', ');
     }
@@ -123,17 +123,13 @@ function _getComment() {
     return comment;
 }
 
-gulp.task('update-version', function() {
+gulp.task('update-package-version', function() {
     gulp.src('./package.json')
         .pipe(bump({version: argv.version}))
         .pipe(gulp.dest('./'));
+});
 
-    var dest = _getDestinationPath();
-
-    gulp.src(dest)
-        .pipe(inject.prepend(_getComment()))
-        .pipe(gulp.dest('dist'));
-
+gulp.task('update-version', function() {
     var message = 'Update version to ' + argv.version;
     gulp.src(['./package.json', 'dist/' + lowercaseAppName + '.min.js'])
         .pipe(git.add())
@@ -174,7 +170,7 @@ gulp.task('release', function(callback) {
     argv.release = true;
     argv.version = newVersion;
 
-    runSequence('test', 'pack', 'update-version', callback);
+    runSequence('test', 'update-package-version', 'build', 'update-version', callback);
 });
 
 gulp.task('append-languages', function() {
@@ -205,7 +201,10 @@ gulp.task('build', function(callback) {
     }
 
     argv.ugly = true;
-    argv.custom = true;
+    if (argv.languages !== 'all') {
+        argv.custom = true;
+    }
+
     runSequence('pack', 'append-languages', callback);
 });
 
