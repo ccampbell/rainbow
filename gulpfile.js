@@ -6,6 +6,7 @@ var del = require('del');
 var KarmaServer = require('karma').Server;
 var argv = require('yargs').argv;
 var eslint = require('gulp-eslint');
+var fs = require('fs');
 var rollup = require("rollup").rollup;
 var buble = require('rollup-plugin-buble');
 var uglify = require('rollup-plugin-uglify');
@@ -21,6 +22,19 @@ var version = require('./package.json').version;
 var appName = 'Rainbow';
 var lowercaseAppName = 'rainbow';
 
+function _getDestinationPath() {
+    var destination = 'dist/' + lowercaseAppName + '.js';
+    if (argv.release) {
+        destination = 'dist/' + lowercaseAppName + '.min.js';
+    }
+
+    if (argv.custom) {
+        destination = 'dist/' + lowercaseAppName + '-custom.min.js';
+    }
+
+    return destination;
+}
+
 gulp.task('pack', function() {
     var plugins = [
         buble({
@@ -35,18 +49,16 @@ gulp.task('pack', function() {
     }
 
     var includeSourceMaps = true;
-    if (argv.sourcemaps == '0' || argv.release) {
+    if (argv.sourcemaps == '0' || argv.release || argv.custom) {
         includeSourceMaps = false;
     }
 
-    var dest = 'dist/' + lowercaseAppName + '.js';
+    var entry = 'src/' + lowercaseAppName + '.js';
+    var dest = _getDestinationPath();
     var format = 'umd';
-    if (argv.release) {
-        dest = 'dist/' + lowercaseAppName + '.min.js';
-    }
 
     return rollup({
-        entry: 'src/' + lowercaseAppName + '.js',
+        entry: entry,
         sourceMap: includeSourceMaps,
         plugins: plugins
     }).then(function (bundle) {
@@ -65,8 +77,50 @@ gulp.task('pack', function() {
     });
 });
 
+function _needsGeneric(languages) {
+    var needsGeneric = ['php', 'python', 'javascript', 'go', 'c', 'r', 'coffeescript', 'haskell'];
+
+    for (var i = 0; i < languages.length; i++) {
+        if (needsGeneric.indexOf(languages[i]) !== -1) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function _getLanguageList() {
+    if (argv.languages.toLowerCase() === 'all') {
+        var files = fs.readdirSync('./src/language');
+        var languages = ['generic'];
+        for (var i = 0; i < files.length; i++) {
+            var lang = files[i].replace('.js', '');
+            if (lang !== 'generic') {
+                languages.push(lang);
+            }
+        }
+
+        return languages;
+    }
+
+    var languages = argv.languages.toLowerCase().split(',');
+    if (_needsGeneric(languages) && languages.indexOf('generic') === -1) {
+        languages.unshift('generic');
+    }
+
+    return languages;
+}
+
 function _getComment() {
-    return '/* ' + appName + ' v' + argv.version + ' rainbowco.de */';
+    var comment = '/* ' + appName + ' v' + (argv.version || version) + ' rainbowco.de'
+
+    if (argv.languages) {
+        var languages = _getLanguageList();
+        comment += ' | included languages: ' + languages.sort().join(', ');
+    }
+
+    comment += ' */';
+    return comment;
 }
 
 gulp.task('update-version', function() {
@@ -74,7 +128,9 @@ gulp.task('update-version', function() {
         .pipe(bump({version: argv.version}))
         .pipe(gulp.dest('./'));
 
-    gulp.src('dist/' + lowercaseAppName + '.min.js')
+    var dest = _getDestinationPath();
+
+    gulp.src(dest)
         .pipe(inject.prepend(_getComment()))
         .pipe(gulp.dest('dist'));
 
@@ -119,6 +175,38 @@ gulp.task('release', function(callback) {
     argv.version = newVersion;
 
     runSequence('test', 'pack', 'update-version', callback);
+});
+
+gulp.task('append-languages', function() {
+    var languageCode = [];
+
+    var languages = _getLanguageList();
+    for (var i = 0; i < languages.length; i++) {
+        languageCode.push('import \'./language/' + languages[i] + '\';');
+    }
+
+    fs.writeFileSync('src/build.js', languageCode.join('\n'));
+
+    rollup({
+        entry: 'src/build.js',
+        plugins: [uglify()]
+    }).then(function (bundle) {
+        var dest = _getDestinationPath();
+        gulp.src(dest)
+            .pipe(inject.prepend(_getComment()))
+            .pipe(inject.append("\n" + bundle.generate().code))
+            .pipe(gulp.dest('dist'));
+    });
+});
+
+gulp.task('build', function(callback) {
+    if (!argv.languages) {
+        argv.languages = 'all';
+    }
+
+    argv.ugly = true;
+    argv.custom = true;
+    runSequence('pack', 'append-languages', callback);
 });
 
 gulp.task('sass', function() {
