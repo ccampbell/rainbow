@@ -26,7 +26,7 @@
         {
             "path": "./",
             "folder_exclude_patterns": ["dist", "node_modules"],
-            "file_exclude_patterns": ["*.sublime-workspace"]
+            "file_exclude_patterns": ["*.sublime-workspace", "src/build.js"]
         }
     ]
 }
