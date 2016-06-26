@@ -1,35 +1,8 @@
-
-@mixin animation($animation)
-    -webkit-animation: $animation
-    animation: $animation
-
-@mixin animation-play-state($state)
-    -webkit-animation-play-state: $state
-    animation-play-state: $state
-
-/**
- * @todo not sure we need all the prefixed keyframes
- */
-@mixin keyframes($animationName)
-    @-webkit-keyframes #{$animationName}
-        @content
-
-    @-moz-keyframes #{$animationName}
-        @content
-
-    @-o-keyframes #{$animationName}
-        @content
-
-    @keyframes #{$animationName}
-        @content
-
-@mixin border-radius($args)
-    border-radius: $args
-    -moz-border-radius: $args
-    -webkit-border-radius: $args
-
-@include keyframes(fade-in)
+@keyframes #{fade-in}
     0%
+        opacity: 0
+
+    5%
         opacity: 0
 
     100%
@@ -45,7 +18,12 @@
     // IE 10+ and all modern browsers support CSS animations
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"
 
-    @include animation((fade-in 50ms 100ms forwards ease-in-out))
+    animation: 50ms ease-in-out 1000ms forwards fade-in
+
+    &.decrease-delay
+        animation-delay: 75ms
 
     &.stop-animation
-        @include animation-play-state(paused)
+        opacity: 0
+        // background: red
+        animation-play-state: paused
