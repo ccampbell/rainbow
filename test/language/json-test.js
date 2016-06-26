@@ -12,22 +12,36 @@ describe(language, () => {
 
         'json string',
 
-        '{\n' +
-        '    "id": 23,\n' +
-        '    "name": "Something",\n' +
-        '    "description": "He said, \"Double quotes inside of other double quotes.\"",\n' +
-        '    "tags": [\n' +
-        '        "one",\n' +
-        '        "two",\n' +
-        '        "three"\n' +
-        '    ],\n' +
-        '    "image": {\n' +
-        '        "url": "http://example.com/image.jpg",\n' +
-        '        "width": 100,\n' +
-        '        "height": 100\n' +
-        '    }\n' +
-        '}',
+        `{
+            "id": 23,
+            "name": "Something",
+            "description": "He said, \"Double quotes inside of other double quotes.\"",
+            "tags": [
+                "one",
+                "two",
+                "three"
+            ],
+            "image": {
+                "url": "http://example.com/image.jpg",
+                "width": 100,
+                "height": 100
+            }
+        }`,
 
-        '{\n    <span class="string">"id"</span>: <span class="constant numeric">23</span>,\n    <span class="string">"name"</span>: <span class="string">"Something"</span>,\n    <span class="string">"description"</span>: <span class="string">"He said, "</span>Double quotes inside of other double quotes.<span class="string">""</span>,\n    <span class="string">"tags"</span>: [\n        <span class="string">"one"</span>,\n        <span class="string">"two"</span>,\n        <span class="string">"three"</span>\n    ],\n    <span class="string">"image"</span>: {\n        <span class="string">"url"</span>: <span class="string">"http://example.com/image.jpg"</span>,\n        <span class="string">"width"</span>: <span class="constant numeric">100</span>,\n        <span class="string">"height"</span>: <span class="constant numeric">100</span>\n    }\n}'
+        `{
+            <span class="string">"id"</span>: <span class="constant numeric">23</span>,
+            <span class="string">"name"</span>: <span class="string">"Something"</span>,
+            <span class="string">"description"</span>: <span class="string">"He said, "</span>Double quotes inside of other double quotes.<span class="string">""</span>,
+            <span class="string">"tags"</span>: [
+                <span class="string">"one"</span>,
+                <span class="string">"two"</span>,
+                <span class="string">"three"</span>
+            ],
+            <span class="string">"image"</span>: {
+                <span class="string">"url"</span>: <span class="string">"http://example.com/image.jpg"</span>,
+                <span class="string">"width"</span>: <span class="constant numeric">100</span>,
+                <span class="string">"height"</span>: <span class="constant numeric">100</span>
+            }
+        }`
     );
 });

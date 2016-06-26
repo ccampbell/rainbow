@@ -12,11 +12,11 @@ describe(language, () => {
 
         'multiple (non-greedy) strings',
 
-        '"me" && "you"\n',
+        `"me" && "you"
+        `,
 
-        '<span class="string"><span class="string open">"</span>me<span class="string close">"</span></span>' +
-        ' <span class="keyword operator">&amp;</span><span class="keyword operator">&amp;</span> ' +
-        '<span class="string"><span class="string open">"</span>you<span class="string close">"</span></span>\n'
+        `<span class="string"><span class="string open">"</span>me<span class="string close">"</span></span> <span class="keyword operator">&amp;</span><span class="keyword operator">&amp;</span> <span class="string"><span class="string open">"</span>you<span class="string close">"</span></span>
+        `
     );
 
     run(
@@ -40,8 +40,8 @@ describe(language, () => {
 
         'foo = ["one", "two", "three"];',
 
-        'foo <span class="keyword operator">=</span> ['+
-        '<span class="string"><span class="string open">"</span>one<span class="string close">"</span></span>, '+
+        'foo <span class="keyword operator">=</span> [' +
+        '<span class="string"><span class="string open">"</span>one<span class="string close">"</span></span>, ' +
         '<span class="string"><span class="string open">"</span>two<span class="string close">"</span></span>, ' +
         '<span class="string"><span class="string open">"</span>three<span class="string close">"</span></span>];'
     );
@@ -51,11 +51,17 @@ describe(language, () => {
 
         '__END__',
 
-        'class Test;end;\n__END__\nthis is just text\ntrue\n',
+        `class Test;end;
+__END__
+this is just text
+true
+`,
 
-        '<span class="storage class">class</span> <span class="entity name class">Test</span>;' +
-        '<span class="keyword control">end</span>;\n<span class="variable language">__END__</span>\n' +
-        'this is just text\ntrue\n'
+        `<span class="storage class">class</span> <span class="entity name class">Test</span>;<span class="keyword control">end</span>;
+<span class="variable language">__END__</span>
+this is just text
+true
+`
     );
 
 });

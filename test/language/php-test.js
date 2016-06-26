@@ -1,5 +1,6 @@
+import '../../src/language/generic';
 import '../../src/language/php';
-import { run } from '../helper';
+import { run, skip } from '../helper';
 
 ////////////////
 // Test suite //
@@ -72,7 +73,7 @@ describe(language, () => {
 
         'instanceof',
 
-        "$is_array_object = $collection instanceof ArrayObject;",
+        '$is_array_object = $collection instanceof ArrayObject;',
 
         '<span class="variable dollar-sign">$</span><span class="variable">is_array_object</span> <span class="keyword operator">=</span> <span class="variable dollar-sign">$</span><span class="variable">collection</span> <span class="keyword">instanceof</span> <span class="support class">ArrayObject</span>;'
     );
@@ -82,7 +83,7 @@ describe(language, () => {
 
         'instanceof namespace class',
 
-        "$is_user = $object instanceof App\\User;",
+        '$is_user = $object instanceof App\\User;',
 
         '<span class="variable dollar-sign">$</span><span class="variable">is_user</span> <span class="keyword operator">=</span> <span class="variable dollar-sign">$</span><span class="variable">object</span> <span class="keyword">instanceof</span> <span class="support class">App</span>\\<span class="support class">User</span>;'
     );
@@ -92,23 +93,23 @@ describe(language, () => {
 
         'array stuff',
 
-        '$turtles = array(\n' +
-        '   \'leonardo\',\n' +
-        '   \'michaelangelo\',\n' +
-        '   \'donatello\',\n' +
-        '   \'raphael\'\n' +
-        ');\n' +
-        '\n' +
-        '$exists = array_key_exists(0, $turtles);',
+        `$turtles = array(
+           'leonardo',
+           'michaelangelo',
+           'donatello',
+           'raphael'
+        );
 
-        '<span class="variable dollar-sign">$</span><span class="variable">turtles</span> <span class="keyword operator">=</span> <span class="support function">array</span>(\n' +
-        '   <span class="string">\'leonardo\'</span>,\n' +
-        '   <span class="string">\'michaelangelo\'</span>,\n' +
-        '   <span class="string">\'donatello\'</span>,\n' +
-        '   <span class="string">\'raphael\'</span>\n' +
-        ');\n' +
-        '\n' +
-        '<span class="variable dollar-sign">$</span><span class="variable">exists</span> <span class="keyword operator">=</span> <span class="support function">array_key_exists</span>(<span class="constant numeric">0</span>, <span class="variable dollar-sign">$</span><span class="variable">turtles</span>);'
+        $exists = array_key_exists(0, $turtles);`,
+
+        `<span class="variable dollar-sign">$</span><span class="variable">turtles</span> <span class="keyword operator">=</span> <span class="support function">array</span>(
+           <span class="string">'leonardo'</span>,
+           <span class="string">'michaelangelo'</span>,
+           <span class="string">'donatello'</span>,
+           <span class="string">'raphael'</span>
+        );
+
+        <span class="variable dollar-sign">$</span><span class="variable">exists</span> <span class="keyword operator">=</span> <span class="support function">array_key_exists</span>(<span class="constant numeric">0</span>, <span class="variable dollar-sign">$</span><span class="variable">turtles</span>);`
     );
 
     run(
@@ -196,13 +197,13 @@ describe(language, () => {
 
         'final class declaration',
 
-        'final class TestClass\n' +
-        '{\n' +
-        '}',
+        `final class TestClass
+        {
+        }`,
 
-        '<span class="storage modifier">final</span> <span class="storage class">class</span> <span class="entity name class">TestClass</span>\n' +
-        '{\n' +
-        '}'
+        `<span class="storage modifier">final</span> <span class="storage class">class</span> <span class="entity name class">TestClass</span>
+        {
+        }`
     );
 
     run(
@@ -250,11 +251,11 @@ describe(language, () => {
 
         'test static',
 
-        'self::_doSomething();\n' +
-        'static::_doSomethingElse();',
+        `self::_doSomething();
+        static::_doSomethingElse();`,
 
-        '<span class="keyword static">self::</span><span class="function call">_doSomething</span>();\n' +
-        '<span class="keyword static">static::</span><span class="function call">_doSomethingElse</span>();'
+        `<span class="keyword static">self::</span><span class="function call">_doSomething</span>();
+        <span class="keyword static">static::</span><span class="function call">_doSomethingElse</span>();`
     );
 
     run(
@@ -262,15 +263,15 @@ describe(language, () => {
 
         'test magic function',
 
-        'function __autoload($class)\n' +
-        '{\n' +
-        '   // do whatever\n' +
-        '}',
+        `function __autoload($class)
+        {
+           // do whatever
+        }`,
 
-        '<span class="storage function">function</span> <span class="support magic">__autoload</span>(<span class="variable dollar-sign">$</span><span class="variable">class</span>)\n' +
-        '{\n' +
-        '   <span class="comment">// do whatever</span>\n' +
-        '}'
+        `<span class="storage function">function</span> <span class="support magic">__autoload</span>(<span class="variable dollar-sign">$</span><span class="variable">class</span>)
+        {
+           <span class="comment">// do whatever</span>
+        }`
     );
 
     run(
@@ -278,25 +279,25 @@ describe(language, () => {
 
         'test magic method',
 
-        'class SomeThing\n' +
-        '{\n' +
-        '   protected $_foo;\n' +
-        '\n' +
-        '   public function __construct($foo)\n' +
-        '   {\n' +
-        '       $this->_foo = $foo;\n' +
-        '   }\n' +
-        '}',
+        `class SomeThing
+        {
+           protected $_foo;
 
-        '<span class="storage class">class</span> <span class="entity name class">SomeThing</span>\n' +
-        '{\n' +
-        '   <span class="keyword">protected</span> <span class="variable dollar-sign">$</span><span class="variable">_foo</span>;\n' +
-        '\n' +
-        '   <span class="keyword">public</span> <span class="storage function">function</span> <span class="support magic">__construct</span>(<span class="variable dollar-sign">$</span><span class="variable">foo</span>)\n' +
-        '   {\n' +
-        '       <span class="variable dollar-sign">$</span><span class="variable">this</span><span class="keyword operator">-</span><span class="keyword operator">&gt;</span>_foo <span class="keyword operator">=</span> <span class="variable dollar-sign">$</span><span class="variable">foo</span>;\n' +
-        '   }\n' +
-        '}'
+           public function __construct($foo)
+           {
+               $this->_foo = $foo;
+           }
+        }`,
+
+        `<span class="storage class">class</span> <span class="entity name class">SomeThing</span>
+        {
+           <span class="keyword">protected</span> <span class="variable dollar-sign">$</span><span class="variable">_foo</span>;
+
+           <span class="keyword">public</span> <span class="storage function">function</span> <span class="support magic">__construct</span>(<span class="variable dollar-sign">$</span><span class="variable">foo</span>)
+           {
+               <span class="variable dollar-sign">$</span><span class="variable">this</span><span class="keyword operator">-</span><span class="keyword operator">&gt;</span>_foo <span class="keyword operator">=</span> <span class="variable dollar-sign">$</span><span class="variable">foo</span>;
+           }
+        }`
     );
 
     run(
