@@ -103,6 +103,10 @@ function _getLanguageList() {
         return languages;
     }
 
+    if (!argv.languages) {
+        return [];
+    }
+
     var languages = argv.languages.toLowerCase().split(',');
     if (_needsGeneric(languages) && languages.indexOf('generic') === -1) {
         languages.unshift('generic');
@@ -173,6 +177,14 @@ gulp.task('release', function(callback) {
     runSequence('test', 'update-package-version', 'build', 'update-version', callback);
 });
 
+function _appendCode(code) {
+    var dest = _getDestinationPath();
+    gulp.src(dest)
+        .pipe(inject.prepend(_getComment()))
+        .pipe(inject.append(code))
+        .pipe(gulp.dest('dist'));
+}
+
 gulp.task('append-languages', function() {
     var languageCode = [];
 
@@ -181,17 +193,19 @@ gulp.task('append-languages', function() {
         languageCode.push('import \'./language/' + languages[i] + '\';');
     }
 
+    if (languageCode.length === 0) {
+        argv.languages = 'none';
+        _appendCode('');
+        return;
+    }
+
     fs.writeFileSync('src/build.js', languageCode.join('\n'));
 
     rollup({
         entry: 'src/build.js',
         plugins: [uglify()]
     }).then(function (bundle) {
-        var dest = _getDestinationPath();
-        gulp.src(dest)
-            .pipe(inject.prepend(_getComment()))
-            .pipe(inject.append("\n" + bundle.generate().code))
-            .pipe(gulp.dest('dist'));
+        _appendCode("\n" + bundle.generate().code);
     });
 });
 
@@ -203,6 +217,10 @@ gulp.task('build', function(callback) {
     argv.ugly = true;
     if (argv.languages !== 'all') {
         argv.custom = true;
+    }
+
+    if (argv.languages === 'none') {
+        argv.languages = '';
     }
 
     runSequence('pack', 'append-languages', callback);
