@@ -114,7 +114,6 @@ function _getWorkerData(code, lang) {
         languagePatterns: util.languagePatterns,
         bypassDefaults: util.bypassDefaults,
         aliases: util.aliases,
-        DEFAULT_LANGUAGE: util.DEFAULT_LANGUAGE,
         globalClass
     };
 

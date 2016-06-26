@@ -7,7 +7,6 @@ export default function rainbowWorker(e) {
     self.bypassDefaults = message.bypassDefaults;
     self.aliases = message.aliases;
     self.globalClass = message.globalClass;
-    self.DEFAULT_LANGUAGE = message.DEFAULT_LANGUAGE;
 
     const drop = new Raindrop();
     const result = drop.refract(message.code, message.lang);

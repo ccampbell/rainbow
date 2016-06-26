@@ -21,13 +21,6 @@ export const bypassDefaults = {};
 export const aliases = {};
 
 /**
- * Constant used to refer to the default language
- *
- * @type {number}
- */
-export const DEFAULT_LANGUAGE = 1;
-
-/**
  * Method to add an alias for an existing language.
  *
  * For example if you want to have "coffee" map to "coffeescript"
@@ -112,7 +105,7 @@ export function extend(...args) {
     // extend the default language rules.
     if (args.length === 1) {
         patterns = language;
-        language = DEFAULT_LANGUAGE;
+        language = 'generic';
         bypass = null;
     }
 
@@ -166,7 +159,7 @@ export function getPatternsForLanguage(language) {
     const bypass = isWorker() ? self.bypassDefaults : bypassDefaults;
 
     const patterns = langPatterns[language] || [];
-    const defaultPatterns = langPatterns[DEFAULT_LANGUAGE] || [];
+    const defaultPatterns = langPatterns['generic'] || [];
 
     return bypass[language] ? patterns : patterns.concat(defaultPatterns);
 }
