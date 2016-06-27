@@ -225,5 +225,17 @@ describe(language, () => {
 
         'code.<span class="support method">replace</span>(<span class="string regexp"><span class="string regexp open">/</span>&lt;<span class="string regexp close">/</span><span class="string regexp modifier">g</span></span>, <span class="string">\'&lt;\'</span>).<span class="support method">replace</span>(<span class="string regexp"><span class="string regexp open">/</span>&gt;<span class="string regexp close">/</span><span class="string regexp modifier">g</span></span>, <span class="string">\'&gt;\'</span>)'
     );
+
+    run(
+        language,
+
+        'quotes inside curly brackets',
+
+        '{\' \'}\n' +
+        'var str = \'something\';',
+
+        '{<span class="string">\' \'</span>}\n' +
+        '<span class="keyword">var</span> str <span class="keyword operator">=</span> <span class="string">\'something\'</span>;'
+    );
 });
 
