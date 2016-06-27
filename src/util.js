@@ -25,7 +25,7 @@ export const aliases = {};
  *
  * @type {null|string}
  */
-export let globalClass;
+let globalClass;
 
 /**
  * Method to add an alias for an existing language.
@@ -290,6 +290,10 @@ export function replaceAtPosition(position, replace, replaceWith, code) {
  */
 export function setGlobalClass(name) {
     globalClass = name;
+}
+
+export function getGlobalClass() {
+    return globalClass;
 }
 
 /**
