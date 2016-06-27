@@ -53,6 +53,7 @@
     "semver": "5.1.0",
     "sinon": "1.17.4",
     "sinon-chai": "2.8.0",
+    "through": "2.3.8",
     "yargs": "4.7.1"
   },
   "dependencies": {

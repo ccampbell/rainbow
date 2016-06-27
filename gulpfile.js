@@ -16,6 +16,7 @@ var git = require('gulp-git');
 var bump = require('gulp-bump');
 var semver = require('semver');
 var sass = require('gulp-sass');
+var through = require('through');
 var autoprefixer = require('gulp-autoprefixer');
 var version = require('./package.json').version;
 
@@ -180,10 +181,16 @@ gulp.task('release', function(callback) {
 
 function _appendCode(code) {
     var dest = _getDestinationPath();
-    gulp.src(dest)
+    var stream = gulp.src(dest)
         .pipe(inject.prepend(_getComment()))
-        .pipe(inject.append(code))
-        .pipe(gulp.dest('dist'));
+        .pipe(inject.append(code));
+
+    if (argv.output) {
+        stream.pipe(through(function(data) { this.queue(data.contents); })).pipe(process.stdout);
+        return;
+    }
+
+    stream.pipe(gulp.dest('dist'));
 }
 
 gulp.task('append-languages', function() {
