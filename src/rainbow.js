@@ -35,11 +35,6 @@ let globalClass;
  */
 let onHighlight;
 
-/**
- * Reference to web worker for doing the heavy lifting
- *
- * @type Worker
- */
 const isNode = util.isNode();
 const isWorker = util.isWorker();
 
