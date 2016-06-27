@@ -237,5 +237,15 @@ describe(language, () => {
         '{<span class="string">\' \'</span>}\n' +
         '<span class="keyword">var</span> str <span class="keyword operator">=</span> <span class="string">\'something\'</span>;'
     );
+
+    run(
+        language,
+
+        'complex regex',
+
+        '/\\/\\*[\\s\\S]*?\\*\\//gm',
+
+        '<span class="string regexp"><span class="string regexp open">/</span><span class="constant regexp escape">\\/</span><span class="constant regexp escape">\\*</span>[<span class="constant regexp escape">\\s</span><span class="constant regexp escape">\\S</span>]*?<span class="constant regexp escape">\\*</span><span class="constant regexp escape">\\/</span><span class="string regexp close">/</span><span class="string regexp modifier">gm</span></span>'
+    );
 });
 

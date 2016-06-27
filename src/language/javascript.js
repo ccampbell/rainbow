@@ -2,7 +2,7 @@
  * Javascript patterns
  *
  * @author Craig Campbell
- * @version 1.0.10
+ * @version 1.0.11
  */
 Rainbow.extend('javascript', [
 
@@ -45,7 +45,8 @@ Rainbow.extend('javascript', [
      * this was causing single line comments to fail so it now makes sure
      * the opening / is not directly followed by a *
      *
-     * @todo check that there is valid regex in match group 1
+     * The body of the regex to match a regex was borrowed from:
+     * http://stackoverflow.com/a/17843773/421333
      */
     {
         'name': 'string.regexp',
@@ -58,7 +59,7 @@ Rainbow.extend('javascript', [
             3: 'string.regexp.close',
             4: 'string.regexp.modifier'
         },
-        'pattern': /(\/)(?!\*)(.+?)(\/)([igm]{0,3})/g
+        'pattern': /(\/)((?![*+?])(?:[^\r\n\[/\\]|\\.|\[(?:[^\r\n\]\\]|\\.)*\])+)(\/)([igm]{0,3})/g
     },
 
     /**
