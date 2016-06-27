@@ -31,6 +31,15 @@ let onHighlight;
 const isNode = util.isNode();
 const isWorker = util.isWorker();
 
+let cachedWorker = null;
+function _getWorker() {
+    if (isNode || cachedWorker === null) {
+        cachedWorker = util.createWorker(rainbowWorker, [Raindrop, util]);
+    }
+
+    return cachedWorker;
+}
+
 /**
  * Helper for matching up callbacks directly with the
  * post message requests to a web worker.
@@ -40,7 +49,7 @@ const isWorker = util.isWorker();
  * @return {void}
  */
 function _messageWorker(message, callback) {
-    const worker = util.createWorker(rainbowWorker, [Raindrop, util]);
+    const worker = _getWorker();
 
     function _listen(e) {
         if (e.data.id === message.id) {
@@ -103,6 +112,7 @@ function _getWorkerData(code, lang) {
         bypassDefaults: util.bypassDefaults,
         aliases: util.aliases,
         globalClass: util.globalClass,
+        isNode
     };
 
     return workerData;
