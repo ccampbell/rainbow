@@ -300,6 +300,7 @@ export function setGlobalClass(name) {
  * @param {string} globalClass class to apply to every span
  * @return {string}
  */
-export function wrapCodeInSpan(name, code, globalClass) {
-    return `<span class="${name.replace(/\./g, ' ')}${(globalClass ? ` ${globalClass}` : '')}">${code}</span>`;
+export function wrapCodeInSpan(name, code) {
+    const gClass = isWorker() ? self.globalClass : globalClass;
+    return `<span class="${name.replace(/\./g, ' ')}${(gClass ? ` ${gClass}` : '')}">${code}</span>`;
 }
