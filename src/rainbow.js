@@ -22,13 +22,6 @@ import * as util from './util';
 import rainbowWorker from './worker';
 
 /**
- * Global class added to each span in the highlighted code
- *
- * @type {null|string}
- */
-let globalClass;
-
-/**
  * Callback to fire after each block is highlighted
  *
  * @type {null|Function}
@@ -109,7 +102,7 @@ function _getWorkerData(code, lang) {
         languagePatterns: util.languagePatterns,
         bypassDefaults: util.bypassDefaults,
         aliases: util.aliases,
-        globalClass
+        globalClass: util.globalClass,
     };
 
     return workerData;
@@ -233,20 +226,6 @@ function _onHighlight(callback) {
 }
 
 /**
- * Method to set a global class that will be applied to all spans.
- *
- * This is realy only useful for the effect on rainbowco.de where you can
- * force all blocks to not be highlighted and remove this class to
- * transition them to being highlighted.
- *
- * @param {string} className
- * @return {void}
- */
-function _addGlobalClass(className) {
-    globalClass = className;
-}
-
-/**
  * Starts the magic rainbow
  *
  * @return {void}
@@ -309,7 +288,7 @@ function _color(...args) {
 const _rainbow = {
     extend: util.extend,
     onHighlight: _onHighlight,
-    addClass: _addGlobalClass,
+    addClass: util.setGlobalClass,
     addAlias: util.addAlias,
     color: _color
 };

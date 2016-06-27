@@ -21,6 +21,13 @@ export const bypassDefaults = {};
 export const aliases = {};
 
 /**
+ * Global class added to each span in the highlighted code
+ *
+ * @type {null|string}
+ */
+export let globalClass;
+
+/**
  * Method to add an alias for an existing language.
  *
  * For example if you want to have "coffee" map to "coffeescript"
@@ -269,6 +276,20 @@ export function keys(object) {
 export function replaceAtPosition(position, replace, replaceWith, code) {
     const subString = code.substr(position);
     return code.substr(0, position) + subString.replace(replace, replaceWith);
+}
+
+/**
+ * Method to set a global class that will be applied to all spans.
+ *
+ * This is realy only useful for the effect on rainbowco.de where you can
+ * force all blocks to not be highlighted and remove this class to
+ * transition them to being highlighted.
+ *
+ * @param {string} className
+ * @return {void}
+ */
+export function setGlobalClass(name) {
+    globalClass = name;
 }
 
 /**
