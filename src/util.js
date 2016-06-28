@@ -1,46 +1,3 @@
-/**
- * An array of the language patterns specified for each language
- *
- * @type {Object}
- */
-export const languagePatterns = {};
-
-/**
- * An array of languages and whether they should bypass the
- * default patterns
- *
- * @type {Object}
- */
-export const bypassDefaults = {};
-
-/**
- * A mapping of language aliases
- *
- * @type {Object}
- */
-export const aliases = {};
-
-/**
- * Global class added to each span in the highlighted code
- *
- * @type {null|string}
- */
-let globalClass;
-
-/**
- * Method to add an alias for an existing language.
- *
- * For example if you want to have "coffee" map to "coffeescript"
- *
- * @see https://github.com/ccampbell/rainbow/issues/154
- * @param {string} alias
- * @param {string} originalLanguage
- * @return {void}
- */
-export function addAlias(alias, originalLanguage) {
-    aliases[alias] = originalLanguage;
-}
-
 function _addGlobal(thing) {
     if (typeof thing === 'function') {
         return `\n${thing.toString()}`;
@@ -104,29 +61,6 @@ export function createWorker(fn, globals) {
 }
 
 /**
- * Extends the language pattern matches
- *
- * @param {string} language         name of language
- * @param {object} patterns         object of patterns to add on
- * @param {boolean|null} bypass     if `true` this will not inherit the
- *                                  default language patterns
- */
-export function extend(...args) {
-    let [language, patterns, bypass] = args;
-
-    // If there is only one argument then we assume that we want to
-    // extend the default language rules.
-    if (args.length === 1) {
-        patterns = language;
-        language = 'generic';
-        bypass = null;
-    }
-
-    bypassDefaults[language] = bypass;
-    languagePatterns[language] = patterns.concat(languagePatterns[language] || []);
-}
-
-/**
  * Browser Only - Gets the language for this block of code
  *
  * @param {Element} block
@@ -159,22 +93,6 @@ export function getLanguageForBlock(block) {
     }
 
     return null;
-}
-
-/**
- * Returns a list of regex patterns for this language
- *
- * @param {string} language
- * @return {Array}
- */
-export function getPatternsForLanguage(language) {
-    const langPatterns = isWorker() ? self.languagePatterns : languagePatterns;
-    const bypass = isWorker() ? self.bypassDefaults : bypassDefaults;
-
-    const patterns = langPatterns[language] || [];
-    const defaultPatterns = langPatterns['generic'] || [];
-
-    return bypass[language] ? patterns : patterns.concat(defaultPatterns);
 }
 
 /**
@@ -276,35 +194,4 @@ export function keys(object) {
 export function replaceAtPosition(position, replace, replaceWith, code) {
     const subString = code.substr(position);
     return code.substr(0, position) + subString.replace(replace, replaceWith);
-}
-
-/**
- * Method to set a global class that will be applied to all spans.
- *
- * This is realy only useful for the effect on rainbowco.de where you can
- * force all blocks to not be highlighted and remove this class to
- * transition them to being highlighted.
- *
- * @param {string} className
- * @return {void}
- */
-export function setGlobalClass(name) {
-    globalClass = name;
-}
-
-export function getGlobalClass() {
-    return globalClass;
-}
-
-/**
- * Takes a string of code and wraps it in a span tag based on the name
- *
- * @param {string} name        name of the pattern (ie keyword.regex)
- * @param {string} code        block of code to wrap
- * @param {string} globalClass class to apply to every span
- * @return {string}
- */
-export function wrapCodeInSpan(name, code) {
-    const gClass = isWorker() ? self.globalClass : globalClass;
-    return `<span class="${name.replace(/\./g, ' ')}${(gClass ? ` ${gClass}` : '')}">${code}</span>`;
 }

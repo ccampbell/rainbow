@@ -22,11 +22,40 @@ import * as util from './util';
 import rainbowWorker from './worker';
 
 /**
+ * An array of the language patterns specified for each language
+ *
+ * @type {Object}
+ */
+const patterns = {};
+
+/**
+ * An array of languages and whether they should bypass the
+ * default patterns
+ *
+ * @type {Object}
+ */
+const bypass = {};
+
+/**
+ * A mapping of language aliases
+ *
+ * @type {Object}
+ */
+const aliases = {};
+
+/**
+ * Global class added to each span in the highlighted code
+ *
+ * @type {null|string}
+ */
+let globalClass;
+
+/**
  * Callback to fire after each block is highlighted
  *
  * @type {null|Function}
  */
-let onHighlight;
+let onHighlightCallback;
 
 const isNode = util.isNode();
 const isWorker = util.isWorker();
@@ -84,13 +113,27 @@ function _generateHandler(element, waitingOn, callback) {
         //     }
         // });
 
-        if (onHighlight) {
-            onHighlight(element, data.lang);
+        if (onHighlightCallback) {
+            onHighlightCallback(element, data.lang);
         }
 
         if (--waitingOn.c === 0) {
             callback();
         }
+    };
+}
+
+/**
+ * Gets options needed to pass into Raindrop
+ *
+ * @return {object}
+ */
+function _getRaindropOptions() {
+    return {
+        patterns,
+        bypass,
+        aliases,
+        globalClass
     };
 }
 
@@ -102,16 +145,13 @@ function _generateHandler(element, waitingOn, callback) {
  * @return {object}
  */
 function _getWorkerData(code, lang) {
-    lang = util.aliases[lang] || lang;
+    lang = aliases[lang] || lang;
 
     const workerData = {
         id: String.fromCharCode(65 + Math.floor(Math.random() * 26)) + Date.now(),
         code,
         lang,
-        languagePatterns: util.languagePatterns,
-        bypassDefaults: util.bypassDefaults,
-        aliases: util.aliases,
-        globalClass: util.getGlobalClass(),
+        options: _getRaindropOptions(),
         isNode
     };
 
@@ -231,8 +271,45 @@ function _highlight(node, callback) {
  * @param {Function} callback
  * @return {void}
  */
-function _onHighlight(callback) {
-    onHighlight = callback;
+function onHighlight(callback) {
+    onHighlightCallback = callback;
+}
+
+/**
+ * Method to set a global class that will be applied to all spans.
+ *
+ * This is realy only useful for the effect on rainbowco.de where you can
+ * force all blocks to not be highlighted and remove this class to
+ * transition them to being highlighted.
+ *
+ * @param {string} className
+ * @return {void}
+ */
+function addClass(name) {
+    globalClass = name;
+}
+
+/**
+ * Extends the language pattern matches
+ *
+ * @param {string} language         name of language
+ * @param {object} patterns         object of patterns to add on
+ * @param {boolean|null} bypass     if `true` this will not inherit the
+ *                                  default language patterns
+ */
+function extend(...args) {
+    let [localLanguage, localPatterns, localBypass] = args;
+
+    // If there is only one argument then we assume that we want to
+    // extend the default language rules.
+    if (args.length === 1) {
+        localPatterns = localLanguage;
+        localLanguage = 'generic';
+        localBypass = null;
+    }
+
+    bypass[localLanguage] = localBypass;
+    patterns[localLanguage] = localPatterns.concat(patterns[localLanguage] || []);
 }
 
 /**
@@ -240,7 +317,7 @@ function _onHighlight(callback) {
  *
  * @return {void}
  */
-function _color(...args) {
+function color(...args) {
     // If you want to straight up highlight a string you can pass the
     // string of code, the language, and a callback function.
     //
@@ -293,20 +370,34 @@ function _color(...args) {
 }
 
 /**
+ * Method to add an alias for an existing language.
+ *
+ * For example if you want to have "coffee" map to "coffeescript"
+ *
+ * @see https://github.com/ccampbell/rainbow/issues/154
+ * @param {string} alias
+ * @param {string} originalLanguage
+ * @return {void}
+ */
+function addAlias(alias, originalLanguage) {
+    aliases[alias] = originalLanguage;
+}
+
+/**
  * public methods
  */
 const _rainbow = {
-    extend: util.extend,
-    onHighlight: _onHighlight,
-    addClass: util.setGlobalClass,
-    addAlias: util.addAlias,
-    color: _color
+    extend,
+    onHighlight,
+    addClass,
+    addAlias,
+    color
 };
 
 if (isNode) {
     _rainbow.colorSync = function(code, lang) {
-        const drop = new Raindrop();
-        return drop.refract(code, util.aliases[lang] || lang);
+        const drop = new Raindrop(_getRaindropOptions());
+        return drop.refract(code, aliases[lang] || lang);
     };
 }
 

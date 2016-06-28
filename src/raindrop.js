@@ -6,7 +6,7 @@ import * as util from './util';
  * @class
  */
 class Raindrop {
-    constructor() {
+    constructor(options) {
         /**
          * Object of replacements to process at the end of the processing
          *
@@ -57,6 +57,19 @@ class Raindrop {
             }
 
             return false;
+        }
+
+        /**
+         * Takes a string of code and wraps it in a span tag based on the name
+         *
+         * @param {string} name        name of the pattern (ie keyword.regex)
+         * @param {string} code        block of code to wrap
+         * @param {string} globalClass class to apply to every span
+         * @return {string}
+         */
+        function _wrapCodeInSpan(name, code) {
+            const globalClass = options.globalClass;
+            return `<span class="${name.replace(/\./g, ' ')}${(globalClass ? ` ${globalClass}` : '')}">${code}</span>`;
         }
 
         /**
@@ -126,7 +139,7 @@ class Raindrop {
 
                 // If this match has a name then wrap it in a span tag
                 if (pattern.name) {
-                    repl = util.wrapCodeInSpan(pattern.name, repl);
+                    repl = _wrapCodeInSpan(pattern.name, repl);
                 }
 
                 // For debugging
@@ -198,7 +211,7 @@ class Raindrop {
                  * @param {string|null} matchName
                  */
                 const _getReplacement = function(passedBlock, replaceBlock, matchName) {
-                    replacement = util.replaceAtPosition(util.indexOfGroup(match, groupKey), passedBlock, matchName ? util.wrapCodeInSpan(matchName, replaceBlock) : replaceBlock, replacement);
+                    replacement = util.replaceAtPosition(util.indexOfGroup(match, groupKey), passedBlock, matchName ? _wrapCodeInSpan(matchName, replaceBlock) : replaceBlock, replacement);
                     return;
                 };
 
@@ -211,7 +224,7 @@ class Raindrop {
                 }
 
                 let localCode;
-                const drop = new Raindrop();
+                const drop = new Raindrop(options);
 
                 // If this is a sublanguage go and process the block using
                 // that language
@@ -262,6 +275,18 @@ class Raindrop {
         }
 
         /**
+         * Returns a list of regex patterns for this language
+         *
+         * @param {string} language
+         * @return {Array}
+         */
+        function getPatternsForLanguage(language) {
+            const patterns = options.patterns[language] || [];
+            const defaultPatterns = options.patterns.generic || [];
+            return options.bypass[language] ? patterns : patterns.concat(defaultPatterns);
+        }
+
+        /**
          * Takes a string of code and highlights it according to the language
          * specified
          *
@@ -272,7 +297,7 @@ class Raindrop {
          */
         function _highlightBlockForLanguage(code, language, patterns) {
             currentLanguage = language;
-            patterns = patterns || util.getPatternsForLanguage(language, this);
+            patterns = patterns || getPatternsForLanguage(language);
             return _processCodeWithPatterns(util.htmlEntities(code), patterns);
         }
 
