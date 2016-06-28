@@ -17,7 +17,7 @@
  *
  * @see rainbowco.de
  */
-import Raindrop from './raindrop';
+import Prism from './prism';
 import * as util from './util';
 import rainbowWorker from './worker';
 
@@ -63,7 +63,7 @@ const isWorker = util.isWorker();
 let cachedWorker = null;
 function _getWorker() {
     if (isNode || cachedWorker === null) {
-        cachedWorker = util.createWorker(rainbowWorker, [Raindrop, util]);
+        cachedWorker = util.createWorker(rainbowWorker, [Prism, util]);
     }
 
     return cachedWorker;
@@ -124,11 +124,11 @@ function _generateHandler(element, waitingOn, callback) {
 }
 
 /**
- * Gets options needed to pass into Raindrop
+ * Gets options needed to pass into Prism
  *
  * @return {object}
  */
-function _getRaindropOptions() {
+function _getPrismOptions() {
     return {
         patterns,
         bypass,
@@ -151,7 +151,7 @@ function _getWorkerData(code, lang) {
         id: String.fromCharCode(65 + Math.floor(Math.random() * 26)) + Date.now(),
         code,
         lang,
-        options: _getRaindropOptions(),
+        options: _getPrismOptions(),
         isNode
     };
 
@@ -396,7 +396,7 @@ const _rainbow = {
 
 if (isNode) {
     _rainbow.colorSync = function(code, lang) {
-        const drop = new Raindrop(_getRaindropOptions());
+        const drop = new Prism(_getPrismOptions());
         return drop.refract(code, aliases[lang] || lang);
     };
 }

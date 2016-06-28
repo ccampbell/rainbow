@@ -1,11 +1,11 @@
 import * as util from './util';
 
 /**
- * Raindrop is a class used to highlight individual blocks of code
+ * Prism is a class used to highlight individual blocks of code
  *
  * @class
  */
-class Raindrop {
+class Prism {
     constructor(options) {
         /**
          * Object of replacements to process at the end of the processing
@@ -15,7 +15,7 @@ class Raindrop {
         const replacements = {};
 
         /**
-         * Language associated with this Raindrop object
+         * Language associated with this Prism object
          *
          * @type {string}
          */
@@ -224,7 +224,7 @@ class Raindrop {
                 }
 
                 let localCode;
-                const drop = new Raindrop(options);
+                const drop = new Prism(options);
 
                 // If this is a sublanguage go and process the block using
                 // that language
@@ -305,4 +305,4 @@ class Raindrop {
     }
 }
 
-export default Raindrop;
+export default Prism;

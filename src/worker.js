@@ -1,9 +1,9 @@
-import Raindrop from './raindrop';
+import Prism from './prism';
 
 export default function rainbowWorker(e) {
     const message = e.data;
 
-    const drop = new Raindrop(message.options);
+    const drop = new Prism(message.options);
     const result = drop.refract(message.code, message.lang);
 
     self.postMessage({

@@ -49,10 +49,10 @@ export function createWorker(fn, globals) {
 
     // This is an awful hack, but something to do with how uglify renames stuff
     // and rollup means that the variable the worker.js is using to reference
-    // Raindrop will not be the same one available in this context
-    const raindropName = globals[0].toString().match(/function (\w*?)\(/)[1];
+    // Prism will not be the same one available in this context
+    const prismName = globals[0].toString().match(/function (\w*?)\(/)[1];
     let str = fn.toString();
-    str = str.replace(/=new \w*/, `= new ${raindropName}`);
+    str = str.replace(/=new \w*/, `= new ${prismName}`);
 
     const fullString = `${code}\tthis.onmessage =${str}`;
 
