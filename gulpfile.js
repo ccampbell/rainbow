@@ -207,7 +207,7 @@ gulp.task('append-languages', function() {
         return;
     }
 
-    fs.writeFileSync('src/build.js', languageCode.join('\n'));
+    fs.writeFileSync('src/build.js', languageCode.join('\n') + '\n');
 
     rollup({
         entry: 'src/build.js',
