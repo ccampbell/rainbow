@@ -3,8 +3,8 @@ import Prism from './prism';
 export default function rainbowWorker(e) {
     const message = e.data;
 
-    const drop = new Prism(message.options);
-    const result = drop.refract(message.code, message.lang);
+    const prism = new Prism(message.options);
+    const result = prism.refract(message.code, message.lang);
 
     self.postMessage({
         id: message.id,

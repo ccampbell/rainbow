@@ -224,12 +224,12 @@ class Prism {
                 }
 
                 let localCode;
-                const drop = new Prism(options);
+                const prism = new Prism(options);
 
                 // If this is a sublanguage go and process the block using
                 // that language
                 if (language) {
-                    localCode = drop.refract(block, language);
+                    localCode = prism.refract(block, language);
                     _getReplacement(block, localCode);
                     return;
                 }
@@ -237,7 +237,7 @@ class Prism {
                 // The process group can be a single pattern or an array of
                 // patterns. `_processCodeWithPatterns` always expects an array
                 // so we convert it here.
-                localCode = drop.refract(block, currentLanguage, groupToProcess.length ? groupToProcess : [groupToProcess]);
+                localCode = prism.refract(block, currentLanguage, groupToProcess.length ? groupToProcess : [groupToProcess]);
                 _getReplacement(block, localCode, group.matches ? group.name : 0);
             }
 

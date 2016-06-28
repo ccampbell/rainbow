@@ -396,8 +396,8 @@ const _rainbow = {
 
 if (isNode) {
     _rainbow.colorSync = function(code, lang) {
-        const drop = new Prism(_getPrismOptions());
-        return drop.refract(code, aliases[lang] || lang);
+        const prism = new Prism(_getPrismOptions());
+        return prism.refract(code, aliases[lang] || lang);
     };
 }
 
