@@ -10,20 +10,20 @@ Rainbow.extend('r', [
      * [.a-zA-Z][0-9a-zA-Z._]*
      */
     {
-        'matches': {
+        matches: {
             1: {
-                'name': 'keyword.operator',
-                'pattern': /\=|<\-|&lt;-/g
+                name: 'keyword.operator',
+                pattern: /\=|<\-|&lt;-/g
             },
             2: {
-                'name': 'string',
-                'matches': {
-                    'name': 'constant.character.escape',
-                    'pattern': /\\('|"){1}/g
+                name: 'string',
+                matches: {
+                    name: 'constant.character.escape',
+                    pattern: /\\('|"){1}/g
                 }
             }
         },
-        'pattern': /(\(|\s|\[|\=|:)(('|")([^\\\1]|\\.)*?(\3))/gm
+        pattern: /(\(|\s|\[|\=|:)(('|")([^\\\1]|\\.)*?(\3))/gm
     },
 
     /**
@@ -31,16 +31,16 @@ Rainbow.extend('r', [
      * The built-in constant symbols are known via ?Constants.
      */
     {
-        'matches': {
+        matches: {
             1: 'constant.language'
         },
-        'pattern': /\b(NULL|NA|TRUE|FALSE|T|F|NaN|Inf|NA_integer_|NA_real_|NA_complex_|NA_character_)\b/g
+        pattern: /\b(NULL|NA|TRUE|FALSE|T|F|NaN|Inf|NA_integer_|NA_real_|NA_complex_|NA_character_)\b/g
     },
     {
-        'matches': {
+        matches: {
             1: 'constant.symbol'
         },
-        'pattern': /[^0-9a-zA-Z\._](LETTERS|letters|month\.(abb|name)|pi)/g
+        pattern: /[^0-9a-zA-Z\._](LETTERS|letters|month\.(abb|name)|pi)/g
     },
 
     /**
@@ -48,29 +48,29 @@ Rainbow.extend('r', [
      *        It includes the previous variable when it should only match [[
      */
     {
-        'name': 'keyword.operator',
-        'pattern': /&lt;-|<-|-|==|&lt;=|<=|&gt;>|>=|<|>|&amp;&amp;|&&|&amp;|&|!=|\|\|?|\*|\+|\^|\/|%%|%\/%|\=|%in%|%\*%|%o%|%x%|\$|:|~|\[{1,2}|\]{1,2}/g
+        name: 'keyword.operator',
+        pattern: /&lt;-|<-|-|==|&lt;=|<=|&gt;>|>=|<|>|&amp;&amp;|&&|&amp;|&|!=|\|\|?|\*|\+|\^|\/|%%|%\/%|\=|%in%|%\*%|%o%|%x%|\$|:|~|\[{1,2}|\]{1,2}/g
     },
     {
-        'matches': {
+        matches: {
             1: 'storage',
             3: 'entity.function'
         },
-        'pattern': /(\s|^)(.*)(?=\s?=\s?function\s\()/g
+        pattern: /(\s|^)(.*)(?=\s?=\s?function\s\()/g
     },
     {
-        'matches': {
+        matches: {
             1: 'storage.function'
         },
-        'pattern': /[^a-zA-Z0-9._](function)(?=\s*\()/g
+        pattern: /[^a-zA-Z0-9._](function)(?=\s*\()/g
     },
     {
-        'matches': {
+        matches: {
             1: 'namespace',
             2: 'keyword.operator',
             3: 'function.call'
         },
-        'pattern': /([a-zA-Z][a-zA-Z0-9._]+)([:]{2,3})([.a-zA-Z][a-zA-Z0-9._]*(?=\s*\())\b/g
+        pattern: /([a-zA-Z][a-zA-Z0-9._]+)([:]{2,3})([.a-zA-Z][a-zA-Z0-9._]*(?=\s*\())\b/g
     },
 
     /*
@@ -83,7 +83,7 @@ Rainbow.extend('r', [
      *        only partly a function all.
      */
     {
-        'name': 'support.function',
-        'pattern': /(^|[^0-9a-zA-Z\._])(array|character|complex|data\.frame|double|integer|list|logical|matrix|numeric|vector)(?=\s*\()/g
+        name: 'support.function',
+        pattern: /(^|[^0-9a-zA-Z\._])(array|character|complex|data\.frame|double|integer|list|logical|matrix|numeric|vector)(?=\s*\()/g
     }
 ]);

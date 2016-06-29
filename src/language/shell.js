@@ -14,43 +14,43 @@ Rainbow.extend('shell', [
      * @see http://stackoverflow.com/questions/133601/can-regular-expressions-be-used-to-match-nested-patterns
      */
     {
-        'name': 'shell',
-        'matches': {
+        name: 'shell',
+        matches: {
             1: {
-                'language': 'shell'
+                language: 'shell'
             }
         },
-        'pattern': /\$\(([\s\S]*?)\)/gm
+        pattern: /\$\(([\s\S]*?)\)/gm
     },
     {
-        'matches': {
+        matches: {
             2: 'string'
         },
-        'pattern': /(\(|\s|\[|\=)(('|")[\s\S]*?(\3))/gm
+        pattern: /(\(|\s|\[|\=)(('|")[\s\S]*?(\3))/gm
     },
     {
-        'name': 'keyword.operator',
-        'pattern': /&lt;|&gt;|&amp;/g
+        name: 'keyword.operator',
+        pattern: /&lt;|&gt;|&amp;/g
     },
     {
-        'name': 'comment',
-        'pattern': /\#[\s\S]*?$/gm
+        name: 'comment',
+        pattern: /\#[\s\S]*?$/gm
     },
     {
-        'name': 'storage.function',
-        'pattern': /(.+?)(?=\(\)\s{0,}\{)/g
+        name: 'storage.function',
+        pattern: /(.+?)(?=\(\)\s{0,}\{)/g
     },
     /**
      * Environment variables
      */
     {
-        'name': 'support.command',
-        'pattern': /\b(echo|rm|ls|(mk|rm)dir|cd|find|cp|exit|pwd|exec|trap|source|shift|unset)/g
+        name: 'support.command',
+        pattern: /\b(echo|rm|ls|(mk|rm)dir|cd|find|cp|exit|pwd|exec|trap|source|shift|unset)/g
     },
     {
-        'matches': {
+        matches: {
             1: 'keyword'
         },
-        'pattern': /\b(break|case|continue|do|done|elif|else|esac|eval|export|fi|for|function|if|in|local|return|set|then|unset|until|while)(?=\(|\b)/g
+        pattern: /\b(break|case|continue|do|done|elif|else|esac|eval|export|fi|for|function|if|in|local|return|set|then|unset|until|while)(?=\(|\b)/g
     }
 ], true);

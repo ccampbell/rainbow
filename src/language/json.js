@@ -7,23 +7,23 @@
  */
 Rainbow.extend('json', [
     {
-        'matches': {
+        matches: {
             0: {
-                'name': 'string',
-                'matches': {
-                    'name': 'constant.character.escape',
-                    'pattern': /\\('|"){1}/g
+                name: 'string',
+                matches: {
+                    name: 'constant.character.escape',
+                    pattern: /\\('|"){1}/g
                 }
             }
         },
-        'pattern': /(\"|\')(\\?.)*?\1/g
+        pattern: /(\"|\')(\\?.)*?\1/g
     },
     {
-        'name': 'constant.numeric',
-        'pattern': /\b(-?(0x)?\d*\.?[\da-f]+|NaN|-?Infinity)\b/gi
+        name: 'constant.numeric',
+        pattern: /\b(-?(0x)?\d*\.?[\da-f]+|NaN|-?Infinity)\b/gi
     },
     {
-        'name': 'constant.language',
-        'pattern': /\b(true|false|null)\b/g
+        name: 'constant.language',
+        pattern: /\b(true|false|null)\b/g
     }
 ], true);
