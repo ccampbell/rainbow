@@ -51,6 +51,13 @@ const aliases = {};
 let globalClass;
 
 /**
+ * Representation of the actual rainbow object
+ *
+ * @type {Object}
+ */
+let Rainbow = {};
+
+/**
  * Callback to fire after each block is highlighted
  *
  * @type {null|Function}
@@ -282,7 +289,7 @@ function onHighlight(callback) {
  * force all blocks to not be highlighted and remove this class to
  * transition them to being highlighted.
  *
- * @param {string} className
+ * @param {string} name
  * @return {void}
  */
 function addClass(name) {
@@ -386,7 +393,7 @@ function addAlias(alias, originalLanguage) {
 /**
  * public methods
  */
-const _rainbow = {
+Rainbow = {
     extend,
     onHighlight,
     addClass,
@@ -395,7 +402,7 @@ const _rainbow = {
 };
 
 if (isNode) {
-    _rainbow.colorSync = function(code, lang) {
+    Rainbow.colorSync = function(code, lang) {
         const prism = new Prism(_getPrismOptions());
         return prism.refract(code, aliases[lang] || lang);
     };
@@ -403,7 +410,7 @@ if (isNode) {
 
 // In the browser hook it up to color on page load
 if (!isNode && !isWorker) {
-    document.addEventListener('DOMContentLoaded', _rainbow.color, false);
+    document.addEventListener('DOMContentLoaded', Rainbow.color, false);
 }
 
 // From a node worker, handle the postMessage requests to it
@@ -411,4 +418,4 @@ if (isWorker) {
     self.onmessage = rainbowWorker;
 }
 
-export default _rainbow;
+export default Rainbow;
