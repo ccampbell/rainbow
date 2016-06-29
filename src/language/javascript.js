@@ -18,6 +18,22 @@ Rainbow.extend('javascript', [
         pattern: /\b(window|document)\b/g
     },
     {
+        name: 'keyword',
+        pattern: /export|default|from/g
+    },
+    {
+        name: 'variable.language.this',
+        pattern: /this/g
+    },
+    {
+        name: 'variable.language.super',
+        pattern: /super/g
+    },
+    {
+        name: 'storage.type',
+        pattern: /const|let|var/g
+    },
+    {
         matches: {
             1: 'support.property'
         },
@@ -66,7 +82,7 @@ Rainbow.extend('javascript', [
      */
     {
         matches: {
-            1: 'storage',
+            1: 'storage.type',
             3: 'entity.function'
         },
         pattern: /(var)?(\s|^)(\S*)(?=\s?=\s?function\()/g
@@ -78,9 +94,9 @@ Rainbow.extend('javascript', [
     {
         matches: {
             1: 'keyword',
-            2: 'entity.function'
+            2: 'variable.type'
         },
-        pattern: /(new)\s+(.*)(?=\()/g
+        pattern: /(new)\s+(?!Promise)([^\(]*)(?=\()/g
     },
 
     /**
@@ -89,6 +105,47 @@ Rainbow.extend('javascript', [
     {
         name: 'entity.function',
         pattern: /(\w+)(?=:\s{0,}function)/g
+    },
+    {
+        name: 'constant.other',
+        pattern: /\*(?= as)/g
+    },
+    {
+        matches: {
+            1: 'keyword',
+            2: 'constant.other'
+        },
+        pattern: /(export)\s+(\*)/g
+    },
+    {
+        matches: {
+            1: 'storage.type.accessor',
+            2: 'entity.name.function'
+        },
+        pattern: /(get|set)\s+(\w+)(?=\()/g
+    },
+    {
+        matches: {
+            2: 'entity.name.function'
+        },
+        pattern: /(^\s*)(\w+)(?=\([^\)]*?\)\s*\{)/gm
+    },
+    {
+        matches: {
+            1: 'storage.type.class',
+            2: 'entity.name.class',
+            3: 'storage.modifier.extends',
+            4: 'entity.other.inherited-class'
+        },
+        pattern: /(class)\s+(\w+)(?:\s+(extends)\s+(\w+))?(?=\s*\{)/g
+    },
+    {
+        name: 'storage.type.function.arrow',
+        pattern: /=&gt;/g
+    },
+    {
+        name: 'support.class.promise',
+        pattern: /Promise(?=(\(|\.))/g
     }
 ]);
 

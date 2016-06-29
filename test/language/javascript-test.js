@@ -55,7 +55,7 @@ describe(language, () => {
 
         'var pattern = /\\((.*?)\\)/g',
 
-        '<span class="keyword">var</span> pattern <span class="keyword operator">=</span> <span class="string regexp"><span class="string regexp open">/</span><span class="constant regexp escape">\\(</span>(.*?)<span class="constant regexp escape">\\)</span><span class="string regexp close">/</span><span class="string regexp modifier">g</span></span>'
+        '<span class="storage type">var</span> pattern <span class="keyword operator">=</span> <span class="string regexp"><span class="string regexp open">/</span><span class="constant regexp escape">\\(</span>(.*?)<span class="constant regexp escape">\\)</span><span class="string regexp close">/</span><span class="string regexp modifier">g</span></span>'
     );
 
     run(
@@ -65,7 +65,7 @@ describe(language, () => {
 
         'var pattern = /true/',
 
-        '<span class="keyword">var</span> pattern <span class="keyword operator">=</span> <span class="string regexp"><span class="string regexp open">/</span>true<span class="string regexp close">/</span></span>'
+        '<span class="storage type">var</span> pattern <span class="keyword operator">=</span> <span class="string regexp"><span class="string regexp open">/</span>true<span class="string regexp close">/</span></span>'
     );
 
     run(
@@ -75,7 +75,7 @@ describe(language, () => {
 
         'var test = "http://website.com/could/match/regex/i";',
 
-        '<span class="keyword">var</span> test <span class="keyword operator">=</span> <span class="string">"http://website.com/could/match/regex/i"</span>;'
+        '<span class="storage type">var</span> test <span class="keyword operator">=</span> <span class="string">"http://website.com/could/match/regex/i"</span>;'
     );
 
     run(
@@ -85,7 +85,7 @@ describe(language, () => {
 
         'var Animal = function() { /* some comment */ };',
 
-        '<span class="storage">var</span> <span class="entity function">Animal</span> <span class="keyword operator">=</span> <span class="keyword">function</span>() { <span class="comment">/* some comment */</span> };'
+        '<span class="storage type">var</span> <span class="entity function">Animal</span> <span class="keyword operator">=</span> <span class="keyword">function</span>() { <span class="comment">/* some comment */</span> };'
     );
 
     run(
@@ -95,7 +95,7 @@ describe(language, () => {
 
         'var animal = new Animal();',
 
-        '<span class="keyword">var</span> animal <span class="keyword operator">=</span> <span class="keyword">new</span> <span class="entity function">Animal</span>();'
+        '<span class="storage type">var</span> animal <span class="keyword operator">=</span> <span class="keyword">new</span> <span class="variable type">Animal</span>();'
     );
 
     run(
@@ -108,7 +108,7 @@ describe(language, () => {
                // do something
             };`,
 
-        `<span class="keyword">var</span> foo <span class="keyword operator">=</span> <span class="constant language">true</span>,
+        `<span class="storage type">var</span> foo <span class="keyword operator">=</span> <span class="constant language">true</span>,
             <span class="entity function">something</span> <span class="keyword operator">=</span> <span class="keyword">function</span>() {
                <span class="comment">// do something</span>
             };`
@@ -211,9 +211,9 @@ describe(language, () => {
         var parseAndHighlight = function() {};
         var parseAndHighlight2 = function() {};`,
 
-        `<span class="keyword">var</span> language <span class="keyword operator">=</span> <span class="function call">getLanguage</span>(source);
-        <span class="storage">var</span> <span class="entity function">parseAndHighlight</span> <span class="keyword operator">=</span> <span class="keyword">function</span>() {};
-        <span class="storage">var</span> <span class="entity function">parseAndHighlight2</span> <span class="keyword operator">=</span> <span class="keyword">function</span>() {};`
+        `<span class="storage type">var</span> language <span class="keyword operator">=</span> <span class="function call">getLanguage</span>(source);
+        <span class="storage type">var</span> <span class="entity function">parseAndHighlight</span> <span class="keyword operator">=</span> <span class="keyword">function</span>() {};
+        <span class="storage type">var</span> <span class="entity function">parseAndHighlight2</span> <span class="keyword operator">=</span> <span class="keyword">function</span>() {};`
     );
 
     run(
@@ -235,7 +235,7 @@ describe(language, () => {
         'var str = \'something\';',
 
         '{<span class="string">\' \'</span>}\n' +
-        '<span class="keyword">var</span> str <span class="keyword operator">=</span> <span class="string">\'something\'</span>;'
+        '<span class="storage type">var</span> str <span class="keyword operator">=</span> <span class="string">\'something\'</span>;'
     );
 
     run(
@@ -246,6 +246,134 @@ describe(language, () => {
         '/\\/\\*[\\s\\S]*?\\*\\//gm',
 
         '<span class="string regexp"><span class="string regexp open">/</span><span class="constant regexp escape">\\/</span><span class="constant regexp escape">\\*</span>[<span class="constant regexp escape">\\s</span><span class="constant regexp escape">\\S</span>]*?<span class="constant regexp escape">\\*</span><span class="constant regexp escape">\\/</span><span class="string regexp close">/</span><span class="string regexp modifier">gm</span></span>'
+    );
+
+    run(
+        language,
+
+        'const declaration',
+
+        'const something = true;',
+
+        '<span class="storage type">const</span> something <span class="keyword operator">=</span> <span class="constant language">true</span>;'
+    );
+
+    run(
+        language,
+
+        'let declaration',
+
+        'let something = true;',
+
+        '<span class="storage type">let</span> something <span class="keyword operator">=</span> <span class="constant language">true</span>;'
+    );
+
+    run(
+        language,
+
+        'import statement',
+
+        'import * as templates from \'./templates\'',
+
+        '<span class="keyword">import</span> <span class="constant other">*</span> <span class="keyword">as</span> templates <span class="keyword">from</span> <span class="string">\'./templates\'</span>'
+    );
+
+    run(
+        language,
+
+        'export statement',
+
+        'export default Template;',
+
+        '<span class="keyword">export</span> <span class="keyword">default</span> Template;'
+    );
+
+    run(
+        language,
+
+        'export statement with asterisk',
+
+        'export * from "./othermod";',
+
+        '<span class="keyword">export</span> <span class="constant other">*</span> <span class="keyword">from</span> <span class="string">"./othermod"</span>;'
+    );
+
+    run(
+        language,
+
+        'class definition',
+
+        `class Test {
+            constructor(blah) {
+                super(blah);
+            }
+        }`,
+
+        `<span class="storage type class">class</span> <span class="entity name class">Test</span> {
+            <span class="entity name function">constructor</span>(blah) {
+                <span class="variable language super">super</span>(blah);
+            }
+        }`
+    );
+
+    run(
+        language,
+
+        'child class definition',
+
+        'class Test extends SomethingElse {}',
+
+        '<span class="storage type class">class</span> <span class="entity name class">Test</span> <span class="storage modifier extends">extends</span> <span class="entity other inherited-class">SomethingElse</span> {}'
+    );
+
+    run(
+        language,
+
+        'setters and getters',
+
+        `set name(name) {
+            this._name = name;
+        }
+
+        get name() {
+            return this._name;
+        }`,
+
+       `<span class="storage type accessor">set</span> <span class="entity name function">name</span>(name) {
+            <span class="variable language this">this</span>._name <span class="keyword operator">=</span> name;
+        }
+
+        <span class="storage type accessor">get</span> <span class="entity name function">name</span>() {
+            <span class="keyword">return</span> <span class="variable language this">this</span>._name;
+        }`
+    );
+
+    run(
+        language,
+
+        'default function arguments',
+
+        'function something({ one = true, two = 123 } = {}) {}',
+
+        '<span class="storage function">function</span> <span class="entity name function">something</span>({ one <span class="keyword operator">=</span> <span class="constant language">true</span>, two <span class="keyword operator">=</span> <span class="constant numeric">123</span> } <span class="keyword operator">=</span> {}) {}'
+    );
+
+    run(
+        language,
+
+        'arrow function with promise',
+
+        `function test() {
+            return new Promise((resolve, reject) => {
+                resolve();
+            });
+        }`,
+
+        `<span class="storage function">function</span> <span class="entity name function">test</span>() {
+            <span class="keyword">return</span> <span class="keyword">new</span> <span class="support class promise">Promise</span>((resolve, reject) <span class="storage type function arrow">=&gt;</span> {
+                <span class="function call">resolve</span>();
+            });
+        }`
     );
 });
 
