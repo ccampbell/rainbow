@@ -1,6 +1,12 @@
-@mixin language($name)
-    [data-language="#{$name}"], .lang-#{$name}, .language-#{$name}
-        @content
+$name: ""
+@mixin language($names)
+    @if length($names) == 1
+        [data-language="#{$name}"], .lang-#{$name}, .language-#{$name}
+            @content
+    @else
+        @each $name in $names
+            [data-language="#{$name}"], .lang-#{$name}, .language-#{$name}
+                @content
 
 @keyframes #{fade-in}
     0%
