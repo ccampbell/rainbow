@@ -325,6 +325,11 @@ function extend(...args) {
  * @return {void}
  */
 function color(...args) {
+    if (Rainbow.defer) {
+        Rainbow.defer = false;
+        return;
+    }
+
     // If you want to straight up highlight a string you can pass the
     // string of code, the language, and a callback function.
     //
