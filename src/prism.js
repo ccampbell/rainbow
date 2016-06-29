@@ -68,8 +68,14 @@ class Prism {
          * @return {string}
          */
         function _wrapCodeInSpan(name, code) {
+            let className = name.replace(/\./g, ' ');
+
             const globalClass = options.globalClass;
-            return `<span class="${name.replace(/\./g, ' ')}${(globalClass ? ` ${globalClass}` : '')}">${code}</span>`;
+            if (globalClass) {
+                className += ` ${globalClass}`;
+            }
+
+            return `<span class="${className}">${code}</span>`;
         }
 
         /**
