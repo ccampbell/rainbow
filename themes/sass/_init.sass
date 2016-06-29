@@ -1,3 +1,7 @@
+@mixin language($name)
+    [data-language="#{$name}"], .lang-#{$name}, .language-#{$name}
+        @content
+
 @keyframes #{fade-in}
     0%
         opacity: 0

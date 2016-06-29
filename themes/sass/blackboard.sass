@@ -42,5 +42,6 @@ pre
     .variable.global, .variable.class, .variable.instance
         color: #FF6400
 
-*[data-language="c"] .function.call
-    color: #8DA6CE
+@include language("c")
+    .function.call
+        color: #8DA6CE
