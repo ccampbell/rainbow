@@ -33,7 +33,7 @@ pre
         /*color: #66D9EF*/
         color: #F92672
 
-    .selector
+    .selector, .storage.modifier.extends
         color: #F92672
 
     .inherited-class
@@ -54,5 +54,10 @@ pre
     .variable.global, .variable.class, .variable.instance
         color: #A6E22E
 
-*[data-language="html"] .support.operator
-    color: #fff
+@include language("html")
+    .support.operator
+        color: #fff
+
+@include language(("javascript", "js"))
+    .variable.super
+        color: #66D9EF
