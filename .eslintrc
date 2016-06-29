@@ -4,7 +4,8 @@
         "es6": true
     },
     "globals": {
-        "console": false
+        "console": false,
+        "Rainbow": false
     },
     "parserOptions": {
         "ecmaVersion": 6,
