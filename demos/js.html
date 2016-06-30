@@ -3,6 +3,44 @@
 <title>Syntax Highlighting</title>
 <link href="../themes/css/monokai.css" rel="stylesheet" type="text/css" media="screen">
 <body>
+    <pre><code class="language-js">/*
+ * This is some sample code to illustrate how things look!
+ */
+import * as templates from './somewhere';
+import Musician from './musician';
+
+const something = true;
+export let blah = 123;
+var somethingElse = false;
+
+function test() {
+    return new Promise((resolve, reject) => {
+        resolve();
+    });
+}
+
+class SomeClass {
+    render() {
+        return templates.helloWorld();
+    }
+}
+
+class TaylorSwift extends Musician {
+    constructor(position) {
+        super(position);
+    }
+
+    get yearOfBirth() {
+        return 1989;
+    }
+
+    perform(song) {
+        this.sing(song)
+    }
+}
+
+export default Paul;</code></pre>
+
     <pre data-language="javascript">
 <code>/**
  * test function
