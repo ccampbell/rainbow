@@ -110,7 +110,6 @@ function _generateHandler(element, waitingOn, callback) {
     return function _handleResponseFromWorker(data) {
         element.innerHTML = data.result;
         element.classList.remove('loading');
-        element.classList.remove('stop-animation');
         // element.addEventListener('animationend', (e) => {
         //     if (e.animationName === 'fade-in') {
         //         setTimeout(() => {
@@ -183,7 +182,7 @@ function _highlightCodeBlocks(codeBlocks, callback) {
         // This cancels the pending animation to fade the code in on load
         // since we want to delay doing this until it is actually
         // highlighted
-        block.classList.add('stop-animation');
+        block.classList.add('loading');
         block.classList.add('rainbow');
 
         // for long files show a spinner
