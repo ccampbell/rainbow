@@ -26,9 +26,7 @@ describe('Rainbow', () => {
             pattern: /Craig/gm
         }]);
 
-        Rainbow.addClass('global');
-
-        Rainbow.color('My name is Craig', 'generic', function(result) {
+        Rainbow.color('My name is Craig', { language: 'generic', globalClass: 'global' }, function(result) {
             expect(result).to.equal('My name is <span class="name global">Craig</span>');
             done();
         });

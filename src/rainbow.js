@@ -43,13 +43,6 @@ const inheritenceMap = {};
 const aliases = {};
 
 /**
- * Global class added to each span in the highlighted code
- *
- * @type {null|string}
- */
-let globalClass;
-
-/**
  * Representation of the actual rainbow object
  *
  * @type {Object}
@@ -133,12 +126,13 @@ function _generateHandler(element, waitingOn, callback) {
  *
  * @return {object}
  */
-function _getPrismOptions() {
+function _getPrismOptions(options) {
     return {
         patterns,
         inheritenceMap,
         aliases,
-        globalClass
+        globalClass: options.globalClass,
+        delay: !isNaN(options.delay) ? options.delay : 0
     };
 }
 
@@ -150,13 +144,19 @@ function _getPrismOptions() {
  * @return {object}
  */
 function _getWorkerData(code, lang) {
+    let options = {};
+    if (typeof lang === 'object') {
+        options = lang;
+        lang = options.language;
+    }
+
     lang = aliases[lang] || lang;
 
     const workerData = {
         id: String.fromCharCode(65 + Math.floor(Math.random() * 26)) + Date.now(),
         code,
         lang,
-        options: _getPrismOptions(),
+        options: _getPrismOptions(options),
         isNode
     };
 
@@ -185,13 +185,11 @@ function _highlightCodeBlocks(codeBlocks, callback) {
         block.classList.add('loading');
         block.classList.add('rainbow');
 
-        // for long files show a spinner
-        if (block.innerHTML.length > 20000) {
-            block.classList.add('loading');
-        }
+        const globalClass = block.getAttribute('data-global-class');
+        const delay = parseInt(block.getAttribute('data-delay'), 10);
 
         ++waitingOn.c;
-        _messageWorker(_getWorkerData(block.innerHTML, language), _generateHandler(block, waitingOn, callback));
+        _messageWorker(_getWorkerData(block.innerHTML, { language, globalClass, delay }), _generateHandler(block, waitingOn, callback));
     }
 
     if (waitingOn.c === 0) {
