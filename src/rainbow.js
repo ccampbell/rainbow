@@ -29,12 +29,11 @@ import rainbowWorker from './worker';
 const patterns = {};
 
 /**
- * An array of languages and whether they should bypass the
- * default patterns
+ * An object of languages mapping to what language they should inherit from
  *
  * @type {Object}
  */
-const bypass = {};
+const inheritenceMap = {};
 
 /**
  * A mapping of language aliases
@@ -138,7 +137,7 @@ function _generateHandler(element, waitingOn, callback) {
 function _getPrismOptions() {
     return {
         patterns,
-        bypass,
+        inheritenceMap,
         aliases,
         globalClass
     };
@@ -299,23 +298,23 @@ function addClass(name) {
 /**
  * Extends the language pattern matches
  *
- * @param {string} language         name of language
- * @param {object} patterns         object of patterns to add on
- * @param {boolean|null} bypass     if `true` this will not inherit the
- *                                  default language patterns
+ * @param {string} language            name of language
+ * @param {object} patterns            object of patterns to add on
+ * @param {string|undefined} inherits  optional language that this language
+ *                                     should inherit rules from
  */
 function extend(...args) {
-    let [localLanguage, localPatterns, localBypass] = args;
+    let [localLanguage, localPatterns, inherits] = args;
 
     // If there is only one argument then we assume that we want to
     // extend the default language rules.
     if (args.length === 1) {
         localPatterns = localLanguage;
         localLanguage = 'generic';
-        localBypass = null;
+        inherits = null;
     }
 
-    bypass[localLanguage] = localBypass;
+    inheritenceMap[localLanguage] = inherits;
     patterns[localLanguage] = localPatterns.concat(patterns[localLanguage] || []);
 }
 

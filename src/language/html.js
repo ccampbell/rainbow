@@ -129,6 +129,6 @@ Rainbow.extend('html', [
         },
         pattern: /\s(\w+)(?=\s|&gt;)(?![\s\S]*&lt;)/g
     }
-], true);
+]);
 
 Rainbow.addAlias('xml', 'html');

@@ -287,9 +287,13 @@ class Prism {
          * @return {Array}
          */
         function getPatternsForLanguage(language) {
-            const patterns = options.patterns[language] || [];
-            const defaultPatterns = options.patterns.generic || [];
-            return options.bypass[language] ? patterns : patterns.concat(defaultPatterns);
+            let patterns = options.patterns[language] || [];
+            while (options.inheritenceMap[language]) {
+                language = options.inheritenceMap[language];
+                patterns = patterns.concat(options.patterns[language]);
+            }
+
+            return patterns;
         }
 
         /**

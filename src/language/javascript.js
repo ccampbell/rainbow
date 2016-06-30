@@ -147,7 +147,7 @@ Rainbow.extend('javascript', [
         name: 'support.class.promise',
         pattern: /Promise(?=(\(|\.))/g
     }
-]);
+], 'generic');
 
 Rainbow.addAlias('js', 'javascript');
 

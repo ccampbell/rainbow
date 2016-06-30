@@ -69,6 +69,6 @@ Rainbow.extend('css', [
         },
         pattern: /(:|,)\s*(-o-|-moz-|-webkit-|-ms-)?([a-zA-Z-]*)(?=\b)(?!.*\{)/g
     }
-], true);
+]);
 
 Rainbow.addAlias('scss', 'css');

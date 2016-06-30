@@ -81,4 +81,4 @@ Rainbow.extend('python', [
         name: 'comment.docstring',
         pattern: /('{3}|"{3})[\s\S]*?\1/gm
     }
-]);
+], 'generic');

@@ -26,4 +26,4 @@ Rainbow.extend('json', [
         name: 'constant.language',
         pattern: /\b(true|false|null)\b/g
     }
-], true);
+]);

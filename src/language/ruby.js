@@ -224,4 +224,4 @@ Rainbow.extend('ruby', [
         },
         pattern: /(def)\s(.*?)(?=(\s|\())/g
     }
-], true);
+]);

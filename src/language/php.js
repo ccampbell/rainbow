@@ -120,4 +120,4 @@ Rainbow.extend('php', [
         },
         pattern: /(\(|,\s?)([\w\\]*?)(?=\s\$)/g
     }
-]);
+], 'generic');

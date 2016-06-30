@@ -49,4 +49,4 @@ Rainbow.extend('smalltalk', [
         name: 'operator.delimiter',
         pattern: /;[\(\)\[\]\{\}]|#\[|#\(^\./g
     }
-], true);
+]);

@@ -84,4 +84,4 @@ Rainbow.extend('csharp', [
 		name: 'preprocessor',
 		pattern: /(\#if|\#else|\#elif|\#endif|\#define|\#undef|\#warning|\#error|\#line|\#region|\#endregion|\#pragma)[\s\S]*?$/gm
 	}
-], true);
+]);

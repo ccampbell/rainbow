@@ -56,4 +56,4 @@ Rainbow.extend('go', [
         },
         pattern: /(func)\s(.*?)(?=\()/g
     }
-]);
+], 'generic');

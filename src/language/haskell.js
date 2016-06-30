@@ -91,4 +91,4 @@ Rainbow.extend('haskell', [
 		},
 		pattern: /^\#([\S\s]*?)$/gm
 	}
-]);
+], 'generic');

@@ -86,4 +86,4 @@ Rainbow.extend('r', [
         name: 'support.function',
         pattern: /(^|[^0-9a-zA-Z\._])(array|character|complex|data\.frame|double|integer|list|logical|matrix|numeric|vector)(?=\s*\()/g
     }
-]);
+], 'generic');
