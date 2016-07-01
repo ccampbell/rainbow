@@ -16,7 +16,6 @@ describe('Rainbow', () => {
         expect(Rainbow.color).to.be.a('function');
         expect(Rainbow.extend).to.be.a('function');
         expect(Rainbow.onHighlight).to.be.a('function');
-        expect(Rainbow.addClass).to.be.a('function');
         expect(Rainbow.addAlias).to.be.a('function');
     });
 

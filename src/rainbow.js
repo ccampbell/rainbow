@@ -300,20 +300,6 @@ function onHighlight(callback) {
 }
 
 /**
- * Method to set a global class that will be applied to all spans.
- *
- * This is realy only useful for the effect on rainbowco.de where you can
- * force all blocks to not be highlighted and remove this class to
- * transition them to being highlighted.
- *
- * @param {string} name
- * @return {void}
- */
-function addClass(name) {
-    globalClass = name;
-}
-
-/**
  * Extends the language pattern matches
  *
  * @param {string} language            name of language
@@ -414,7 +400,6 @@ function addAlias(alias, originalLanguage) {
 Rainbow = {
     extend,
     onHighlight,
-    addClass,
     addAlias,
     color
 };
