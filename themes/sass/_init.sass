@@ -25,15 +25,18 @@ $name: ""
         opacity: 1
 
 @keyframes fade
-    0%
-        transform: translateY(0px)
-    25%
-        transform: translateY(2px)
+    10%
+        transform: scale(1.0, 1.0)
+    35%
+        transform: scale(1.0, 1.7)
+    40%
+        transform: scale(1.0, 1.7)
     50%
-        transform: translateY(-2px)
         opacity: 1
+    60%
+        transform: scale(1.0, 1.0)
     100%
-        transform: translateY(2px)
+        transform: scale(1.0, 1.0)
         opacity: 0
 
 [data-language] code, [class^="lang"] code,
@@ -78,11 +81,11 @@ pre
         left: 10px
 
         div
-            width: 10px
-            height: 15px
+            width: 12px
+            height: 12px
             border-radius: 4px
             display: inline-block
-            margin-right: 3px
+            margin-right: 4px
 
             opacity: 0
             animation-play-state: paused
