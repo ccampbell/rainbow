@@ -208,6 +208,15 @@ function _highlightCodeBlocks(codeBlocks, callback) {
     }
 }
 
+function _addPreloader(preBlock) {
+    const preloader = document.createElement('div');
+    preloader.className = 'preloader';
+    for (let i = 0; i < 7; i++) {
+        preloader.appendChild(document.createElement('div'));
+    }
+    preBlock.appendChild(preloader);
+}
+
 /**
  * Browser Only - Start highlighting all the code blocks
  *
@@ -233,6 +242,7 @@ function _highlight(node, callback) {
 
     // First loop through all pre blocks to find which ones to highlight
     for (const preBlock of preBlocks) {
+        _addPreloader(preBlock);
 
         // Strip whitespace around code tags when they are inside of a pre
         // tag.  This makes the themes look better because you can't
