@@ -11,7 +11,7 @@ $rainbow: $blue, $indigo, $violet, $red, $orange, $yellow, $green
 $name: ""
 @mixin language($names)
     @if length($names) == 1
-        [data-language="#{$name}"], .lang-#{$name}, .language-#{$name}
+        [data-language="#{$names}"], .lang-#{$names}, .language-#{$names}
             @content
     @else
         @each $name in $names
