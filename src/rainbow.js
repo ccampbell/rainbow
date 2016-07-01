@@ -318,7 +318,18 @@ function extend(...args) {
         inherits = null;
     }
 
-    inheritenceMap[localLanguage] = inherits;
+    // If we extend a language again we shouldn't need to specify the
+    // inheritence for it. For example, if you are adding special highlighting
+    // for a javascript function that is not in the base javascript rules, you
+    // should be able to do
+    //
+    // Rainbow.extend('javascript', [ … ]);
+    //
+    // Without specifying a language it should inherit (generic in this case)
+    if (!inheritenceMap[localLanguage]) {
+        inheritenceMap[localLanguage] = inherits;
+    }
+
     patterns[localLanguage] = localPatterns.concat(patterns[localLanguage] || []);
 }
 
