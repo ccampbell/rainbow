@@ -342,10 +342,6 @@ function extend(...args) {
  * @return {void}
  */
 function color(...args) {
-    if (Rainbow.defer) {
-        Rainbow.defer = false;
-        return;
-    }
 
     // If you want to straight up highlight a string you can pass the
     // string of code, the language, and a callback function.
@@ -432,7 +428,11 @@ if (isNode) {
 
 // In the browser hook it up to color on page load
 if (!isNode && !isWorker) {
-    document.addEventListener('DOMContentLoaded', Rainbow.color, false);
+    document.addEventListener('DOMContentLoaded', (event) => {
+        if (!Rainbow.defer) {
+            Rainbow.color(event);
+        }
+    }, false);
 }
 
 // From a node worker, handle the postMessage requests to it
