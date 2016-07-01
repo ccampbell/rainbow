@@ -1,3 +1,13 @@
+$red: #f50419
+$orange: #f57900
+$yellow: #f5e600
+$green: #00f50c
+$blue: #0081f5
+$indigo: #5000f5
+$violet: #9000f5
+
+$rainbow: $blue, $indigo, $violet, $red, $orange, $yellow, $green
+
 $name: ""
 @mixin language($names)
     @if length($names) == 1
@@ -8,12 +18,23 @@ $name: ""
             [data-language="#{$name}"], .lang-#{$name}, .language-#{$name}
                 @content
 
-@keyframes #{fade-in}
+@keyframes fade-in
     0%
         opacity: 0
-
     100%
         opacity: 1
+
+@keyframes fade
+    0%
+        transform: translateY(0px)
+    25%
+        transform: translateY(2px)
+    50%
+        transform: translateY(-2px)
+        opacity: 1
+    100%
+        transform: translateY(2px)
+        opacity: 0
 
 [data-language] code, [class^="lang"] code,
 pre [data-language], pre [class^="lang"]
@@ -33,3 +54,36 @@ pre [data-language], pre [class^="lang"]
 
     &.loading
         animation-play-state: paused
+
+pre
+    position: relative
+
+    &.loading
+        .preloader div
+            animation-play-state: running
+
+            $dur: 0.83s
+            $start: 1
+            $num: 6
+            @for $i from $start through $start + $num
+                &:nth-of-type(#{$i})
+                    background: nth($rainbow, $i)
+                    animation: fade 1.5s (($i - $start) * $dur / $num + 500ms) linear infinite
+
+
+    .preloader
+        position: absolute
+        top: 12px
+        left: 10px
+
+        div
+            width: 10px
+            height: 15px
+            border-radius: 4px
+            display: inline-block
+            margin-right: 3px
+
+            opacity: 0
+            animation-play-state: paused
+            animation-fill-mode: forwards
+
