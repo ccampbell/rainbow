@@ -62,13 +62,14 @@ pre
         .preloader div
             animation-play-state: running
 
-            $dur: 0.83s
+            $dur: 830ms
+            $delay: 300ms
             $start: 1
             $num: 6
             @for $i from $start through $start + $num
                 &:nth-of-type(#{$i})
                     background: nth($rainbow, $i)
-                    animation: fade 1.5s (($i - $start) * $dur / $num + 500ms) linear infinite
+                    animation: fade 1.5s (($i - $start) * $dur / $num + $delay) linear infinite
 
 
     .preloader
