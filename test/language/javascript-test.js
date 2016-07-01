@@ -35,7 +35,7 @@ describe(language, () => {
 
         'console.log(window.scrollX)',
 
-        'console.<span class="support method">log</span>(<span class="support">window</span>.scrollX)'
+        'console.<span class="function call">log</span>(<span class="support">window</span>.scrollX)'
     );
 
     run(

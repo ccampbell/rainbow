@@ -49,7 +49,7 @@ Rainbow.extend('javascript', [
         matches: {
             1: 'support.method'
         },
-        pattern: /\.(getAttribute|replace|push|getElementById|getElementsByClassName|log|setTimeout|setInterval)(?=\()/g
+        pattern: /\.(getAttribute|replace|push|getElementById|getElementsByClassName|setTimeout|setInterval)(?=\()/g
     },
 
     /**
