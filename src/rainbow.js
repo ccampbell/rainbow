@@ -103,6 +103,11 @@ function _generateHandler(element, waitingOn, callback) {
     return function _handleResponseFromWorker(data) {
         element.innerHTML = data.result;
         element.classList.remove('loading');
+
+        if (element.parentNode.tagName === 'PRE') {
+            element.parentNode.classList.remove('loading');
+        }
+
         // element.addEventListener('animationend', (e) => {
         //     if (e.animationName === 'fade-in') {
         //         setTimeout(() => {
@@ -184,6 +189,12 @@ function _highlightCodeBlocks(codeBlocks, callback) {
         // highlighted
         block.classList.add('loading');
         block.classList.add('rainbow');
+
+        // We need to make sure to also add the loading class to the pre tag
+        // because that is how we will know to show a preloader
+        if (block.parentNode.tagName === 'PRE') {
+            block.parentNode.classList.add('loading');
+        }
 
         const globalClass = block.getAttribute('data-global-class');
         const delay = parseInt(block.getAttribute('data-delay'), 10);
