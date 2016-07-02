@@ -149,7 +149,7 @@ Rainbow also supports the HTML5 style for specifying languages:
 <pre><code class="language-javascript">var testing = true;</code></pre>
 ```
 
-And the Google Prettify style:
+And the Google prettify style:
 
 ```html
 <pre class="lang-javascript"><code>var testing = true;</code></pre>
