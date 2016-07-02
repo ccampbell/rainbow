@@ -408,8 +408,9 @@ Rainbow = {
 
 if (isNode) {
     Rainbow.colorSync = function(code, lang) {
-        const prism = new Prism(_getPrismOptions());
-        return prism.refract(code, aliases[lang] || lang);
+        const workerData = _getWorkerData(code, lang);
+        const prism = new Prism(workerData.options);
+        return prism.refract(workerData.code, workerData.lang);
     };
 }
 
