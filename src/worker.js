@@ -6,7 +6,7 @@ export default function rainbowWorker(e) {
     const prism = new Prism(message.options);
     const result = prism.refract(message.code, message.lang);
 
-    function _reply(message, result) {
+    function _reply() {
         self.postMessage({
             id: message.id,
             lang: message.lang,
@@ -26,12 +26,12 @@ export default function rainbowWorker(e) {
     // block we are highlighting, but in the browser we will keep a single
     // worker open for all requests.
     if (message.isNode) {
-        _reply(message, result);
+        _reply();
         self.close();
         return;
     }
 
     setTimeout(() => {
-        _reply(message, result);
+        _reply();
     }, message.options.delay * 1000);
 }
