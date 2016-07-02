@@ -6,13 +6,13 @@ export default function rainbowWorker(e) {
     const prism = new Prism(message.options);
     const result = prism.refract(message.code, message.lang);
 
-    setTimeout(() => {
+    function _reply(message, result) {
         self.postMessage({
             id: message.id,
             lang: message.lang,
             result
         });
-    }, message.options.delay * 1000);
+    }
 
     // I realized down the road I might look at this and wonder what is going on
     // so probably it is not a bad idea to leave a comment.
@@ -26,6 +26,12 @@ export default function rainbowWorker(e) {
     // block we are highlighting, but in the browser we will keep a single
     // worker open for all requests.
     if (message.isNode) {
+        _reply(message, result);
         self.close();
+        return;
     }
+
+    setTimeout(() => {
+        _reply(message, result);
+    }, message.options.delay * 1000);
 }
