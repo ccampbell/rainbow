@@ -24,6 +24,7 @@ You can also build/download custom packages from there.
   * [Specifying a language](#specifying-a-language)
   * [Themes](#themes)
     * [Rendering code blocks](#rendering-code-blocks)
+    * [Adding custom rules for specific languages](#adding-custom-rules-for-specific-languages)
   * [JavaScript API Documentation](#javascript-api-documentation)
     * [Rainbow.color](#rainbowcolor)
       * [Preventing automatic highlighting on page load](#preventing-automatic-highlighting-on-page-load)
@@ -168,6 +169,22 @@ As of version 2.0 the themes use a clever trick to display the highlighted code.
 This means for users who do not have JavaScript enabled the code will fade in after 2 seconds. If JavaScript is enabled, the animation is stopped on load and the delay is reset to `0s`. That ensures that as soon as the code is done being highlighted it will be able to show up instantly. This is used to prevent a flash of unstyled text on page load and ensure that the code blocks only show up after they have been highlighted.
 
 There is also a preload animation that will show up for any code block that takes longer than 300ms to load.
+
+### Adding custom rules for specific languages
+
+A SASS mixin was added to simplify defining styles that should only apply for a specific language. Using it looks like this:
+
+```sass
+@include language("html")
+    .support.operator
+        color: #fff
+
+@include language(("javascript", "js"))
+    .variable.super
+        color: #66D9EF
+```
+
+You can pass a single language or a list of languages.
 
 ## JavaScript API Documentation
 
