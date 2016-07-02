@@ -219,7 +219,7 @@ gulp.task('append-languages', function() {
 
 gulp.task('build', function(callback) {
     if (!argv.languages) {
-        argv.languages = 'all';
+        argv.languages = 'java,javascript,csharp,python,c,php,ruby,html,css,json';
     }
 
     argv.ugly = true;
