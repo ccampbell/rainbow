@@ -1,0 +1,68 @@
+// This is the theme used on the rainbowco.de website
+@import "_base.sass"
+
+code span
+    transition: color 0.6s ease-in
+
+pre
+    background: #010104
+
+.animate
+    color: #fff !important
+
+// These colors are only needed to highlight the header on the site
+.red
+    color: $red
+
+.orange
+    color: $orange
+
+.yellow
+    color: $yellow
+
+.green
+    color: $green
+
+.blue
+    color: $blue
+
+.indigo
+    color: $indigo
+
+.violet
+    color: $violet
+
+@include language("custom")
+    .comment
+        color: #314CAD
+
+    .integer
+        color: $yellow
+
+    .keyword
+        color: $orange
+
+.comment
+    color: #535353;
+
+.keyword, .selector, .operator
+    color: lighten($violet, 20%)
+
+.storage, .support
+    color: lighten($red, 8%)
+
+.string
+    color: lighten($yellow, 20%)
+
+.constant
+    color: lighten($orange, 20%)
+
+.entity
+    color: lighten($blue, 15%)
+
+.inherited-class
+    font-style: italic
+
+@include language("html")
+    .attribute
+        color: lighten($red, 15%)
