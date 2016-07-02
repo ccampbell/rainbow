@@ -1,0 +1,51 @@
+/**
+ * Obsidian theme
+ *
+ * Adapted from a theme based on:
+ * http://studiostyl.es/schemes/son-of-obsidian
+ *
+ * @author Dan Stewart <dan@stewshack.com>
+ * @version 1.0
+ */
+@import "_base.sass"
+
+pre
+    background: #22282A
+    color: #F1F2F3
+
+    .comment
+        color: #66747B
+
+    .constant
+        color: #EC7600
+
+    .storage
+        color: #EC7600
+
+    .string, .comment.docstring
+        color: #EC7600
+
+    .string.regexp, .support.tag.script, .support.tag.style
+        color: #fff
+
+    .keyword, .selector
+        color: #93C763
+
+    .inherited-class
+        font-style: italic
+
+    .entity
+        color: #93C763
+
+    .integer
+        color: #FFCD22
+
+    .variable.global, .variable.class, .variable.instance
+        color: #CCC
+
+    /* C# specific rule */
+    .preprocessor
+        color: #66747B
+
+pre .support, *[data-language="csharp"] .function.call
+    color: #FACD22

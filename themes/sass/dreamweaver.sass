@@ -1,0 +1,85 @@
+/**
+ * Dreamweaver theme
+ *
+ * @author Sean Coker
+ * @url http://seancoker.com
+ * @version 1.0
+ */
+@import "_base.sass"
+
+pre, code
+    font-family: monospace
+
+pre
+    /* original is white background with no border */
+    background-color: #fff
+    color: #000
+    font-size: 13px
+    line-height: 16px
+
+    .comment
+        color: #888
+
+    .support
+        color: #cd57d5
+
+    .constant.numeric, .php.embedded
+        color: #fa0002
+        font-weight: bold
+
+    .keyword, .constant.language
+        color: #000789
+        font-weight: bold
+
+    .selector, .support.property, .entity.name.function
+        color: #000
+
+    .storage.function, .variable.self, .support.function, .constant.language
+        color: #000
+        font-weight: bold
+
+    .string
+        color: #0d43fa
+        font-weight: normal
+
+    .css-property + span, .keyword.unit, .support.css-value
+        color: #0d43fa !important
+        font-weight: normal !important
+
+    .entity.tag.style + .string, .php.embedded .constant.language, .php.embedded .keyword
+        color: #37a348 !important
+
+    .support.method
+        color: #2bd5bb
+
+    .entity.name
+        color: #fd74e0
+
+    .support.css-property, .support.tag-name, .support.tag, .support.attribute, .support.attribute + .operator
+        color: #000789
+
+    .storage.module, .storage.class
+        color: #122573
+        font-weight: bold
+
+    .css.embedded .support.tag, .css.embedded .style.tag
+        color: #cd57d5
+
+    .keyword.operator
+        color: #2852eb
+        font-weight: normal
+
+    .php.embedded .variable, .php.embedded .storage.function
+        color: #0d43fa
+        font-weight: normal
+
+    .php.embedded .string, .js.embedded .tag.script
+        color: #c4001e
+
+    .php.embedded .comment
+        color: #f4b441
+        font-weight: normal
+
+    .php.embedded .function.name
+        color: #000
+        font-weight: normal

@@ -1,0 +1,71 @@
+/**
+ * GitHub theme
+ *
+ * @author Craig Campbell
+ * @version 1.0.4
+ */
+@import "_init.sass"
+
+pre
+    border: 1px solid #ccc
+    word-wrap: break-word
+    padding: 6px 10px
+    line-height: 19px
+    margin-bottom: 20px
+
+    code
+        border: 0
+        padding: 0
+        margin: 0
+        border-radius: 0
+
+code
+    border: 1px solid #eaeaea
+    margin: 0px 2px
+    padding: 0px 5px
+    font-size: 12px
+
+pre, code
+    font-family: Consolas, 'Liberation Mono', Courier, monospace
+    color: #333
+    background: #f8f8f8
+    border-radius: 3px
+
+pre, pre code
+    font-size: 13px
+
+pre
+    .comment
+        color: #998
+
+    .support
+        color: #0086B3
+
+    .tag,  .tag-name
+        color: navy
+
+    .keyword,  .css-property,  .vendor-fix,  .sass,  .class,  .id,  .css-value,  .entity.function,  .storage.function
+        font-weight: bold
+
+    .css-property,  .css-value,  .vendor-fix,  .support.namespace
+        color: #333
+
+    .constant.numeric,  .keyword.unit,  .hex-color
+        font-weight: normal
+        color: #099
+
+    .entity.class
+        color: #458
+
+    .entity.id,  .entity.function
+        color: #900
+
+    .attribute,  .variable
+        color: teal
+
+    .string,  .support.value
+        font-weight: normal
+        color: #d14
+
+    .regexp
+        color: #009926

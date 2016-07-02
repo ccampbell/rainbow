@@ -1,10 +1,48 @@
 <!DOCTYPE html>
 <meta charset=utf-8>
 <title>Syntax Highlighting</title>
-<link href="../themes/blackboard.css" rel="stylesheet" type="text/css" media="screen">
+<link href="../themes/css/monokai.css" rel="stylesheet" type="text/css" media="screen">
 <body>
-    <pre>
-<code data-language="javascript">/**
+    <pre><code class="language-js">/*
+ * This is some sample code to illustrate how things look!
+ */
+import * as templates from './somewhere';
+import Musician from './musician';
+
+const something = true;
+export let blah = 123;
+var somethingElse = false;
+
+function test() {
+    return new Promise((resolve, reject) => {
+        resolve();
+    });
+}
+
+class SomeClass {
+    render() {
+        return templates.helloWorld();
+    }
+}
+
+class TaylorSwift extends Musician {
+    constructor(position) {
+        super(position);
+    }
+
+    get yearOfBirth() {
+        return 1989;
+    }
+
+    perform(song) {
+        this.sing(song)
+    }
+}
+
+export default Paul;</code></pre>
+
+    <pre data-language="javascript">
+<code>/**
  * test function
  *
  * @param string
@@ -27,8 +65,7 @@ $(document).ready(function() {
         console.log('td click');
     });
 });
-</code>
-</pre>
+</code></pre>
 
 <pre>
 <code data-language="javascript">window.Rainbow = {
@@ -82,7 +119,7 @@ function _attr(el, attr) {
 }</code>
 </pre>
 
-    <script src="../js/rainbow.js"></script>
-    <script src="../js/language/generic.js"></script>
-    <script src="../js/language/javascript.js"></script>
+    <script src="../dist/rainbow.js"></script>
+    <script src="../src/language/generic.js"></script>
+    <script src="../src/language/javascript.js"></script>
 </body>

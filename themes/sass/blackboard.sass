@@ -1,0 +1,47 @@
+/**
+ * Blackboard theme
+ *
+ * Adapted from Domenico Carbotta's TextMate theme of the same name
+ *
+ * @author Domenico Carbotta
+ * @author Craig Campbell
+ * @version 1.0.2
+ */
+@import "_base.sass"
+
+pre
+    background: #0B1022
+
+    .comment
+        color: #727272
+
+    .constant
+        color: #D8FA3C
+
+    .storage
+        color: #FBDE2D
+
+    .string, .comment.docstring
+        color: #61CE3C
+
+    .string.regexp, .support.tag.script, .support.tag.style
+        color: #fff
+
+    .keyword, .selector
+        color: #FBDE2D
+
+    .inherited-class
+        font-style: italic
+
+    .entity
+        color: #FF6400
+
+    .support
+        color: #8DA6CE
+
+    .variable.global, .variable.class, .variable.instance
+        color: #FF6400
+
+@include language("c")
+    .function.call
+        color: #8DA6CE

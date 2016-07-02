@@ -1,0 +1,62 @@
+/**
+ * Solarized Light theme
+ *
+ * Adaptation of Solarized Light from ethanschoonover.com/solarized
+ *
+ * @author Ethan Schoonover
+ * @author David Litmark
+ * @version 1.0.0
+ */
+@import "_base.sass"
+
+pre
+    background: #fdf6e3 /* base3 */
+    color: #657b83 /* base00 */
+
+    .comment
+        color: #93a1a1 /* base1 */
+
+    .constant
+        color: #657b83 /* base00 */
+
+    .constant.language
+        color: #268bd2 /* blue */
+
+    .constant.regexp
+        color: #2aa198 /* cyan */
+
+    .storage
+        color: #268bd2 /* blue */
+
+    .string, .comment.docstring
+        color: #2aa198 /* cyan */
+
+    .support.tag.script, .support.tag.style
+        color: #2aa198 /* cyan */
+
+    .string.regexp
+        color: #2aa198 /* cyan */
+
+    .string.regexp.open, .string.regexp.close
+        color: #2aa198 /* cyan */
+
+    .keyword, .selector
+        color: #859900 /* green */
+
+    .inherited-class
+        font-style: italic
+
+    .entity
+        color: #b58900 /* yellow */
+
+    .support.method
+        color: #657b83 /* base00 */
+
+    .support.property
+        color: #657b83 /* base00 */
+
+    .variable.global, .variable.class, .variable.instance
+        color: #657b83 /* base00 */
+
+pre .support, *[data-language="c"] .function.call
+    color: #859900 /* green */

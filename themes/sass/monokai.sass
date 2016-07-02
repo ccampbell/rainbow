@@ -1,0 +1,63 @@
+/**
+ * Monokai theme
+ *
+ * Adapted from Wimer Hazenberg's TextMate theme of the same name
+ *
+ * @author Wimer Hazenberg
+ * @author Michael Fasani
+ * @author Craig Campbell
+ * @version 1.0.0
+ */
+@import "_base.sass"
+
+pre
+    background: #272822
+
+    .comment
+        color: #75715E
+
+    .constant
+        color: #AE81FF
+
+    .storage
+        color: #66D9EF
+
+    .string, .comment.docstring
+        color: #E6DB74
+
+    .support.tag
+        color: #fff
+
+    .keyword
+        /* @todo some keywords use this light blue, most use the pink */
+        /*color: #66D9EF*/
+        color: #F92672
+
+    .selector, .storage.modifier.extends
+        color: #F92672
+
+    .inherited-class
+        font-style: italic
+
+    .operator, .support.tag-name, .entity.tag
+        color: #F92672
+
+    .entity, .support.attribute, .entity.attribute
+        color: #A6E22E
+
+    .support, *[data-language="c"] .function.call
+        color: #66D9EF
+
+    .css-property, .storage.function
+        font-style: italic
+
+    .variable.global, .variable.class, .variable.instance
+        color: #A6E22E
+
+@include language("html")
+    .support.operator
+        color: #fff
+
+@include language(("javascript", "js"))
+    .variable.super
+        color: #66D9EF

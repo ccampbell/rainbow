@@ -1,0 +1,90 @@
+$red: #f50419
+$orange: #f57900
+$yellow: #f5e600
+$green: #00f50c
+$blue: #0081f5
+$indigo: #5000f5
+$violet: #9000f5
+
+$rainbow: $blue, $indigo, $violet, $red, $orange, $yellow, $green
+
+$name: ""
+@mixin language($names)
+    @if length($names) == 1
+        [data-language="#{$names}"], .lang-#{$names}, .language-#{$names}
+            @content
+    @else
+        @each $name in $names
+            [data-language="#{$name}"], .lang-#{$name}, .language-#{$name}
+                @content
+
+@keyframes fade-in
+    0%
+        opacity: 0
+    100%
+        opacity: 1
+
+@keyframes fade
+    10%
+        transform: scale(1.0, 1.0)
+    35%
+        transform: scale(1.0, 1.7)
+    40%
+        transform: scale(1.0, 1.7)
+    50%
+        opacity: 1
+    60%
+        transform: scale(1.0, 1.0)
+    100%
+        transform: scale(1.0, 1.0)
+        opacity: 0
+
+[data-language] code, [class^="lang"] code,
+pre [data-language], pre [class^="lang"]
+    opacity: 0
+
+    // IE9 supports unprefixed opacity property but does not support keyframe
+    // animations.  This means in order to get the code to show up in IE 9 when
+    // javascript is disabled we have to include this ugly bad boy.
+    //
+    // IE 10+ and all modern browsers support CSS animations
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"
+
+    animation: 50ms ease-in-out 2s forwards fade-in
+
+    &.rainbow
+        animation-delay: 0s
+
+    &.loading
+        animation-play-state: paused
+
+pre
+    position: relative
+
+    &.loading
+        .preloader div
+            animation-play-state: running
+
+            $dur: 830ms
+            $delay: 300ms
+            $start: 1
+            $num: 6
+            @for $i from $start through $start + $num
+                &:nth-of-type(#{$i})
+                    background: nth($rainbow, $i)
+                    animation: fade 1.5s round(($i - $start) * $dur / $num + $delay) linear infinite
+
+    .preloader
+        position: absolute
+        top: 12px
+        left: 10px
+
+        div
+            width: 12px
+            height: 12px
+            border-radius: 4px
+            display: inline-block
+            margin-right: 4px
+            opacity: 0
+            animation-play-state: paused
+            animation-fill-mode: forwards

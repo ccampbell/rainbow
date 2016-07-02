@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <meta charset=utf-8>
 <title>Syntax Highlighting</title>
-<link href="../themes/blackboard.css" rel="stylesheet" type="text/css" media="screen">
+<link href="../themes/css/blackboard.css" rel="stylesheet" type="text/css" media="screen">
 <body>
 
-    <pre><code data-language="coffeescript"># Assignment:
+    <pre><code data-language="coffee"># Assignment:
 number   = 42
 opposite = true
 
@@ -69,7 +69,18 @@ task 'build:parser', 'rebuild the Jison parser', (options) ->
   code = require('./lib/grammar').parser.generate()
   dir  = options.output or 'lib'
   fs.writeFile "#{dir}/parser.js", code</code></pre>
-    <script src="../js/rainbow.js"></script>
-    <script src="../js/language/generic.js"></script>
-    <script src="../js/language/coffeescript.js"></script>
+    <script src="../dist/rainbow.js"></script>
+    <script src="../src/language/generic.js"></script>
+    <script src="../src/language/coffeescript.js"></script>
 </body>
+
+<pre><code data-language="coffee">OPERATOR = /// ^ (
+           ?: [-=]>            # function
+           | [-+*/%<>&|^!?=]=  # compound assign / compare
+           | >>>=?             # zero-fill right shift
+           | ([-+:])\\1        # doubles
+           | ([&|<>])\\2=?     # logic / shift
+           | \\?\\.            # soak access
+           | \\.{2,3}          # range or splat
+        ) ///</code></pre>
+
