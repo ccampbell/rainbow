@@ -50,10 +50,10 @@ pre [data-language], pre [class^="lang"]
     // IE 10+ and all modern browsers support CSS animations
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"
 
-    animation: 50ms ease-in-out 2000ms forwards fade-in
+    animation: 50ms ease-in-out 2s forwards fade-in
 
     &.rainbow
-        animation-delay: 0ms
+        animation-delay: 0s
 
     &.loading
         animation-play-state: paused
@@ -74,7 +74,6 @@ pre
                     background: nth($rainbow, $i)
                     animation: fade 1.5s (($i - $start) * $dur / $num + $delay) linear infinite
 
-
     .preloader
         position: absolute
         top: 12px
@@ -86,8 +85,6 @@ pre
             border-radius: 4px
             display: inline-block
             margin-right: 4px
-
             opacity: 0
             animation-play-state: paused
             animation-fill-mode: forwards
-
