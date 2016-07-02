@@ -72,7 +72,7 @@ pre
             @for $i from $start through $start + $num
                 &:nth-of-type(#{$i})
                     background: nth($rainbow, $i)
-                    animation: fade 1.5s (($i - $start) * $dur / $num + $delay) linear infinite
+                    animation: fade 1.5s round(($i - $start) * $dur / $num + $delay) linear infinite
 
     .preloader
         position: absolute
