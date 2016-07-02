@@ -1,5 +1,5 @@
 {
-  "name": "rainbow",
+  "name": "rainbow-code",
   "version": "2.0.0",
   "description": "Simple library for code syntax highlighting",
   "main": "./src/rainbow-node.js",
