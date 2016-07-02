@@ -4,7 +4,7 @@
  * @author Craig Campbell
  * @version 1.0.11
  */
-Rainbow.extend([
+Rainbow.extend('generic', [
     {
         matches: {
             1: [

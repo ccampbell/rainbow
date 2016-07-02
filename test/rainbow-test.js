@@ -35,7 +35,7 @@ describe('Rainbow', () => {
     });
 
     it('Should apply global class', (done) => {
-        Rainbow.extend([{
+        Rainbow.extend('generic', [{
             name: 'name',
             pattern: /Craig/gm
         }]);
@@ -47,7 +47,7 @@ describe('Rainbow', () => {
     });
 
     it('Should properly use patterns', (done) => {
-        Rainbow.extend(genericPatterns);
+        Rainbow.extend('generic', genericPatterns);
 
         Rainbow.color('here is a test', 'generic', (result) => {
             expect(result).to.equal('here is a <span class="test">test</span>');

@@ -303,20 +303,11 @@ function onHighlight(callback) {
  * Extends the language pattern matches
  *
  * @param {string} language            name of language
- * @param {object} patterns            object of patterns to add on
+ * @param {object} languagePatterns    object of patterns to add on
  * @param {string|undefined} inherits  optional language that this language
  *                                     should inherit rules from
  */
-function extend(...args) {
-    let [localLanguage, localPatterns, inherits] = args;
-
-    // If there is only one argument then we assume that we want to
-    // extend the default language rules.
-    if (args.length === 1) {
-        localPatterns = localLanguage;
-        localLanguage = 'generic';
-        inherits = null;
-    }
+function extend(language, languagePatterns, inherits) {
 
     // If we extend a language again we shouldn't need to specify the
     // inheritence for it. For example, if you are adding special highlighting
@@ -326,11 +317,11 @@ function extend(...args) {
     // Rainbow.extend('javascript', [ … ]);
     //
     // Without specifying a language it should inherit (generic in this case)
-    if (!inheritenceMap[localLanguage]) {
-        inheritenceMap[localLanguage] = inherits;
+    if (!inheritenceMap[language]) {
+        inheritenceMap[language] = inherits;
     }
 
-    patterns[localLanguage] = localPatterns.concat(patterns[localLanguage] || []);
+    patterns[language] = languagePatterns.concat(patterns[language] || []);
 }
 
 /**
