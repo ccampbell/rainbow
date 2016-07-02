@@ -4,9 +4,6 @@
   "description": "Simple library for code syntax highlighting",
   "main": "./src/rainbow-node.js",
   "homepage": "http://rainbowco.de",
-  "directories": {
-    "test": "tests"
-  },
   "scripts": {
     "test": "gulp test"
   },
