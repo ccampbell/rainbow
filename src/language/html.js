@@ -126,7 +126,7 @@ Rainbow.extend('html', [
         matches: {
             1: 'support.attribute'
         },
-        pattern: /\s(\w+)(?=\s|&gt;)(?![\s\S]*&lt;)/g
+        pattern: /\s([\w-]+)(?=\s|&gt;)(?![\s\S]*&lt;)/g
     }
 ]);
 

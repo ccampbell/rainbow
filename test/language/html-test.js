@@ -246,4 +246,14 @@ describe(language, () => {
         file.close()
         return content<span class="support tag"><span class="support tag">&lt;</span><span class="support tag special">/</span><span class="support tag-name">code</span></span><span class="support tag close">&gt;</span><span class="support tag"><span class="support tag">&lt;</span><span class="support tag special">/</span><span class="support tag-name">pre</span></span><span class="support tag close">&gt;</span>`
     );
+
+    run(
+        language,
+
+        'boolean attributes containing dashes',
+
+        '<input type="text" read-only>',
+
+        '<span class="support tag"><span class="support tag">&lt;</span><span class="support tag-name">input</span></span> <span class="support attribute">type</span><span class="support operator">=</span><span class="string quote">"</span><span class="string value">text</span><span class="string quote">"</span> <span class="support attribute">read-only</span><span class="support tag close">&gt;</span>'
+    );
 });
