@@ -29,7 +29,7 @@ Rainbow.extend('php', [
     },
     {
         name: 'keyword',
-        pattern: /\b(die|end(for(each)?|switch|if)|case|require(_once)?|include(_once)?)(?=\(|\b)/g
+        pattern: /\b(die|end(for(each)?|switch|if)|case|require(_once)?|include(_once)?)(?=\b)/g
     },
     {
         matches: {

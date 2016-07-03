@@ -37,7 +37,7 @@ Rainbow.extend('python', [
         matches: {
             1: 'keyword'
         },
-        pattern: /\b(pass|lambda|with|is|not|in|from|elif|raise|del)(?=\(|\b)/g
+        pattern: /\b(pass|lambda|with|is|not|in|from|elif|raise|del)(?=\b)/g
     },
     {
         matches: {

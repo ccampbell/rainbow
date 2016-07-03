@@ -32,7 +32,7 @@ Rainbow.extend('go', [
         matches: {
             1: 'keyword'
         },
-        pattern: /\b(break|c(ase|onst|ontinue)|d(efault|efer)|else|fallthrough|for|go(to)?|if|import|interface|map|package|range|return|select|struct|switch|type|var)(?=\(|\b)/gi
+        pattern: /\b(break|c(ase|onst|ontinue)|d(efault|efer)|else|fallthrough|for|go(to)?|if|import|interface|map|package|range|return|select|struct|switch|type|var)(?=\b)/gi
     },
     {
         name: 'constant.language',

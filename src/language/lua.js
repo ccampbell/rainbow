@@ -32,7 +32,7 @@ Rainbow.extend('lua', [
         matches: {
             1: 'keyword'
         },
-        pattern: /\b((a|e)nd|in|repeat|break|local|return|do|for|then|else(if)?|function|not|if|or|until|while)(?=\(|\b)/gi
+        pattern: /\b((a|e)nd|in|repeat|break|local|return|do|for|then|else(if)?|function|not|if|or|until|while)(?=\b)/gi
     },
     {
         name: 'constant.language',
