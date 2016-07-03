@@ -43,14 +43,14 @@ Rainbow.extend('go', [
             1: 'storage.type',
             2: 'entity.name.struct'
         },
-        pattern: /\b(type)\s*(\w+)\b(?=\s+struct\b)/gi
+        pattern: /\b(type)\s+(\w+)\b(?=\s+struct\b)/gi
     },
     {
         matches: {
             1: 'storage.type',
             2: 'entity.name.type'
         },
-        pattern: /\b(type)\s*(\w+)\b/gi
+        pattern: /\b(type)\s+(\w+)\b/gi
     },
     {
         name: 'storage.type',

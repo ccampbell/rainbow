@@ -139,4 +139,14 @@ describe(language, () => {
 
         '<span class="storage function">func</span> (t funcTypeExample) <span class="entity name function">foobar</span>() {}'
     );
+
+    run(
+        language,
+
+        'type inside of word',
+
+        'contentType := mime.TypeByExtension(path.Ext(file.Path()))',
+
+        'contentType <span class="keyword operator initialize">:=</span> mime.<span class="function call">TypeByExtension</span>(path.<span class="function call">Ext</span>(file.<span class="function call">Path</span>()))'
+    );
 });
