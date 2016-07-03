@@ -21,6 +21,10 @@ Rainbow.extend('javascript', [
         pattern: /\b(export|default|from)\b/g
     },
     {
+        name: 'function.call',
+        pattern: /\b(then)(?=\()/g
+    },
+    {
         name: 'variable.language.this',
         pattern: /\bthis\b/g
     },
