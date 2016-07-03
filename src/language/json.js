@@ -3,7 +3,6 @@
  *
  * @author Nijiko Yonskai
  * @author Craig Campbell
- * @version 1.0
  */
 Rainbow.extend('json', [
     {
