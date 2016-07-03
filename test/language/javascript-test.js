@@ -375,5 +375,19 @@ describe(language, () => {
             });
         }`
     );
+
+    run(
+        language,
+
+        'keywords inside of other things',
+
+        `const variation = true;
+        let constrained = true;
+        var outlet = true;`,
+
+        `<span class="storage type">const</span> variation <span class="keyword operator">=</span> <span class="constant language">true</span>;
+        <span class="storage type">let</span> constrained <span class="keyword operator">=</span> <span class="constant language">true</span>;
+        <span class="storage type">var</span> outlet <span class="keyword operator">=</span> <span class="constant language">true</span>;`
+    );
 });
 

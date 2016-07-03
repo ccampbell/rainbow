@@ -19,19 +19,19 @@ Rainbow.extend('javascript', [
     },
     {
         name: 'keyword',
-        pattern: /export|default|from/g
+        pattern: /\b(export|default|from)\b/g
     },
     {
         name: 'variable.language.this',
-        pattern: /this/g
+        pattern: /\bthis\b/g
     },
     {
         name: 'variable.language.super',
-        pattern: /super/g
+        pattern: /super(?=\.|\()/g
     },
     {
         name: 'storage.type',
-        pattern: /const|let|var/g
+        pattern: /\b(const|let|var)(?=\s)/g
     },
     {
         matches: {
