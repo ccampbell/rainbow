@@ -86,7 +86,7 @@ Rainbow.extend('php', [
     {
         matches: {
             1: 'storage.function',
-            2: 'support.magic'
+            2: 'entity.name.function.magic'
         },
         pattern: /(function)\s(__.*?)(?=\()/g
     },

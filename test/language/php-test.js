@@ -268,7 +268,7 @@ describe(language, () => {
            // do whatever
         }`,
 
-        `<span class="storage function">function</span> <span class="support magic">__autoload</span>(<span class="variable dollar-sign">$</span><span class="variable">class</span>)
+        `<span class="storage function">function</span> <span class="entity name function magic">__autoload</span>(<span class="variable dollar-sign">$</span><span class="variable">class</span>)
         {
            <span class="comment">// do whatever</span>
         }`
@@ -293,7 +293,7 @@ describe(language, () => {
         {
            <span class="keyword">protected</span> <span class="variable dollar-sign">$</span><span class="variable">_foo</span>;
 
-           <span class="keyword">public</span> <span class="storage function">function</span> <span class="support magic">__construct</span>(<span class="variable dollar-sign">$</span><span class="variable">foo</span>)
+           <span class="keyword">public</span> <span class="storage function">function</span> <span class="entity name function magic">__construct</span>(<span class="variable dollar-sign">$</span><span class="variable">foo</span>)
            {
                <span class="variable dollar-sign">$</span><span class="variable">this</span><span class="keyword operator">-</span><span class="keyword operator">&gt;</span>_foo <span class="keyword operator">=</span> <span class="variable dollar-sign">$</span><span class="variable">foo</span>;
            }
