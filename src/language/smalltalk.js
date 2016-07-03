@@ -2,7 +2,6 @@
  * Smalltalk patterns
  *
  * @author Frank Shearar <frank@angband.za.org>
- * @version 1.0
  */
 Rainbow.extend('smalltalk', [
     {

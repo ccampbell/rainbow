@@ -2,7 +2,6 @@
  * Haskell patterns
  *
  * @author Bruno Dias
- * @version 1.0.1
  */
 //TODO: {-# ... #-} stuff...
 Rainbow.extend('haskell', [

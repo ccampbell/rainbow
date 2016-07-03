@@ -2,7 +2,6 @@
  * Scheme patterns
  *
  * @author Alex Queiroz <alex@artisancoder.com>
- * @version 1.0
  */
 Rainbow.extend('scheme', [
     {

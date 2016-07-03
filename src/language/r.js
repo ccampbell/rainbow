@@ -2,7 +2,6 @@
  * R language patterns
  *
  * @author Simon Potter
- * @version 1.0
  */
 Rainbow.extend('r', [
     /**

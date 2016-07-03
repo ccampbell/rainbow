@@ -2,7 +2,6 @@
  * GO Language
  *
  * @author Javier Aguirre
- * @version 1.0
  */
 Rainbow.extend('go', [
     {

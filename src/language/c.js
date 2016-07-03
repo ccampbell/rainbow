@@ -3,7 +3,6 @@
  *
  * @author Daniel Holden
  * @author Craig Campbell
- * @version 1.0.7
  */
 Rainbow.extend('c', [
     {
