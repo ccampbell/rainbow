@@ -32,11 +32,33 @@ Rainbow.extend('go', [
         matches: {
             1: 'keyword'
         },
-        pattern: /\b(break|c(ase|onst|ontinue)|d(efault|efer)|else|fallthrough|for|go(to)?|if|import|interface|map|package|range|return|select|struct|switch|type|var)(?=\b)/gi
+        pattern: /\b(d(efault|efer)|fallthrough|go(to)?|range|select)(?=\b)/gi
     },
     {
-        name: 'constant.language',
-        pattern: /true|false|null|string|byte|rune|u?int(8|16|32|64)?|float(32|64)|complex(64|128)/g
+        name: 'keyword',
+        pattern: /\bpackage(?=\s*\w)/gi
+    },
+    {
+        matches: {
+            1: 'storage.type',
+            2: 'entity.name.struct'
+        },
+        pattern: /\b(type)\s*(\w+)\b(?=\s+struct\b)/gi
+    },
+    {
+        matches: {
+            1: 'storage.type',
+            2: 'entity.name.type'
+        },
+        pattern: /\b(type)\s*(\w+)\b/gi
+    },
+    {
+        name: 'storage.type',
+        pattern: /\b(bool|byte|complex(64|128)|float(32|64)|func|interface|map|rune|string|struct|u?int(8|16|32|64)?|var)(?=\b)/g
+    },
+    {
+        name: 'keyword.operator.initialize',
+        pattern: /\:=/g
     },
     {
         name: 'keyword.operator',
@@ -53,6 +75,13 @@ Rainbow.extend('go', [
             1: 'storage.function',
             2: 'entity.name.function'
         },
-        pattern: /(func)\s(.*?)(?=\()/g
+        pattern: /(func)\s+(?:\(.*?\))\s+(.*?)(?=\()/g
+    },
+    {
+        matches: {
+            1: 'storage.function',
+            2: 'entity.name.function'
+        },
+        pattern: /(func)\s+(.*?)(?=\()/g
     }
 ], 'generic');
