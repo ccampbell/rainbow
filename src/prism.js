@@ -290,7 +290,7 @@ class Prism {
             let patterns = options.patterns[language] || [];
             while (options.inheritenceMap[language]) {
                 language = options.inheritenceMap[language];
-                patterns = patterns.concat(options.patterns[language]);
+                patterns = patterns.concat(options.patterns[language] || []);
             }
 
             return patterns;
