@@ -349,4 +349,14 @@ describe(language, () => {
 
         'NV_CSS<span class="keyword dot">.</span><span class="string">\'/app.css\'</span>'
     );
+
+    run(
+        language,
+
+        'strings after a comma',
+
+        "var map = {'&':'&amp;','<':'&lt;'};",
+
+        '<span class="keyword">var</span> map <span class="keyword operator">=</span> {<span class="string">\'&amp;\'</span>:<span class="string">\'&amp;\'</span>,<span class="string">\'&lt;\'</span>:<span class="string">\'&lt;\'</span>};'
+    );
 });
