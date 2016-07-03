@@ -6,7 +6,7 @@
 Rainbow.extend('php', [
     {
         name: 'support',
-        pattern: /\becho\b/g
+        pattern: /\becho\b/ig
     },
     {
         matches: {
@@ -29,7 +29,7 @@ Rainbow.extend('php', [
     },
     {
         name: 'keyword',
-        pattern: /\b(die|end(for(each)?|switch|if)|case|require(_once)?|include(_once)?)(?=\b)/g
+        pattern: /\b(die|end(for(each)?|switch|if)|case|require(_once)?|include(_once)?)(?=\b)/ig
     },
     {
         matches: {
@@ -39,7 +39,7 @@ Rainbow.extend('php', [
                 pattern: /\w+/g
             }
         },
-        pattern: /(instanceof)\s([^\$].*?)(\)|;)/g
+        pattern: /(instanceof)\s([^\$].*?)(\)|;)/ig
     },
 
     /**
@@ -51,11 +51,11 @@ Rainbow.extend('php', [
         matches: {
             1: 'support.function'
         },
-        pattern: /\b(array(_key_exists|_merge|_keys|_shift)?|isset|count|empty|unset|printf|is_(array|string|numeric|object)|sprintf|each|date|time|substr|pos|str(len|pos|tolower|_replace|totime)?|ord|trim|in_array|implode|end|preg_match|explode|fmod|define|link|list|get_class|serialize|file|sort|mail|dir|idate|log|intval|header|chr|function_exists|dirname|preg_replace|file_exists)(?=\()/g
+        pattern: /\b(array(_key_exists|_merge|_keys|_shift)?|isset|count|empty|unset|printf|is_(array|string|numeric|object)|sprintf|each|date|time|substr|pos|str(len|pos|tolower|_replace|totime)?|ord|trim|in_array|implode|end|preg_match|explode|fmod|define|link|list|get_class|serialize|file|sort|mail|dir|idate|log|intval|header|chr|function_exists|dirname|preg_replace|file_exists)(?=\()/ig
     },
     {
         name: 'variable.language.php-tag',
-        pattern: /(&lt;\?(php)?|\?&gt;)/g
+        pattern: /(&lt;\?(php)?|\?&gt;)/ig
     },
     {
         matches: {
@@ -65,7 +65,7 @@ Rainbow.extend('php', [
                 pattern: /\w+/g
             }
         },
-        pattern: /\b(namespace|use)\s(.*?);/g
+        pattern: /\b(namespace|use)\s(.*?);/ig
     },
     {
         matches: {
@@ -77,18 +77,25 @@ Rainbow.extend('php', [
             6: 'storage.modifier.extends',
             7: 'entity.other.inherited-class'
         },
-        pattern: /\b(abstract|final)?\s?(class|interface|trait)\s(\w+)(\sextends\s)?([\w\\]*)?(\simplements\s)?([\w\\]*)?\s?\{?(\n|\})/g
+        pattern: /\b(abstract|final)?\s?(class|interface|trait)\s(\w+)(\sextends\s)?([\w\\]*)?(\simplements\s)?([\w\\]*)?\s?\{?(\n|\})/ig
     },
     {
         name: 'keyword.static',
-        pattern: /self::|static::/g
+        pattern: /self::|static::/ig
     },
     {
         matches: {
             1: 'storage.function',
             2: 'entity.name.function.magic'
         },
-        pattern: /(function)\s(__.*?)(?=\()/g
+        pattern: /(function)\s(__.*?)(?=\()/ig
+    },
+    {
+        matches: {
+            1: 'storage.function',
+            2: 'entity.name.function'
+        },
+        pattern: /(function)\s(.*?)(?=\()/ig
     },
     {
         matches: {
@@ -98,7 +105,7 @@ Rainbow.extend('php', [
                 pattern: /\w+/g
             }
         },
-        pattern: /\b(new)\s([^\$].*?)(?=\)|\(|;)/g
+        pattern: /\b(new)\s([^\$].*?)(?=\)|\(|;)/ig
     },
     {
         matches: {

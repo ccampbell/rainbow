@@ -410,4 +410,18 @@ describe(language, () => {
 
         '<span class="keyword">public</span> <span class="keyword">static</span> <span class="storage function">function</span> <span class="entity name function">getForUser</span>(\\<span class="support class">SomeApp</span>\\<span class="support class">User</span> <span class="variable dollar-sign">$</span><span class="variable">user</span>) {}'
     );
+
+    run(
+        language,
+
+        'things should be case insensitive',
+
+        `FUNCTION SOMETHING() {
+            ECHO 'HELLO';
+        }`,
+
+        `<span class="storage function">FUNCTION</span> <span class="entity name function">SOMETHING</span>() {
+            <span class="support">ECHO</span> <span class="string">\'HELLO\'</span>;
+        }`
+    );
 });
