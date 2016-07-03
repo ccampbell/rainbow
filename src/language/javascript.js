@@ -11,7 +11,7 @@ Rainbow.extend('javascript', [
      */
     {
         name: 'selector',
-        pattern: /(\s|^)\$(?=\.|\()/g
+        pattern: /\$(?=\.|\()/g
     },
     {
         name: 'support',

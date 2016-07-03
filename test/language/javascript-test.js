@@ -25,7 +25,7 @@ describe(language, () => {
 
         ' $(\'.some_class\').show()',
 
-        '<span class="selector"> $</span>(<span class="string">\'.some_class\'</span>).<span class="function call">show</span>()'
+        ' <span class="selector">$</span>(<span class="string">\'.some_class\'</span>).<span class="function call">show</span>()'
     );
 
     run(
