@@ -25,10 +25,6 @@ Rainbow.extend('go', [
         pattern: /\/\*[\s\S]*?\*\/|(\/\/)[\s\S]*?$/gm
     },
     {
-        name: 'constant.numeric',
-        pattern: /\b(\d+(\.\d+)?(e(\+|\-)?\d+)?(f|d)?|0x[\da-f]+)\b/gi
-    },
-    {
         matches: {
             1: 'keyword'
         },
