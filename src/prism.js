@@ -95,6 +95,33 @@ class Prism {
         }
 
         /**
+         * It is so we can create a new regex object for each call to
+         * _processPattern to avoid state carrying over when running exec
+         * multiple times.
+         *
+         * The global flag should not be carried over because we are simulating
+         * it by processing the regex in a loop so we only care about the first
+         * match in each string. This also seems to improve performance quite a
+         * bit.
+         *
+         * @param {RegExp} regex
+         * @return {string}
+         */
+        function _cloneRegex(regex) {
+            let flags = '';
+
+            if (regex.ignoreCase) {
+                flags += 'i';
+            }
+
+            if (regex.multiline) {
+                flags += 'm';
+            }
+
+            return new RegExp(regex.source, flags);
+        }
+
+        /**
          * Matches a regex pattern against a block of code, finds all matches
          * that should be processed, and stores the positions of where they
          * should be replaced within the string.
@@ -104,17 +131,23 @@ class Prism {
          *
          * @param {Object} pattern
          * @param {string} code
-         * @return {void}
+         * @param {number} offset
+         * @return {mixed}
          */
-        function _processPattern(pattern, code) {
-            const regex = pattern.pattern;
+        function _processPattern(pattern, code, offset = 0) {
+            let regex = pattern.pattern;
             if (!regex) {
-                return;
+                return false;
             }
 
+            // Since we are simulating global regex matching we need to also
+            // make sure to stop after one match if the pattern is not global
+            const shouldStop = !regex.global;
+
+            regex = _cloneRegex(regex);
             const match = regex.exec(code);
             if (!match) {
-                return;
+                return false;
             }
 
             // Treat match 0 the same way as name
@@ -124,15 +157,25 @@ class Prism {
             }
 
             let replacement = match[0];
-            const startPos = match.index;
+            const startPos = match.index + offset;
             const endPos = match[0].length + startPos;
+
+            // In some cases when the regex matches a group such as \s* it is
+            // possible for there to be a match, but have the start position
+            // equal the end position. In those cases we should be able to stop
+            // matching. Otherwise this can lead to an infinite loop.
+            if (startPos === endPos) {
+                return false;
+            }
 
             // If this is not a child match and it falls inside of another
             // match that already happened we should skip it and continue
             // processing.
             if (_matchIsInsideOtherMatch(startPos, endPos)) {
-                _processPattern(pattern, code);
-                return;
+                return {
+                    remaining: code.substr(endPos - offset),
+                    offset: endPos
+                };
             }
 
             /**
@@ -161,7 +204,14 @@ class Prism {
                 // comparisons with other matches later.
                 replacementPositions[startPos] = endPos;
 
-                _processPattern(pattern, code);
+                if (shouldStop) {
+                    return false;
+                }
+
+                return {
+                    remaining: code.substr(endPos - offset),
+                    offset: endPos
+                };
             }
 
             /**
@@ -260,7 +310,7 @@ class Prism {
             }
 
             // Finally, call `onMatchSuccess` with the replacement
-            onMatchSuccess(replacement);
+            return onMatchSuccess(replacement);
         }
 
         /**
@@ -272,7 +322,10 @@ class Prism {
          */
         function _processCodeWithPatterns(code, patterns) {
             for (const pattern of patterns) {
-                _processPattern(pattern, code);
+                let result = _processPattern(pattern, code);
+                while (result) {
+                    result = _processPattern(pattern, result.remaining, result.offset);
+                }
             }
 
             // We are done processing the patterns so we should actually replace
