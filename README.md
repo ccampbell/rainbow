@@ -44,6 +44,7 @@ You can also build/download custom packages from there.
         * [Regular expression subgroup matches](#regular-expression-subgroup-matches)
     * [Rainbow.addAlias](#rainbowaddalias)
     * [Rainbow.onHighlight](#rainbowonhighlight)
+    * [Rainbow.remove](#rainbowremove)
   * [Building](#building)
     * [Getting a local environment set up](#getting-a-local-environment-set-up)
     * [Build commands](#build-commands)
@@ -194,6 +195,7 @@ Rainbow has four public methods:
 - [Rainbow.extend](#rainbowextend)
 - [Rainbow.addAlias](#rainbowaddalias)
 - [Rainbow.onHighlight](#rainbowonhighlight)
+- [Rainbow.remove](#rainbowremove)
 
 ### Rainbow.color
 
@@ -513,6 +515,15 @@ Rainbow.onHighlight(function(block, language) {
 ```
 
 The first parameter returns a reference to that code block in the DOM. The second parameter returns a string of the language being highlighted.
+
+### Rainbow.remove
+
+This method allows you to remove syntax rules for a specific language. It is only really useful for development if you want to be able to reload language grammars on the fly without having to refresh the page.
+
+```javascript
+// Remove all the javascript patterns
+Rainbow.remove('javascript');
+```
 
 ## Building
 

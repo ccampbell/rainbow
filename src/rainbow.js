@@ -324,6 +324,11 @@ function extend(language, languagePatterns, inherits) {
     patterns[language] = languagePatterns.concat(patterns[language] || []);
 }
 
+function remove(language) {
+    delete inheritenceMap[language];
+    delete patterns[language];
+}
+
 /**
  * Starts the magic rainbow
  *
@@ -401,6 +406,7 @@ function addAlias(alias, originalLanguage) {
  */
 Rainbow = {
     extend,
+    remove,
     onHighlight,
     addAlias,
     color

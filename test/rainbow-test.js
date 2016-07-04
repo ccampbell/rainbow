@@ -81,4 +81,19 @@ describe('Rainbow', () => {
             done();
         });
     });
+
+    it('Should properly remove language', (done) => {
+        Rainbow.extend('foo', genericPatterns);
+
+        Rainbow.color('just a test', 'foo', (result) => {
+            expect(result).to.equal('just a <span class="test">test</span>');
+
+            Rainbow.remove('foo');
+
+            Rainbow.color('just a test', 'foo', (result2) => {
+                expect(result2).to.equal('just a test');
+                done();
+            });
+        });
+    });
 });
