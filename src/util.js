@@ -1,17 +1,3 @@
-function _addGlobal(thing) {
-    if (typeof thing === 'function') {
-        return `\n${thing.toString()}`;
-    }
-
-    let toAdd = '';
-    if (typeof thing === 'object') {
-        for (const key in thing) {
-            toAdd += _addGlobal(thing[key]);
-        }
-    }
-
-    return toAdd;
-}
 
 export function isNode() {
     /* globals module */
@@ -20,44 +6,6 @@ export function isNode() {
 
 export function isWorker() {
     return typeof document === 'undefined' && typeof self !== 'undefined';
-}
-
-/**
- * Creates a usable web worker from an anonymous function
- *
- * mostly borrowed from https://github.com/zevero/worker-create
- *
- * @param {Function} fn
- * @param {Array} globals global functions that should be added to the worker scope
- * @return {Worker}
- */
-export function createWorker(fn, globals) {
-    if (isNode()) {
-        /* globals global, require, __filename */
-        global.Worker = require('webworker-threads').Worker;
-        return new Worker(__filename);
-    }
-
-    if (!Array.isArray(globals)) {
-        globals = [globals];
-    }
-
-    let code = '';
-    for (const thing of globals) {
-        code += _addGlobal(thing);
-    }
-
-    // This is an awful hack, but something to do with how uglify renames stuff
-    // and rollup means that the variable the worker.js is using to reference
-    // Prism will not be the same one available in this context
-    const prismName = globals[0].toString().match(/function (\w*?)\(/)[1];
-    let str = fn.toString();
-    str = str.replace(/=new \w*/, `= new ${prismName}`);
-
-    const fullString = `${code}\tthis.onmessage =${str}`;
-
-    const blob = new Blob([fullString], { type: 'text/javascript' });
-    return new Worker((window.URL || window.webkitURL).createObjectURL(blob));
 }
 
 /**
@@ -194,4 +142,42 @@ export function keys(object) {
 export function replaceAtPosition(position, replace, replaceWith, code) {
     const subString = code.substr(position);
     return code.substr(0, position) + subString.replace(replace, replaceWith);
+}
+
+/**
+ * Creates a usable web worker from an anonymous function
+ *
+ * mostly borrowed from https://github.com/zevero/worker-create
+ *
+ * @param {Function} fn
+ * @return {Worker}
+ */
+export function createWorker(fn, Prism) {
+    if (isNode()) {
+        /* globals global, require, __filename */
+        global.Worker = require('webworker-threads').Worker;
+        return new Worker(__filename);
+    }
+
+    const prismFunction = Prism.toString();
+
+    let code = keys.toString();
+    code += htmlEntities.toString();
+    code += hasCompleteOverlap.toString();
+    code += intersects.toString();
+    code += replaceAtPosition.toString();
+    code += indexOfGroup.toString();
+    code += prismFunction;
+
+    // This is an awful hack, but something to do with how uglify renames stuff
+    // and rollup means that the variable the worker.js is using to reference
+    // Prism will not be the same one available in this context
+    const prismName = prismFunction.match(/function (\w+?)\(/)[1];
+    let str = fn.toString();
+    str = str.replace(/=new \w+/, `= new ${prismName}`);
+
+    const fullString = `${code}\tthis.onmessage =${str}`;
+
+    const blob = new Blob([fullString], { type: 'text/javascript' });
+    return new Worker((window.URL || window.webkitURL).createObjectURL(blob));
 }

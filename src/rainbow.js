@@ -62,7 +62,7 @@ const isWorker = utilIsWorker();
 let cachedWorker = null;
 function _getWorker() {
     if (isNode || cachedWorker === null) {
-        cachedWorker = util.createWorker(rainbowWorker, [Prism, util]);
+        cachedWorker = createWorker(rainbowWorker, Prism);
     }
 
     return cachedWorker;
