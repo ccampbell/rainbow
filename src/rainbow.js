@@ -129,6 +129,7 @@ function _generateHandler(element, waitingOn, callback) {
 /**
  * Gets options needed to pass into Prism
  *
+ * @param {object} options
  * @return {object}
  */
 function _getPrismOptions(options) {
