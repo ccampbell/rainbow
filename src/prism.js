@@ -1,4 +1,4 @@
-import * as util from './util';
+import { replaceAtPosition, indexOfGroup, keys, htmlEntities, hasCompleteOverlap, intersects } from './util';
 
 /**
  * Prism is a class used to highlight individual blocks of code
@@ -46,12 +46,12 @@ class Prism {
 
                 // If this block completely overlaps with another block
                 // then we should remove the other block and return `false`.
-                if (util.hasCompleteOverlap(key, replacementPositions[key], start, end)) {
+                if (hasCompleteOverlap(key, replacementPositions[key], start, end)) {
                     delete replacementPositions[key];
                     delete replacements[key];
                 }
 
-                if (util.intersects(key, replacementPositions[key], start, end)) {
+                if (intersects(key, replacementPositions[key], start, end)) {
                     return true;
                 }
             }
@@ -86,10 +86,10 @@ class Prism {
          * @return {string}
          */
         function _processReplacements(code) {
-            const positions = util.keys(replacements);
+            const positions = keys(replacements);
             for (const position of positions) {
                 const replacement = replacements[position];
-                code = util.replaceAtPosition(position, replacement.replace, replacement.with, code);
+                code = replaceAtPosition(position, replacement.replace, replacement.with, code);
             }
             return code;
         }
@@ -217,7 +217,7 @@ class Prism {
                  * @param {string|null} matchName
                  */
                 const _getReplacement = function(passedBlock, replaceBlock, matchName) {
-                    replacement = util.replaceAtPosition(util.indexOfGroup(match, groupKey), passedBlock, matchName ? _wrapCodeInSpan(matchName, replaceBlock) : replaceBlock, replacement);
+                    replacement = replaceAtPosition(indexOfGroup(match, groupKey), passedBlock, matchName ? _wrapCodeInSpan(matchName, replaceBlock) : replaceBlock, replacement);
                     return;
                 };
 
@@ -254,7 +254,7 @@ class Prism {
             // We use the `keys` function to run through them backwards because
             // the match position of earlier matches will not change depending
             // on what gets replaced in later matches.
-            const groupKeys = util.keys(pattern.matches);
+            const groupKeys = keys(pattern.matches);
             for (const groupKey of groupKeys) {
                 _processGroup(groupKey);
             }
@@ -308,7 +308,7 @@ class Prism {
         function _highlightBlockForLanguage(code, language, patterns) {
             currentLanguage = language;
             patterns = patterns || getPatternsForLanguage(language);
-            return _processCodeWithPatterns(util.htmlEntities(code), patterns);
+            return _processCodeWithPatterns(htmlEntities(code), patterns);
         }
 
         this.refract = _highlightBlockForLanguage;

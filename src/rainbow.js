@@ -18,7 +18,7 @@
  * @see rainbowco.de
  */
 import Prism from './prism';
-import * as util from './util';
+import { isNode as utilIsNode, isWorker as utilIsWorker, createWorker, getLanguageForBlock } from './util';
 import rainbowWorker from './worker';
 
 /**
@@ -56,8 +56,8 @@ let Rainbow = {};
  */
 let onHighlightCallback;
 
-const isNode = util.isNode();
-const isWorker = util.isWorker();
+const isNode = utilIsNode();
+const isWorker = utilIsWorker();
 
 let cachedWorker = null;
 function _getWorker() {
@@ -180,7 +180,7 @@ function _getWorkerData(code, lang) {
 function _highlightCodeBlocks(codeBlocks, callback) {
     const waitingOn = { c: 0 };
     for (const block of codeBlocks) {
-        const language = util.getLanguageForBlock(block);
+        const language = getLanguageForBlock(block);
         if (block.classList.contains('rainbow') || !language) {
             continue;
         }
