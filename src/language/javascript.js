@@ -88,7 +88,7 @@ Rainbow.extend('javascript', [
             1: 'storage.type',
             3: 'entity.function'
         },
-        pattern: /(var)?(\s|^)(\S*)(?=\s?=\s?function\()/g
+        pattern: /(var)?(\s|^)(\S+)(?=\s?=\s?function\()/g
     },
 
     /**
