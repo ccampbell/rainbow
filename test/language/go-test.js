@@ -149,4 +149,14 @@ describe(language, () => {
 
         'contentType <span class="keyword operator initialize">:=</span> mime.<span class="function call">TypeByExtension</span>(path.<span class="function call">Ext</span>(file.<span class="function call">Path</span>()))'
     );
+
+    run(
+        language,
+
+        'comment after website in string',
+
+        'test := `http://example.com` // wow it works now',
+
+        'test <span class="keyword operator initialize">:=</span> <span class="string">`http://example.com`</span> <span class="comment">// wow it works now</span>'
+    );
 });

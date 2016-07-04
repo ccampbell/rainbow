@@ -22,7 +22,7 @@ Rainbow.extend('go', [
     },
     {
         name: 'comment',
-        pattern: /\/\*[\s\S]*?\*\/|(\/\/)[\s\S]*?$/gm
+        pattern: /\/\*[\s\S]*?\*\/|(\/\/)(?!.*(`|").*?\1).*?$/gm
     },
     {
         matches: {

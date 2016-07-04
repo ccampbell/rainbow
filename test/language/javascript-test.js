@@ -389,5 +389,16 @@ describe(language, () => {
         <span class="storage type">let</span> constrained <span class="keyword operator">=</span> <span class="constant language">true</span>;
         <span class="storage type">var</span> outlet <span class="keyword operator">=</span> <span class="constant language">true</span>;`
     );
+
+    // This is the same test as generic, but javascript could match regex patterns
+    run(
+        language,
+
+        'comment after website string',
+
+        'var test = "http://example.com/index.html"; // sweet website',
+
+        '<span class="storage type">var</span> test <span class="keyword operator">=</span> <span class="string">"http://example.com/index.html"</span>; <span class="comment">// sweet website</span>'
+    );
 });
 

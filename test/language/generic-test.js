@@ -300,14 +300,34 @@ describe(language, () => {
         }`
     );
 
-    skip(
+    run(
         language,
 
         'comment after website string',
 
-        'var test = "http://website.com/index.html"; // sweet website',
+        'var test = "http://example.com/index.html"; // sweet website',
 
-        '<span class="keyword">var</span> test <span class="keyword operator">=</span> <span class="string">"http://website.com/index.html"</span>; <span class="comment">// sweet website</span>'
+        '<span class="keyword">var</span> test <span class="keyword operator">=</span> <span class="string">"http://example.com/index.html"</span>; <span class="comment">// sweet website</span>'
+    );
+
+    run(
+        language,
+
+        'comment after website string with hash',
+
+        "var url = 'http://example.com#what'; # ugh",
+
+        '<span class="keyword">var</span> url <span class="keyword operator">=</span> <span class="string">\'http://example.com#what\'</span>; <span class="comment"># ugh</span>'
+    );
+
+    run(
+        language,
+
+        'comment after regular string',
+
+        "var id = '#testing'; # comment",
+
+        '<span class="keyword">var</span> id <span class="keyword operator">=</span> <span class="string">\'#testing\'</span>; <span class="comment"># comment</span>'
     );
 
     run(
@@ -358,5 +378,26 @@ describe(language, () => {
         "var map = {'&':'&amp;','<':'&lt;'};",
 
         '<span class="keyword">var</span> map <span class="keyword operator">=</span> {<span class="string">\'&amp;\'</span>:<span class="string">\'&amp;\'</span>,<span class="string">\'&lt;\'</span>:<span class="string">\'&lt;\'</span>};'
+    );
+
+    run(
+        language,
+
+        'comment containing website',
+
+        '// some person\'s comment about https://example.com',
+
+        '<span class="comment">// some person\'s comment about https://example.com</span>'
+    );
+
+    // I know this won't work right now.
+    skip(
+        language,
+
+        'weird looking comment',
+
+        '// some person\'s comment about //example.com',
+
+        '<span class="comment">// some person\'s comment about //example.com</span>'
     );
 });
