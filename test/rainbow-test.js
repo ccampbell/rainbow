@@ -96,4 +96,21 @@ describe('Rainbow', () => {
             });
         });
     });
+
+    // Not sure why anyone would want this behavior, but since we are faking
+    // global regex matches we should make sure this works too.
+    it('Should work with non global regex matches', (done) => {
+        Rainbow.remove('foo');
+        Rainbow.extend('foo', [
+            {
+                name: 'number',
+                pattern: /\b\d+\b/
+            }
+        ]);
+
+        Rainbow.color('123 456 789', 'foo', (result) => {
+            expect(result).to.equal('<span class="number">123</span> 456 789');
+            done();
+        });
+    });
 });
