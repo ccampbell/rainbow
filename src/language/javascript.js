@@ -148,7 +148,7 @@ Rainbow.extend('javascript', [
     },
     {
         name: 'support.class.promise',
-        pattern: /Promise(?=(\(|\.))/g
+        pattern: /\bPromise(?=(\(|\.))/g
     }
 ], 'generic');
 

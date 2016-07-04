@@ -400,5 +400,15 @@ describe(language, () => {
 
         '<span class="storage type">var</span> test <span class="keyword operator">=</span> <span class="string">"http://example.com/index.html"</span>; <span class="comment">// sweet website</span>'
     );
+
+    run(
+        language,
+
+        'promise as part of another word',
+
+        'initPromise.then(function() {});',
+
+        'initPromise.<span class="function call">then</span>(<span class="keyword">function</span>() {});'
+    );
 });
 
