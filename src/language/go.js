@@ -60,16 +60,6 @@ Rainbow.extend('go', [
         pattern: /\:=/g
     },
     {
-        name: 'keyword.operator',
-        pattern: /\+|\!|\-|&(gt|lt|amp);|\||\*|\:?=/g
-    },
-    {
-        matches: {
-            1: 'function.call'
-        },
-        pattern: /(\w+?)(?=\()/g
-    },
-    {
         matches: {
             1: 'storage.function',
             2: 'entity.name.function'
