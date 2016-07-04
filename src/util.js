@@ -150,6 +150,7 @@ export function replaceAtPosition(position, replace, replaceWith, code) {
  * mostly borrowed from https://github.com/zevero/worker-create
  *
  * @param {Function} fn
+ * @param {Prism} Prism
  * @return {Worker}
  */
 export function createWorker(fn, Prism) {
