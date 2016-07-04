@@ -2,14 +2,17 @@
  * GO Language
  *
  * @author Javier Aguirre
+ * @author Craig Campbell
  */
 Rainbow.extend('go', [
     {
         matches: {
-            1: {
-                name: 'keyword.operator',
-                pattern: /\=/g
-            },
+            1: [
+                {
+                    name: 'keyword.operator',
+                    pattern: /\=|\+/g
+                }
+            ],
             2: {
                 name: 'string',
                 matches: {
@@ -18,7 +21,7 @@ Rainbow.extend('go', [
                 }
             }
         },
-        pattern: /(\(|\s|\[|\=|:)((`|")([^\\\1]|\\.)*?(\3))/gm
+        pattern: /(\(|\s|\[|\=|:|\+|\{|,)((`|")([^\\\1]|\\.)*?(\3))/gm
     },
     {
         name: 'comment',

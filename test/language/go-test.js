@@ -159,4 +159,14 @@ describe(language, () => {
 
         'test <span class="keyword operator initialize">:=</span> <span class="string">`http://example.com`</span> <span class="comment">// wow it works now</span>'
     );
+
+    run(
+        language,
+
+        'concatenated ` strings',
+
+        'test := `string`+`other string`',
+
+        'test <span class="keyword operator initialize">:=</span> <span class="string">`string`</span><span class="keyword operator">+</span><span class="string">`other string`</span>'
+    );
 });
