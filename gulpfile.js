@@ -176,7 +176,7 @@ gulp.task('release', function(callback) {
     argv.release = true;
     argv.version = newVersion;
 
-    runSequence('test', 'update-package-version', 'build', 'update-version', callback);
+    runSequence('lint', 'test', 'update-package-version', 'build', 'update-version', callback);
 });
 
 function _appendCode(code) {
