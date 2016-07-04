@@ -77,7 +77,7 @@ Rainbow.extend('javascript', [
             3: 'string.regexp.close',
             4: 'string.regexp.modifier'
         },
-        pattern: /(\/)((?![*+?])(?:[^\r\n\[/\\]|\\.|\[(?:[^\r\n\]\\]|\\.)*\])+)(\/)([igm]{0,3})/g
+        pattern: /(\/)((?![*+?])(?:[^\r\n\[/\\]|\\.|\[(?:[^\r\n\]\\]|\\.)*\])+)(\/)(?!\/)([igm]{0,3})/g
     },
 
     /**

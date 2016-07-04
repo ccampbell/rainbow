@@ -404,6 +404,16 @@ describe(language, () => {
     run(
         language,
 
+        'comment after website string again',
+
+        "var test = 'http://example.com'; // what the hell?",
+
+        '<span class="storage type">var</span> test <span class="keyword operator">=</span> <span class="string">\'http://example.com\'</span>; <span class="comment">// what the hell?</span>'
+    );
+
+    run(
+        language,
+
         'promise as part of another word',
 
         'initPromise.then(function() {});',
