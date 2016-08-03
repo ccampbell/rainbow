@@ -64,4 +64,14 @@ true
 `
     );
 
+    run(
+        language,
+
+        'numbers with underscores',
+
+        '1_000_000',
+
+        '<span class="constant numeric">1_000_000</span>'
+    );
+
 });

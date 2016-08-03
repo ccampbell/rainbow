@@ -129,7 +129,7 @@ Rainbow.extend('ruby', [
     },
     {
         name: 'constant.numeric',
-        pattern: /\b(0x[\da-f]+|\d+)\b/g
+        pattern: /\b(0x[\da-f]+|[\d_]+)\b/g
     },
     {
         name: 'support.class',
