@@ -7,11 +7,13 @@ Rainbow.extend('html', [
     {
         name: 'source.php.embedded',
         matches: {
+            1: 'variable.language.php-tag',
             2: {
                 language: 'php'
-            }
+            },
+            3: 'variable.language.php-tag'
         },
-        pattern: /&lt;\?=?(?!xml)(php)?([\s\S]*?)(\?&gt;)/gm
+        pattern: /(&lt;\?php|&lt;\?=?(?!xml))([\s\S]*?)(\?&gt;)/gm
     },
     {
         name: 'source.css.embedded',
