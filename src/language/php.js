@@ -105,7 +105,7 @@ Rainbow.extend('php', [
                 pattern: /\w+/g
             }
         },
-        pattern: /\b(new)\s([^\$]*?)(?=\)|\(|;)/ig
+        pattern: /\b(new)\s([^\$][a-z0-9_]*?)(?=\)|\(|;)/ig
     },
     {
         matches: {
