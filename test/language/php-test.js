@@ -424,4 +424,14 @@ describe(language, () => {
             <span class="support">ECHO</span> <span class="string">\'HELLO\'</span>;
         }`
     );
+
+    run(
+        language,
+
+        'new class syntax should not allow any character',
+
+        "echo 'something something in New York' . $meh;",
+
+        '<span class="support">echo</span> <span class="string">\'something something in New York\'</span> <span class="keyword dot">.</span> <span class="variable dollar-sign">$</span><span class="variable">meh</span>;'
+    );
 });
