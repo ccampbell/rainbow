@@ -21,6 +21,11 @@ const patternB = [{
     pattern: /is/gi
 }];
 
+const patternDollar = [{
+    name: 'dollar',
+    pattern: /'\$'/g
+}];
+
 ////////////////
 // Test suite //
 ////////////////
@@ -110,6 +115,15 @@ describe('Rainbow', () => {
 
         Rainbow.color('123 456 789', 'foo', (result) => {
             expect(result).to.equal('<span class="number">123</span> 456 789');
+            done();
+        });
+    });
+
+    it('Should support dollar signs in replacements', (done) => {
+        Rainbow.extend('dollarLanguage', patternDollar);
+
+        Rainbow.color('here is a test with a \'$\' sign in it', 'dollarLanguage', (result) => {
+            expect(result).to.equal('here is a test with a <span class="dollar">\'$\'</span> sign in it');
             done();
         });
     });
