@@ -141,7 +141,7 @@ export function keys(object) {
  */
 export function replaceAtPosition(position, replace, replaceWith, code) {
     const subString = code.substr(position);
-    return code.substr(0, position) + subString.replace(replace, replaceWith);
+    return code.substr(0, position) + subString.replace(replace, replaceWith.replace(/\$/g, '$$$$'));
 }
 
 /**
