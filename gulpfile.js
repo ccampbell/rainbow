@@ -47,7 +47,11 @@ gulp.task('pack', function() {
     ];
 
     if (argv.ugly || argv.release) {
-        plugins.push(uglify());
+        plugins.push(uglify({
+            mangle: {
+                except: ['Prism']
+            }
+        }));
     }
 
     var includeSourceMaps = true;

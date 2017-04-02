@@ -170,14 +170,7 @@ export function createWorker(fn, Prism) {
     code += indexOfGroup.toString();
     code += prismFunction;
 
-    // This is an awful hack, but something to do with how uglify renames stuff
-    // and rollup means that the variable the worker.js is using to reference
-    // Prism will not be the same one available in this context
-    const prismName = prismFunction.match(/function (\w+?)\(/)[1];
-    let str = fn.toString();
-    str = str.replace(/=new \w+/, `= new ${prismName}`);
-
-    const fullString = `${code}\tthis.onmessage =${str}`;
+    const fullString = `${code}\tthis.onmessage=${fn.toString()}`;
 
     const blob = new Blob([fullString], { type: 'text/javascript' });
     return new Worker((window.URL || window.webkitURL).createObjectURL(blob));
