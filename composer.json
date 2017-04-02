@@ -1,0 +1,12 @@
+{
+    "name": "ccampbell/rainbow",
+    "description": "Simple library for code syntax highlighting",
+    "keywords": ["javascript", "css", "syntax"],
+    "homepage": "http://craig.is/making/rainbows",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Craig Campbell"
+        }
+    ]
+}
