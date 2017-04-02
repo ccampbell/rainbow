@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Classic ASP</title>
+    <style type="text/css">
+      pre {background: #F9F9F9;word-wrap: break-word;margin: 0px;padding: 0px;padding: 10px;color: #525252;font-size: 14px;margin-bottom: 20px;border: solid 1px #C6CACD;overflow-x:scroll;}
+      pre, code {font-family: 'Monaco', courier, monospace;}
+      pre .variable.language.asp-tag {color: #525252;background-color: #FFFF00}
+      pre .comment {color: #57ac57;}
+      pre .constant.language {color: #0000ff;}
+      pre .string {color: #960000;}
+      pre .variable.language.asp-include {color: #57ac57;}
+      pre .support.function {color: #0092db;}
+      pre .support.function.suggested {color: #0000ff;}
+      pre .keyword {color: #0000ff;}
+      pre .keyword.dot {color: #525252;}
+      pre .keyword.operator {color: #ff3400;}    
+    </style>
+  </head>
+  <body>
+
+<pre data-language="asp">
+<code>&lt;!--&num;include file="test.asp"--&gt;
+&lt;!--&num;include virtual="/test2.asp"--&gt;
+
+<%@LANGUAGE="VBSCRIPT" CODEPAGE="65001"%>
+&lt;%
+
+function changeTextFunc(a, b, c, mystring)
+  d = b + c
+  if cint(a) = cint(d) then
+      mystring=replace(mystring,"ASP","Classic ASP")
+  end if
+    changeTextFunc = mystring
+end function
+    
+dim mystring = ""
+dim position = 0
+mystring_empty = true
+mystring = "Support ASP for use in Rainbow.js"
+
+if len(trim(mystring)) = 0 then mystring_empty = false
+
+mystring = changeTextFunc(5, 2, 3, mystring)
+
+position = instr(mystring,"ASP")
+    
+select case cint(position)
+  case 0
+    'operations
+    response.Write "The word searched is not in the string"
+  case else
+    'other operations
+    response.Write "Great! The word searched is in the string"
+end select
+
+dim string_names = ""
+sql="select id, name from my_table;" 'query example
+set rs=connection.execute(sql)
+if not rs.eof then
+    Do while not rs.eof
+        string_names = string_names & rs("name") & ","
+    rs.movenext
+    Loop
+    string_names = left(string_names,len(string_names)-1)
+end if
+rs.close
+set rs = nothing
+%&gt;
+
+<!-- Eventual HTML code before and after ASP code -->
+    
+&lt;%
+strTest = ""
+For i = 1 To Request.Form.Count
+    strTest = strTest &amp; Request.Form.Key(i) &amp; ": " &amp; Request.Form.Item(i) & "<br />"
+Next
+    
+'other examples
+session.Timeout = 30
+session.Abandon
+response.Write request.Form
+response.redirect "http://www.michelepisani.it"
+
+'...and more (cicle for, do while, on error resume next, ...)
+%&gt;
+        </code>
+    </pre>
+    
+    <script src="../js/rainbow.js"></script>
+    <script src="../js/language/asp.js"></script>
+  </body>
+</html>
