@@ -60,7 +60,7 @@ let onHighlightCallback;
  * Counter for block ids
  * @see https://github.com/ccampbell/rainbow/issues/207
  */
- let id = 0;
+let id = 0;
 
 const isNode = utilIsNode();
 const isWorker = utilIsWorker();
