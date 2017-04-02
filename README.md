@@ -136,6 +136,7 @@ Currently supported languages are:
 - Scheme
 - Shell
 - Smalltalk
+- SQL
 
 ## Specifying a language
 
