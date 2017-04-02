@@ -56,6 +56,12 @@ let Rainbow = {};
  */
 let onHighlightCallback;
 
+/**
+ * Counter for block ids
+ * @see https://github.com/ccampbell/rainbow/issues/207
+ */
+ let id = 0;
+
 const isNode = utilIsNode();
 const isWorker = utilIsWorker();
 
@@ -159,7 +165,7 @@ function _getWorkerData(code, lang) {
     lang = aliases[lang] || lang;
 
     const workerData = {
-        id: String.fromCharCode(65 + Math.floor(Math.random() * 26)) + Date.now(),
+        id: id++,
         code,
         lang,
         options: _getPrismOptions(options),
