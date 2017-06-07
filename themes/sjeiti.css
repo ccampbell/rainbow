@@ -1,0 +1,18 @@
+/**
+ * Sjeiti theme
+ *
+ * Theme for testing line numbering
+ *
+ * @author Ron Valstar <ron@sjeiti.com>
+ * @version 1.0
+ */
+@import url(http://fonts.googleapis.com/css?family=Inconsolata);
+pre{position:relative;padding:15px;background:#222;color:#666;border-color:#000;margin-bottom:20px;font:12px / 15px Inconsolata,courier,monospace;}pre code.rainbow{position:static;color:#fff;word-wrap:normal;}pre code.rainbow .comment{color:#FC2;}
+pre code.rainbow .string,pre code.rainbow .comment.docstring{color:#9C6;}
+pre code.rainbow .keyword,pre code.rainbow .selector{color:#89A;}
+pre code.rainbow .inherited-class{font-style:italic;}
+pre code.rainbow .entity{color:#A98;}
+pre code.rainbow .function.name{color:#97B;}
+pre code.rainbow .numeric{color:#38C;}
+pre code.rainbow .property{color:#9A8;}
+pre code.rainbow .operator{color:#C83;}
