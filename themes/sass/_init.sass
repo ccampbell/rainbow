@@ -50,13 +50,14 @@ pre [data-language], pre [class^="lang"]
     // IE 10+ and all modern browsers support CSS animations
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"
 
-    animation: 50ms ease-in-out 2s forwards fade-in
+    animation: fade-in 50ms ease-in-out 2s forwards
 
     &.rainbow
-        animation-delay: 0s
+        animation: none
+        transition: opacity 50ms ease-in-out
 
-    &.loading
-        animation-play-state: paused
+    &.rainbow-show
+        opacity: 1
 
 pre
     position: relative

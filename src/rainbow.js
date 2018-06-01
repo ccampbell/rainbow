@@ -109,9 +109,11 @@ function _generateHandler(element, waitingOn, callback) {
     return function _handleResponseFromWorker(data) {
         element.innerHTML = data.result;
         element.classList.remove('loading');
+        element.classList.add('rainbow-show');
 
         if (element.parentNode.tagName === 'PRE') {
             element.parentNode.classList.remove('loading');
+            element.parentNode.classList.add('rainbow-show');
         }
 
         // element.addEventListener('animationend', (e) => {
