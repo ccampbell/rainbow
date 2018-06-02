@@ -141,7 +141,14 @@ export function keys(object) {
  */
 export function replaceAtPosition(position, replace, replaceWith, code) {
     const subString = code.substr(position);
-    return code.substr(0, position) + subString.replace(replace, replaceWith.replace(/\$/g, '$$$$'));
+
+    // This is needed to fix an issue where $ signs do not render in the
+    // highlighted code
+    //
+    // @see https://github.com/ccampbell/rainbow/issues/208
+    replaceWith = replaceWith.replace(/\$/g, '$$$$')
+
+    return code.substr(0, position) + subString.replace(replace, replaceWith);
 }
 
 /**
