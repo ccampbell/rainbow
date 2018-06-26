@@ -146,7 +146,7 @@ export function replaceAtPosition(position, replace, replaceWith, code) {
     // highlighted code
     //
     // @see https://github.com/ccampbell/rainbow/issues/208
-    replaceWith = replaceWith.replace(/\$/g, '$$$$')
+    replaceWith = replaceWith.replace(/\$/g, '$$$$');
 
     return code.substr(0, position) + subString.replace(replace, replaceWith);
 }
