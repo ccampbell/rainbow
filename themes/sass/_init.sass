@@ -65,21 +65,25 @@ pre [data-language], pre [class^="lang"]
 pre
     position: relative
 
-    &.loading
-        .preloader div
-            animation-play-state: running
+    &.loading            
+        .preloader
+            display: block
 
-            $dur: 830ms
-            $delay: 300ms
-            $start: 1
-            $num: 6
-            @for $i from $start through $start + $num
-                &:nth-of-type(#{$i})
-                    background: nth($rainbow, $i)
-                    animation: fade 1.5s round(($i - $start) * $dur / $num + $delay) linear infinite
+            div
+                animation-play-state: running
+
+                $dur: 830ms
+                $delay: 300ms
+                $start: 1
+                $num: 6
+                @for $i from $start through $start + $num
+                    &:nth-of-type(#{$i})
+                        background: nth($rainbow, $i)
+                        animation: fade 1.5s round(($i - $start) * $dur / $num + $delay) linear infinite
 
     .preloader
         position: absolute
+        display: none
         top: 12px
         left: 10px
 
