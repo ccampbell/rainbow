@@ -596,3 +596,4 @@ If you are looking for line number support you can try one of the following:
 - https://github.com/Sjeiti/rainbow.linenumbers
 
 You can check out demos and build custom packages at [rainbowco.de](http://rainbowco.de).
+Enjoy opensource coding...!
