@@ -5,8 +5,7 @@
 }(this, function () { 'use strict';
 
     function isNode$1() {
-        /* globals module */
-        return typeof module !== 'undefined' && typeof module.exports === 'object';
+        return false;
     }
 
     function isWorker$1() {
