@@ -1,4 +1,6 @@
-    /**
+import Rainbow from '../rainbow';
+
+/**
  * Generic language patterns
  *
  * @author Craig Campbell

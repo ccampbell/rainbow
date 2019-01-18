@@ -1,3 +1,5 @@
+import Rainbow from '../rainbow';
+
 /**
  * Ruby patterns
  *
