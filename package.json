@@ -54,6 +54,6 @@
     "yargs": "4.7.1"
   },
   "dependencies": {
-    "webworker-threads": "0.7.13"
+    "web-worker": "1.0.0"
   }
 }

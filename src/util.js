@@ -163,7 +163,7 @@ export function replaceAtPosition(position, replace, replaceWith, code) {
 export function createWorker(fn, Prism) {
     if (isNode()) {
         /* globals global, require, __filename */
-        global.Worker = require('webworker-threads').Worker;
+        global.Worker = require('web-worker');
         return new Worker(__filename);
     }
 
