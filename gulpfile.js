@@ -158,7 +158,7 @@ gulp.task('test', function(done) {
 });
 
 gulp.task('lint', function() {
-    return gulp.src('src/*.js')
+    gulp.src('src/*.js')
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
