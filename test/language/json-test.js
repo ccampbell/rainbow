@@ -1,13 +1,15 @@
-import '../../src/language/json';
-import { run } from '../helper';
+const rainbow = require('./src/rainbow-node.js');
+import { run, skip } from '../helper';
 
 ////////////////
 // Test suite //
 ////////////////
 const language = 'json';
 
-describe(language, () => {
+export function testJSON(t) {
     run(
+        t,
+
         language,
 
         'json string',
@@ -44,4 +46,4 @@ describe(language, () => {
             }
         }`
     );
-});
+}

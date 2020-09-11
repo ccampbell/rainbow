@@ -1,4 +1,5 @@
-import '../../src/language/d';
+const rainbow = require('./src/rainbow-node.js');
+
 import { run } from '../helper';
 
 ////////////////
@@ -6,8 +7,10 @@ import { run } from '../helper';
 ////////////////
 const language = 'd';
 
-describe(language, () => {
+export function testD(t) {
     run(
+        t,
+
         language,
 
         'echo',
@@ -18,6 +21,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'variable',
@@ -28,6 +33,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'string concatenation',
@@ -38,6 +45,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'typeof',
@@ -48,6 +57,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'array stuff',
@@ -72,6 +83,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'module declaration',
@@ -82,6 +95,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'class declaration',
@@ -92,6 +107,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'abstract class declaration',
@@ -102,6 +119,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'child class declaration',
@@ -112,6 +131,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'test static',
@@ -122,6 +143,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'test new class',
@@ -132,6 +155,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'test new namespace class',
@@ -142,6 +167,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'test static class call',
@@ -152,6 +179,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'type hint',
@@ -162,6 +191,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'template',
@@ -170,4 +201,4 @@ describe(language, () => {
 
         '<span class="keyword">public</span> List<span class="operator">!</span><span class="keyword">string</span> firstNames <span class="operator">=</span> <span class="keyword new">new</span> <span class="support class">List</span>!(<span class="keyword">string</span>)()'
     );
-});
+}

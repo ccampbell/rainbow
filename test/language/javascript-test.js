@@ -1,14 +1,15 @@
-import '../../src/language/generic';
-import '../../src/language/javascript';
-import { run } from '../helper';
+const rainbow = require('./src/rainbow-node.js');
+import { run, skip } from '../helper';
 
 ////////////////
 // Test suite //
 ////////////////
 const language = 'javascript';
 
-describe(language, () => {
+export function testJavaScript(t) {
     run(
+        t,
+
         language,
 
         'selector 1',
@@ -19,6 +20,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'selector 2',
@@ -29,6 +32,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'window',
@@ -39,6 +44,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'document',
@@ -49,6 +56,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'regex',
@@ -59,6 +68,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'regex 2',
@@ -69,6 +80,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'string no regex',
@@ -79,6 +92,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'single line comment vs. regex',
@@ -89,6 +104,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'class instantiation',
@@ -99,6 +116,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'inline function',
@@ -115,6 +134,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'inline function beginning of line',
@@ -129,6 +150,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'functions in object',
@@ -151,6 +174,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'JSON 1',
@@ -177,6 +202,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'JSON 2',
@@ -203,6 +230,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'multiple var declarations',
@@ -217,6 +246,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'multiple regex same line',
@@ -227,6 +258,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'quotes inside curly brackets',
@@ -239,6 +272,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'complex regex',
@@ -249,6 +284,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'const declaration',
@@ -259,6 +296,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'let declaration',
@@ -269,6 +308,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'import statement',
@@ -279,6 +320,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'export statement',
@@ -289,6 +332,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'export statement with asterisk',
@@ -299,6 +344,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'class definition',
@@ -317,6 +364,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'child class definition',
@@ -327,6 +376,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'setters and getters',
@@ -349,6 +400,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'default function arguments',
@@ -359,6 +412,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'arrow function with promise',
@@ -377,6 +432,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'keywords inside of other things',
@@ -392,6 +449,8 @@ describe(language, () => {
 
     // This is the same test as generic, but javascript could match regex patterns
     run(
+        t,
+
         language,
 
         'comment after website string',
@@ -402,6 +461,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'comment after website string again',
@@ -412,6 +473,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'promise as part of another word',
@@ -420,5 +483,4 @@ describe(language, () => {
 
         'initPromise.<span class="function call">then</span>(<span class="keyword">function</span>() {});'
     );
-});
-
+}

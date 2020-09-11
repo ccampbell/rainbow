@@ -1,13 +1,15 @@
-import '../../src/language/sql';
-import { run } from '../helper';
+const rainbow = require('./src/rainbow-node.js');
+import { run, skip } from '../helper';
 
 ////////////////
 // Test suite //
 ////////////////
 const language = 'sql';
 
-describe(language, () => {
+export function testSQL(t) {
     run(
+        t,
+
         language,
 
         'select statement',
@@ -18,6 +20,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'select statement on multiple lines',
@@ -40,6 +44,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'lowercase query',
@@ -48,4 +54,4 @@ describe(language, () => {
 
         '<span class="keyword">select</span> <span class="function call">count</span>(<span class="keyword operator">*</span>) <span class="keyword">from</span> some_table <span class="keyword">WHERE</span> some_column <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">null</span>;'
     );
-});
+}

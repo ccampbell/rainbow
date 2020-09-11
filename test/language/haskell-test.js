@@ -1,14 +1,15 @@
-import '../../src/language/generic';
-import '../../src/language/haskell';
-import { run } from '../helper';
+const rainbow = require('./src/rainbow-node.js');
+import { run, skip } from '../helper';
 
 ////////////////
 // Test suite //
 ////////////////
 const language = 'haskell';
 
-describe(language, () => {
+export function testHaskell(t) {
     run(
+        t,
+
         language,
 
         '-- comments',
@@ -19,6 +20,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         '{-- comments --}',
@@ -29,6 +32,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
         '{-- comments with multiple lines --}',
 
@@ -42,6 +47,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'module declaration',
@@ -52,6 +59,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'module with exported functions and comments',
@@ -74,6 +83,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'import',
@@ -86,6 +97,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'function declaration',
@@ -96,6 +109,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'IO function declaration',
@@ -114,6 +129,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'infix declaration',
@@ -124,6 +141,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'let declaration',
@@ -136,6 +155,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'if declaration',
@@ -150,6 +171,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'data types decaration',
@@ -172,6 +195,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'classes',
@@ -190,6 +215,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'instances',
@@ -202,6 +229,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'list comprehensions',
@@ -212,6 +241,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'case statement',
@@ -226,6 +257,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'C Preprocessors',
@@ -250,4 +283,4 @@ exitWith code<span class="keyword operator">@</span>(<span class="entity class">
 <span class="meta preprocessor">#<span class="keyword define">endif</span></span>
 <span class="meta preprocessor">#<span class="keyword define">endif</span>  /* ! __NHC__ */</span>`
     );
-});
+}

@@ -1,13 +1,15 @@
-import '../../src/language/ruby';
-import { run } from '../helper';
+const rainbow = require('./src/rainbow-node.js');
+import { run, skip } from '../helper';
 
 ////////////////
 // Test suite //
 ////////////////
 const language = 'ruby';
 
-describe(language, () => {
+export function testRuby(t) {
     run(
+        t,
+
         language,
 
         'multiple (non-greedy) strings',
@@ -20,6 +22,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'interpolated strings',
@@ -34,6 +38,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'string in brackets',
@@ -47,6 +53,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         '__END__',
@@ -65,6 +73,8 @@ true
     );
 
     run(
+        t,
+
         language,
 
         'numbers with underscores',
@@ -73,5 +83,4 @@ true
 
         '<span class="constant numeric">1_000_000</span>'
     );
-
-});
+}

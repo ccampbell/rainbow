@@ -1,13 +1,15 @@
-import '../../src/language/smalltalk';
-import { run } from '../helper';
+const rainbow = require('./src/rainbow-node.js');
+import { run, skip } from '../helper';
 
 ////////////////
 // Test suite //
 ////////////////
 const language = 'smalltalk';
 
-describe(language, () => {
+export function testSmalltalk(t) {
     run(
+        t,
+
         language,
 
         'constant true',
@@ -18,6 +20,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'constant false',
@@ -28,6 +32,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'constant nil',
@@ -38,6 +44,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'self pseudovariable',
@@ -48,6 +56,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'thisContext pseudovariable',
@@ -58,6 +68,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'two-character operator !!',
@@ -68,6 +80,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'two-character operator //',
@@ -78,6 +92,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         '| delimiter',
@@ -88,6 +104,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         '|| binary selector',
@@ -98,6 +116,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'HTML-unfriendly operator',
@@ -108,6 +128,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'three-character operator',
@@ -118,6 +140,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'String-like Symbol',
@@ -128,6 +152,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'Symbol',
@@ -138,6 +164,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'String',
@@ -148,6 +176,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'Comment',
@@ -158,6 +188,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'Comment in between message sends',
@@ -168,6 +200,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'Integer',
@@ -178,6 +212,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'Negative integer',
@@ -188,6 +224,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'Exponent integer',
@@ -198,6 +236,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'Negative exponent integer',
@@ -208,6 +248,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'Radix Integer',
@@ -218,6 +260,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'Negative radix Integer',
@@ -228,6 +272,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'Float',
@@ -238,6 +284,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'Negative float',
@@ -248,6 +296,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'Exponent float',
@@ -258,6 +308,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'Negative exponent float',
@@ -268,6 +320,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'Negative exponent negative float',
@@ -278,6 +332,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'Scaled decimal',
@@ -288,6 +344,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'Class name, normal',
@@ -298,6 +356,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'Class name, with digits',
@@ -306,4 +366,4 @@ describe(language, () => {
 
         '<span class="entity name class">Class0zero</span>'
     );
-});
+}

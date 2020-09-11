@@ -1,5 +1,5 @@
-import '../../src/language/generic';
-import '../../src/language/coffeescript';
+const rainbow = require('./src/rainbow-node.js');
+
 import { run } from '../helper';
 
 ////////////////
@@ -7,8 +7,10 @@ import { run } from '../helper';
 ////////////////
 const language = 'coffeescript';
 
-describe(language, () => {
+export function testCoffeescript(t) {
     run(
+        t,
+
         language,
 
         'comment',
@@ -19,6 +21,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'block comment',
@@ -35,6 +39,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'string',
@@ -45,6 +51,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'block string',
@@ -63,6 +71,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'function call',
@@ -73,6 +83,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'function call inside object',
@@ -89,6 +101,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'function call multiple arguments',
@@ -101,6 +115,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'switch statement',
@@ -129,6 +145,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'multiline regex',
@@ -155,6 +173,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'function inside function call',
@@ -173,6 +193,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'multiline function',
@@ -191,6 +213,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'function binding',
@@ -211,6 +235,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'direct function call',
@@ -225,6 +251,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         '@ keyword',
@@ -235,6 +263,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'class definition',
@@ -245,6 +275,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'child class definition',
@@ -255,6 +287,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'class instantiation',
@@ -263,4 +297,4 @@ describe(language, () => {
 
         'sam <span class="keyword operator">=</span> <span class="keyword new">new</span> <span class="support class">Snake</span> <span class="string">"Sammy the Python"</span>'
     );
-});
+}

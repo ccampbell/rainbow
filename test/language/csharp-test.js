@@ -1,4 +1,5 @@
-import '../../src/language/csharp';
+const rainbow = require('./src/rainbow-node.js');
+
 import { run } from '../helper';
 
 ////////////////
@@ -6,8 +7,10 @@ import { run } from '../helper';
 ////////////////
 const language = 'csharp';
 
-describe(language, () => {
+export function testCsharp(t) {
     run(
+        t,
+
         language,
 
         'echo',
@@ -18,6 +21,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'variable',
@@ -28,6 +33,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'string concatenation',
@@ -38,6 +45,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'typeof',
@@ -48,6 +57,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'array stuff',
@@ -72,6 +83,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'namespace declaration',
@@ -82,6 +95,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'class declaration',
@@ -92,6 +107,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'abstract class declaration',
@@ -102,6 +119,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'sealed class declaration',
@@ -116,6 +135,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'child class declaration',
@@ -126,6 +147,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'test static',
@@ -136,6 +159,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'test magic function',
@@ -152,6 +177,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'test new class',
@@ -162,6 +189,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'test new namespace class',
@@ -172,6 +201,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'test static class call',
@@ -182,6 +213,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'type hint',
@@ -192,6 +225,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'generics',
@@ -200,4 +235,4 @@ describe(language, () => {
 
         '<span class="keyword">public</span> IList&lt;<span class="keyword">string</span>&gt; firstNames <span class="operator">=</span> <span class="keyword new">new</span> <span class="support class">List</span>&lt;<span class="keyword">string</span>&gt;()'
     );
-});
+}

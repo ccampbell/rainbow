@@ -1,4 +1,5 @@
-import '../../src/language/css';
+const rainbow = require('./src/rainbow-node.js');
+
 import { run } from '../helper';
 
 ////////////////
@@ -6,8 +7,10 @@ import { run } from '../helper';
 ////////////////
 const language = 'css';
 
-describe(language, () => {
+export function testCSS(t) {
     run(
+        t,
+
         language,
 
         'comment',
@@ -18,6 +21,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'multi-line comment',
@@ -32,6 +37,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'pixels',
@@ -42,6 +49,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'cm',
@@ -52,6 +61,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'em',
@@ -62,6 +73,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'percentage',
@@ -74,6 +87,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'string single quote',
@@ -84,6 +99,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'string double quote',
@@ -94,6 +111,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'transition - vendor prefix',
@@ -114,6 +133,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'tag',
@@ -124,6 +145,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'class',
@@ -134,6 +157,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'id',
@@ -144,6 +169,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'direct descendant',
@@ -154,6 +181,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'scss',
@@ -176,6 +205,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'one line',
@@ -186,6 +217,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'linear gradients',
@@ -206,6 +239,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'multi line selectors',
@@ -224,4 +259,4 @@ describe(language, () => {
             <span class="support css-property">font-weight</span>: <span class="support css-value">bold</span>;
         }`
     );
-});
+}

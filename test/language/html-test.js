@@ -1,17 +1,15 @@
-import '../../src/language/generic';
-import '../../src/language/javascript';
-import '../../src/language/php';
-import '../../src/language/css';
-import '../../src/language/html';
-import { run } from '../helper';
+const rainbow = require('./src/rainbow-node.js');
+import { run, skip } from '../helper';
 
 ////////////////
 // Test suite //
 ////////////////
 const language = 'html';
 
-describe(language, () => {
+export function testHTML(t) {
     run(
+        t,
+
         language,
 
         'comment',
@@ -23,6 +21,8 @@ describe(language, () => {
 
 
     run(
+        t,
+
         language,
 
         'multi-line comment',
@@ -36,6 +36,8 @@ describe(language, () => {
 
 
     run(
+        t,
+
         language,
 
         'paragraph',
@@ -47,6 +49,8 @@ describe(language, () => {
 
 
     run(
+        t,
+
         language,
 
         'inline php',
@@ -65,6 +69,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'php short tag',
@@ -79,6 +85,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'xml declaration',
@@ -90,6 +98,8 @@ describe(language, () => {
 
 
     run(
+        t,
+
         language,
 
         'inline css 1',
@@ -111,6 +121,8 @@ describe(language, () => {
 
 
     run(
+        t,
+
         language,
 
         'inline css 2',
@@ -132,6 +144,8 @@ describe(language, () => {
 
 
     run(
+        t,
+
         language,
 
         'inline js 1',
@@ -151,6 +165,8 @@ describe(language, () => {
 
 
     run(
+        t,
+
         language,
 
         'inline js 2',
@@ -170,6 +186,8 @@ describe(language, () => {
 
 
     run(
+        t,
+
         language,
 
         'js include',
@@ -180,6 +198,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'attribute no quotes',
@@ -190,6 +210,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'attribute alone',
@@ -200,6 +222,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'attribute middle',
@@ -210,6 +234,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'attribute alone self close',
@@ -220,6 +246,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'attribute camel case',
@@ -230,6 +258,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'string inside tags',
@@ -248,6 +278,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'boolean attributes containing dashes',
@@ -256,4 +288,4 @@ describe(language, () => {
 
         '<span class="support tag"><span class="support tag">&lt;</span><span class="support tag-name">input</span></span> <span class="support attribute">type</span><span class="support operator">=</span><span class="string quote">"</span><span class="string value">text</span><span class="string quote">"</span> <span class="support attribute">read-only</span><span class="support tag close">&gt;</span>'
     );
-});
+}

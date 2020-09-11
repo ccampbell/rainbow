@@ -5,7 +5,7 @@
   "main": "./src/rainbow-node.js",
   "homepage": "http://rainbowco.de",
   "scripts": {
-    "test": "gulp test"
+    "test": "luna test/rainbow-test.js test/language -n -x -f -v"
   },
   "repository": {
     "type": "git",
@@ -20,9 +20,6 @@
   "license": "Apache-2.0",
   "readmeFilename": "README.md",
   "devDependencies": {
-    "babel-polyfill": "6.9.1",
-    "chai": "3.5.0",
-    "chai-as-promised": "5.3.0",
     "del": "2.2.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "3.1.0",
@@ -31,24 +28,11 @@
     "gulp-git": "2.6.0",
     "gulp-inject-string": "1.1.0",
     "gulp-sass": "^4.1.0",
-    "karma": "0.13.22",
-    "karma-chai": "0.1.0",
-    "karma-chai-as-promised": "0.1.2",
-    "karma-chai-sinon": "0.1.5",
-    "karma-chrome-launcher": "1.0.1",
-    "karma-mocha": "1.0.1",
-    "karma-mocha-reporter": "2.0.4",
-    "karma-phantomjs-launcher": "1.0.1",
-    "karma-rollup-preprocessor": "2.0.2",
-    "karma-sourcemap-loader": "0.3.7",
-    "mocha": "2.5.3",
-    "phantomjs-prebuilt": "2.1.7",
+    "luna-testing": "^1.6.1",
     "rollup": "0.33.0",
     "rollup-plugin-buble": "0.12.1",
     "rollup-plugin-uglify": "0.3.1",
     "semver": "5.1.0",
-    "sinon": "1.17.4",
-    "sinon-chai": "2.8.0",
     "through": "2.3.8",
     "yargs": "4.7.1"
   },

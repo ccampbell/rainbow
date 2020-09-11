@@ -1,3 +1,4 @@
+const rainbow = require('./src/rainbow-node.js');
 import { run, skip } from '../helper';
 
 ////////////////
@@ -5,8 +6,10 @@ import { run, skip } from '../helper';
 ////////////////
 const language = 'generic';
 
-describe(language, () => {
+export function testGeneric(t) {
     run(
+        t,
+
         language,
 
         'string alone',
@@ -17,6 +20,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'string after equal sign',
@@ -27,6 +32,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'string in brackets',
@@ -37,6 +44,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'string in function call',
@@ -47,6 +56,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'concatenated string',
@@ -57,6 +68,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'quoted comment with string',
@@ -73,6 +86,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'quoted comment with multi-line string',
@@ -91,6 +106,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'quoted comment with multi-line directly after',
@@ -105,6 +122,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'comment inline 1',
@@ -115,6 +134,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'comment inline 2',
@@ -129,6 +150,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'comment inline 3',
@@ -139,6 +162,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'comment inline 4',
@@ -149,6 +174,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'comment block',
@@ -163,6 +190,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'integer',
@@ -173,6 +202,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'decimal',
@@ -183,6 +214,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'float',
@@ -193,6 +226,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'exponential',
@@ -203,6 +238,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'hex',
@@ -213,6 +250,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'language constants',
@@ -229,6 +268,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'comment after string',
@@ -239,6 +280,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'operator math',
@@ -249,6 +292,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'operator comparison not escaped',
@@ -263,6 +308,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'operator comparison escaped',
@@ -277,6 +324,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'function call',
@@ -287,6 +336,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'function definition',
@@ -301,6 +352,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'comment after website string',
@@ -311,6 +364,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'comment after website string with hash',
@@ -321,6 +376,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'comment after regular string',
@@ -331,6 +388,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'escaped string single quote',
@@ -341,6 +400,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'escaped string double quote',
@@ -351,6 +412,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'string concatenation with +',
@@ -361,6 +424,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'string concatenation with .',
@@ -371,6 +436,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'strings after a comma',
@@ -381,6 +448,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'comment containing website',
@@ -400,4 +469,4 @@ describe(language, () => {
 
         '<span class="comment">// some person\'s comment about //example.com</span>'
     );
-});
+}

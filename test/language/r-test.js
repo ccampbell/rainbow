@@ -1,5 +1,4 @@
-import '../../src/language/generic';
-import '../../src/language/r';
+const rainbow = require('./src/rainbow-node.js');
 import { run, skip } from '../helper';
 
 ////////////////
@@ -7,8 +6,10 @@ import { run, skip } from '../helper';
 ////////////////
 const language = 'r';
 
-describe(language, () => {
+export function testR(t) {
     run(
+        t,
+
         language,
 
         'comments',
@@ -21,6 +22,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'assignment',
@@ -33,6 +36,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'constants',
@@ -49,6 +54,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'operators',
@@ -71,6 +78,8 @@ describe(language, () => {
      * just testing that the regex is matching only 'function' and not .+function
      */
     run(
+        t,
+
         language,
 
         'function creation',
@@ -129,4 +138,4 @@ describe(language, () => {
         <span class="support function">data.frame</span>(a <span class="keyword operator">=</span> <span class="constant numeric">1</span><span class="keyword operator">:</span><span class="constant numeric">10</span>, b <span class="keyword operator">=</span> <span class="constant numeric">15</span><span class="keyword operator">:</span><span class="constant numeric">24</span>)
         <span class="support function">complex</span>(real <span class="keyword operator">=</span> <span class="constant numeric">1</span>, imaginary <span class="keyword operator">=</span> <span class="constant numeric">0.5</span>)`
     );
-});
+}

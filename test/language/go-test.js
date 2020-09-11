@@ -1,5 +1,5 @@
-import '../../src/language/generic';
-import '../../src/language/go';
+const rainbow = require('./src/rainbow-node.js');
+
 import { run, skip } from '../helper';
 
 ////////////////
@@ -7,8 +7,10 @@ import { run, skip } from '../helper';
 ////////////////
 const language = 'go';
 
-describe(language, () => {
+export function testGo(t) {
     run(
+        t,
+
         language,
 
         'package declaration',
@@ -19,6 +21,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'import declaration',
@@ -37,6 +41,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'variable declaration',
@@ -47,6 +53,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'shorthand variable declaration',
@@ -57,6 +65,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'function declaration',
@@ -67,6 +77,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'function declaration with type',
@@ -87,6 +99,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'structure declaration',
@@ -101,6 +115,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'type declaration',
@@ -111,6 +127,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'func alone',
@@ -121,6 +139,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'func attached to struct',
@@ -131,6 +151,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'func attached to struct simple',
@@ -141,6 +163,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'type inside of word',
@@ -151,6 +175,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'comment after website in string',
@@ -161,6 +187,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'concatenated ` strings',
@@ -169,4 +197,4 @@ describe(language, () => {
 
         'test <span class="keyword operator initialize">:=</span> <span class="string">`string`</span><span class="keyword operator">+</span><span class="string">`other string`</span>'
     );
-});
+}

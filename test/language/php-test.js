@@ -1,5 +1,4 @@
-import '../../src/language/generic';
-import '../../src/language/php';
+const rainbow = require('./src/rainbow-node.js');
 import { run, skip } from '../helper';
 
 ////////////////
@@ -7,8 +6,10 @@ import { run, skip } from '../helper';
 ////////////////
 const language = 'php';
 
-describe(language, () => {
+export function testPHP(t) {
     run(
+        t,
+
         language,
 
         'echo',
@@ -19,6 +20,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'variable',
@@ -39,6 +42,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'string concatenation',
@@ -49,6 +54,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'include 1',
@@ -59,6 +66,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'include 2',
@@ -69,6 +78,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'instanceof',
@@ -79,6 +90,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'instanceof namespace class',
@@ -89,6 +102,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'array stuff',
@@ -113,6 +128,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'php tag',
@@ -123,6 +140,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'php tag 2',
@@ -133,6 +152,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'namespace declaration',
@@ -143,6 +164,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'use declaration',
@@ -153,6 +176,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'class declaration',
@@ -163,6 +188,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'trait declaration',
@@ -173,6 +200,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'interface declaration',
@@ -183,6 +212,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'abstract class declaration',
@@ -193,6 +224,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'final class declaration',
@@ -207,6 +240,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'class with an implementation declaration',
@@ -217,6 +252,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'child class declaration',
@@ -227,6 +264,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'child class with an implementation declaration',
@@ -237,6 +276,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'final child class declaration',
@@ -247,6 +288,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'test static',
@@ -259,6 +302,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'test magic function',
@@ -275,6 +320,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'test magic method',
@@ -301,6 +348,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'test new class',
@@ -311,6 +360,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'test new namespace class',
@@ -321,6 +372,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'test new class without parenthesis',
@@ -331,6 +384,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'test static class call',
@@ -341,6 +396,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'constant language',
@@ -351,6 +408,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'constant',
@@ -361,6 +420,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'constant 2',
@@ -371,6 +432,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'class constant',
@@ -381,6 +444,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'static variable access',
@@ -391,6 +456,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'type hint',
@@ -402,6 +469,8 @@ describe(language, () => {
 
 
     run(
+        t,
+
         language,
 
         'type hint with namespace',
@@ -412,6 +481,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'things should be case insensitive',
@@ -426,6 +497,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'new class syntax should not allow any character',
@@ -434,4 +507,4 @@ describe(language, () => {
 
         '<span class="support">echo</span> <span class="string">\'something something in New York\'</span> <span class="keyword dot">.</span> <span class="variable dollar-sign">$</span><span class="variable">meh</span>;'
     );
-});
+}

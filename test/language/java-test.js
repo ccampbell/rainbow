@@ -1,13 +1,15 @@
-import '../../src/language/java';
-import { run } from '../helper';
+const rainbow = require('./src/rainbow-node.js');
+import { run, skip } from '../helper';
 
 ////////////////
 // Test suite //
 ////////////////
 const language = 'java';
 
-describe(language, () => {
+export function testJava(t) {
     run(
+        t,
+
         language,
 
         'package declaration',
@@ -18,6 +20,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         "import statement",
@@ -28,6 +32,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'multi-line comment',
@@ -42,6 +48,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'single-line comment',
@@ -52,6 +60,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'complicated class declaration',
@@ -62,6 +72,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         "simple class declaration",
@@ -72,6 +84,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         "constant declaration",
@@ -82,6 +96,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         "field declaration",
@@ -92,6 +108,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         "method declaration",
@@ -102,6 +120,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         "simple annotation",
@@ -112,6 +132,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         "complex annotation",
@@ -122,6 +144,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         "string concatenation",
@@ -132,6 +156,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         "local method invocation",
@@ -142,6 +168,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         "static method invocation",
@@ -152,6 +180,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         "variable assignment",
@@ -160,4 +190,4 @@ describe(language, () => {
 
         '<span class="keyword">int</span> numberOfColors <span class="operator">=</span> (<span class="keyword">int</span>) <span class="entity class">Math</span>.<span class="entity function">ceil</span>( <span class="entity class">Math</span>.<span class="entity function">random</span>() <span class="operator">*</span> <span class="integer">256</span> );'
     );
-});
+}

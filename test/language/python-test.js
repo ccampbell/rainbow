@@ -1,14 +1,15 @@
-import '../../src/language/generic';
-import '../../src/language/python';
-import { run } from '../helper';
+const rainbow = require('./src/rainbow-node.js');
+import { run, skip } from '../helper';
 
 ////////////////
 // Test suite //
 ////////////////
 const language = 'python';
 
-describe(language, () => {
+export function testPython(t) {
     run(
+        t,
+
         language,
 
         'no self',
@@ -19,6 +20,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'comment',
@@ -29,6 +32,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'language constants',
@@ -43,6 +48,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'object',
@@ -53,6 +60,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'import',
@@ -63,6 +72,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'class',
@@ -75,6 +86,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'special method',
@@ -87,6 +100,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'function',
@@ -105,6 +120,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'decorator',
@@ -121,6 +138,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         '__main__',
@@ -133,6 +152,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'try catch',
@@ -149,6 +170,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'docstring single line double quotes',
@@ -159,6 +182,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'docstring single line single quotes',
@@ -169,6 +194,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'docstring multiline',
@@ -183,6 +210,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'decorator with dot',
@@ -193,6 +222,8 @@ describe(language, () => {
     );
 
     run(
+        t,
+
         language,
 
         'multiple docstrings',
@@ -213,4 +244,4 @@ describe(language, () => {
         y
         """</span>`
     );
-});
+}
