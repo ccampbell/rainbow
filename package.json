@@ -1,12 +1,11 @@
 {
   "name": "rainbow-code",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "description": "Simple library for code syntax highlighting",
   "main": "./src/rainbow-node.js",
   "homepage": "http://rainbowco.de",
   "scripts": {
-    "test": "gulp test",
-    "preinstall": "npx npm-force-resolutions"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
@@ -56,8 +55,5 @@
   },
   "dependencies": {
     "web-worker": "1.0.0"
-  },
-  "resolutions": {
-    "graceful-fs": "^4.2.4"
   }
 }
