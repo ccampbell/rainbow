@@ -5,8 +5,7 @@
   "main": "./src/rainbow-node.js",
   "homepage": "http://rainbowco.de",
   "scripts": {
-    "test": "gulp test",
-    "preinstall": "npx npm-force-resolutions"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
@@ -25,7 +24,7 @@
     "chai": "3.5.0",
     "chai-as-promised": "5.3.0",
     "del": "2.2.0",
-    "gulp": "3.9.1",
+    "gulp": "^4.0.2",
     "gulp-autoprefixer": "3.1.0",
     "gulp-bump": "2.1.0",
     "gulp-eslint": "^6.0.0",
@@ -47,7 +46,6 @@
     "rollup": "0.33.0",
     "rollup-plugin-buble": "0.12.1",
     "rollup-plugin-uglify": "0.3.1",
-    "run-sequence": "^2.2.1",
     "semver": "5.1.0",
     "sinon": "1.17.4",
     "sinon-chai": "2.8.0",
@@ -56,8 +54,5 @@
   },
   "dependencies": {
     "web-worker": "1.0.0"
-  },
-  "resolutions": {
-    "graceful-fs": "^4.2.4"
   }
 }

@@ -10,7 +10,6 @@ var fs = require('fs');
 var rollup = require("rollup").rollup;
 var buble = require('rollup-plugin-buble');
 var uglify = require('rollup-plugin-uglify');
-var runSequence = require('run-sequence');
 var inject = require('gulp-inject-string');
 var git = require('gulp-git');
 var bump = require('gulp-bump');
@@ -134,14 +133,14 @@ function _getComment() {
 }
 
 gulp.task('update-package-version', function() {
-    gulp.src('./package.json')
+    return gulp.src(['./package.json', './package-lock.json'])
         .pipe(bump({version: argv.version}))
         .pipe(gulp.dest('./'));
 });
 
 gulp.task('update-version', function() {
     var message = 'Update version to ' + argv.version;
-    gulp.src(['./package.json', 'dist/' + lowercaseAppName + '.min.js'])
+    return gulp.src(['./package.json', './package-lock.json', 'dist/' + lowercaseAppName + '.min.js'])
         .pipe(git.add())
         .pipe(git.commit(message))
         .on('data', function(err) {
@@ -158,17 +157,17 @@ gulp.task('test', function(done) {
 });
 
 gulp.task('lint', function() {
-    gulp.src('src/*.js')
+    return gulp.src('src/*.js')
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
 });
 
 gulp.task('clean', function() {
-    del(['dist/']);
+    return del(['dist/']);
 });
 
-gulp.task('release', function(callback) {
+gulp.task('release', async function() {
     var type = argv.type || 'fix';
     var map = {
         breaking: 'major',
@@ -180,7 +179,8 @@ gulp.task('release', function(callback) {
     argv.release = true;
     argv.version = newVersion;
 
-    runSequence('lint', 'test', 'update-package-version', 'build', 'update-version', callback);
+    const todo = gulp.series(['lint', 'test', 'update-package-version', 'build', 'update-version']);
+    return todo();
 });
 
 function _appendCode(code) {
@@ -213,7 +213,7 @@ gulp.task('append-languages', function() {
 
     fs.writeFileSync('src/build.js', languageCode.join('\n') + '\n');
 
-    rollup({
+    return rollup({
         entry: 'src/build.js',
         plugins: [uglify()]
     }).then(function (bundle) {
@@ -221,7 +221,7 @@ gulp.task('append-languages', function() {
     });
 });
 
-gulp.task('build', function(callback) {
+gulp.task('build', async function() {
     if (!argv.languages) {
         argv.languages = 'java,javascript,csharp,python,c,php,ruby,html,css,json';
     }
@@ -233,7 +233,8 @@ gulp.task('build', function(callback) {
         argv.languages = '';
     }
 
-    runSequence('pack', 'append-languages', callback);
+    const todo = gulp.series(['pack', 'append-languages']);
+    return todo();
 });
 
 gulp.task('sass', function() {
@@ -244,8 +245,8 @@ gulp.task('sass', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch('src/**/*.js', ['pack']);
-    gulp.watch('themes/sass/*.sass', ['sass']);
+    gulp.watch('src/**/*.js', gulp.series(['pack']));
+    gulp.watch('themes/sass/*.sass', gulp.series(['sass']));
 });
 
-gulp.task('default', ['lint', 'test', 'pack']);
+gulp.task('default', gulp.series(['lint', 'test', 'pack']));
