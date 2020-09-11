@@ -3,7 +3,6 @@
 
 var gulp = require('gulp');
 var del = require('del');
-var KarmaServer = require('karma').Server;
 var argv = require('yargs').argv;
 var eslint = require('gulp-eslint');
 var fs = require('fs');
@@ -17,6 +16,7 @@ var semver = require('semver');
 var sass = require('gulp-sass');
 var through = require('through');
 var autoprefixer = require('gulp-autoprefixer');
+var run = require('gulp-run-command').default;
 var version = require('./package.json').version;
 
 var appName = 'Rainbow';
@@ -148,13 +148,7 @@ gulp.task('update-version', function() {
         });
 });
 
-gulp.task('test', function(done) {
-    new KarmaServer({
-        configFile: __dirname + '/karma.conf.js',
-        singleRun: !argv.watch ? true : false,
-        browsers: argv.browsers ? argv.browsers.split(',') : ['PhantomJS']
-    }, done).start();
-});
+gulp.task('test', run('npm run test'));
 
 gulp.task('lint', function() {
     return gulp.src('src/*.js')

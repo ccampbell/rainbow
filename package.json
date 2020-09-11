@@ -27,6 +27,7 @@
     "gulp-eslint": "^6.0.0",
     "gulp-git": "2.6.0",
     "gulp-inject-string": "1.1.0",
+    "gulp-run-command": "0.0.10",
     "gulp-sass": "^4.1.0",
     "luna-testing": "^1.6.1",
     "rollup": "0.33.0",
