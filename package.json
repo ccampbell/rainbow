@@ -1,6 +1,6 @@
 {
   "name": "rainbow-code",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "Simple library for code syntax highlighting",
   "main": "./src/rainbow-node.js",
   "homepage": "http://rainbowco.de",
