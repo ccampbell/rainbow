@@ -1,0 +1,49 @@
+/**
+ * TOGGLE HIGHLIGHT
+ *
+ * rainbow-toggle-highlight.js
+ */
+pre .highlighted {
+    background-color: rgba(255, 255, 0, 0.2);
+    box-shadow: 0 0 2px 2px #ffff00;
+}
+
+/**
+ * TOGGLE INFO
+ *
+ * rainbow-toggle-info.js
+ */
+#rainbowOverlay {
+    background: #002b36;
+    border-radius: 4px;
+    bottom: 0;
+    color: #839496;
+    left: 0;
+    margin: 8px;
+    padding: 8px 16px;
+    position: fixed;
+}
+
+#rainbowOverlay strong {
+    color: #acb8b9;
+}
+
+/**
+ * DISPLAY STATS
+ *
+ * rainbow-display-stats.js
+ */
+.rainbow-stats-class {
+    cursor: pointer;
+}
+
+.rainbow-stats-count {
+    display: inline-block;
+    margin: 0 8px 0 0;
+    text-align: right;
+    width: 30px;
+}
+
+.rainbow-stats-selected {
+    font-weight: bold;
+}
