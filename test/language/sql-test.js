@@ -54,4 +54,22 @@ export function testSQL(t) {
 
         '<span class="keyword">select</span> <span class="function call">count</span>(<span class="keyword operator">*</span>) <span class="keyword">from</span> some_table <span class="keyword">WHERE</span> some_column <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">null</span>;'
     );
+
+    run(
+        t,
+
+        language,
+
+        'comments',
+
+        `/* This
+        is a 
+        multi-line
+        comment */
+        select count(*) -- This is a one type of single line comment
+        from some_table # This is another type of single line comment
+        WHERE some_column is not null;`,
+
+        '<span class="comment">/* This\n        is a \n        multi-line\n        comment */</span>\n        <span class="keyword">select</span> <span class="function call">count</span>(<span class="keyword operator">*</span>) <span class="comment">-- This is a one type of single line comment</span>\n        <span class="keyword">from</span> some_table <span class="comment"># This is another type of single line comment</span>\n        <span class="keyword">WHERE</span> some_column <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">null</span>;'
+    );
 }

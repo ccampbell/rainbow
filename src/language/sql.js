@@ -19,7 +19,7 @@ Rainbow.extend('sql', [
     },
     {
         name: 'comment',
-        pattern: /--.*$|\/\*[\s\S]*?\*\/|(\/\/)[\s\S]*?$/gm
+        pattern: /--.*$|#.*$|\/\*[\s\S]*?\*\/|(\/\/)[\s\S]*?$/gm
     },
     {
         name: 'constant.numeric',
