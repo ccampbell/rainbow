@@ -117,6 +117,7 @@ For older browsers you can download the legacy [1.2.0](https://github.com/ccampb
 ## Supported Languages
 
 Currently supported languages are:
+- Bash
 - C
 - C#
 - Coffeescript
