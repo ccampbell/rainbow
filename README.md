@@ -1,4 +1,4 @@
-# Rainbow
+# RainBow
 
 Rainbow is a code syntax highlighting library written in Javascript.
 
@@ -83,7 +83,6 @@ You can also build/download custom packages from there.
     <script src="/assets/js/language/generic.js"></script>
     <script src="/assets/js/language/python.js"></script>
     ```
-
 By default `dist/rainbow.min.js` comes with some popular languages bundled together with it.
 
 ### Node.js
