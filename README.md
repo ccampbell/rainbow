@@ -1,4 +1,4 @@
-# Rainbow
+# RainBow
 
 Rainbow is a code syntax highlighting library written in Javascript.
 
